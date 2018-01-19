@@ -12,6 +12,7 @@ class CoffeePotList extends Component {
         headerTitleStyle: {
             color: '#ecf0f1'
         },
+        headerTintColor: 'white'
     }
     render() {
         return (

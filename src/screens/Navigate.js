@@ -13,6 +13,7 @@ class Navigate extends Component {
         headerTitleStyle: {
             color: '#ecf0f1'
         },
+        headerBackTitle: null,
     }
 
     render() {
@@ -26,6 +27,7 @@ class Navigate extends Component {
                     backgroundColor: '#ecf0f1'
                 }}
             >
+                {/* Coffee Pot List Screen Button */}
                 <Button 
                     buttonStyle={{
                         margin:10,
@@ -37,6 +39,21 @@ class Navigate extends Component {
                         navigate('CoffeePotList')
                     }
                 />
+
+                {/* Coffee Pot Screen Button */}
+                <Button 
+                    buttonStyle={{
+                        margin:10,
+                        width: 200,
+                        backgroundColor: '#1abc9c'
+                    }}
+                    title='Coffee Pot'
+                    onPress={() => 
+                        navigate('CoffeePot')
+                    }
+                />
+
+                {/* Existing Orders List */}
                 <Button 
                     buttonStyle={{
                         margin:10,
@@ -46,6 +63,19 @@ class Navigate extends Component {
                     title='Existing Orders List'
                     onPress={() => 
                         navigate('ExistingOrdersList')
+                    }
+                />
+
+                {/* Existing Order */}
+                <Button 
+                    buttonStyle={{
+                        margin:10,
+                        width: 200,
+                        backgroundColor: '#1abc9c'
+                    }}
+                    title='Existing Order'
+                    onPress={() => 
+                        navigate('ExistingOrder')
                     }
                 />
             </View>

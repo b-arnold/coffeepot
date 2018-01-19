@@ -1,22 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
 import { Button } from 'react-native-elements';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 
-import CoffeePotList from './src/screens/CoffeePotList';
-import ExistingOrdersList from './src/screens/ExistingOrdersList';
 import Navigate from './src/screens/Navigate';
+import CoffeePotList from './src/screens/CoffeePotList';
+import CoffeePot from './src/screens/CoffeePot';
+import ExistingOrdersList from './src/screens/ExistingOrdersList';
+import ExistingOrder from './src/screens/ExistingOrdersList';
 
 export default class App extends React.Component {
   render() {
     const ButtonNav = StackNavigator({
       Navigate: { screen: Navigate },
       CoffeePotList: { screen: CoffeePotList },
-      ExistingOrdersList: { screen: ExistingOrdersList }
+      CoffeePot: { screen: CoffeePot },
+      ExistingOrdersList: { screen: ExistingOrdersList },
+      ExistingOrder: { screen: ExistingOrder }
     })
 
     return (
       <View style={styles.container}>
+        <StatusBar
+          barStyle='light-content'
+        />
         <ButtonNav />
       </View>
     );
