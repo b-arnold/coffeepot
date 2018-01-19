@@ -21,15 +21,10 @@ export default class App extends React.Component {
 
     return (
       <View style={styles.container}>
-<<<<<<< HEAD
         <StatusBar
           barStyle='light-content'
         />
         <ButtonNav />
-=======
-        <Text>Hello Coffee Pot People!</Text>
-        <Text>Let's start coding!!</Text>
->>>>>>> development
       </View>
     );
   }
