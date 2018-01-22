@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+
 class ExistingOrdersList extends Component {
     static navigationOptions = {
         title: 'Existing Orders',
         headerStyle: {
-            backgroundColor: '#16a085'
+            backgroundColor: PRIMARY_COLOR
             
         },
         headerTitleStyle: {
-            color: '#ecf0f1'
+            color: SECONDARY_COLOR
         },
-        headerTintColor: 'white'
+        headerTintColor: SECONDARY_COLOR
     }
     render() {
         return (
@@ -29,7 +31,7 @@ class ExistingOrdersList extends Component {
                         <Button 
                             title='GPS View'
                             buttonStyle={{
-                                backgroundColor: '#1abc9c'
+                                backgroundColor: BUTTON_COLOR
                             }}
                         />
                     </View>

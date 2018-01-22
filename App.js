@@ -7,7 +7,7 @@ import Navigate from './src/screens/Navigate';
 import CoffeePotList from './src/screens/CoffeePotList';
 import CoffeePot from './src/screens/CoffeePot';
 import ExistingOrdersList from './src/screens/ExistingOrdersList';
-import ExistingOrder from './src/screens/ExistingOrdersList';
+import ExistingOrder from './src/screens/ExistingOrder';
 
 export default class App extends React.Component {
   render() {

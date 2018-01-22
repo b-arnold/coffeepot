@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+
 //ONLY FOR SCREEN TESTING
 class Navigate extends Component {
     static navigationOptions = {
         title: 'Navigation',
         headerStyle: {
-            backgroundColor: '#16a085'
+            backgroundColor: PRIMARY_COLOR
             
         },
         headerTitleStyle: {
-            color: '#ecf0f1'
+            color: SECONDARY_COLOR
         },
         headerBackTitle: null,
     }
@@ -32,7 +34,7 @@ class Navigate extends Component {
                     buttonStyle={{
                         margin:10,
                         width: 200,
-                        backgroundColor: '#1abc9c'
+                        backgroundColor: BUTTON_COLOR
                     }}
                     title='Coffee Pot List'
                     onPress={() => 
@@ -45,7 +47,7 @@ class Navigate extends Component {
                     buttonStyle={{
                         margin:10,
                         width: 200,
-                        backgroundColor: '#1abc9c'
+                        backgroundColor: BUTTON_COLOR
                     }}
                     title='Coffee Pot'
                     onPress={() => 
@@ -58,7 +60,7 @@ class Navigate extends Component {
                     buttonStyle={{
                         margin:10,
                         width: 200,
-                        backgroundColor: '#1abc9c'
+                        backgroundColor: BUTTON_COLOR
                     }}
                     title='Existing Orders List'
                     onPress={() => 
@@ -71,7 +73,7 @@ class Navigate extends Component {
                     buttonStyle={{
                         margin:10,
                         width: 200,
-                        backgroundColor: '#1abc9c'
+                        backgroundColor: BUTTON_COLOR
                     }}
                     title='Existing Order'
                     onPress={() => 
