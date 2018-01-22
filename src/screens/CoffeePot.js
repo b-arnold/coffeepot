@@ -53,9 +53,7 @@ class CoffeePot extends Component {
                 */}
                 <Button 
                     title='Join Coffee Pot'
-                    buttonStyle={{
-                        backgroundColor: BUTTON_COLOR
-                    }}
+                    buttonStyle={styles.button_style}
                 />
             </View>
         )
@@ -77,6 +75,9 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: BUTTON_COLOR,
         color: SECONDARY_COLOR
+    },
+    button_style: {
+        backgroundColor: BUTTON_COLOR
     }
 });
 
