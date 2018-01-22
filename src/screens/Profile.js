@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView, Image } from 'react-native';
 import { Card } from 'react-native-elements';
 
+/////////////////////////////////////////////////////////
+////  The following code is for the Profile Screen   ////
+/////////////////////////////////////////////////////////
+
 class Profile extends Component {
     static navigationOptions = {
         title: 'Profile',
