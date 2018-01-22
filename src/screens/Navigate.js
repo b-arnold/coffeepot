@@ -30,7 +30,7 @@ class Navigate extends Component {
                 {/* Coffee Pot List Screen Button */}
                 <Button 
                     buttonStyle={{
-                        margin:10,
+                        margin: 10,
                         width: 200,
                         backgroundColor: '#1abc9c'
                     }}
@@ -43,7 +43,7 @@ class Navigate extends Component {
                 {/* Coffee Pot Screen Button */}
                 <Button 
                     buttonStyle={{
-                        margin:10,
+                        margin: 10,
                         width: 200,
                         backgroundColor: '#1abc9c'
                     }}
@@ -56,7 +56,7 @@ class Navigate extends Component {
                 {/* Existing Orders List */}
                 <Button 
                     buttonStyle={{
-                        margin:10,
+                        margin: 10,
                         width: 200,
                         backgroundColor: '#1abc9c'
                     }}
@@ -69,7 +69,7 @@ class Navigate extends Component {
                 {/* Existing Order */}
                 <Button 
                     buttonStyle={{
-                        margin:10,
+                        margin: 10,
                         width: 200,
                         backgroundColor: '#1abc9c'
                     }}
@@ -78,8 +78,74 @@ class Navigate extends Component {
                         navigate('ExistingOrder')
                     }
                 />
+
+                 {/* ChooseDelivery */}
+                 <Button 
+                    buttonStyle={{
+                        margin: 10,
+                        width: 200,
+                        backgroundColor: '#1abc9c'
+                    }}
+                    title='Choose Delivery'
+                    onPress={() => 
+                        navigate('ChooseDelivery')
+                    }
+                />
+
+                {/* PickLocationList */}
+                <Button 
+                    buttonStyle={{
+                        margin: 10,
+                        width: 200,
+                        backgroundColor: '#1abc9c'
+                    }}
+                    title='Pick Location List'
+                    onPress={() => 
+                        navigate('PickLocationList')
+                    }
+                />
+
+                {/* PickedLocation */}
+                <Button 
+                    buttonStyle={{
+                        margin: 10,
+                        width: 200,
+                        backgroundColor: '#1abc9c'
+                    }}
+                    title='Picked Location'
+                    onPress={() => 
+                        navigate('PickedLocation')
+                    }
+                />
+
+                {/* Profile */}
+                <Button 
+                    buttonStyle={{
+                        margin: 10,
+                        width: 200,
+                        backgroundColor: '#1abc9c'
+                    }}
+                    title='Profile'
+                    onPress={() => 
+                        navigate('Profile')
+                    }
+                />
+
+                {/* Receipt Snapshot */}
+                <Button 
+                    buttonStyle={{
+                        margin: 10,
+                        width: 200,
+                        backgroundColor: '#1abc9c'
+                    }}
+                    title='Receipt Snapshot'
+                    onPress={() => 
+                        navigate('ReceiptSnapshot')
+                    }
+                />
+
             </View>
-        )
+        );
     }
 }
 
