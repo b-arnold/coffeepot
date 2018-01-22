@@ -14,10 +14,10 @@ class CreateAccountScreen extends Component {
   static navigationOptions = {
     title: 'Create Account',
     headerStyle: {
-      backgroundColor: '#16A085'
+      backgroundColor: '#16a085'
     },
     headerTitleStyle: {
-      color: 'ECF0F1'
+      color: '#ecf0f1'
     },
     headerTintColor: 'white'
   }

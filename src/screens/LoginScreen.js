@@ -18,7 +18,7 @@ class LoginScreen extends Component {
       backgroundColor: '#16A085'
     },
     headerTitleStyle: {
-      color: 'ECF0F1'
+      color: '#ECF0F1'
     },
     headerTintColor: 'white'
   }
