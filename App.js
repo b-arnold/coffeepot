@@ -9,8 +9,10 @@ import CoffeePot from './src/screens/CoffeePot';
 import ExistingOrdersList from './src/screens/ExistingOrdersList';
 import ExistingOrder from './src/screens/ExistingOrder';
 
+
 export default class App extends React.Component {
   render() {
+    //This nav is used for testing purposes only.
     const ButtonNav = StackNavigator({
       Navigate: { screen: Navigate },
       CoffeePotList: { screen: CoffeePotList },

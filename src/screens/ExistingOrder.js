@@ -7,13 +7,16 @@ import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style
 class ExistingOrder extends Component {
     static navigationOptions = {
         title: 'Existing Order',
+        //Changes the header color
         headerStyle: {
             backgroundColor: PRIMARY_COLOR
             
         },
+        //Changes the Header Title color
         headerTitleStyle: {
             color: SECONDARY_COLOR
         },
+        //Changes the Back button color
         headerTintColor: SECONDARY_COLOR
     }
 
@@ -31,16 +34,16 @@ class ExistingOrder extends Component {
 
                 <View>
                     <Text>
-                        Row of Coffee Cups
+                        Location:
                     </Text>
                 </View>
 
                 <Text style={styles.text} >
-                    Location:
+                    Order:
                 </Text>
 
                 <Button 
-                    title='Join Coffee Pot'
+                    title='Accept Order'
                     buttonStyle={{
                         backgroundColor: BUTTON_COLOR
                     }}

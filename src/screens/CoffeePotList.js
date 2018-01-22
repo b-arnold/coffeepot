@@ -7,18 +7,22 @@ import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style
 class CoffeePotList extends Component {
     static navigationOptions = {
         title: 'Coffee Pots',
+        //Changes the color of the header
         headerStyle: {
             backgroundColor: PRIMARY_COLOR
             
         },
+        //Changes the color of the Header Title
         headerTitleStyle: {
             color: SECONDARY_COLOR
         },
+        //Changes the color of the back button
         headerTintColor: SECONDARY_COLOR
     }
     render() {
         return (
             <View>
+                {/* Currently here for scaffolding, but will be replaced */}
                 <ScrollView>
                     <View
                         style={{
