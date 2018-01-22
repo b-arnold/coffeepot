@@ -4,10 +4,21 @@ import { Button } from 'react-native-elements';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 
 import Navigate from './src/screens/Navigate';
+import Profile from './src/screens/Profile';
+
+// CoffeePot Screens
 import CoffeePotList from './src/screens/CoffeePotList';
 import CoffeePot from './src/screens/CoffeePot';
+
+// Delivery Screens
+import ChooseDelivery from './src/screens/ChooseDelivery';
 import ExistingOrdersList from './src/screens/ExistingOrdersList';
 import ExistingOrder from './src/screens/ExistingOrdersList';
+import PickLocationList from './src/screens/PickLocationList';
+import PickedLocation from './src/screens/PickedLocation';
+
+// Payment Screens
+import ReceiptSnapshot from './src/screens/ReceiptSnapshot';
 
 ///////////////////////////////////////////////////////////
 // YOU'RE CURRENTLY WORKING IN DEVELOPMENT BRANCH
@@ -24,7 +35,12 @@ export default class App extends React.Component {
       CoffeePotList: { screen: CoffeePotList },
       CoffeePot: { screen: CoffeePot },
       ExistingOrdersList: { screen: ExistingOrdersList },
-      ExistingOrder: { screen: ExistingOrder }
+      ExistingOrder: { screen: ExistingOrder },
+      ChooseDelivery: { screen: ChooseDelivery },
+      PickLocationList: { screen: PickLocationList },
+      PickedLocation: { screen: PickedLocation },
+      Profile: { screen: Profile },
+      ReceiptSnapshot: { screen: ReceiptSnapshot }
     })
 
     return (
