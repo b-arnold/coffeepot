@@ -39,6 +39,7 @@ class ExistingOrder extends Component {
                 <Button 
                     title='Accept Order'
                     buttonStyle={styles.button_style}
+                    rounded
                 />
             </View>
         )

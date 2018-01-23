@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import { Button, Card, Avatar } from 'react-native-elements';
+import { Button, Card, Avatar, Icon } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
@@ -26,12 +26,24 @@ class CoffeePotList extends Component {
                 <ScrollView>
                     <View style={styles.view_bttn}>
                         <Button 
+                            iconRight={{
+                                name: 'plus-circle',
+                                type: 'material-community',
+                                size: 25
+                            }}
                             title='Place Order'
                             buttonStyle={styles.button_style}
+                            rounded
                         />
                         <Button 
+                            iconRight={{
+                                name: 'map-marker',
+                                type: 'font-awesome',
+                                size: 25
+                            }}
                             title='GPS View'
                             buttonStyle={styles.button_style}
+                            rounded
                         />
                     </View>
 

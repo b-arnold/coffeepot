@@ -48,6 +48,7 @@ class CoffeePot extends Component {
                 <Button 
                     title='Join Coffee Pot'
                     buttonStyle={styles.button_style}
+                    rounded
                 />
             </View>
         )

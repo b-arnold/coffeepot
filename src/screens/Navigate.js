@@ -26,6 +26,7 @@ class Navigate extends Component {
                 <Button 
                     buttonStyle={style=styles.bttn_style}
                     title='Coffee Pot List'
+                    rounded
                     onPress={() => 
                         navigate('CoffeePotList')
                     }
@@ -35,6 +36,7 @@ class Navigate extends Component {
                 <Button 
                     buttonStyle={style=styles.bttn_style}
                     title='Coffee Pot'
+                    rounded
                     onPress={() => 
                         navigate('CoffeePot')
                     }
@@ -44,6 +46,7 @@ class Navigate extends Component {
                 <Button 
                     buttonStyle={style=styles.bttn_style}
                     title='Existing Orders List'
+                    rounded
                     onPress={() => 
                         navigate('ExistingOrdersList')
                     }
@@ -53,6 +56,7 @@ class Navigate extends Component {
                 <Button 
                     buttonStyle={style=styles.bttn_style}
                     title='Existing Order'
+                    rounded
                     onPress={() => 
                         navigate('ExistingOrder')
                     }
@@ -62,6 +66,7 @@ class Navigate extends Component {
                 <Button 
                     buttonStyle={style=styles.bttn_style}
                     title='Choose Delivery'
+                    rounded
                     onPress={() => 
                         navigate('ChooseDelivery')
                     }
@@ -71,6 +76,7 @@ class Navigate extends Component {
                 <Button 
                     buttonStyle={style=styles.bttn_style}
                     title='Pick Location List'
+                    rounded
                     onPress={() => 
                         navigate('PickLocationList')
                     }
@@ -80,6 +86,7 @@ class Navigate extends Component {
                 <Button 
                     buttonStyle={style=styles.bttn_style}
                     title='Picked Location'
+                    rounded
                     onPress={() => 
                         navigate('PickedLocation')
                     }
@@ -89,6 +96,7 @@ class Navigate extends Component {
                 <Button 
                     buttonStyle={style=styles.bttn_style}
                     title='Profile'
+                    rounded
                     onPress={() => 
                         navigate('Profile')
                     }
@@ -98,6 +106,7 @@ class Navigate extends Component {
                 <Button 
                     buttonStyle={style=styles.bttn_style}
                     title='Receipt Snapshot'
+                    rounded
                     onPress={() => 
                         navigate('ReceiptSnapshot')
                     }
@@ -115,7 +124,7 @@ const styles = StyleSheet.create({
     },
     bttn_style: {
         margin: 10,
-        width: 200,
+        width: 230,
         backgroundColor: BUTTON_COLOR
     }
 })
