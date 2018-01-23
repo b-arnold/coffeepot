@@ -13,23 +13,18 @@ import CoffeePot from './src/screens/CoffeePot';
 // Delivery Screens
 import ChooseDelivery from './src/screens/ChooseDelivery';
 import ExistingOrdersList from './src/screens/ExistingOrdersList';
-import ExistingOrder from './src/screens/ExistingOrdersList';
+import ExistingOrder from './src/screens/ExistingOrder';
 import PickLocationList from './src/screens/PickLocationList';
 import PickedLocation from './src/screens/PickedLocation';
 
 // Payment Screens
 import ReceiptSnapshot from './src/screens/ReceiptSnapshot';
 
-///////////////////////////////////////////////////////////
-// YOU'RE CURRENTLY WORKING IN DEVELOPMENT BRANCH
-///////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////
-// YOU'RE CURRENTLY WORKING IN BRETT's BRANCH
-///////////////////////////////////////////////////////////
 
 export default class App extends React.Component {
   render() {
+    //This nav is used for testing purposes only.
     const ButtonNav = StackNavigator({
       Navigate: { screen: Navigate },
       CoffeePotList: { screen: CoffeePotList },
