@@ -25,9 +25,7 @@ class CoffeePot extends Component {
         return (
             <View style={styles.container}>
                 {/* This will display the time left in the coffee pot */}
-                <Text style={styles.text}>
-                    Time Left:
-                </Text>
+                <Text style={styles.text}>Time Left:</Text>
 
                 {/* This will have the picture of the coffee shop */}
                 <Avatar 
@@ -37,15 +35,11 @@ class CoffeePot extends Component {
 
                 {/* WIP: Figuring out how to add a row of coffee cups */}
                 <View>
-                    <Text>
-                        Row of Coffee Cups
-                    </Text>
+                    <Text>Row of Coffee Cups</Text>
                 </View>
 
                 {/* This will display the location of the coffee shop */}
-                <Text style={styles.text} >
-                    Location:
-                </Text>
+                <Text style={styles.text}>Location:</Text>
 
                 {/* 
                 Button looks life the text so need to make round.

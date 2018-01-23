@@ -23,9 +23,7 @@ class ExistingOrder extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>
-                    Time Left:
-                </Text>
+                <Text style={styles.text}>Time Left:</Text>
 
                 <Avatar 
                     xlarge
@@ -33,14 +31,10 @@ class ExistingOrder extends Component {
                 />
 
                 <View>
-                    <Text>
-                        Location:
-                    </Text>
+                    <Text style={styles.text}>Location:</Text>
                 </View>
 
-                <Text style={styles.text} >
-                    Order:
-                </Text>
+                <Text style={styles.text}> Order:</Text>
 
                 <Button 
                     title='Accept Order'
