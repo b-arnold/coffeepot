@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet } from 'react-native';
+import {View, Text } from 'react-native';
 import { Button, Avatar } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
@@ -48,7 +48,7 @@ class ExistingOrder extends Component {
 
 //////////////////////////////////////////////////////////////////////////////
 // Style object
-const styles = StyleSheet.create({
+const styles = {
     container: {
         margin: 50,
         flex: 1,
@@ -65,6 +65,6 @@ const styles = StyleSheet.create({
     button_style: {
         backgroundColor: BUTTON_COLOR
     }
-});
+}
 
 export default ExistingOrder;

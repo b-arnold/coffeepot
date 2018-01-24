@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
@@ -116,7 +116,7 @@ class Navigate extends Component {
     }
 }
 
-const styles = StyleSheet.create({
+const styles = {
     view_style: {
         flexGrow: 1,
         justifyContent: 'center',
@@ -127,6 +127,6 @@ const styles = StyleSheet.create({
         width: 230,
         backgroundColor: BUTTON_COLOR
     }
-})
+}
 
 export default Navigate;

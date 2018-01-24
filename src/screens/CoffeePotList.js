@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Button, Card, Avatar, Icon } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
@@ -194,7 +194,7 @@ class CoffeePotList extends Component {
 
 //////////////////////////////////////////////////////////////////////////////
 // Style object
-const styles = StyleSheet.create({
+const styles = {
     view_bttn: {
         flex:1,
         flexDirection:'row',
@@ -218,6 +218,6 @@ const styles = StyleSheet.create({
     button_style: {
         backgroundColor: BUTTON_COLOR
     }
-});
+}
 
 export default CoffeePotList;
