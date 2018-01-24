@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet } from 'react-native';
+import {View, Text } from 'react-native';
 import { Avatar, Button } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
@@ -48,6 +48,7 @@ class CoffeePot extends Component {
                 <Button 
                     title='Join Coffee Pot'
                     buttonStyle={styles.button_style}
+                    rounded
                 />
             </View>
         )
@@ -56,7 +57,7 @@ class CoffeePot extends Component {
 
 //////////////////////////////////////////////////////////////////////////////
 // Style object
-const styles = StyleSheet.create({
+const styles = {
     container: {
         margin: 50,
         flex: 1,
@@ -73,6 +74,6 @@ const styles = StyleSheet.create({
     button_style: {
         backgroundColor: BUTTON_COLOR
     }
-});
+}
 
 export default CoffeePot;

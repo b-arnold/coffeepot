@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+
 class ChooseDelivery extends Component {
     static navigationOptions = {
         title: 'Delivery',
         headerStyle: {
-            backgroundColor: '#16a085'
+            backgroundColor: PRIMARY_COLOR
             
         },
         headerTitleStyle: {
-            color: '#ecf0f1'
+            color: SECONDARY_COLOR
         },
-        headerTintColor: 'white'
+        headerTintColor: SECONDARY_COLOR
     }
 
     render() {
@@ -20,12 +22,9 @@ class ChooseDelivery extends Component {
             <View style={styles.mainContainer}>
                 <View style={{marginBottom: 10}}>
                     <Button 
-                        buttonStyle={{
-                            margin: 10,
-                            width: 300,
-                            backgroundColor: '#1abc9c'
-                        }}
+                        buttonStyle={styles.bttn_style}
                         title='Existing Order'
+                        rounded
                     />
                 </View>
                 <View style={{marginBottom: 100}}>
@@ -35,12 +34,9 @@ class ChooseDelivery extends Component {
                 </View>
                 <View style={{marginBottom: 10}}>
                     <Button 
-                        buttonStyle={{
-                            margin: 10,
-                            width: 300,
-                            backgroundColor: '#1abc9c'
-                        }}
+                        buttonStyle={styles.bttn_style}
                         title='Pick Location'
+                        rounded
                     />
                 </View>
                 <View style={{marginBottom: 30}}>
@@ -53,12 +49,17 @@ class ChooseDelivery extends Component {
     }
 }
 
-export default ChooseDelivery;
-
 const styles = {
     mainContainer: {
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1
+    },
+    bttn_style: {
+        margin: 10,
+        width: 300,
+        backgroundColor: BUTTON_COLOR
     }
 }
+
+export default ChooseDelivery;
