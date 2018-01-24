@@ -10,7 +10,6 @@ class Navigate extends Component {
         title: 'Navigation',
         headerStyle: {
             backgroundColor: PRIMARY_COLOR
-            
         },
         headerTitleStyle: {
             color: SECONDARY_COLOR
@@ -30,57 +29,80 @@ class Navigate extends Component {
                 }}
             >
                 {/* Coffee Pot List Screen Button */}
-                <Button 
+                <Button
                     buttonStyle={{
-                        margin:10,
+                        margin: 10,
                         width: 200,
                         backgroundColor: BUTTON_COLOR
                     }}
                     title='Coffee Pot List'
-                    onPress={() => 
+                    onPress={() =>
                         navigate('CoffeePotList')
                     }
                 />
 
                 {/* Coffee Pot Screen Button */}
-                <Button 
+                <Button
                     buttonStyle={{
-                        margin:10,
+                        margin: 10,
                         width: 200,
                         backgroundColor: BUTTON_COLOR
                     }}
                     title='Coffee Pot'
-                    onPress={() => 
+                    onPress={() =>
                         navigate('CoffeePot')
                     }
                 />
 
                 {/* Existing Orders List */}
-                <Button 
+                <Button
                     buttonStyle={{
-                        margin:10,
+                        margin: 10,
                         width: 200,
                         backgroundColor: BUTTON_COLOR
                     }}
                     title='Existing Orders List'
-                    onPress={() => 
+                    onPress={() =>
                         navigate('ExistingOrdersList')
                     }
                 />
 
                 {/* Existing Order */}
-                <Button 
+                <Button
                     buttonStyle={{
-                        margin:10,
+                        margin: 10,
                         width: 200,
                         backgroundColor: BUTTON_COLOR
                     }}
                     title='Existing Order'
-                    onPress={() => 
+                    onPress={() =>
                         navigate('ExistingOrder')
                     }
                 />
+                {/* Login Screen */}
+                <Button
+                  buttonStyle={{
+                    margin: 10,
+                    width: 200,
+                    backgroundColor: BUTTON_COLOR
+                  }}
+                  title='Login Screen'
+                  onPress={() =>
+                    navigate('LoginScreen')
+                  }
+                />
 
+                {/* Create Account Screen */}
+                <Button
+                  buttonStyle={{
+                    margin: 10,
+                    width: 200,
+                    backgroundColor: BUTTON_COLOR
+                  }}
+                  title='Create Account Screen'
+                  onPress={() =>
+                    navigate('CreateAccountScreen')
+                  }
                  {/* ChooseDelivery */}
                  <Button 
                     buttonStyle={{
