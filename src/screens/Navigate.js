@@ -103,67 +103,68 @@ class Navigate extends Component {
                   onPress={() =>
                     navigate('CreateAccountScreen')
                   }
+                />
                  {/* ChooseDelivery */}
-                 <Button 
+                 <Button
                     buttonStyle={{
                         margin: 10,
                         width: 200,
                         backgroundColor: BUTTON_COLOR
                     }}
                     title='Choose Delivery'
-                    onPress={() => 
+                    onPress={() =>
                         navigate('ChooseDelivery')
                     }
                 />
 
                 {/* PickLocationList */}
-                <Button 
+                <Button
                     buttonStyle={{
                         margin: 10,
                         width: 200,
                         backgroundColor: BUTTON_COLOR
                     }}
                     title='Pick Location List'
-                    onPress={() => 
+                    onPress={() =>
                         navigate('PickLocationList')
                     }
                 />
 
                 {/* PickedLocation */}
-                <Button 
+                <Button
                     buttonStyle={{
                         margin: 10,
                         width: 200,
                         backgroundColor: BUTTON_COLOR
                     }}
                     title='Picked Location'
-                    onPress={() => 
+                    onPress={() =>
                         navigate('PickedLocation')
                     }
                 />
 
                 {/* Profile */}
-                <Button 
+                <Button
                     buttonStyle={{
                         margin: 10,
                         width: 200,
                         backgroundColor: BUTTON_COLOR
                     }}
                     title='Profile'
-                    onPress={() => 
+                    onPress={() =>
                         navigate('Profile')
                     }
                 />
 
                 {/* Receipt Snapshot */}
-                <Button 
+                <Button
                     buttonStyle={{
                         margin: 10,
                         width: 200,
                         backgroundColor: BUTTON_COLOR
                     }}
                     title='Receipt Snapshot'
-                    onPress={() => 
+                    onPress={() =>
                         navigate('ReceiptSnapshot')
                     }
                 />
