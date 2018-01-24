@@ -4,7 +4,8 @@
     Brian Cajulis, Brett Arnold, Daniel Davis
 */
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
+import { Button } from 'react-native-elements';
 
 ///////////////////////////////////////////////////////////
 // Login Screen
@@ -23,14 +24,40 @@ class LoginScreen extends Component {
     headerTintColor: 'white'
   }
   /////////////////////////////////////////////////////////
+  // Button Render Method
+  /////////////////////////////////////////////////////////
+  renderButtons() {
+    return (
+      <View>
+        <Button
+          title="Log In"
+        />
+
+        <View>
+          <Button
+            title="Register"
+          />
+
+          <Button
+            title="Forgot Password?"
+          />
+        </View>
+      </View>
+    );
+  }
+
+  /////////////////////////////////////////////////////////
   // Main render method
   /////////////////////////////////////////////////////////
   render() {
     return (
       <View>
-        <Text>
-          Login
-        </Text>
+        <Image
+          style={{ width: 50, height: 50 }}
+          source={{ uri: '' }}
+        />
+        {this.renderButtons()}
+
       </View>
     );
   }
