@@ -62,12 +62,9 @@ class Navigate extends Component {
                 />
                 {/* Login Screen */}
                 <Button
-                  buttonStyle={{
-                    margin: 10,
-                    width: 200,
-                    backgroundColor: BUTTON_COLOR
-                  }}
+                  buttonStyle={style=styles.bttn_style}
                   title='Login Screen'
+                  rounded
                   onPress={() =>
                     navigate('LoginScreen')
                   }
