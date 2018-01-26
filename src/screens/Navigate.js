@@ -22,41 +22,41 @@ class Navigate extends Component {
         return (
             <ScrollView contentContainerStyle={styles.view_style}>
                 {/* Coffee Pot List Screen Button */}
-                <Button 
+                <Button
                     buttonStyle={style=styles.bttn_style}
                     title='Coffee Pot List'
                     rounded
-                    onPress={() => 
+                    onPress={() =>
                         navigate('CoffeePotList')
                     }
                 />
 
                 {/* Coffee Pot Screen Button */}
-                <Button 
+                <Button
                     buttonStyle={style=styles.bttn_style}
                     title='Coffee Pot'
                     rounded
-                    onPress={() => 
+                    onPress={() =>
                         navigate('CoffeePot')
                     }
                 />
 
                 {/* Existing Orders List */}
-                <Button 
+                <Button
                     buttonStyle={style=styles.bttn_style}
                     title='Existing Orders List'
                     rounded
-                    onPress={() => 
+                    onPress={() =>
                         navigate('ExistingOrdersList')
                     }
                 />
 
                 {/* Existing Order */}
-                <Button 
+                <Button
                     buttonStyle={style=styles.bttn_style}
                     title='Existing Order'
                     rounded
-                    onPress={() => 
+                    onPress={() =>
                         navigate('ExistingOrder')
                     }
                 />
@@ -70,62 +70,62 @@ class Navigate extends Component {
                   }
                 />
 
-
                 {/* Create Account Screen */}
                 <Button
                   buttonStyle={style=styles.bttn_style}
                   title='Create Account Screen'
+                  rounded
                   onPress={() =>
                     navigate('CreateAccountScreen')
                   }
                 />
+
                 {/* ChooseDelivery */}
-                <Button 
+                <Button
                     buttonStyle={style=styles.bttn_style}
                     title='Choose Delivery'
                     rounded
-                    onPress={() => 
+                    onPress={() =>
                         navigate('ChooseDelivery')
                     }
                 />
 
                 {/* PickLocationList */}
-                <Button 
+                <Button
                     buttonStyle={style=styles.bttn_style}
                     title='Pick Location List'
                     rounded
-                    onPress={() => 
+                    onPress={() =>
                         navigate('PickLocationList')
                     }
                 />
 
                 {/* PickedLocation */}
-                <Button 
+                <Button
                     buttonStyle={style=styles.bttn_style}
                     title='Picked Location'
                     rounded
-                    onPress={() => 
+                    onPress={() =>
                         navigate('PickedLocation')
                     }
                 />
 
                 {/* Profile */}
-                <Button 
+                <Button
                     buttonStyle={style=styles.bttn_style}
                     title='Profile'
                     rounded
-                    onPress={() => 
+                    onPress={() =>
                         navigate('Profile')
                     }
                 />
 
                 {/* Receipt Snapshot */}
-
-                <Button 
+                <Button
                     buttonStyle={style=styles.bttn_style}
                     title='Receipt Snapshot'
                     rounded
-                    onPress={() => 
+                    onPress={() =>
                         navigate('ReceiptSnapshot')
                     }
                 />
