@@ -4,8 +4,9 @@
     Brian Cajulis, Brett Arnold, Daniel Davis
 */
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, Text, Image, KeyboardAvoidingView } from 'react-native';
+import { Button, FormInput } from 'react-native-elements';
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 ///////////////////////////////////////////////////////////
 // Login Screen
@@ -16,34 +17,12 @@ class LoginScreen extends Component {
   static navigationOptions = {
     title: 'Login',
     headerStyle: {
-      backgroundColor: '#16A085'
+      backgroundColor: PRIMARY_COLOR
     },
     headerTitleStyle: {
-      color: '#ECF0F1'
+      color: SECONDARY_COLOR
     },
-    headerTintColor: 'white'
-  }
-  /////////////////////////////////////////////////////////
-  // Button Render Method
-  /////////////////////////////////////////////////////////
-  renderButtons() {
-    return (
-      <View>
-        <Button
-          title="Log In"
-        />
-
-        <View>
-          <Button
-            title="Register"
-          />
-
-          <Button
-            title="Forgot Password?"
-          />
-        </View>
-      </View>
-    );
+    headerTintColor: SECONDARY_COLOR
   }
 
   /////////////////////////////////////////////////////////
@@ -51,16 +30,88 @@ class LoginScreen extends Component {
   /////////////////////////////////////////////////////////
   render() {
     return (
-      <View>
-        <Image
-          style={{ width: 50, height: 50 }}
-          source={{ uri: '' }}
-        />
-        {this.renderButtons()}
+      <KeyboardAvoidingView
+        style={{ flex: 1, justifyContent: 'center' }}
+        behavior='padding'
+      >
+        <View
+          style={styles.containerStyle}
+        >
+          <Image
+            style={styles.imageStyle}
+            source={require('../images/LoginLogo.png')}
+          />
+        </View>
 
-      </View>
+        <View style={{ marginBottom: 10, marginTop: 10 }}>
+          <View style={{ marginBottom: 10, marginTop: 10, marginLeft: 20 }}>
+            <Text>Email</Text>
+          </View>
+          <FormInput
+            placeholder="youremail@email.com"
+            style={{ color: 'black' }}
+          />
+          <View style={{ marginBottom: 10, marginTop: 10, marginLeft: 20 }}>
+            <Text>Password</Text>
+          </View>
+          <FormInput
+            placeholder="password"
+            secureTextEntry
+            style={{ color: 'black' }}
+          />
+        </View>
+
+        <View
+          style={styles.containerStyle}
+        >
+          <Button
+            title="Log In"
+            buttonStyle={styles.loginButtonStyle}
+          />
+        </View>
+
+        <View
+          style={styles.containerStyle}
+        >
+          <Button
+            title="Register"
+            buttonStyle={styles.smallButtonStyle}
+          />
+
+          <Button
+            title="Forgot Password?"
+            fontSize={10.5}
+            buttonStyle={styles.smallButtonStyle}
+          />
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 }
+
+///////////////////////////////////////////////////////////
+//Syles
+const styles = {
+  smallButtonStyle: {
+    width: 85,
+    margin: 10,
+    height: 30,
+    backgroundColor: BUTTON_COLOR
+  },
+  loginButtonStyle: {
+    width: 110,
+    backgroundColor: BUTTON_COLOR
+  },
+  imageStyle: {
+    width: 200,
+    height: 200
+  },
+  containerStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10
+  }
+};
 
 export default LoginScreen;

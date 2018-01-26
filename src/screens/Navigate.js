@@ -70,6 +70,15 @@ class Navigate extends Component {
                   }
                 />
 
+
+                {/* Create Account Screen */}
+                <Button
+                  buttonStyle={style=styles.bttn_style}
+                  title='Create Account Screen'
+                  onPress={() =>
+                    navigate('CreateAccountScreen')
+                  }
+                />
                 {/* ChooseDelivery */}
                 <Button 
                     buttonStyle={style=styles.bttn_style}
@@ -111,6 +120,7 @@ class Navigate extends Component {
                 />
 
                 {/* Receipt Snapshot */}
+
                 <Button 
                     buttonStyle={style=styles.bttn_style}
                     title='Receipt Snapshot'
