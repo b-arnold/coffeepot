@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
@@ -23,7 +23,7 @@ class Navigate extends Component {
             <ScrollView contentContainerStyle={styles.view_style}>
                 {/* Coffee Pot List Screen Button */}
                 <Button
-                    buttonStyle={style=styles.bttn_style}
+                    buttonStyle={styles.bttn_style}
                     title='Coffee Pot List'
                     rounded
                     onPress={() =>
@@ -33,7 +33,7 @@ class Navigate extends Component {
 
                 {/* Coffee Pot Screen Button */}
                 <Button
-                    buttonStyle={style=styles.bttn_style}
+                    buttonStyle={styles.bttn_style}
                     title='Coffee Pot'
                     rounded
                     onPress={() =>
@@ -43,7 +43,7 @@ class Navigate extends Component {
 
                 {/* Existing Orders List */}
                 <Button
-                    buttonStyle={style=styles.bttn_style}
+                    buttonStyle={styles.bttn_style}
                     title='Existing Orders List'
                     rounded
                     onPress={() =>
@@ -53,7 +53,7 @@ class Navigate extends Component {
 
                 {/* Existing Order */}
                 <Button
-                    buttonStyle={style=styles.bttn_style}
+                    buttonStyle={styles.bttn_style}
                     title='Existing Order'
                     rounded
                     onPress={() =>
@@ -62,7 +62,7 @@ class Navigate extends Component {
                 />
                 {/* Login Screen */}
                 <Button
-                  buttonStyle={style=styles.bttn_style}
+                  buttonStyle={styles.bttn_style}
                   title='Login Screen'
                   rounded
                   onPress={() =>
@@ -72,7 +72,7 @@ class Navigate extends Component {
 
                 {/* Create Account Screen */}
                 <Button
-                  buttonStyle={style=styles.bttn_style}
+                  buttonStyle={styles.bttn_style}
                   title='Create Account Screen'
                   rounded
                   onPress={() =>
@@ -82,7 +82,7 @@ class Navigate extends Component {
 
                 {/* ChooseDelivery */}
                 <Button
-                    buttonStyle={style=styles.bttn_style}
+                    buttonStyle={styles.bttn_style}
                     title='Choose Delivery'
                     rounded
                     onPress={() =>
@@ -92,7 +92,7 @@ class Navigate extends Component {
 
                 {/* PickLocationList */}
                 <Button
-                    buttonStyle={style=styles.bttn_style}
+                    buttonStyle={styles.bttn_style}
                     title='Pick Location List'
                     rounded
                     onPress={() =>
@@ -102,7 +102,7 @@ class Navigate extends Component {
 
                 {/* PickedLocation */}
                 <Button
-                    buttonStyle={style=styles.bttn_style}
+                    buttonStyle={styles.bttn_style}
                     title='Picked Location'
                     rounded
                     onPress={() =>
@@ -112,7 +112,7 @@ class Navigate extends Component {
 
                 {/* Profile */}
                 <Button
-                    buttonStyle={style=styles.bttn_style}
+                    buttonStyle={styles.bttn_style}
                     title='Profile'
                     rounded
                     onPress={() =>
@@ -122,12 +122,32 @@ class Navigate extends Component {
 
                 {/* Receipt Snapshot */}
                 <Button
-                    buttonStyle={style=styles.bttn_style}
+                    buttonStyle={styles.bttn_style}
                     title='Receipt Snapshot'
                     rounded
                     onPress={() =>
                         navigate('ReceiptSnapshot')
                     }
+                />
+
+                {/* Payment Confirmation Screen */}
+                <Button
+                  buttonStyle={styles.bttn_style}
+                  title='Payment Confirmation'
+                  rounded
+                  onPress={() =>
+                      navigate('PaymentConfirmationScreen')
+                  }
+                />
+
+                {/* Receipt Screen */}
+                <Button
+                  buttonStyle={styles.bttn_style}
+                  title='Receipt'
+                  rounded
+                  onPress={() =>
+                      navigate('ReceiptScreen')
+                  }
                 />
             </ScrollView>
         );
@@ -145,6 +165,6 @@ const styles = {
         width: 230,
         backgroundColor: BUTTON_COLOR
     }
-}
+};
 
 export default Navigate;

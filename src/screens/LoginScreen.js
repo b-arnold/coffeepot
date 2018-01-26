@@ -34,9 +34,7 @@ class LoginScreen extends Component {
         style={{ flex: 1, justifyContent: 'center' }}
         behavior='padding'
       >
-        <View
-          style={styles.containerStyle}
-        >
+        <View style={styles.containerStyle}>
           <Image
             style={styles.imageStyle}
             source={require('../images/LoginLogo.png')}
@@ -66,6 +64,7 @@ class LoginScreen extends Component {
         >
           <Button
             title="Log In"
+            rounded
             buttonStyle={styles.loginButtonStyle}
           />
         </View>
@@ -75,12 +74,14 @@ class LoginScreen extends Component {
         >
           <Button
             title="Register"
+            rounded
             buttonStyle={styles.smallButtonStyle}
           />
 
           <Button
             title="Forgot Password?"
             fontSize={10.5}
+            rounded
             buttonStyle={styles.smallButtonStyle}
           />
         </View>
@@ -93,13 +94,13 @@ class LoginScreen extends Component {
 //Syles
 const styles = {
   smallButtonStyle: {
-    width: 85,
+    width: 90,
     margin: 10,
     height: 30,
     backgroundColor: BUTTON_COLOR
   },
   loginButtonStyle: {
-    width: 110,
+    width: 160,
     backgroundColor: BUTTON_COLOR
   },
   imageStyle: {
