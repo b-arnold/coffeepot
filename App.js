@@ -13,15 +13,18 @@ import CoffeePot from './src/screens/CoffeePot';
 // Delivery Screens
 import ChooseDelivery from './src/screens/ChooseDelivery';
 import ExistingOrdersList from './src/screens/ExistingOrdersList';
-import LoginScreen from './src/screens/LoginScreen';
-import CreateAccountScreen from './src/screens/CreateAccountScreen';
 import ExistingOrder from './src/screens/ExistingOrder';
 import PickLocationList from './src/screens/PickLocationList';
 import PickedLocation from './src/screens/PickedLocation';
 
+// Authenticaiton Screens
+import LoginScreen from './src/screens/LoginScreen';
+import CreateAccountScreen from './src/screens/CreateAccountScreen';
+
 // Payment Screens
 import ReceiptSnapshot from './src/screens/ReceiptSnapshot';
-
+import PaymentConfirmationScreen from './src/screens/PaymentConfirmationScreen';
+import ReceiptScreen from './src/screens/ReceiptScreen';
 
 
 export default class App extends React.Component {
@@ -39,7 +42,9 @@ export default class App extends React.Component {
       PickLocationList: { screen: PickLocationList },
       PickedLocation: { screen: PickedLocation },
       Profile: { screen: Profile },
-      ReceiptSnapshot: { screen: ReceiptSnapshot }
+      ReceiptSnapshot: { screen: ReceiptSnapshot },
+      PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
+      ReceiptScreen: { screen: ReceiptScreen },
     })
 
     return (
