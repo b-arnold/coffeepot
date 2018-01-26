@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import { Button, Card, Avatar } from 'react-native-elements';
+import { View, Text, ScrollView } from 'react-native';
+import { Button, Card, Avatar, Icon } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
@@ -24,8 +24,14 @@ class ExistingOrdersList extends Component {
                 <ScrollView>
                     <View style={styles.view_bttn}>
                         <Button 
+                            iconRight={{
+                                name: 'map-marker',
+                                type: 'font-awesome',
+                                size: 25
+                            }}
                             title='GPS View'
                             buttonStyle={styles.button_style}
+                            rounded
                         />
                     </View>
 
@@ -176,7 +182,7 @@ class ExistingOrdersList extends Component {
 
 //////////////////////////////////////////////////////////////////////////////
 // Style object
-const styles = StyleSheet.create({
+const styles = {
     view_bttn: {
         flex:1,
         flexDirection:'row',
@@ -200,6 +206,6 @@ const styles = StyleSheet.create({
     button_style: {
         backgroundColor: BUTTON_COLOR
     }
-});
+}
 
 export default ExistingOrdersList;
