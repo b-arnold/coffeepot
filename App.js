@@ -19,6 +19,7 @@ import ExistingOrder from './src/screens/ExistingOrder';
 import PickLocationList from './src/screens/PickLocationList';
 import PickedLocation from './src/screens/PickedLocation';
 import PlaceOrder from './src/screens/PlaceOrder';
+import PaymentScreen from './src/screens/PaymentScreen';
 
 
 // Payment Screens
@@ -42,7 +43,8 @@ export default class App extends React.Component {
       PickedLocation: { screen: PickedLocation },
       Profile: { screen: Profile },
       ReceiptSnapshot: { screen: ReceiptSnapshot },
-      PlaceOrder: { screen: PlaceOrder}
+      PlaceOrder: { screen: PlaceOrder},
+      PaymentScreen: { screen: PaymentScreen }
     })
 
     return (

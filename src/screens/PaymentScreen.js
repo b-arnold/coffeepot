@@ -4,9 +4,9 @@ import { Button, Card } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
-export default class PlaceOrder extends Component {
+export default class PaymentScreen extends Component {
     static navigationOptions = {
-        title: 'Place Order',
+        title: 'Order Payment',
         headerStyle: {
             backgroundColor: '#16a085'
             
@@ -23,35 +23,36 @@ export default class PlaceOrder extends Component {
                 <ScrollView>
                     <Card>
                         <View style={{ flexDirection: 'row' }}>
-                            <Text>FirstName LastName</Text>
+                            <View>
+                                <Image
+                                    source={require('../images/profile_icon.png')}
+                                    style={{ width: 50, height: 50 }} 
+                                />
+                            </View>
+                            <View>
+                                <Text>FirstName</Text>
+                                <Text>LastName</Text>
+                            </View>
+                        </View>
+                    </Card>
+
+                    <Card>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text>Card Number</Text>
+                            <Text>Expiration Date</Text>
+                            <Text>01  2017</Text>
                         </View>
                     </Card>
                     <Card>
                         <View style={{ flexDirection: 'row' }}>
-                            <Text>Location: Starbucks, Azusa</Text>
-                        </View>
-                    </Card>
-                    <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style ={styles.title_style}>Order:</Text>
-                            <Text>Grande, Iced, Vanilla /n Caffe Latte</Text>
-                            <Text style ={{fontWeight: 'bold'}}>Remove Order</Text>
+                            <Text>Apply New Card</Text>
                         </View>
                     </Card>
                     <Card>
                         <View style={{ flexDirection: 'row' }}>
                             <Button 
-                            buttonStyle={styles.AddBttn_style}
-                            title='Add to Order +'
-                            rounded
-                            />
-                        </View>
-                    </Card>
-                    <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                        <Button 
                             buttonStyle={styles.bttn_style}
-                            title='Place Order'
+                            title='Confirm Payment'
                             rounded
                             />
                         </View>
@@ -61,24 +62,16 @@ export default class PlaceOrder extends Component {
         );
     }
 }
+
 const styles = {
     mainContainer: {
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1
     },
-    addBttn_style: {
-        margin: 10,
-        width: 100,
-        backgroundColor: BUTTON_COLOR
-    },
     bttn_style: {
         margin: 10,
         width: 300,
         backgroundColor: BUTTON_COLOR
-    },
-    title_style: {
-        fontSize:20,
-        fontWeight: 'bold'
     }
 }
