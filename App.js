@@ -18,6 +18,8 @@ import CreateAccountScreen from './src/screens/CreateAccountScreen';
 import ExistingOrder from './src/screens/ExistingOrder';
 import PickLocationList from './src/screens/PickLocationList';
 import PickedLocation from './src/screens/PickedLocation';
+import PlaceOrder from './src/screens/PlaceOrder';
+
 
 // Payment Screens
 import ReceiptSnapshot from './src/screens/ReceiptSnapshot';
@@ -39,7 +41,8 @@ export default class App extends React.Component {
       PickLocationList: { screen: PickLocationList },
       PickedLocation: { screen: PickedLocation },
       Profile: { screen: Profile },
-      ReceiptSnapshot: { screen: ReceiptSnapshot }
+      ReceiptSnapshot: { screen: ReceiptSnapshot },
+      PlaceOrder: { screen: PlaceOrder}
     })
 
     return (
