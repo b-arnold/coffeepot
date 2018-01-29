@@ -19,10 +19,9 @@ import ExistingOrder from './src/screens/ExistingOrder';
 import PickLocationList from './src/screens/PickLocationList';
 import PickedLocation from './src/screens/PickedLocation';
 import PlaceOrder from './src/screens/PlaceOrder';
-import PaymentScreen from './src/screens/PaymentScreen';
-
 
 // Payment Screens
+import PaymentScreen from './src/screens/PaymentScreen';
 import ReceiptSnapshot from './src/screens/ReceiptSnapshot';
 
 

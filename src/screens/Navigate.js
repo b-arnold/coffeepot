@@ -119,6 +119,26 @@ class Navigate extends Component {
                         navigate('ReceiptSnapshot')
                     }
                 />
+
+                {/* Place Order */}
+                <Button 
+                    buttonStyle={style=styles.bttn_style}
+                    title='Place Order'
+                    rounded
+                    onPress={() => 
+                        navigate('PlaceOrder')
+                    }
+                />
+
+                {/* Payment Screen */}
+                <Button 
+                    buttonStyle={style=styles.bttn_style}
+                    title='Order Payment'
+                    rounded
+                    onPress={() => 
+                        navigate('PaymentScreen')
+                    }
+                />
             </ScrollView>
         );
     }

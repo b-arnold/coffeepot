@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image } from 'react-native';
+import { View, Text, ScrollView, Image, Dimensions } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+
+const window_width =Dimensions.get('window').width;
 
 export default class PlaceOrder extends Component {
     static navigationOptions = {
@@ -32,23 +34,22 @@ export default class PlaceOrder extends Component {
                         </View>
                     </Card>
                     <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style ={styles.title_style}>Order:</Text>
-                            <Text>Grande, Iced, Vanilla /n Caffe Latte</Text>
-                            <Text style ={{fontWeight: 'bold'}}>Remove Order</Text>
+                        <View style={{ flexDirection: 'column' }}>
+                            <Text style ={styles.title_style}>Order:{"\n"}</Text>
+                            <Text>Grande, Iced, Vanilla {"\n"} Caffe Latte{"\n"}</Text>
+
+                            <View style={styles.button_container}>
+                                <Text style ={{fontWeight: 'bold'}}>Remove from Order{"\n"}{"\n"}{"\n"}</Text>
+                                <Button 
+                                buttonStyle={styles.AddBttn_style}
+                                title='Add Order +'
+                                rounded
+                                />
+                            </View>
                         </View>
                     </Card>
                     <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Button 
-                            buttonStyle={styles.AddBttn_style}
-                            title='Add to Order +'
-                            rounded
-                            />
-                        </View>
-                    </Card>
-                    <Card>
-                        <View style={{ flexDirection: 'row' }}>
+                        <View style={styles.button_container}>
                         <Button 
                             buttonStyle={styles.bttn_style}
                             title='Place Order'
@@ -68,17 +69,22 @@ const styles = {
         flex: 1
     },
     addBttn_style: {
-        margin: 10,
+        margin: 0,
         width: 100,
         backgroundColor: BUTTON_COLOR
     },
     bttn_style: {
-        margin: 10,
-        width: 300,
+        margin: 0,
+        width: window_width-75,
         backgroundColor: BUTTON_COLOR
     },
     title_style: {
         fontSize:20,
         fontWeight: 'bold'
+    },
+    button_container:{
+        flexDirection: 'column', 
+        justifyContent: 'center', 
+        alignItems: 'center'
     }
 }

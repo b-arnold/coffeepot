@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image } from 'react-native';
+import { View, Text, ScrollView, Image, Dimensions } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+const window_width = Dimensions.get('window').width;
 
 export default class PaymentScreen extends Component {
     static navigationOptions = {
@@ -37,19 +38,21 @@ export default class PaymentScreen extends Component {
                     </Card>
 
                     <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text>Card Number</Text>
-                            <Text>Expiration Date</Text>
-                            <Text>01  2017</Text>
+                        <View style={{ flexDirection: 'column' }}>
+                            <Text>Card Number: xxxx-xxxx-xxxx-0000{"\n"}</Text>
+                            <Text>Expiration Date: 01/ 2020{"\n"}</Text>
+                            <View style={style.button_container}>
+                                <Button 
+                                    buttonStyle={styles.AddBttn_style}
+                                    title='Apply New Card +'
+                                    rounded
+                                />
+                            </View>
                         </View>
                     </Card>
+
                     <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text>Apply New Card</Text>
-                        </View>
-                    </Card>
-                    <Card>
-                        <View style={{ flexDirection: 'row' }}>
+                        <View style={style.button_container}>
                             <Button 
                             buttonStyle={styles.bttn_style}
                             title='Confirm Payment'
@@ -70,8 +73,18 @@ const styles = {
         flex: 1
     },
     bttn_style: {
-        margin: 10,
-        width: 300,
+        margin: 0,
+        width: window_width-75,
         backgroundColor: BUTTON_COLOR
+    },
+    addBttn_style: {
+        margin: 0,
+        width: 100,
+        backgroundColor: BUTTON_COLOR
+    },
+    button_container:{
+        flexDirection: 'column', 
+        justifyContent: 'center', 
+        alignItems: 'center'
     }
 }
