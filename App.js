@@ -24,6 +24,7 @@ import CreateAccountScreen from './src/screens/CreateAccountScreen';
 // Payment Screens
 import ReceiptSnapshot from './src/screens/ReceiptSnapshot';
 import PaymentConfirmationScreen from './src/screens/PaymentConfirmationScreen';
+import ReceiptScreen from './src/screens/ReceiptScreen';
 
 //Drawer
 import DrawerContent from './src/components/DrawerContent';
