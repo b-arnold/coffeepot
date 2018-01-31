@@ -1,25 +1,37 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Button, Card, Avatar, Icon } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 class CoffeePotList extends Component {
-    static navigationOptions = {
+    static navigationOptions = ({navigation}) => ({
         title: 'Coffee Pots',
         //Changes the color of the header
         headerStyle: {
-            backgroundColor: PRIMARY_COLOR
-            
+            backgroundColor: PRIMARY_COLOR,
+            paddingRight: 10,
+            paddingLeft: 10
         },
         //Changes the color of the Header Title
         headerTitleStyle: {
             color: SECONDARY_COLOR
         },
         //Changes the color of the back button
-        headerTintColor: SECONDARY_COLOR
-    }
+        headerTintColor: SECONDARY_COLOR,
+        headerBackTitle: null,
+        headerLeft: (
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+                <Icon 
+                    type='material-community'
+                    name='menu'
+                    color={ SECONDARY_COLOR }
+                />
+            </TouchableOpacity>
+        ),
+    })
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View>
                 {/* This file is here for scaffolding, but will be replaced */}
@@ -47,22 +59,26 @@ class CoffeePotList extends Component {
                         />
                     </View>
 
-                    <Card>
-                        <View style={styles.view_card}>
-                            <View style={styles.view_avatar}>
-                                <Avatar
-                                    title='Test'
-                                    large
-                                />
-                            </View>
+                    <TouchableOpacity
+                         onPress={() => navigate('CoffeePot')}
+                    >
+                        <Card>
+                            <View style={styles.view_card}>
+                                <View style={styles.view_avatar}>
+                                    <Avatar
+                                        title='Test'
+                                        large
+                                    />
+                                </View>
 
-                            <View style={styles.view_text}>
-                                <Text> Location: </Text>
-                                <Text> Coffee Cup Row </Text>
-                                <Text> Time Left: </Text>
+                                <View style={styles.view_text}>
+                                    <Text> Location: </Text>
+                                    <Text> Coffee Cup Row </Text>
+                                    <Text> Time Left: </Text>
+                                </View>
                             </View>
-                        </View>
-                    </Card>
+                        </Card>
+                    </TouchableOpacity>
 
                     <Card>
                         <View style={styles.view_card}>

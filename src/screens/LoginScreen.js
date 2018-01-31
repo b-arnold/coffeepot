@@ -27,10 +27,14 @@ class LoginScreen extends Component {
   // Button Render Method
   /////////////////////////////////////////////////////////
   renderButtons() {
+    const { navigate } = this.props.navigation;
     return (
       <View>
         <Button
           title="Log In"
+          onPress={() =>
+            navigate('Main')
+          }
         />
 
         <View>

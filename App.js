@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
-import { Button } from 'react-native-elements';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { StyleSheet, Text, View, Platform, StatusBar, ScrollView } from 'react-native';
+import { Button, Icon, Divider, Avatar } from 'react-native-elements';
+import { StackNavigator, TabNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
 
 import Navigate from './src/screens/Navigate';
 import Profile from './src/screens/Profile';
@@ -22,10 +22,15 @@ import PickedLocation from './src/screens/PickedLocation';
 // Payment Screens
 import ReceiptSnapshot from './src/screens/ReceiptSnapshot';
 
+//Drawer
+import DrawerContent from './src/components/DrawerContent';
+
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from './src/constants/style';
 
 
 export default class App extends React.Component {
   render() {
+    /////////////////////////////////////////////////////////////
     //This nav is used for testing purposes only.
     const ButtonNav = StackNavigator({
       Navigate: { screen: Navigate },
@@ -42,12 +47,76 @@ export default class App extends React.Component {
       ReceiptSnapshot: { screen: ReceiptSnapshot }
     })
 
+    /////////////////////////////////////////////////////////////////////////
+    //// This is used for the actual development of the app
+    const Home = StackNavigator({
+      CoffeePotList: { screen: CoffeePotList },
+      CoffeePot: { screen: CoffeePot },
+      Profile: { screen: Profile }
+    })
+
+    //////////////////////////////////////////////////////////////////////////////
+    // This component dictates the configuration of the drawer
+    const customDrawerComponent = props => (
+      <ScrollView>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            alignContent: "center"
+          }}
+        >
+          <Avatar
+            title='Test'
+            xlarge
+            rounded
+            containerStyle={{ margin: 10 }}
+          />
+          <Text style={{ margin: 10, color: 'white' }}>John TestyMcTestFace</Text>
+        </View>
+
+        <View>
+          <DrawerItems {...props} />
+        </View>
+      </ScrollView>
+    );
+
+    const Drawer = DrawerNavigator({
+      Home: { screen: Home },
+      Profile: { screen: Profile }
+    },{
+      contentComponent: customDrawerComponent,
+      drawerBackgroundColor: '#607D8B',
+      contentOptions: {
+        inactiveBackgroundColor: BUTTON_COLOR,
+        activeBackgroundColor: BUTTON_COLOR,
+        margin: 10,
+        labelStyle: {
+          color: SECONDARY_COLOR,
+        },
+
+      }
+    })
+
+    const MainNav = TabNavigator({
+      Login: { screen: LoginScreen },
+      Main: { screen: Drawer },
+    },{
+      navigationOptions: {
+        tabBarVisible: false
+      },
+      tabBarPosition: "bottom",
+      swipeEnabled: false,
+      lazy: true, // Each screen will not mount/load until user clicks on them
+    })
+
     return (
       <View style={styles.container}>
         <StatusBar
           barStyle='light-content'
         />
-        <ButtonNav />
+        <MainNav />
+        {/* <ButtonNav /> */}
       </View>
     );
   }
