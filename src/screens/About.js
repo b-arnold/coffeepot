@@ -19,7 +19,7 @@ class About extends Component {
                 <ScrollView>
                 <Text>
                 CoffeePot is an applictaion based coffee Delivery service that has set out
-                to facilatate excellent coffee delivery
+                to facilitate excellent coffee delivery
                 </Text>
                 </ScrollView>
             </View>
