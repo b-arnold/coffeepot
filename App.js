@@ -8,7 +8,6 @@ import DeliveryLegal from './src/screens/DeliveryLegal';
 import StandardLegal from './src/screens/StandardLegal';
 import About from './src/screens/About';
 import Settings from './src/screens/Settings';
-import SideBarMenu from './src/screens/SideBarMenu';
 
 ///////////////////////////////////////////////////////////
 // YOU'RE CURRENTLY WORKING IN DEVELOPMENT BRANCH
