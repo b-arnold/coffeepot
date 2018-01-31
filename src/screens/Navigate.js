@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+
 //ONLY FOR SCREEN TESTING
 class Navigate extends Component {
     static navigationOptions = {
         title: 'Navigation',
         headerStyle: {
-            backgroundColor: '#16a085'
-            
+            backgroundColor: PRIMARY_COLOR
         },
         headerTitleStyle: {
-            color: '#ecf0f1'
+            color: SECONDARY_COLOR
         },
         headerBackTitle: null,
     }
@@ -19,6 +20,7 @@ class Navigate extends Component {
     render() {
         const { navigate } = this.props.navigation;
         return (
+
             <ScrollView>
                 <View
                     style={{
@@ -158,10 +160,63 @@ class Navigate extends Component {
                         }
                     />
 
-                </View>
+       
+                {/* Login Screen */}
+                <Button
+                  buttonStyle={styles.bttn_style}
+                  title='Login Screen'
+                  rounded
+                  onPress={() =>
+                    navigate('LoginScreen')
+                  }
+                />
+
+                {/* Create Account Screen */}
+                <Button
+                  buttonStyle={styles.bttn_style}
+                  title='Create Account Screen'
+                  rounded
+                  onPress={() =>
+                    navigate('CreateAccountScreen')
+                  }
+                />
+
+                {/* Payment Confirmation Screen */}
+                <Button
+                  buttonStyle={styles.bttn_style}
+                  title='Payment Confirmation'
+                  rounded
+                  onPress={() =>
+                      navigate('PaymentConfirmationScreen')
+                  }
+                />
+
+                {/* Receipt Screen */}
+                <Button
+                  buttonStyle={styles.bttn_style}
+                  title='Receipt'
+                  rounded
+                  onPress={() =>
+                      navigate('ReceiptScreen')
+                  }
+                />
+               </View>
             </ScrollView>
         );
     }
 }
+
+const styles = {
+    view_style: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    bttn_style: {
+        margin: 10,
+        width: 230,
+        backgroundColor: BUTTON_COLOR
+    }
+};
 
 export default Navigate;

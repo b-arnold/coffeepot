@@ -1,110 +1,238 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { Button, Card } from 'react-native-elements';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { Button, Card, Avatar, Icon } from 'react-native-elements';
+
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 class CoffeePotList extends Component {
-    static navigationOptions = {
+    static navigationOptions = ({navigation}) => ({
         title: 'Coffee Pots',
+        //Changes the color of the header
         headerStyle: {
-            backgroundColor: '#16a085'
-            
+            backgroundColor: PRIMARY_COLOR,
+            paddingRight: 10,
+            paddingLeft: 10
         },
+        //Changes the color of the Header Title
         headerTitleStyle: {
-            color: '#ecf0f1'
+            color: SECONDARY_COLOR
         },
-        headerTintColor: 'white'
-    }
+        //Changes the color of the back button
+        headerTintColor: SECONDARY_COLOR,
+        headerBackTitle: null,
+        headerLeft: (
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+                <Icon 
+                    type='material-community'
+                    name='menu'
+                    color={ SECONDARY_COLOR }
+                />
+            </TouchableOpacity>
+        ),
+    })
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View>
+                {/* This file is here for scaffolding, but will be replaced */}
                 <ScrollView>
-                    <View
-                        style={{
-                            flex:1,
-                            flexDirection:'row',
-                            justifyContent: 'center',
-                            margin:10
-                        }}
-                    >
+                    <View style={styles.view_bttn}>
                         <Button 
-                            title='Place Order'
-                            buttonStyle={{
-                                backgroundColor: '#1abc9c'
+                            iconRight={{
+                                name: 'plus-circle',
+                                type: 'material-community',
+                                size: 25
                             }}
+                            title='Place Order'
+                            buttonStyle={styles.button_style}
+                            rounded
                         />
                         <Button 
-                            title='GPS View'
-                            buttonStyle={{
-                                backgroundColor: '#1abc9c'
+                            iconRight={{
+                                name: 'map-marker',
+                                type: 'font-awesome',
+                                size: 25
                             }}
+                            title='GPS View'
+                            buttonStyle={styles.button_style}
+                            rounded
                         />
                     </View>
-                    <Card>
-                        <Text>
-                            Coffee Pot Card 
-                        </Text>
-                    </Card>
-                    <Card>
-                        <Text>
-                            Coffee Pot Card 
-                        </Text>
-                    </Card>
-                    <Card>
-                        <Text>
-                            Coffee Pot Card 
-                        </Text>
-                    </Card>
-                    <Card>
-                        <Text>
-                            Coffee Pot Card 
-                        </Text>
-                    </Card>
-                    <Card>
-                        <Text>
-                            Coffee Pot Card 
-                        </Text>
-                    </Card>
-                    <Card>
-                        <Text>
-                            Coffee Pot Card 
-                        </Text>
-                    </Card>
-                    <Card>
-                        <Text>
-                            Coffee Pot Card 
-                        </Text>
-                    </Card>
-                    <Card>
-                        <Text>
-                            Coffee Pot Card 
-                        </Text>
-                    </Card>
-                    <Card>
-                        <Text>
-                            Coffee Pot Card 
-                        </Text>
-                    </Card>
-                    <Card>
-                        <Text>
-                            Coffee Pot Card 
-                        </Text>
-                    </Card>
-                    <Card>
-                        <Text>
-                            Coffee Pot Card 
-                        </Text>
-                    </Card>
-                    <Text
-                        style={{
-                            margin: 10,
-                            justifyContent: 'center'
-                        }}
+
+                    <TouchableOpacity
+                         onPress={() => navigate('CoffeePot')}
                     >
+                        <Card>
+                            <View style={styles.view_card}>
+                                <View style={styles.view_avatar}>
+                                    <Avatar
+                                        title='Test'
+                                        large
+                                    />
+                                </View>
+
+                                <View style={styles.view_text}>
+                                    <Text> Location: </Text>
+                                    <Text> Coffee Cup Row </Text>
+                                    <Text> Time Left: </Text>
+                                </View>
+                            </View>
+                        </Card>
+                    </TouchableOpacity>
+
+                    <Card>
+                        <View style={styles.view_card}>
+                            <View style={styles.view_avatar}>
+                                <Avatar
+                                    title='Test'
+                                    large
+                                />
+                            </View>
+
+                            <View style={styles.view_text}>
+                                <Text> Location: </Text>
+                                <Text> Coffee Cup Row </Text>
+                                <Text> Time Left: </Text>
+                            </View>
+                        </View>
+                    </Card>
+
+                    <Card>
+                        <View style={styles.view_card}>
+                            <View style={styles.view_avatar}>
+                                <Avatar
+                                    title='Test'
+                                    large
+                                />
+                            </View>
+
+                            <View style={styles.view_text}>
+                                <Text> Location: </Text>
+                                <Text> Coffee Cup Row </Text>
+                                <Text> Time Left: </Text>
+                            </View>
+                        </View>
+                    </Card>
+
+                    <Card>
+                        <View style={styles.view_card}>
+                            <View style={styles.view_avatar}>
+                                <Avatar
+                                    title='Test'
+                                    large
+                                />
+                            </View>
+
+                            <View style={styles.view_text}>
+                                <Text> Location: </Text>
+                                <Text> Coffee Cup Row </Text>
+                                <Text> Time Left: </Text>
+                            </View>
+                        </View>
+                    </Card>
+
+                    <Card>
+                        <View style={styles.view_card}>
+                            <View style={styles.view_avatar}>
+                                <Avatar
+                                    title='Test'
+                                    large
+                                />
+                            </View>
+
+                            <View style={styles.view_text}>
+                                <Text> Location: </Text>
+                                <Text> Coffee Cup Row </Text>
+                                <Text> Time Left: </Text>
+                            </View>
+                        </View>
+                    </Card>
+
+                    <Card>
+                        <View style={styles.view_card}>
+                            <View style={styles.view_avatar}>
+                                <Avatar
+                                    title='Test'
+                                    large
+                                />
+                            </View>
+
+                            <View style={styles.view_text}>
+                                <Text> Location: </Text>
+                                <Text> Coffee Cup Row </Text>
+                                <Text> Time Left: </Text>
+                            </View>
+                        </View>
+                    </Card>
+
+                    <Card>
+                        <View style={styles.view_card}>
+                            <View style={styles.view_avatar}>
+                                <Avatar
+                                    title='Test'
+                                    large
+                                />
+                            </View>
+
+                            <View style={styles.view_text}>
+                                <Text> Location: </Text>
+                                <Text> Coffee Cup Row </Text>
+                                <Text> Time Left: </Text>
+                            </View>
+                        </View>
+                    </Card>
+
+                    <Card>
+                        <View style={styles.view_card}>
+                            <View style={styles.view_avatar}>
+                                <Avatar
+                                    title='Test'
+                                    large
+                                />
+                            </View>
+
+                            <View style={styles.view_text}>
+                                <Text> Location: </Text>
+                                <Text> Coffee Cup Row </Text>
+                                <Text> Time Left: </Text>
+                            </View>
+                        </View>
+                    </Card>
+
+                    <Text style={styles.end_text}>
                         No More Coffee Pots
                     </Text>
                 </ScrollView>
             </View>
         )
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Style object
+const styles = {
+    view_bttn: {
+        flex:1,
+        flexDirection:'row',
+        justifyContent: 'center',
+        marginTop:10
+    },
+    view_card: {
+        justifyContent: 'space-between',
+        flexDirection: 'row'
+    },
+    view_avatar: {
+        flexDirection: 'row'
+    },
+    view_text: {
+        justifyContent: 'space-between'
+    },
+    end_text: {
+        margin: 10,
+        textAlign: 'center'
+    },
+    button_style: {
+        backgroundColor: BUTTON_COLOR
     }
 }
 
