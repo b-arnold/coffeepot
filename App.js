@@ -25,7 +25,6 @@ export default class App extends React.Component {
       StandardLegal: { screen: StandardLegal },
       About: { screen: About },
       Settings: { screen: Settings },
-      SideBarMenu: { screen: SideBarMenu }
     });
 
     return (
