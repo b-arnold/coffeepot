@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Button } from 'react-native-elements';
 
-//ONLY FOR SCREEN TESTING
-class Navigate extends Component {
+class Settings extends Component {
     static navigationOptions = {
-        title: 'Navigation',
+        title: 'Settings',
         headerStyle: {
             backgroundColor: '#16a085'
             
@@ -13,7 +12,7 @@ class Navigate extends Component {
         headerTitleStyle: {
             color: '#ecf0f1'
         },
-        headerBackTitle: null,
+        headerTintColor: 'white'
     }
 
     render() {
@@ -27,53 +26,66 @@ class Navigate extends Component {
                     backgroundColor: '#ecf0f1'
                 }}
             >
-                {/* Delivery Legal */}
+                {/* Setting 1 */}
                 <Button 
                     buttonStyle={{
                         margin: 10,
                         width: 200,
                         backgroundColor: '#1abc9c'
                     }}
-                    title='Delivery Legal'
+                    title='Setting 1'
                     onPress={() => 
-                        navigate('DeliveryLegal')
+                        navigate('Settings')
                     }
                 />
 
-                {/* Standard Legal */}
+                {/* Setting 2 */}
                 <Button 
                     buttonStyle={{
                         margin: 10,
                         width: 200,
                         backgroundColor: '#1abc9c'
                     }}
-                    title='Standard Legal'
+                    title='Setting 2'
                     onPress={() => 
-                        navigate('StandardLegal')
+                        navigate('Settings')
                     }
                 />
 
-                {/* About */}
+                {/* Setting 3 */}
                 <Button 
                     buttonStyle={{
                         margin: 10,
                         width: 200,
                         backgroundColor: '#1abc9c'
                     }}
-                    title='About'
+                    title='Setting 3'
                     onPress={() => 
-                        navigate('About')
+                        navigate('Settings')
                     }
                 />
 
-                {/* Settings */}
+                {/* Setting 4 */}
                 <Button 
                     buttonStyle={{
                         margin: 10,
                         width: 200,
                         backgroundColor: '#1abc9c'
                     }}
-                    title='Settings'
+                    title='Setting 4'
+                    onPress={() => 
+                        navigate('Settings')
+                    }
+                />
+
+                {/* Setting 5 */}
+                <Button 
+                    buttonStyle={{
+                        margin: 10,
+                        width: 200,
+                        backgroundColor: '#1abc9c'
+                    }}
+                    title='Setting 5'
                     onPress={() => 
                         navigate('Settings')
                     }
@@ -83,4 +95,4 @@ class Navigate extends Component {
     }
 }
 
-export default Navigate;
+export default Settings;

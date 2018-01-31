@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
-class ExistingOrder extends Component {
+class About extends Component {
     static navigationOptions = {
-        title: 'Existing Order',
+        title: 'About',
         headerStyle: {
             backgroundColor: '#16a085'
             
@@ -13,16 +13,18 @@ class ExistingOrder extends Component {
         },
         headerTintColor: 'white'
     }
-
     render() {
         return (
             <View>
+                <ScrollView>
                 <Text>
-                    Existing Order
+                CoffeePot is an applictaion based coffee Delivery service that has set out
+                to facilatate excellent coffee delivery
                 </Text>
+                </ScrollView>
             </View>
-        )
+        );
     }
 }
 
-export default ExistingOrder;
+export default About;

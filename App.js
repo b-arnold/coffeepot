@@ -4,24 +4,30 @@ import { Button } from 'react-native-elements';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 
 import Navigate from './src/screens/Navigate';
-import CoffeePotList from './src/screens/CoffeePotList';
-import CoffeePot from './src/screens/CoffeePot';
-import ExistingOrdersList from './src/screens/ExistingOrdersList';
-import ExistingOrder from './src/screens/ExistingOrdersList';
+import DeliveryLegal from './src/screens/DeliveryLegal';
+import StandardLegal from './src/screens/StandardLegal';
+import About from './src/screens/About';
+import Settings from './src/screens/Settings';
+import SideBarMenu from './src/screens/SideBarMenu';
 
 ///////////////////////////////////////////////////////////
 // YOU'RE CURRENTLY WORKING IN DEVELOPMENT BRANCH
+///////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+// YOU'RE CURRENTLY WORKING IN DANNY'S BRANCH
 ///////////////////////////////////////////////////////////
 
 export default class App extends React.Component {
   render() {
     const ButtonNav = StackNavigator({
       Navigate: { screen: Navigate },
-      CoffeePotList: { screen: CoffeePotList },
-      CoffeePot: { screen: CoffeePot },
-      ExistingOrdersList: { screen: ExistingOrdersList },
-      ExistingOrder: { screen: ExistingOrder }
-    })
+      DeliveryLegal: { screen: DeliveryLegal },
+      StandardLegal: { screen: StandardLegal },
+      About: { screen: About },
+      Settings: { screen: Settings },
+      SideBarMenu: { screen: SideBarMenu }
+    });
 
     return (
       <View style={styles.container}>

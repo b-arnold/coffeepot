@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 
-class CoffeePot extends Component {
+class StandardLegal extends Component {
     static navigationOptions = {
-        title: 'Coffee Pot',
+        title: 'Standard Legal',
         headerStyle: {
             backgroundColor: '#16a085'
             
@@ -13,16 +13,22 @@ class CoffeePot extends Component {
         },
         headerTintColor: 'white'
     }
-
     render() {
         return (
             <View>
+
                 <Text>
-                    Coffee Pot
+                This service agreement is a legally binding contract between
+                CoffePot and Client for the services listed below.
                 </Text>
+
+                <Text>
+                The Delivery of tasty Coffee
+                </Text>
+
             </View>
-        )
+        );
     }
 }
 
-export default CoffeePot;
+export default StandardLegal;
