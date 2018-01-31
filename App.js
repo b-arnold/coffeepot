@@ -1,10 +1,14 @@
 import React from 'react';
+
 import { StyleSheet, Text, View, Platform, StatusBar, ScrollView } from 'react-native';
 import { Button, Icon, Divider, Avatar } from 'react-native-elements';
+import firebase from 'firebase';
 import { StackNavigator, TabNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
+import { GOOGLE_FIREBASE_CONFIG } from './src/constants/api_keys';
 
 import Navigate from './src/screens/Navigate';
 import Profile from './src/screens/Profile';
+import GPSMap from './src/screens/GPSMap';
 
 // CoffeePot Screens
 import CoffeePotList from './src/screens/CoffeePotList';
@@ -32,6 +36,12 @@ import DrawerContent from './src/components/DrawerContent';
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from './src/constants/style';
 
 export default class App extends React.Component {
+  ////////////////////////////////////////////////////////////////////////
+  // Upon loading app, initialize firebase
+  componentWillMount() {
+    firebase.initializeApp(GOOGLE_FIREBASE_CONFIG);
+  }
+
   render() {
     /////////////////////////////////////////////////////////////
     //This nav is used for testing purposes only.
@@ -48,8 +58,9 @@ export default class App extends React.Component {
       PickedLocation: { screen: PickedLocation },
       Profile: { screen: Profile },
       ReceiptSnapshot: { screen: ReceiptSnapshot },
+      GPSMap: { screen: GPSMap },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
-      ReceiptScreen: { screen: ReceiptScreen },
+      ReceiptScreen: { screen: ReceiptScreen }
     })
 
     /////////////////////////////////////////////////////////////////////////
