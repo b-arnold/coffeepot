@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, KeyboardAvoidingView } from 'react-native';
 import { Button, FormInput } from 'react-native-elements';
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+import Navigate from './Navigate';
 
 ///////////////////////////////////////////////////////////
 // Login Screen
@@ -29,6 +30,7 @@ class LoginScreen extends Component {
   // Main render method
   /////////////////////////////////////////////////////////
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <KeyboardAvoidingView
         style={{ flex: 1, justifyContent: 'center' }}
@@ -66,6 +68,7 @@ class LoginScreen extends Component {
             title="Log In"
             rounded
             buttonStyle={styles.loginButtonStyle}
+            onPress = {() => navigate('Main')}
           />
         </View>
 

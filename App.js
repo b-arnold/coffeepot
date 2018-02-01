@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Platform, StatusBar, ScrollView } from 'react-n
 import { Button, Icon, Divider, Avatar } from 'react-native-elements';
 import firebase from 'firebase';
 import { StackNavigator, TabNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
-import { GOOGLE_FIREBASE_CONFIG } from './src/constants/api_keys';
+
 
 import Navigate from './src/screens/Navigate';
 import Profile from './src/screens/Profile';
@@ -28,12 +28,11 @@ import CreateAccountScreen from './src/screens/CreateAccountScreen';
 // Payment Screens
 import ReceiptSnapshot from './src/screens/ReceiptSnapshot';
 import PaymentConfirmationScreen from './src/screens/PaymentConfirmationScreen';
+import ReceiptScreen from './src/screens/ReceiptScreen';
 
-//Drawer
-import DrawerContent from './src/components/DrawerContent';
-
-
+// Constants
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from './src/constants/style';
+import { GOOGLE_FIREBASE_CONFIG } from './src/constants/api_keys';
 
 export default class App extends React.Component {
   ////////////////////////////////////////////////////////////////////////
