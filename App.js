@@ -5,9 +5,13 @@ import { Button, Icon, Divider, Avatar } from 'react-native-elements';
 import firebase from 'firebase';
 import { StackNavigator, TabNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
 
-
+// Navigate is used for screen testing purposes
 import Navigate from './src/screens/Navigate';
+
+//Side Bar Menu Screens
 import Profile from './src/screens/Profile';
+
+// GPS Screen
 import GPSMap from './src/screens/GPSMap';
 
 // CoffeePot Screens
@@ -67,7 +71,8 @@ export default class App extends React.Component {
     const Home = StackNavigator({
       CoffeePotList: { screen: CoffeePotList },
       CoffeePot: { screen: CoffeePot },
-      Profile: { screen: Profile }
+      Profile: { screen: Profile },
+      GPS: { screen: GPSMap }
     })
 
     //////////////////////////////////////////////////////////////////////////////
@@ -115,7 +120,7 @@ export default class App extends React.Component {
 
     const MainNav = TabNavigator({
       Login: { screen: LoginScreen },
-      Main: { screen: Drawer },
+      Main: { screen: Drawer }
     },{
       navigationOptions: {
         tabBarVisible: false
@@ -130,8 +135,8 @@ export default class App extends React.Component {
         <StatusBar
           barStyle='light-content'
         />
-        <MainNav />
-        {/* <ButtonNav /> */}
+        {/* <MainNav /> */}
+        <ButtonNav />
       </View>
     );
   }
