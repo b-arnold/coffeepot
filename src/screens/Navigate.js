@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
@@ -200,10 +200,10 @@ class Navigate extends Component {
                       navigate('ReceiptScreen')
                   }
                 />
-                
+
                 {/* Place Order */}
                 <Button
-                    buttonStyle={style=styles.bttn_style}
+                    buttonStyle={styles.bttn_style}
                     title='Place Order'
                     rounded
                     onPress={() =>
@@ -213,16 +213,35 @@ class Navigate extends Component {
 
                 {/* Payment Screen */}
                 <Button
-                    buttonStyle={style=styles.bttn_style}
+                    buttonStyle={styles.bttn_style}
                     title='Order Payment'
                     rounded
                     onPress={() =>
                         navigate('PaymentScreen')
                     }
                 />
-=======
+
+                {/* Input Coffee Order Screen */}
+                <Button
+                    buttonStyle={styles.bttn_style}
+                    title='Input Coffee Order'
+                    rounded
+                    onPress={() =>
+                        navigate('InputCoffeeOrderScreen')
+                    }
+                />
+
+                {/* Receive Payment Screen */}
+                <Button
+                    buttonStyle={styles.bttn_style}
+                    title='Receive Payment'
+                    rounded
+                    onPress={() =>
+                        navigate('ReceivePaymentScreen')
+                    }
+                />
+
                </View>
->>>>>>> dev
             </ScrollView>
         );
     }

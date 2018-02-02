@@ -68,7 +68,7 @@ class LoginScreen extends Component {
             title="Log In"
             rounded
             buttonStyle={styles.loginButtonStyle}
-            onPress = {() => navigate('Main')}
+            onPress={() => navigate('Main')}
           />
         </View>
 
