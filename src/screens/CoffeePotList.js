@@ -56,11 +56,7 @@ class CoffeePotList extends Component {
                             title='GPS View'
                             buttonStyle={styles.button_style}
                             rounded
-<<<<<<< HEAD
-                            onPress = {() => navigate('GPS')}
-=======
                             onPress={() => navigate('GPSMap')}
->>>>>>> 682de508c22accd14a23a72ec55554030a7ed7ba
                         />
                     </View>
 
