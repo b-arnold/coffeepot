@@ -5,7 +5,6 @@ import { Button, Icon, Divider, Avatar } from 'react-native-elements';
 import firebase from 'firebase';
 import { StackNavigator, TabNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
 
-
 import Navigate from './src/screens/Navigate';
 import Profile from './src/screens/Profile';
 import GPSMap from './src/screens/GPSMap';

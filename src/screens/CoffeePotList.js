@@ -63,11 +63,11 @@ class CoffeePotList extends Component {
                     <TouchableOpacity
                         onPress={() => navigate('CoffeePot')}
                     >
-                        <Card>
+                        <Card style={{ backgroundColor: 'red' }}>
                             <View style={{ flexDirection: 'row' }}>
                                 <View style={{ marginLeft: 10, marginRight: 20 }}>
                                     <Image 
-                                        source={require('../images/coffee_pot_icon.png')}
+                                        source={require('../images/coffee_pot_symbol.png')}
                                         style={{ width: 50, height: 50 }}
                                     />
                                     <Text style={{ fontWeight: 'bold' }}>5 min</Text>
@@ -91,7 +91,7 @@ class CoffeePotList extends Component {
                         <View style={{ flexDirection: 'row' }}>
                             <View style={{ marginLeft: 10, marginRight: 20 }}>
                                 <Image 
-                                    source={require('../images/coffee_pot_icon.png')}
+                                    source={require('../images/coffee_pot_symbol.png')}
                                     style={{ width: 50, height: 50 }}
                                 />
                                 <Text style={{ fontWeight: 'bold' }}>5 min</Text>
@@ -114,7 +114,7 @@ class CoffeePotList extends Component {
                         <View style={{ flexDirection: 'row' }}>
                             <View style={{ marginLeft: 10, marginRight: 20 }}>
                                 <Image 
-                                    source={require('../images/coffee_pot_icon.png')}
+                                    source={require('../images/coffee_pot_symbol.png')}
                                     style={{ width: 50, height: 50 }}
                                 />
                                 <Text style={{ fontWeight: 'bold' }}>5 min</Text>
@@ -137,7 +137,7 @@ class CoffeePotList extends Component {
                         <View style={{ flexDirection: 'row' }}>
                             <View style={{ marginLeft: 10, marginRight: 20 }}>
                                 <Image 
-                                    source={require('../images/coffee_pot_icon.png')}
+                                    source={require('../images/coffee_pot_symbol.png')}
                                     style={{ width: 50, height: 50 }}
                                 />
                                 <Text style={{ fontWeight: 'bold' }}>5 min</Text>
@@ -160,7 +160,7 @@ class CoffeePotList extends Component {
                         <View style={{ flexDirection: 'row' }}>
                             <View style={{ marginLeft: 10, marginRight: 20 }}>
                                 <Image 
-                                    source={require('../images/coffee_pot_icon.png')}
+                                    source={require('../images/coffee_pot_symbol.png')}
                                     style={{ width: 50, height: 50 }}
                                 />
                                 <Text style={{ fontWeight: 'bold' }}>5 min</Text>
@@ -183,7 +183,7 @@ class CoffeePotList extends Component {
                         <View style={{ flexDirection: 'row' }}>
                             <View style={{ marginLeft: 10, marginRight: 20 }}>
                                 <Image 
-                                    source={require('../images/coffee_pot_icon.png')}
+                                    source={require('../images/coffee_pot_symbol.png')}
                                     style={{ width: 50, height: 50 }}
                                 />
                                 <Text style={{ fontWeight: 'bold' }}>5 min</Text>
@@ -206,7 +206,7 @@ class CoffeePotList extends Component {
                         <View style={{ flexDirection: 'row' }}>
                             <View style={{ marginLeft: 10, marginRight: 20 }}>
                                 <Image 
-                                    source={require('../images/coffee_pot_icon.png')}
+                                    source={require('../images/coffee_pot_symbol.png')}
                                     style={{ width: 50, height: 50 }}
                                 />
                                 <Text style={{ fontWeight: 'bold' }}>5 min</Text>
@@ -229,7 +229,7 @@ class CoffeePotList extends Component {
                         <View style={{ flexDirection: 'row' }}>
                             <View style={{ marginLeft: 10, marginRight: 20 }}>
                                 <Image 
-                                    source={require('../images/coffee_pot_icon.png')}
+                                    source={require('../images/coffee_pot_symbol.png')}
                                     style={{ width: 50, height: 50 }}
                                 />
                                 <Text style={{ fontWeight: 'bold' }}>5 min</Text>

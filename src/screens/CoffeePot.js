@@ -35,7 +35,7 @@ class CoffeePot extends Component {
 
                 {/* This will have the picture of the coffee shop */}
                 <Image 
-                    source={require('../images/coffee_pot_icon.png')}
+                    source={require('../images/coffee_pot_symbol.png')}
                     style={{ width: 200, height: 200 }}
                 />
 
