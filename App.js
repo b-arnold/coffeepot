@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyleSheet, Text, View, Platform, StatusBar, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Platform, StatusBar, ScrollView, Image } from 'react-native';
 import { Button, Icon, Divider, Avatar } from 'react-native-elements';
 import firebase from 'firebase';
 import { StackNavigator, TabNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
@@ -44,31 +44,50 @@ export default class App extends React.Component {
   render() {
     /////////////////////////////////////////////////////////////
     //This nav is used for testing purposes only.
-    const ButtonNav = StackNavigator({
-      Navigate: { screen: Navigate },
-      CoffeePotList: { screen: CoffeePotList },
-      CoffeePot: { screen: CoffeePot },
-      ExistingOrdersList: { screen: ExistingOrdersList },
-      ExistingOrder: { screen: ExistingOrder },
-      LoginScreen: { screen: LoginScreen },
-      CreateAccountScreen: { screen: CreateAccountScreen },
-      ChooseDelivery: { screen: ChooseDelivery },
-      PickLocationList: { screen: PickLocationList },
-      PickedLocation: { screen: PickedLocation },
-      Profile: { screen: Profile },
-      ReceiptSnapshot: { screen: ReceiptSnapshot },
-      GPSMap: { screen: GPSMap },
-      PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
-      ReceiptScreen: { screen: ReceiptScreen }
-    })
+    // const ButtonNav = StackNavigator({
+    //   Navigate: { screen: Navigate },
+    //   CoffeePotList: { screen: CoffeePotList },
+    //   CoffeePot: { screen: CoffeePot },
+    //   ExistingOrdersList: { screen: ExistingOrdersList },
+    //   ExistingOrder: { screen: ExistingOrder },
+    //   LoginScreen: { screen: LoginScreen },
+    //   CreateAccountScreen: { screen: CreateAccountScreen },
+    //   ChooseDelivery: { screen: ChooseDelivery },
+    //   PickLocationList: { screen: PickLocationList },
+    //   PickedLocation: { screen: PickedLocation },
+    //   Profile: { screen: Profile },
+    //   ReceiptSnapshot: { screen: ReceiptSnapshot },
+    //   GPSMap: { screen: GPSMap },
+    //   PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
+    //   ReceiptScreen: { screen: ReceiptScreen }
+    // })
 
     /////////////////////////////////////////////////////////////////////////
     //// This is used for the actual development of the app
     const Home = StackNavigator({
       CoffeePotList: { screen: CoffeePotList },
       CoffeePot: { screen: CoffeePot },
+      GPSMap: { screen: GPSMap },
       Profile: { screen: Profile }
-    })
+    });
+
+    /////////////////////////////////////////////////////////////////////////
+    //// Authentication Screens
+    const Auth = StackNavigator({
+      LoginScreen: { screen: LoginScreen },
+      CreateAccount: { screen: CreateAccountScreen }
+    });
+
+    /////////////////////////////////////////////////////////////////////////
+    //// Authentication Screens
+    const Delivery = StackNavigator({
+      ChooseDelivery: { screen: ChooseDelivery },
+      PickLocationList: { screen: PickLocationList },
+      PickedLocation: { screen: PickedLocation },
+      ExistingOrdersList: { screen: ExistingOrdersList },
+      ExistingOrder: { screen: ExistingOrder },
+      GPSMap: { screen: GPSMap }
+    });
 
     //////////////////////////////////////////////////////////////////////////////
     // This component dictates the configuration of the drawer
@@ -76,18 +95,19 @@ export default class App extends React.Component {
       <ScrollView>
         <View
           style={{
-            flex: 1,
-            alignItems: "center",
-            alignContent: "center"
+            // flex: 1,
+            alignItems: 'center',
+            alignContent: 'center',
+            marginTop: 30
           }}
         >
-          <Avatar
-            title='Test'
-            xlarge
-            rounded
-            containerStyle={{ margin: 10 }}
+          <Image
+            source={require('./src/images/profile_icon.png')}
+            style={{ width: 200, height: 200, borderRadius: 100 }} 
           />
-          <Text style={{ margin: 10, color: 'white' }}>John TestyMcTestFace</Text>
+          <Text style={{ marginBottom: 20, color: 'white', fontSize: 20 }}>
+            John TestyMcTestFace
+          </Text>
         </View>
 
         <View>
@@ -98,7 +118,8 @@ export default class App extends React.Component {
 
     const Drawer = DrawerNavigator({
       Home: { screen: Home },
-      Profile: { screen: Profile }
+      Profile: { screen: Profile },
+      Delivery: { screen: Delivery }
     },{
       contentComponent: customDrawerComponent,
       drawerBackgroundColor: '#607D8B',
@@ -114,7 +135,7 @@ export default class App extends React.Component {
     })
 
     const MainNav = TabNavigator({
-      Login: { screen: LoginScreen },
+      Login: { screen: Auth },
       Main: { screen: Drawer },
     },{
       navigationOptions: {
