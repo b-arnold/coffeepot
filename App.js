@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyleSheet, Text, View, Platform, StatusBar, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Platform, StatusBar, ScrollView, Image } from 'react-native';
 import { Button, Icon, Divider, Avatar } from 'react-native-elements';
 import firebase from 'firebase';
 import { StackNavigator, TabNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
@@ -24,12 +24,15 @@ import ExistingOrdersList from './src/screens/ExistingOrdersList';
 import ExistingOrder from './src/screens/ExistingOrder';
 import PickLocationList from './src/screens/PickLocationList';
 import PickedLocation from './src/screens/PickedLocation';
+import PlaceOrder from './src/screens/PlaceOrder';
+import InputCoffeeOrderScreen from './src/screens/InputCoffeeOrderScreen';
 
 // Authenticaiton Screens
 import LoginScreen from './src/screens/LoginScreen';
 import CreateAccountScreen from './src/screens/CreateAccountScreen';
 
 // Payment Screens
+import PaymentScreen from './src/screens/PaymentScreen';
 import ReceiptSnapshot from './src/screens/ReceiptSnapshot';
 import PaymentConfirmationScreen from './src/screens/PaymentConfirmationScreen';
 import ReceiptScreen from './src/screens/ReceiptScreen';
@@ -61,9 +64,12 @@ export default class App extends React.Component {
       PickedLocation: { screen: PickedLocation },
       Profile: { screen: Profile },
       ReceiptSnapshot: { screen: ReceiptSnapshot },
+      PlaceOrder: { screen: PlaceOrder},
+      PaymentScreen: { screen: PaymentScreen },
       GPSMap: { screen: GPSMap },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
-      ReceiptScreen: { screen: ReceiptScreen }
+      ReceiptScreen: { screen: ReceiptScreen },
+      InputCoffeeOrderScreen: { screen: InputCoffeeOrderScreen },
     })
 
     /////////////////////////////////////////////////////////////////////////
@@ -71,9 +77,27 @@ export default class App extends React.Component {
     const Home = StackNavigator({
       CoffeePotList: { screen: CoffeePotList },
       CoffeePot: { screen: CoffeePot },
-      Profile: { screen: Profile },
-      GPS: { screen: GPSMap }
-    })
+      GPSMap: { screen: GPSMap },
+      Profile: { screen: Profile }
+    });
+
+    /////////////////////////////////////////////////////////////////////////
+    //// Authentication Screens
+    const Auth = StackNavigator({
+      LoginScreen: { screen: LoginScreen },
+      CreateAccount: { screen: CreateAccountScreen }
+    });
+
+    /////////////////////////////////////////////////////////////////////////
+    //// Authentication Screens
+    const Delivery = StackNavigator({
+      ChooseDelivery: { screen: ChooseDelivery },
+      PickLocationList: { screen: PickLocationList },
+      PickedLocation: { screen: PickedLocation },
+      ExistingOrdersList: { screen: ExistingOrdersList },
+      ExistingOrder: { screen: ExistingOrder },
+      GPSMap: { screen: GPSMap }
+    });
 
     //////////////////////////////////////////////////////////////////////////////
     // This component dictates the configuration of the drawer
@@ -81,18 +105,19 @@ export default class App extends React.Component {
       <ScrollView>
         <View
           style={{
-            flex: 1,
-            alignItems: "center",
-            alignContent: "center"
+            // flex: 1,
+            alignItems: 'center',
+            alignContent: 'center',
+            marginTop: 30
           }}
         >
-          <Avatar
-            title='Test'
-            xlarge
-            rounded
-            containerStyle={{ margin: 10 }}
+          <Image
+            source={require('./src/images/profile_icon.png')}
+            style={{ width: 200, height: 200, borderRadius: 100 }} 
           />
-          <Text style={{ margin: 10, color: 'white' }}>John TestyMcTestFace</Text>
+          <Text style={{ marginBottom: 20, color: 'white', fontSize: 20 }}>
+            John TestyMcTestFace
+          </Text>
         </View>
 
         <View>
@@ -103,7 +128,8 @@ export default class App extends React.Component {
 
     const Drawer = DrawerNavigator({
       Home: { screen: Home },
-      Profile: { screen: Profile }
+      Profile: { screen: Profile },
+      Delivery: { screen: Delivery }
     },{
       contentComponent: customDrawerComponent,
       drawerBackgroundColor: '#607D8B',
@@ -119,8 +145,8 @@ export default class App extends React.Component {
     })
 
     const MainNav = TabNavigator({
-      Login: { screen: LoginScreen },
-      Main: { screen: Drawer }
+      Login: { screen: Auth },
+      Main: { screen: Drawer },
     },{
       navigationOptions: {
         tabBarVisible: false
@@ -135,7 +161,7 @@ export default class App extends React.Component {
         <StatusBar
           barStyle='light-content'
         />
-        {/* <MainNav /> */}
+        {/* <MainNav /> */ }
         <ButtonNav />
       </View>
     );

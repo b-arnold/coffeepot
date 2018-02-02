@@ -1,23 +1,35 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Button, Icon } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 class ChooseDelivery extends Component {
-    static navigationOptions = {
+    static navigationOptions = ({navigation}) => ({
         title: 'Delivery',
         headerStyle: {
-            backgroundColor: PRIMARY_COLOR
-            
+            backgroundColor: PRIMARY_COLOR,
+            paddingRight: 10,
+            paddingLeft: 10
         },
         headerTitleStyle: {
             color: SECONDARY_COLOR
         },
-        headerTintColor: SECONDARY_COLOR
-    }
+        headerTintColor: SECONDARY_COLOR,
+        headerBackTitle: null,
+        headerLeft: (
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+                <Icon 
+                    type='material-community'
+                    name='menu'
+                    color={ SECONDARY_COLOR }
+                />
+            </TouchableOpacity>
+        )
+    })
 
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View style={styles.mainContainer}>
                 <View style={{marginBottom: 10}}>
@@ -25,6 +37,7 @@ class ChooseDelivery extends Component {
                         buttonStyle={styles.bttn_style}
                         title='Existing Order'
                         rounded
+                        onPress={() => navigate('ExistingOrdersList')}
                     />
                 </View>
                 <View style={{marginBottom: 100}}>
@@ -37,6 +50,7 @@ class ChooseDelivery extends Component {
                         buttonStyle={styles.bttn_style}
                         title='Pick Location'
                         rounded
+                        onPress={() => navigate('PickLocationList')}
                     />
                 </View>
                 <View style={{marginBottom: 30}}>

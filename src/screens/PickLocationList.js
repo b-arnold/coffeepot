@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { Button, Card } from 'react-native-elements';
+
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+
 
 class PickLocationList extends Component {
     static navigationOptions = {
@@ -16,6 +19,7 @@ class PickLocationList extends Component {
     }
 
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View>
                 <ScrollView>
@@ -28,26 +32,35 @@ class PickLocationList extends Component {
                         }}
                     >
                         <Button 
-                            title='GPS View'
-                            buttonStyle={{
-                                backgroundColor: '#1abc9c'
+                            iconRight={{
+                                name: 'map-marker',
+                                type: 'font-awesome',
+                                size: 25
                             }}
+                            title='GPS View'
+                            buttonStyle={{ backgroundColor: BUTTON_COLOR }}
+                            rounded
+                            onPress={() => navigate('GPSMap')}
                         />
                     </View>
-                    <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ marginLeft: 10, marginRight: 10 }}>
-                                <Image 
-                                    source={require('../images/store_icon.png')}
-                                    style={{ width: 50, height: 50 }}
-                                />
+                    <TouchableOpacity
+                        onPress={() => navigate('PickedLocation')}
+                    >
+                        <Card>
+                            <View style={{ flexDirection: 'row' }}>
+                                <View style={{ marginLeft: 10, marginRight: 10 }}>
+                                    <Image 
+                                        source={require('../images/store_icon.png')}
+                                        style={{ width: 50, height: 50 }}
+                                    />
+                                </View>
+                                <View>
+                                    <Text>Location: ..store name..</Text>
+                                    <Text>Drive: ..drive time..</Text>
+                                </View>
                             </View>
-                            <View>
-                                <Text>Location: ..store name..</Text>
-                                <Text>Drive: ..drive time..</Text>
-                            </View>
-                        </View>
-                    </Card>
+                        </Card>
+                    </TouchableOpacity>
                     <Card>
                         <View style={{ flexDirection: 'row' }}>
                             <View style={{ marginLeft: 10, marginRight: 10 }}>

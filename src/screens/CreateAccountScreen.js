@@ -105,7 +105,8 @@ const styles = {
   },
   imageStyle: {
     width: 200,
-    height: 200
+    height: 200,
+    borderRadius: 50
   },
   imageContainerStyle: {
     flexDirection: 'row',
