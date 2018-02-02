@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Button, Card, Avatar, Icon } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
@@ -18,39 +18,45 @@ class ExistingOrdersList extends Component {
     }
 
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View>
                 {/* This file is here for scaffolding, but will be replaced */}
                 <ScrollView>
                     <View style={styles.view_bttn}>
-                        <Button 
+                    <Button 
                             iconRight={{
                                 name: 'map-marker',
                                 type: 'font-awesome',
                                 size: 25
                             }}
                             title='GPS View'
-                            buttonStyle={styles.button_style}
+                            buttonStyle={{ backgroundColor: BUTTON_COLOR }}
                             rounded
+                            onPress={() => navigate('GPSMap')}
                         />
                     </View>
+                    
+                    <TouchableOpacity
+                        onPress={() => navigate('ExistingOrder')}
+                    >
+                        <Card>
+                            <View style={styles.view_card}>
+                                <View style={styles.view_avatar}>
+                                    <Avatar
+                                        title='Test'
+                                        large
+                                    />
+                                </View>
 
-                    <Card>
-                        <View style={styles.view_card}>
-                            <View style={styles.view_avatar}>
-                                <Avatar
-                                    title='Test'
-                                    large
-                                />
+                                <View style={styles.view_text}>
+                                    <Text> Location: </Text>
+                                    <Text> Order: </Text>
+                                    <Text> Time Left: </Text>
+                                </View>
                             </View>
-
-                            <View style={styles.view_text}>
-                                <Text> Location: </Text>
-                                <Text> Order: </Text>
-                                <Text> Time Left: </Text>
-                            </View>
-                        </View>
-                    </Card>
+                        </Card>
+                    </TouchableOpacity>
 
                     <Card>
                         <View style={styles.view_card}>
