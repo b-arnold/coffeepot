@@ -111,9 +111,11 @@ export default class App extends React.Component {
             marginTop: 30
           }}
         >
-          <Image
-            source={require('./src/images/profile_icon.png')}
+          <Avatar
+            source={require('./src/images/Profile_Pic.jpg')}
             style={{ width: 200, height: 200, borderRadius: 100 }} 
+            rounded
+            xlarge
           />
           <Text style={{ marginBottom: 20, color: 'white', fontSize: 20 }}>
             John TestyMcTestFace
@@ -127,9 +129,9 @@ export default class App extends React.Component {
     );
 
     const Drawer = DrawerNavigator({
+      Delivery: { screen: Delivery },
       Home: { screen: Home },
-      Profile: { screen: Profile },
-      Delivery: { screen: Delivery }
+      Profile: { screen: Profile }
     },{
       contentComponent: customDrawerComponent,
       drawerBackgroundColor: '#607D8B',
@@ -161,8 +163,8 @@ export default class App extends React.Component {
         <StatusBar
           barStyle='light-content'
         />
-        {/* <MainNav /> */ }
-        <ButtonNav />
+        <MainNav /> 
+        {/* <ButtonNav /> */}
       </View>
     );
   }
