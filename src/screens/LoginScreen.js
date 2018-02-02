@@ -62,23 +62,35 @@ class LoginScreen extends Component {
         </View>
 
         <View
-          style={styles.containerStyle}
+          style={{ 
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 40
+        }}
         >
           <Button
             title="Log In"
             rounded
             buttonStyle={styles.loginButtonStyle}
-            onPress = {() => navigate('Main')}
+            onPress = {() => navigate('Home')}
           />
         </View>
 
         <View
-          style={styles.containerStyle}
+          style={styles.containerStyle}style={{ 
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 25
+        }}
         >
           <Button
             title="Register"
+            fontSize={14}
             rounded
             buttonStyle={styles.smallButtonStyle}
+            onPress={() => navigate('CreateAccount')}
           />
 
           <Button
@@ -107,8 +119,9 @@ const styles = {
     backgroundColor: BUTTON_COLOR
   },
   imageStyle: {
-    width: 200,
-    height: 200
+    width: 225,
+    height: 225,
+    borderRadius: 50
   },
   containerStyle: {
     flexDirection: 'row',
