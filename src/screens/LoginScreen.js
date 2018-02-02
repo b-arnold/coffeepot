@@ -110,8 +110,8 @@ class LoginScreen extends Component {
 const styles = {
   smallButtonStyle: {
     width: 90,
-    margin: 10,
-    height: 30,
+    margin: 20,
+    height: 40,
     backgroundColor: BUTTON_COLOR
   },
   loginButtonStyle: {

@@ -5,8 +5,13 @@ import { Button, Icon, Divider, Avatar } from 'react-native-elements';
 import firebase from 'firebase';
 import { StackNavigator, TabNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
 
+// Navigate is used for screen testing purposes
 import Navigate from './src/screens/Navigate';
+
+//Side Bar Menu Screens
 import Profile from './src/screens/Profile';
+
+// GPS Screen
 import GPSMap from './src/screens/GPSMap';
 
 // CoffeePot Screens
@@ -20,6 +25,7 @@ import ExistingOrder from './src/screens/ExistingOrder';
 import PickLocationList from './src/screens/PickLocationList';
 import PickedLocation from './src/screens/PickedLocation';
 import PlaceOrder from './src/screens/PlaceOrder';
+import InputCoffeeOrderScreen from './src/screens/InputCoffeeOrderScreen';
 
 // Authenticaiton Screens
 import LoginScreen from './src/screens/LoginScreen';
@@ -62,7 +68,8 @@ export default class App extends React.Component {
       PaymentScreen: { screen: PaymentScreen },
       GPSMap: { screen: GPSMap },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
-      ReceiptScreen: { screen: ReceiptScreen }
+      ReceiptScreen: { screen: ReceiptScreen },
+      InputCoffeeOrderScreen: { screen: InputCoffeeOrderScreen },
     })
 
     /////////////////////////////////////////////////////////////////////////
@@ -154,8 +161,8 @@ export default class App extends React.Component {
         <StatusBar
           barStyle='light-content'
         />
-        <MainNav />
-        {/* <ButtonNav /> */}
+        {/* <MainNav /> */ }
+        <ButtonNav />
       </View>
     );
   }
