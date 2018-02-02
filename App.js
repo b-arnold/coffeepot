@@ -21,6 +21,7 @@ import ExistingOrder from './src/screens/ExistingOrder';
 import PickLocationList from './src/screens/PickLocationList';
 import PickedLocation from './src/screens/PickedLocation';
 import PlaceOrder from './src/screens/PlaceOrder';
+import InputCoffeeOrderScreen from './src/screens/InputCoffeeOrderScreen';
 
 // Authenticaiton Screens
 import LoginScreen from './src/screens/LoginScreen';
@@ -63,7 +64,8 @@ export default class App extends React.Component {
       PaymentScreen: { screen: PaymentScreen },
       GPSMap: { screen: GPSMap },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
-      ReceiptScreen: { screen: ReceiptScreen }
+      ReceiptScreen: { screen: ReceiptScreen },
+      InputCoffeeOrderScreen: { screen: InputCoffeeOrderScreen },
     })
 
     /////////////////////////////////////////////////////////////////////////
@@ -155,8 +157,8 @@ export default class App extends React.Component {
         <StatusBar
           barStyle='light-content'
         />
-        <MainNav />
-        {/* <ButtonNav /> */}
+        {/* <MainNav /> */ }
+        <ButtonNav />
       </View>
     );
   }
