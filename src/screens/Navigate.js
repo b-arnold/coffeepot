@@ -20,49 +20,150 @@ class Navigate extends Component {
     render() {
         const { navigate } = this.props.navigation;
         return (
-            <ScrollView contentContainerStyle={styles.view_style}>
-                {/* Coffee Pot List Screen Button */}
-                <Button 
-                    buttonStyle={style=styles.bttn_style}
-                    title='Coffee Pot List'
-                    rounded
-                    onPress={() => 
-                        navigate('CoffeePotList')
-                    }
-                />
 
-                {/* Coffee Pot Screen Button */}
-                <Button 
-                    buttonStyle={style=styles.bttn_style}
-                    title='Coffee Pot'
-                    rounded
-                    onPress={() => 
-                        navigate('CoffeePot')
-                    }
-                />
+            <ScrollView>
+                <View
+                    style={{
+                        flex: 1,
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#ecf0f1'
+                    }}
+                >
+                    {/* Coffee Pot List Screen Button */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 10,
+                            width: 200,
+                            backgroundColor: '#1abc9c'
+                        }}
+                        title='Coffee Pot List'
+                        onPress={() => 
+                            navigate('CoffeePotList')
+                        }
+                    />
 
-                {/* Existing Orders List */}
-                <Button 
-                    buttonStyle={style=styles.bttn_style}
-                    title='Existing Orders List'
-                    rounded
-                    onPress={() => 
-                        navigate('ExistingOrdersList')
-                    }
-                />
+                    {/* Coffee Pot Screen Button */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 10,
+                            width: 200,
+                            backgroundColor: '#1abc9c'
+                        }}
+                        title='Coffee Pot'
+                        onPress={() => 
+                            navigate('CoffeePot')
+                        }
+                    />
 
-                {/* Existing Order */}
-                <Button 
-                    buttonStyle={style=styles.bttn_style}
-                    title='Existing Order'
-                    rounded
-                    onPress={() => 
-                        navigate('ExistingOrder')
-                    }
-                />
+                    {/* Existing Orders List */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 10,
+                            width: 200,
+                            backgroundColor: '#1abc9c'
+                        }}
+                        title='Existing Orders List'
+                        onPress={() => 
+                            navigate('ExistingOrdersList')
+                        }
+                    />
+
+                    {/* Existing Order */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 10,
+                            width: 200,
+                            backgroundColor: '#1abc9c'
+                        }}
+                        title='Existing Order'
+                        onPress={() => 
+                            navigate('ExistingOrder')
+                        }
+                    />
+
+                    {/* ChooseDelivery */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 10,
+                            width: 200,
+                            backgroundColor: '#1abc9c'
+                        }}
+                        title='Choose Delivery'
+                        onPress={() => 
+                            navigate('ChooseDelivery')
+                        }
+                    />
+
+                    {/* PickLocationList */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 10,
+                            width: 200,
+                            backgroundColor: '#1abc9c'
+                        }}
+                        title='Pick Location List'
+                        onPress={() => 
+                            navigate('PickLocationList')
+                        }
+                    />
+
+                    {/* PickedLocation */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 10,
+                            width: 200,
+                            backgroundColor: '#1abc9c'
+                        }}
+                        title='Picked Location'
+                        onPress={() => 
+                            navigate('PickedLocation')
+                        }
+                    />
+
+                    {/* Profile */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 10,
+                            width: 200,
+                            backgroundColor: '#1abc9c'
+                        }}
+                        title='Profile'
+                        onPress={() => 
+                            navigate('Profile')
+                        }
+                    />
+
+                    {/* Receipt Snapshot */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 10,
+                            width: 200,
+                            backgroundColor: '#1abc9c'
+                        }}
+                        title='Receipt Snapshot'
+                        onPress={() => 
+                            navigate('ReceiptSnapshot')
+                        }
+                    />
+
+                    {/* GPS Map */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 10,
+                            width: 200,
+                            backgroundColor: '#1abc9c'
+                        }}
+                        title='GPS Map'
+                        onPress={() => 
+                            navigate('GPSMap')
+                        }
+                    />
+
+       
                 {/* Login Screen */}
                 <Button
-                  buttonStyle={style=styles.bttn_style}
+                  buttonStyle={styles.bttn_style}
                   title='Login Screen'
                   rounded
                   onPress={() =>
@@ -70,55 +171,36 @@ class Navigate extends Component {
                   }
                 />
 
-                {/* ChooseDelivery */}
-                <Button 
-                    buttonStyle={style=styles.bttn_style}
-                    title='Choose Delivery'
-                    rounded
-                    onPress={() => 
-                        navigate('ChooseDelivery')
-                    }
+                {/* Create Account Screen */}
+                <Button
+                  buttonStyle={styles.bttn_style}
+                  title='Create Account Screen'
+                  rounded
+                  onPress={() =>
+                    navigate('CreateAccountScreen')
+                  }
                 />
 
-                {/* PickLocationList */}
-                <Button 
-                    buttonStyle={style=styles.bttn_style}
-                    title='Pick Location List'
-                    rounded
-                    onPress={() => 
-                        navigate('PickLocationList')
-                    }
+                {/* Payment Confirmation Screen */}
+                <Button
+                  buttonStyle={styles.bttn_style}
+                  title='Payment Confirmation'
+                  rounded
+                  onPress={() =>
+                      navigate('PaymentConfirmationScreen')
+                  }
                 />
 
-                {/* PickedLocation */}
-                <Button 
-                    buttonStyle={style=styles.bttn_style}
-                    title='Picked Location'
-                    rounded
-                    onPress={() => 
-                        navigate('PickedLocation')
-                    }
+                {/* Receipt Screen */}
+                <Button
+                  buttonStyle={styles.bttn_style}
+                  title='Receipt'
+                  rounded
+                  onPress={() =>
+                      navigate('ReceiptScreen')
+                  }
                 />
-
-                {/* Profile */}
-                <Button 
-                    buttonStyle={style=styles.bttn_style}
-                    title='Profile'
-                    rounded
-                    onPress={() => 
-                        navigate('Profile')
-                    }
-                />
-
-                {/* Receipt Snapshot */}
-                <Button 
-                    buttonStyle={style=styles.bttn_style}
-                    title='Receipt Snapshot'
-                    rounded
-                    onPress={() => 
-                        navigate('ReceiptSnapshot')
-                    }
-                />
+<<<<<<< HEAD
 
                 {/* Place Order */}
                 <Button 
@@ -139,6 +221,9 @@ class Navigate extends Component {
                         navigate('PaymentScreen')
                     }
                 />
+=======
+               </View>
+>>>>>>> dev
             </ScrollView>
         );
     }
@@ -155,6 +240,6 @@ const styles = {
         width: 230,
         backgroundColor: BUTTON_COLOR
     }
-}
+};
 
 export default Navigate;
