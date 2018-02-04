@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
@@ -31,136 +31,136 @@ class Navigate extends Component {
                     }}
                 >
                     {/* Coffee Pot List Screen Button */}
-                    <Button 
+                    <Button
                         buttonStyle={{
                             margin: 10,
                             width: 200,
                             backgroundColor: '#1abc9c'
                         }}
                         title='Coffee Pot List'
-                        onPress={() => 
+                        onPress={() =>
                             navigate('CoffeePotList')
                         }
                     />
 
                     {/* Coffee Pot Screen Button */}
-                    <Button 
+                    <Button
                         buttonStyle={{
                             margin: 10,
                             width: 200,
                             backgroundColor: '#1abc9c'
                         }}
                         title='Coffee Pot'
-                        onPress={() => 
+                        onPress={() =>
                             navigate('CoffeePot')
                         }
                     />
 
                     {/* Existing Orders List */}
-                    <Button 
+                    <Button
                         buttonStyle={{
                             margin: 10,
                             width: 200,
                             backgroundColor: '#1abc9c'
                         }}
                         title='Existing Orders List'
-                        onPress={() => 
+                        onPress={() =>
                             navigate('ExistingOrdersList')
                         }
                     />
 
                     {/* Existing Order */}
-                    <Button 
+                    <Button
                         buttonStyle={{
                             margin: 10,
                             width: 200,
                             backgroundColor: '#1abc9c'
                         }}
                         title='Existing Order'
-                        onPress={() => 
+                        onPress={() =>
                             navigate('ExistingOrder')
                         }
                     />
 
                     {/* ChooseDelivery */}
-                    <Button 
+                    <Button
                         buttonStyle={{
                             margin: 10,
                             width: 200,
                             backgroundColor: '#1abc9c'
                         }}
                         title='Choose Delivery'
-                        onPress={() => 
+                        onPress={() =>
                             navigate('ChooseDelivery')
                         }
                     />
 
                     {/* PickLocationList */}
-                    <Button 
+                    <Button
                         buttonStyle={{
                             margin: 10,
                             width: 200,
                             backgroundColor: '#1abc9c'
                         }}
                         title='Pick Location List'
-                        onPress={() => 
+                        onPress={() =>
                             navigate('PickLocationList')
                         }
                     />
 
                     {/* PickedLocation */}
-                    <Button 
+                    <Button
                         buttonStyle={{
                             margin: 10,
                             width: 200,
                             backgroundColor: '#1abc9c'
                         }}
                         title='Picked Location'
-                        onPress={() => 
+                        onPress={() =>
                             navigate('PickedLocation')
                         }
                     />
 
                     {/* Profile */}
-                    <Button 
+                    <Button
                         buttonStyle={{
                             margin: 10,
                             width: 200,
                             backgroundColor: '#1abc9c'
                         }}
                         title='Profile'
-                        onPress={() => 
+                        onPress={() =>
                             navigate('Profile')
                         }
                     />
 
                     {/* Receipt Snapshot */}
-                    <Button 
+                    <Button
                         buttonStyle={{
                             margin: 10,
                             width: 200,
                             backgroundColor: '#1abc9c'
                         }}
                         title='Receipt Snapshot'
-                        onPress={() => 
+                        onPress={() =>
                             navigate('ReceiptSnapshot')
                         }
                     />
 
                     {/* GPS Map */}
-                    <Button 
+                    <Button
                         buttonStyle={{
                             margin: 10,
                             width: 200,
                             backgroundColor: '#1abc9c'
                         }}
                         title='GPS Map'
-                        onPress={() => 
+                        onPress={() =>
                             navigate('GPSMap')
                         }
                     />
 
-       
+
                 {/* Login Screen */}
                 <Button
                   buttonStyle={styles.bttn_style}
@@ -202,21 +202,21 @@ class Navigate extends Component {
                 />
 
                 {/* Place Order */}
-                <Button 
-                    buttonStyle={style=styles.bttn_style}
+                <Button
+                    buttonStyle={styles.bttn_style}
                     title='Place Order'
                     rounded
-                    onPress={() => 
+                    onPress={() =>
                         navigate('PlaceOrder')
                     }
                 />
 
                 {/* Payment Screen */}
-                <Button 
-                    buttonStyle={style=styles.bttn_style}
+                <Button
+                    buttonStyle={styles.bttn_style}
                     title='Order Payment'
                     rounded
-                    onPress={() => 
+                    onPress={() =>
                         navigate('PaymentScreen')
                     }
                 />
@@ -260,6 +260,27 @@ class Navigate extends Component {
                         navigate('Standard Legal')
                     }
                 />
+
+                {/* Input Coffee Order Screen */}
+                <Button
+                    buttonStyle={styles.bttn_style}
+                    title='Input Coffee Order'
+                    rounded
+                    onPress={() =>
+                        navigate('InputCoffeeOrderScreen')
+                    }
+                />
+
+                {/* Receive Payment Screen */}
+                <Button
+                    buttonStyle={styles.bttn_style}
+                    title='Receive Payment'
+                    rounded
+                    onPress={() =>
+                        navigate('ReceivePaymentScreen')
+                    }
+                />
+
                </View>
             </ScrollView>
         );

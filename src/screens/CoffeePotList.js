@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { Button, Card, Avatar, Icon } from 'react-native-elements';
+import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { Button, Card, Icon } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
@@ -56,145 +56,194 @@ class CoffeePotList extends Component {
                             title='GPS View'
                             buttonStyle={styles.button_style}
                             rounded
+                            onPress={() => navigate('GPSMap')}
                         />
                     </View>
 
                     <TouchableOpacity
-                         onPress={() => navigate('CoffeePot')}
+                        onPress={() => navigate('CoffeePot')}
                     >
-                        <Card>
-                            <View style={styles.view_card}>
-                                <View style={styles.view_avatar}>
-                                    <Avatar
-                                        title='Test'
-                                        large
+                        <Card style={{ backgroundColor: 'red' }}>
+                            <View style={{ flexDirection: 'row' }}>
+                                <View style={{ marginLeft: 10, marginRight: 20 }}>
+                                    <Image 
+                                        source={require('../images/coffee_pot_symbol.png')}
+                                        style={{ width: 50, height: 50 }}
                                     />
+                                    <Text style={{ fontWeight: 'bold' }}>5 min</Text>
                                 </View>
-
-                                <View style={styles.view_text}>
-                                    <Text> Location: </Text>
-                                    <Text> Coffee Cup Row </Text>
-                                    <Text> Time Left: </Text>
+                                <View style={{ margin: 5 }}>
+                                    <View style={{ marginBottom: 5 }}>
+                                        <Text>Location: Coffee Shop Name </Text>
+                                    </View>
+                                    <View style={{ marginBottom: 5 }}>
+                                        <Text>Delivery Time: 10 min</Text>
+                                    </View>
+                                    <View>
+                                        <Text>Cups of Coffee: 3/5</Text>
+                                    </View>
                                 </View>
                             </View>
                         </Card>
                     </TouchableOpacity>
 
                     <Card>
-                        <View style={styles.view_card}>
-                            <View style={styles.view_avatar}>
-                                <Avatar
-                                    title='Test'
-                                    large
+                        <View style={{ flexDirection: 'row' }}>
+                            <View style={{ marginLeft: 10, marginRight: 20 }}>
+                                <Image 
+                                    source={require('../images/coffee_pot_symbol.png')}
+                                    style={{ width: 50, height: 50 }}
                                 />
+                                <Text style={{ fontWeight: 'bold' }}>5 min</Text>
                             </View>
-
-                            <View style={styles.view_text}>
-                                <Text> Location: </Text>
-                                <Text> Coffee Cup Row </Text>
-                                <Text> Time Left: </Text>
+                            <View style={{ margin: 5 }}>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Text>Location: Coffee Shop Name </Text>
+                                </View>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Text>Delivery Time: 10 min</Text>
+                                </View>
+                                <View>
+                                    <Text>Cups of Coffee: 3/5</Text>
+                                </View>
                             </View>
                         </View>
                     </Card>
 
                     <Card>
-                        <View style={styles.view_card}>
-                            <View style={styles.view_avatar}>
-                                <Avatar
-                                    title='Test'
-                                    large
+                        <View style={{ flexDirection: 'row' }}>
+                            <View style={{ marginLeft: 10, marginRight: 20 }}>
+                                <Image 
+                                    source={require('../images/coffee_pot_symbol.png')}
+                                    style={{ width: 50, height: 50 }}
                                 />
+                                <Text style={{ fontWeight: 'bold' }}>5 min</Text>
                             </View>
-
-                            <View style={styles.view_text}>
-                                <Text> Location: </Text>
-                                <Text> Coffee Cup Row </Text>
-                                <Text> Time Left: </Text>
+                            <View style={{ margin: 5 }}>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Text>Location: Coffee Shop Name </Text>
+                                </View>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Text>Delivery Time: 10 min</Text>
+                                </View>
+                                <View>
+                                    <Text>Cups of Coffee: 3/5</Text>
+                                </View>
                             </View>
                         </View>
                     </Card>
 
                     <Card>
-                        <View style={styles.view_card}>
-                            <View style={styles.view_avatar}>
-                                <Avatar
-                                    title='Test'
-                                    large
+                        <View style={{ flexDirection: 'row' }}>
+                            <View style={{ marginLeft: 10, marginRight: 20 }}>
+                                <Image 
+                                    source={require('../images/coffee_pot_symbol.png')}
+                                    style={{ width: 50, height: 50 }}
                                 />
+                                <Text style={{ fontWeight: 'bold' }}>5 min</Text>
                             </View>
-
-                            <View style={styles.view_text}>
-                                <Text> Location: </Text>
-                                <Text> Coffee Cup Row </Text>
-                                <Text> Time Left: </Text>
+                            <View style={{ margin: 5 }}>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Text>Location: Coffee Shop Name </Text>
+                                </View>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Text>Delivery Time: 10 min</Text>
+                                </View>
+                                <View>
+                                    <Text>Cups of Coffee: 3/5</Text>
+                                </View>
                             </View>
                         </View>
                     </Card>
 
                     <Card>
-                        <View style={styles.view_card}>
-                            <View style={styles.view_avatar}>
-                                <Avatar
-                                    title='Test'
-                                    large
+                        <View style={{ flexDirection: 'row' }}>
+                            <View style={{ marginLeft: 10, marginRight: 20 }}>
+                                <Image 
+                                    source={require('../images/coffee_pot_symbol.png')}
+                                    style={{ width: 50, height: 50 }}
                                 />
+                                <Text style={{ fontWeight: 'bold' }}>5 min</Text>
                             </View>
-
-                            <View style={styles.view_text}>
-                                <Text> Location: </Text>
-                                <Text> Coffee Cup Row </Text>
-                                <Text> Time Left: </Text>
+                            <View style={{ margin: 5 }}>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Text>Location: Coffee Shop Name </Text>
+                                </View>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Text>Delivery Time: 10 min</Text>
+                                </View>
+                                <View>
+                                    <Text>Cups of Coffee: 3/5</Text>
+                                </View>
                             </View>
                         </View>
                     </Card>
 
                     <Card>
-                        <View style={styles.view_card}>
-                            <View style={styles.view_avatar}>
-                                <Avatar
-                                    title='Test'
-                                    large
+                        <View style={{ flexDirection: 'row' }}>
+                            <View style={{ marginLeft: 10, marginRight: 20 }}>
+                                <Image 
+                                    source={require('../images/coffee_pot_symbol.png')}
+                                    style={{ width: 50, height: 50 }}
                                 />
+                                <Text style={{ fontWeight: 'bold' }}>5 min</Text>
                             </View>
-
-                            <View style={styles.view_text}>
-                                <Text> Location: </Text>
-                                <Text> Coffee Cup Row </Text>
-                                <Text> Time Left: </Text>
+                            <View style={{ margin: 5 }}>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Text>Location: Coffee Shop Name </Text>
+                                </View>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Text>Delivery Time: 10 min</Text>
+                                </View>
+                                <View>
+                                    <Text>Cups of Coffee: 3/5</Text>
+                                </View>
                             </View>
                         </View>
                     </Card>
 
                     <Card>
-                        <View style={styles.view_card}>
-                            <View style={styles.view_avatar}>
-                                <Avatar
-                                    title='Test'
-                                    large
+                        <View style={{ flexDirection: 'row' }}>
+                            <View style={{ marginLeft: 10, marginRight: 20 }}>
+                                <Image 
+                                    source={require('../images/coffee_pot_symbol.png')}
+                                    style={{ width: 50, height: 50 }}
                                 />
+                                <Text style={{ fontWeight: 'bold' }}>5 min</Text>
                             </View>
-
-                            <View style={styles.view_text}>
-                                <Text> Location: </Text>
-                                <Text> Coffee Cup Row </Text>
-                                <Text> Time Left: </Text>
+                            <View style={{ margin: 5 }}>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Text>Location: Coffee Shop Name </Text>
+                                </View>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Text>Delivery Time: 10 min</Text>
+                                </View>
+                                <View>
+                                    <Text>Cups of Coffee: 3/5</Text>
+                                </View>
                             </View>
                         </View>
                     </Card>
 
                     <Card>
-                        <View style={styles.view_card}>
-                            <View style={styles.view_avatar}>
-                                <Avatar
-                                    title='Test'
-                                    large
+                        <View style={{ flexDirection: 'row' }}>
+                            <View style={{ marginLeft: 10, marginRight: 20 }}>
+                                <Image 
+                                    source={require('../images/coffee_pot_symbol.png')}
+                                    style={{ width: 50, height: 50 }}
                                 />
+                                <Text style={{ fontWeight: 'bold' }}>5 min</Text>
                             </View>
-
-                            <View style={styles.view_text}>
-                                <Text> Location: </Text>
-                                <Text> Coffee Cup Row </Text>
-                                <Text> Time Left: </Text>
+                            <View style={{ margin: 5 }}>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Text>Location: Coffee Shop Name </Text>
+                                </View>
+                                <View style={{ marginBottom: 5 }}>
+                                    <Text>Delivery Time: 10 min</Text>
+                                </View>
+                                <View>
+                                    <Text>Cups of Coffee: 3/5</Text>
+                                </View>
                             </View>
                         </View>
                     </Card>
@@ -204,7 +253,7 @@ class CoffeePotList extends Component {
                     </Text>
                 </ScrollView>
             </View>
-        )
+        );
     }
 }
 

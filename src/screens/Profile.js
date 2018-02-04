@@ -1,23 +1,36 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image } from 'react-native';
-import { Card } from 'react-native-elements';
+import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { Card, Icon } from 'react-native-elements';
+
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 /////////////////////////////////////////////////////////
 ////  The following code is for the Profile Screen   ////
 /////////////////////////////////////////////////////////
 
 class Profile extends Component {
-    static navigationOptions = {
+    static navigationOptions = ({navigation}) => ({
         title: 'Profile',
         headerStyle: {
-            backgroundColor: '#16a085'
-            
+            backgroundColor: PRIMARY_COLOR,
+            paddingRight: 10,
+            paddingLeft: 10
         },
         headerTitleStyle: {
-            color: '#ecf0f1'
+            color: SECONDARY_COLOR
         },
-        headerTintColor: 'white'
-    }
+        headerTintColor: SECONDARY_COLOR,
+        headerBackTitle: null,
+        headerLeft: (
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+                <Icon 
+                    type='material-community'
+                    name='menu'
+                    color={ SECONDARY_COLOR }
+                />
+            </TouchableOpacity>
+        )
+    })
 
     render() {
         return (

@@ -1,13 +1,17 @@
 import React from 'react';
 
-import { StyleSheet, Text, View, Platform, StatusBar, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Platform, StatusBar, ScrollView, Image } from 'react-native';
 import { Button, Icon, Divider, Avatar } from 'react-native-elements';
 import firebase from 'firebase';
 import { StackNavigator, TabNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
 
-
+// Navigate is used for screen testing purposes
 import Navigate from './src/screens/Navigate';
+
+//Side Bar Menu Screens
 import Profile from './src/screens/Profile';
+
+// GPS Screen
 import GPSMap from './src/screens/GPSMap';
 import About from './src/screens/About';
 import Settings from './src/screens/Settings';
@@ -26,6 +30,7 @@ import ExistingOrder from './src/screens/ExistingOrder';
 import PickLocationList from './src/screens/PickLocationList';
 import PickedLocation from './src/screens/PickedLocation';
 import PlaceOrder from './src/screens/PlaceOrder';
+import InputCoffeeOrderScreen from './src/screens/InputCoffeeOrderScreen';
 
 // Authenticaiton Screens
 import LoginScreen from './src/screens/LoginScreen';
@@ -73,6 +78,7 @@ export default class App extends React.Component {
       DeliveryLegal: { screen: DeliveryLegal },
       Settings: { screen: Settings },
       StandardLegal: { screen: StandardLegal }
+      InputCoffeeOrderScreen: { screen: InputCoffeeOrderScreen },
     })
 
     /////////////////////////////////////////////////////////////////////////
@@ -80,8 +86,27 @@ export default class App extends React.Component {
     const Home = StackNavigator({
       CoffeePotList: { screen: CoffeePotList },
       CoffeePot: { screen: CoffeePot },
+      GPSMap: { screen: GPSMap },
       Profile: { screen: Profile }
-    })
+    });
+
+    /////////////////////////////////////////////////////////////////////////
+    //// Authentication Screens
+    const Auth = StackNavigator({
+      LoginScreen: { screen: LoginScreen },
+      CreateAccount: { screen: CreateAccountScreen }
+    });
+
+    /////////////////////////////////////////////////////////////////////////
+    //// Authentication Screens
+    const Delivery = StackNavigator({
+      ChooseDelivery: { screen: ChooseDelivery },
+      PickLocationList: { screen: PickLocationList },
+      PickedLocation: { screen: PickedLocation },
+      ExistingOrdersList: { screen: ExistingOrdersList },
+      ExistingOrder: { screen: ExistingOrder },
+      GPSMap: { screen: GPSMap }
+    });
 
     //////////////////////////////////////////////////////////////////////////////
     // This component dictates the configuration of the drawer
@@ -89,18 +114,21 @@ export default class App extends React.Component {
       <ScrollView>
         <View
           style={{
-            flex: 1,
-            alignItems: "center",
-            alignContent: "center"
+            // flex: 1,
+            alignItems: 'center',
+            alignContent: 'center',
+            marginTop: 30
           }}
         >
           <Avatar
-            title='Test'
-            xlarge
+            source={require('./src/images/Profile_Pic.jpg')}
+            style={{ width: 200, height: 200, borderRadius: 100 }} 
             rounded
-            containerStyle={{ margin: 10 }}
+            xlarge
           />
-          <Text style={{ margin: 10, color: 'white' }}>John TestyMcTestFace</Text>
+          <Text style={{ marginBottom: 20, color: 'white', fontSize: 20 }}>
+            John TestyMcTestFace
+          </Text>
         </View>
 
         <View>
@@ -110,6 +138,7 @@ export default class App extends React.Component {
     );
 
     const Drawer = DrawerNavigator({
+      Delivery: { screen: Delivery },
       Home: { screen: Home },
       Profile: { screen: Profile }
     },{
@@ -127,7 +156,7 @@ export default class App extends React.Component {
     })
 
     const MainNav = TabNavigator({
-      Login: { screen: LoginScreen },
+      Login: { screen: Auth },
       Main: { screen: Drawer },
     },{
       navigationOptions: {
@@ -143,7 +172,7 @@ export default class App extends React.Component {
         <StatusBar
           barStyle='light-content'
         />
-        <MainNav />
+        <MainNav /> 
         {/* <ButtonNav /> */}
       </View>
     );

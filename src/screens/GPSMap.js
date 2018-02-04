@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { Button } from 'react-native-elements';
 import MapView from 'react-native-maps';
+
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 class GPSMap extends Component {
     static navigationOptions = {
@@ -16,6 +19,7 @@ class GPSMap extends Component {
     }
        
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <MapView
@@ -26,7 +30,19 @@ class GPSMap extends Component {
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                     }}
-                />
+                >
+                    <Button 
+                        iconRight={{
+                            name: 'plus-circle',
+                            type: 'material-community',
+                            size: 25
+                        }}
+                        title='List View'
+                        buttonStyle={styles.button_style}
+                        rounded
+                        onPress = {() => navigate('CoffeePotList')}
+                    />
+                </MapView>
             </View>
         );
     }
@@ -44,6 +60,10 @@ const styles = {
         right: 0,
         left: 0,
         bottom: 0
+    },
+    button_style: {
+        width: 100,
+        backgroundColor: BUTTON_COLOR
     }
 };
 

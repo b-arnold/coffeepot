@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { Avatar, Button } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
@@ -25,12 +25,18 @@ class CoffeePot extends Component {
         return (
             <View style={styles.container}>
                 {/* This will display the time left in the coffee pot */}
-                <Text style={styles.text}>Time Left:</Text>
+                <View style={{ flexDirection: 'row' }}>
+                    <Image 
+                        source={require('../images/Hourglass_icon.png')}
+                        style={{ width: 60, height: 60 }}
+                    />
+                    <Text style={{ fontSize: 45 }}>5 min</Text>
+                </View>
 
                 {/* This will have the picture of the coffee shop */}
-                <Avatar 
-                    xlarge
-                    title='Test'
+                <Image 
+                    source={require('../images/coffee_pot_symbol.png')}
+                    style={{ width: 200, height: 200 }}
                 />
 
                 {/* WIP: Figuring out how to add a row of coffee cups */}
@@ -51,7 +57,7 @@ class CoffeePot extends Component {
                     rounded
                 />
             </View>
-        )
+        );
     }
 }
 
@@ -59,7 +65,7 @@ class CoffeePot extends Component {
 // Style object
 const styles = {
     container: {
-        margin: 50,
+        margin: 30,
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -74,6 +80,6 @@ const styles = {
     button_style: {
         backgroundColor: BUTTON_COLOR
     }
-}
+};
 
 export default CoffeePot;
