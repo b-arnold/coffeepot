@@ -9,6 +9,11 @@ import { StackNavigator, TabNavigator, DrawerNavigator, DrawerItems } from 'reac
 import Navigate from './src/screens/Navigate';
 import Profile from './src/screens/Profile';
 import GPSMap from './src/screens/GPSMap';
+import About from './src/screens/About';
+import Settings from './src/screens/Settings';
+import StandardLegal from './src/screens/StandardLegal';
+import DeliveryLegal from './src/screens/DeliveryLegal';
+
 
 // CoffeePot Screens
 import CoffeePotList from './src/screens/CoffeePotList';
@@ -63,7 +68,11 @@ export default class App extends React.Component {
       PaymentScreen: { screen: PaymentScreen },
       GPSMap: { screen: GPSMap },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
-      ReceiptScreen: { screen: ReceiptScreen }
+      ReceiptScreen: { screen: ReceiptScreen },
+      About: { screen: About },
+      DeliveryLegal: { screen: DeliveryLegal },
+      Settings: { screen: Settings },
+      StandardLegal: { screen: StandardLegal }
     })
 
     /////////////////////////////////////////////////////////////////////////
