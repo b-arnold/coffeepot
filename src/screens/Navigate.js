@@ -221,6 +221,46 @@ class Navigate extends Component {
                     }
                 />
 
+                {/* About Screen */}
+                <Button 
+                    buttonStyle={style=styles.bttn_style}
+                    title='About'
+                    rounded
+                    onPress={() => 
+                        navigate('About')
+                    }
+                />
+
+                {/* Delivery Legal Screen */}
+                <Button 
+                    buttonStyle={style=styles.bttn_style}
+                    title='Delivery Legal'
+                    rounded
+                    onPress={() => 
+                        navigate('DeliveryLegal')
+                    }
+                />
+
+                {/* Settings Screen */}
+                <Button 
+                    buttonStyle={style=styles.bttn_style}
+                    title='Settings'
+                    rounded
+                    onPress={() => 
+                        navigate('Settings')
+                    }
+                />
+
+                {/* Payment Screen */}
+                <Button 
+                    buttonStyle={style=styles.bttn_style}
+                    title='Standard Legal'
+                    rounded
+                    onPress={() => 
+                        navigate('Standard Legal')
+                    }
+                />
+
                 {/* Input Coffee Order Screen */}
                 <Button
                     buttonStyle={styles.bttn_style}
