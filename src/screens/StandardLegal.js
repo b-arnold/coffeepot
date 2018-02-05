@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-elements';
+
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 export default class StandardLegal extends Component {
-    static navigationOptions = {
-        title: 'Standard Legal',
+    static navigationOptions = ({navigation}) => ({
+        title: 'Legal',
         headerStyle: {
-            backgroundColor: '#16a085'
-            
+            backgroundColor: PRIMARY_COLOR,
+            paddingRight: 10,
+            paddingLeft: 10
         },
         headerTitleStyle: {
-            color: '#ecf0f1'
+            color: SECONDARY_COLOR
         },
-        headerTintColor: 'white'
-    }
+        headerTintColor: SECONDARY_COLOR,
+        headerBackTitle: null,
+        headerLeft: (
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+                <Icon 
+                    type='material-community'
+                    name='menu'
+                    color={ SECONDARY_COLOR }
+                />
+            </TouchableOpacity>
+        )
+    })
+
     render() {
         return (
             <View>
