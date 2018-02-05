@@ -78,7 +78,7 @@ export default class App extends React.Component {
       About: { screen: About },
       DeliveryLegal: { screen: DeliveryLegal },
       Settings: { screen: Settings },
-      StandardLegal: { screen: StandardLegal }
+      StandardLegal: { screen: StandardLegal },
       InputCoffeeOrderScreen: { screen: InputCoffeeOrderScreen },
     })
 
