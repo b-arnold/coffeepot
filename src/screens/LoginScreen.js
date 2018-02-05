@@ -109,7 +109,7 @@ class LoginScreen extends Component {
 //Syles
 const styles = {
   smallButtonStyle: {
-    width: 90,
+    width: 100,
     margin: 20,
     height: 40,
     backgroundColor: BUTTON_COLOR

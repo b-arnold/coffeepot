@@ -30,6 +30,7 @@ import InputCoffeeOrderScreen from './src/screens/InputCoffeeOrderScreen';
 // Authenticaiton Screens
 import LoginScreen from './src/screens/LoginScreen';
 import CreateAccountScreen from './src/screens/CreateAccountScreen';
+import LogOut from './src/screens/LogOut';
 
 // Payment Screens
 import PaymentScreen from './src/screens/PaymentScreen';
@@ -78,8 +79,15 @@ export default class App extends React.Component {
       CoffeePotList: { screen: CoffeePotList },
       CoffeePot: { screen: CoffeePot },
       GPSMap: { screen: GPSMap },
-      Profile: { screen: Profile }
+      PlaceOrder: { screen: PlaceOrder },
+      PaymentScreen: { screen: PaymentScreen },
+      PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
+      ReceiptScreen: { screen: ReceiptScreen },
     });
+
+    const ProfileNav = StackNavigator({
+      Profile: { screen: Profile }
+    })
 
     /////////////////////////////////////////////////////////////////////////
     //// Authentication Screens
@@ -131,7 +139,8 @@ export default class App extends React.Component {
     const Drawer = DrawerNavigator({
       Delivery: { screen: Delivery },
       Home: { screen: Home },
-      Profile: { screen: Profile }
+      Profile: { screen: ProfileNav },
+      LogOut: { screen: LogOut }
     },{
       contentComponent: customDrawerComponent,
       drawerBackgroundColor: '#607D8B',

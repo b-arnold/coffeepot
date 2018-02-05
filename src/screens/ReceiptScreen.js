@@ -66,7 +66,7 @@ class ReceiptScreen extends Component {
 
         <View style={{ marginTop: 30, alignItems: 'center' }}>
           <Button
-            title="Review"
+            title="Give Review"
             buttonStyle={styles.buttonStyle}
             rounded
           />
@@ -79,7 +79,7 @@ class ReceiptScreen extends Component {
             </View>
           </Card>
           <Button
-            title="Leave Comment Here"
+            title="Leave A Comment"
             buttonStyle={styles.buttonStyle}
             rounded
           />
