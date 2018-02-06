@@ -80,7 +80,7 @@ export default class App extends React.Component {
       About: { screen: About },
       DeliveryLegal: { screen: DeliveryLegal },
       Settings: { screen: Settings },
-      StandardLegal: { screen: StandardLegal }
+      StandardLegal: { screen: StandardLegal },
       InputCoffeeOrderScreen: { screen: InputCoffeeOrderScreen },
     });
 
@@ -132,7 +132,7 @@ export default class App extends React.Component {
 
           <Avatar
             source={require('./src/images/Profile_Pic.jpg')}
-            style={{ width: 200, height: 200, borderRadius: 100 }} 
+            style={{ width: 200, height: 200, borderRadius: 100 }}
             rounded
             xlarge
           />
@@ -184,8 +184,8 @@ export default class App extends React.Component {
           <StatusBar
             barStyle='light-content'
           />
-          {/* <MainNav /> */ }
-          <ButtonNav />
+          {/* <ButtonNav /> */ }
+          <MainNav />
         </View>
       </Provider>
 
