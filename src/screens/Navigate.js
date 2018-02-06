@@ -171,16 +171,6 @@ class Navigate extends Component {
                   }
                 />
 
-                {/* Create Account Screen */}
-                <Button
-                  buttonStyle={styles.bttn_style}
-                  title='Create Account Screen'
-                  rounded
-                  onPress={() =>
-                    navigate('CreateAccountScreen')
-                  }
-                />
-
                 {/* Payment Confirmation Screen */}
                 <Button
                   buttonStyle={styles.bttn_style}

@@ -3,7 +3,10 @@ import React from 'react';
 import { StyleSheet, Text, View, Platform, StatusBar, ScrollView, Image } from 'react-native';
 import { Button, Icon, Divider, Avatar } from 'react-native-elements';
 import firebase from 'firebase';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { StackNavigator, TabNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
+import { Provider } from 'react-redux';
+import store from './src/store'
 
 // Navigate is used for screen testing purposes
 import Navigate from './src/screens/Navigate';
@@ -29,7 +32,6 @@ import InputCoffeeOrderScreen from './src/screens/InputCoffeeOrderScreen';
 
 // Authenticaiton Screens
 import LoginScreen from './src/screens/LoginScreen';
-import CreateAccountScreen from './src/screens/CreateAccountScreen';
 
 // Payment Screens
 import PaymentScreen from './src/screens/PaymentScreen';
@@ -58,19 +60,18 @@ export default class App extends React.Component {
       ExistingOrdersList: { screen: ExistingOrdersList },
       ExistingOrder: { screen: ExistingOrder },
       LoginScreen: { screen: LoginScreen },
-      CreateAccountScreen: { screen: CreateAccountScreen },
       ChooseDelivery: { screen: ChooseDelivery },
       PickLocationList: { screen: PickLocationList },
       PickedLocation: { screen: PickedLocation },
       Profile: { screen: Profile },
       ReceiptSnapshot: { screen: ReceiptSnapshot },
-      PlaceOrder: { screen: PlaceOrder},
+      PlaceOrder: { screen: PlaceOrder },
       PaymentScreen: { screen: PaymentScreen },
       GPSMap: { screen: GPSMap },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
       ReceiptScreen: { screen: ReceiptScreen },
       InputCoffeeOrderScreen: { screen: InputCoffeeOrderScreen },
-    })
+    });
 
     /////////////////////////////////////////////////////////////////////////
     //// This is used for the actual development of the app
@@ -84,8 +85,7 @@ export default class App extends React.Component {
     /////////////////////////////////////////////////////////////////////////
     //// Authentication Screens
     const Auth = StackNavigator({
-      LoginScreen: { screen: LoginScreen },
-      CreateAccount: { screen: CreateAccountScreen }
+      LoginScreen: { screen: LoginScreen }
     });
 
     /////////////////////////////////////////////////////////////////////////
@@ -113,7 +113,7 @@ export default class App extends React.Component {
         >
           <Image
             source={require('./src/images/profile_icon.png')}
-            style={{ width: 200, height: 200, borderRadius: 100 }} 
+            style={{ width: 200, height: 200, borderRadius: 100 }}
           />
           <Text style={{ marginBottom: 20, color: 'white', fontSize: 20 }}>
             John TestyMcTestFace
@@ -157,13 +157,16 @@ export default class App extends React.Component {
     })
 
     return (
-      <View style={styles.container}>
-        <StatusBar
-          barStyle='light-content'
-        />
-        {/* <MainNav /> */ }
-        <ButtonNav />
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          <StatusBar
+            barStyle='light-content'
+          />
+          {/* <MainNav /> */ }
+          <ButtonNav />
+        </View>
+      </Provider>
+
     );
   }
 }
