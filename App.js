@@ -16,6 +16,11 @@ import Profile from './src/screens/Profile';
 
 // GPS Screen
 import GPSMap from './src/screens/GPSMap';
+import About from './src/screens/About';
+import Settings from './src/screens/Settings';
+import StandardLegal from './src/screens/StandardLegal';
+import DeliveryLegal from './src/screens/DeliveryLegal';
+
 
 // CoffeePot Screens
 import CoffeePotList from './src/screens/CoffeePotList';
@@ -32,6 +37,8 @@ import InputCoffeeOrderScreen from './src/screens/InputCoffeeOrderScreen';
 
 // Authenticaiton Screens
 import LoginScreen from './src/screens/LoginScreen';
+import LogOut from './src/screens/LogOut';
+
 
 // Payment Screens
 import PaymentScreen from './src/screens/PaymentScreen';
@@ -70,6 +77,10 @@ export default class App extends React.Component {
       GPSMap: { screen: GPSMap },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
       ReceiptScreen: { screen: ReceiptScreen },
+      About: { screen: About },
+      DeliveryLegal: { screen: DeliveryLegal },
+      Settings: { screen: Settings },
+      StandardLegal: { screen: StandardLegal }
       InputCoffeeOrderScreen: { screen: InputCoffeeOrderScreen },
     });
 
@@ -79,8 +90,15 @@ export default class App extends React.Component {
       CoffeePotList: { screen: CoffeePotList },
       CoffeePot: { screen: CoffeePot },
       GPSMap: { screen: GPSMap },
-      Profile: { screen: Profile }
+      PlaceOrder: { screen: PlaceOrder },
+      PaymentScreen: { screen: PaymentScreen },
+      PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
+      ReceiptScreen: { screen: ReceiptScreen },
     });
+
+    const ProfileNav = StackNavigator({
+      Profile: { screen: Profile }
+    })
 
     /////////////////////////////////////////////////////////////////////////
     //// Authentication Screens
@@ -111,9 +129,12 @@ export default class App extends React.Component {
             marginTop: 30
           }}
         >
-          <Image
-            source={require('./src/images/profile_icon.png')}
-            style={{ width: 200, height: 200, borderRadius: 100 }}
+
+          <Avatar
+            source={require('./src/images/Profile_Pic.jpg')}
+            style={{ width: 200, height: 200, borderRadius: 100 }} 
+            rounded
+            xlarge
           />
           <Text style={{ marginBottom: 20, color: 'white', fontSize: 20 }}>
             John TestyMcTestFace
@@ -127,9 +148,10 @@ export default class App extends React.Component {
     );
 
     const Drawer = DrawerNavigator({
+      Delivery: { screen: Delivery },
       Home: { screen: Home },
-      Profile: { screen: Profile },
-      Delivery: { screen: Delivery }
+      Profile: { screen: ProfileNav },
+      LogOut: { screen: LogOut }
     },{
       contentComponent: customDrawerComponent,
       drawerBackgroundColor: '#607D8B',

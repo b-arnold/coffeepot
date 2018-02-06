@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
-import { Card, Icon } from 'react-native-elements';
+import { Card, Icon, Avatar, Rating } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
@@ -41,9 +41,9 @@ class Profile extends Component {
                     alignItems: 'center'
                 }}>
                     <View style={{ marginTop: 10 }}>
-                        <Image
-                            source={require('../images/profile_icon.png')}
-                            style={{ width: 200, height: 200 }} 
+                        <Avatar
+                            source={require('../images/Profile_Pic.jpg')}
+                            xlarge
                         />
                     </View>
 
@@ -53,9 +53,10 @@ class Profile extends Component {
 
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', margin: 10 }}>
                         <View style={styles.container}>
-                            <Image
-                                source={require('../images/ratings_example_icon.png')}
-                                style={{ width: 100, height: 25 }} 
+                            <Rating
+                                imageSize={30}
+                                readonly
+                                startingValue={4.5}
                             />
                         </View>
                         <View style={styles.container}>
@@ -67,17 +68,18 @@ class Profile extends Component {
                 <Card>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ marginLeft: 10, marginRight: 20 }}>
-                            <Image 
-                                source={require('../images/profile_icon.png')}
-                                style={{ width: 50, height: 50 }}
+                            <Avatar 
+                                source={require('../images/Profile_Pic.jpg')}
+                                medium
                             />
                         </View>
                         <View>
                             <View style={{ marginBottom: 5 }}>
-                                <Image
-                                    source={require('../images/ratings_example_icon.png')}
-                                    style={{ width: 50, height: 10 }} 
-                                />
+                                <Rating
+                                imageSize={30}
+                                readonly
+                                startingValue={4.5}
+                            />
                             </View>
                             <Text>Name: First Last </Text>
                             <Text>Comments: Blah blah blah blah...</Text>
@@ -88,17 +90,18 @@ class Profile extends Component {
                 <Card>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ marginLeft: 10, marginRight: 20 }}>
-                            <Image 
-                                source={require('../images/profile_icon.png')}
-                                style={{ width: 50, height: 50 }}
+                            <Avatar 
+                                source={require('../images/Profile_Pic.jpg')}
+                                medium
                             />
                         </View>
                         <View>
                             <View style={{ marginBottom: 5 }}>
-                                <Image
-                                    source={require('../images/ratings_example_icon.png')}
-                                    style={{ width: 50, height: 10 }} 
-                                />
+                                <Rating
+                                imageSize={30}
+                                readonly
+                                startingValue={4.5}
+                            />
                             </View>
                             <Text>Name: First Last </Text>
                             <Text>Comments: Blah blah blah blah...</Text>
@@ -109,17 +112,18 @@ class Profile extends Component {
                 <Card>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ marginLeft: 10, marginRight: 20 }}>
-                            <Image 
-                                source={require('../images/profile_icon.png')}
-                                style={{ width: 50, height: 50 }}
+                            <Avatar 
+                                source={require('../images/Profile_Pic.jpg')}
+                                medium
                             />
                         </View>
                         <View>
                             <View style={{ marginBottom: 5 }}>
-                                <Image
-                                    source={require('../images/ratings_example_icon.png')}
-                                    style={{ width: 50, height: 10 }} 
-                                />
+                                <Rating
+                                imageSize={30}
+                                readonly
+                                startingValue={4.5}
+                            />
                             </View>
                             <Text>Name: First Last </Text>
                             <Text>Comments: Blah blah blah blah...</Text>
@@ -130,17 +134,18 @@ class Profile extends Component {
                 <Card>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ marginLeft: 10, marginRight: 20 }}>
-                            <Image 
-                                source={require('../images/profile_icon.png')}
-                                style={{ width: 50, height: 50 }}
+                            <Avatar 
+                                source={require('../images/Profile_Pic.jpg')}
+                                medium
                             />
                         </View>
                         <View>
                             <View style={{ marginBottom: 5 }}>
-                                <Image
-                                    source={require('../images/ratings_example_icon.png')}
-                                    style={{ width: 50, height: 10 }} 
-                                />
+                                <Rating
+                                imageSize={30}
+                                readonly
+                                startingValue={4.5}
+                            />
                             </View>
                             <Text>Name: First Last </Text>
                             <Text>Comments: Blah blah blah blah...</Text>
@@ -151,17 +156,18 @@ class Profile extends Component {
                 <Card>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ marginLeft: 10, marginRight: 20 }}>
-                            <Image 
-                                source={require('../images/profile_icon.png')}
-                                style={{ width: 50, height: 50 }}
+                            <Avatar 
+                                source={require('../images/Profile_Pic.jpg')}
+                                medium
                             />
                         </View>
                         <View>
                             <View style={{ marginBottom: 5 }}>
-                                <Image
-                                    source={require('../images/ratings_example_icon.png')}
-                                    style={{ width: 50, height: 10 }} 
-                                />
+                                <Rating
+                                imageSize={30}
+                                readonly
+                                startingValue={4.5}
+                            />
                             </View>
                             <Text>Name: First Last </Text>
                             <Text>Comments: Blah blah blah blah...</Text>
@@ -172,17 +178,18 @@ class Profile extends Component {
                 <Card>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ marginLeft: 10, marginRight: 20 }}>
-                            <Image 
-                                source={require('../images/profile_icon.png')}
-                                style={{ width: 50, height: 50 }}
+                            <Avatar 
+                                source={require('../images/Profile_Pic.jpg')}
+                                medium
                             />
                         </View>
                         <View>
                             <View style={{ marginBottom: 5 }}>
-                                <Image
-                                    source={require('../images/ratings_example_icon.png')}
-                                    style={{ width: 50, height: 10 }} 
-                                />
+                                <Rating
+                                imageSize={30}
+                                readonly
+                                startingValue={4.5}
+                            />
                             </View>
                             <Text>Name: First Last </Text>
                             <Text>Comments: Blah blah blah blah...</Text>
@@ -193,17 +200,18 @@ class Profile extends Component {
                 <Card>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ marginLeft: 10, marginRight: 20 }}>
-                            <Image 
-                                source={require('../images/profile_icon.png')}
-                                style={{ width: 50, height: 50 }}
+                            <Avatar 
+                                source={require('../images/Profile_Pic.jpg')}
+                                medium
                             />
                         </View>
                         <View>
                             <View style={{ marginBottom: 5 }}>
-                                <Image
-                                    source={require('../images/ratings_example_icon.png')}
-                                    style={{ width: 50, height: 10 }} 
-                                />
+                                <Rating
+                                imageSize={30}
+                                readonly
+                                startingValue={4.5}
+                            />
                             </View>
                             <Text>Name: First Last </Text>
                             <Text>Comments: Blah blah blah blah...</Text>
@@ -226,6 +234,6 @@ export default Profile;
 
 const styles = {
     container: {
-        margin: 20
+        margin: 10
     }
 };

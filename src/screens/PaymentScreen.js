@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image, Dimensions } from 'react-native';
-import { Button, Card } from 'react-native-elements';
+import { View, Text, ScrollView } from 'react-native';
+import { Button, Card, Avatar } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
-const window_width = Dimensions.get('window').width;
 
-export default class PaymentScreen extends Component {
+class PaymentScreen extends Component {
     static navigationOptions = {
         title: 'Order Payment',
         headerStyle: {
@@ -19,15 +18,16 @@ export default class PaymentScreen extends Component {
     }
 
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View>
                 <ScrollView>
                     <Card>
                         <View style={{ flexDirection: 'row' }}>
                             <View>
-                                <Image
+                                <Avatar
                                     source={require('../images/profile_icon.png')}
-                                    style={{ width: 50, height: 50 }} 
+                                    large
                                 />
                             </View>
                             <View>
@@ -41,7 +41,7 @@ export default class PaymentScreen extends Component {
                         <View style={{ flexDirection: 'column' }}>
                             <Text>Card Number: xxxx-xxxx-xxxx-0000{"\n"}</Text>
                             <Text>Expiration Date: 01/ 2020{"\n"}</Text>
-                            <View style={style.button_container}>
+                            <View style={styles.button_container}>
                                 <Button 
                                     buttonStyle={styles.AddBttn_style}
                                     title='Apply New Card +'
@@ -52,11 +52,12 @@ export default class PaymentScreen extends Component {
                     </Card>
 
                     <Card>
-                        <View style={style.button_container}>
+                        <View style={styles.button_container}>
                             <Button 
                             buttonStyle={styles.bttn_style}
                             title='Confirm Payment'
                             rounded
+                            onPress = {() => navigate('PaymentConfirmationScreen')}
                             />
                         </View>
                     </Card>
@@ -74,7 +75,6 @@ const styles = {
     },
     bttn_style: {
         margin: 0,
-        width: window_width-75,
         backgroundColor: BUTTON_COLOR
     },
     addBttn_style: {
@@ -88,3 +88,5 @@ const styles = {
         alignItems: 'center'
     }
 }
+
+export default PaymentScreen;

@@ -62,7 +62,7 @@ const styles = {
         bottom: 0
     },
     button_style: {
-        width: 100,
+        width: 130,
         backgroundColor: BUTTON_COLOR
     }
 };

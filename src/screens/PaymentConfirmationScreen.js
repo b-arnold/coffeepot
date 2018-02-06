@@ -28,6 +28,7 @@ class PaymentConfirmationScreen extends Component {
   // Main render method
   /////////////////////////////////////////////////////////
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View>
         <View>
@@ -65,12 +66,14 @@ class PaymentConfirmationScreen extends Component {
             title="Return to Order"
             rounded
             buttonStyle={styles.buttonStyle}
+            onPress = {() => navigate('PlaceOrder')}
           />
 
           <Button
             title="Confirm"
             rounded
             buttonStyle={styles.buttonStyle}
+            onPress = {() => navigate('ReceiptScreen')}
           />
         </View>
       </View>
