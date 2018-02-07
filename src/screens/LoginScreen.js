@@ -44,7 +44,7 @@ class LoginScreen extends Component {
   componentWillMount() {
     if (firebase.auth().currentUser) {
     //  this.props.signoutUser();
-      this.props.navigation.navigate('CoffeePotList');
+      this.props.navigation.navigate('Home');
       return;
     }
 
