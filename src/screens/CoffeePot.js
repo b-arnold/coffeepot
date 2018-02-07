@@ -51,7 +51,6 @@ class CoffeePot extends Component {
                         ratingBackgroundColor='transparent'
                         imageSize={70}
                         readonly
-                        startingValue={3}
                     />
                 </View>
 
