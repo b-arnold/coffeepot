@@ -30,6 +30,41 @@ class CoffeePotList extends Component {
             </TouchableOpacity>
         ),
     })
+
+    renderCard() {
+        return (
+            <TouchableOpacity
+                onPress={() => navigate('CoffeePot')}
+            >
+                <Card>
+                    <View style={styles.view_card}>
+                        <View style={styles.view_avatar}>
+                            <Avatar
+                                source={require('../images/coffee_pot_symbol.png')}
+                                large
+                            />
+                            <Text style={styles.view_time}>5 min</Text>
+                        </View>
+
+                        <View style={styles.view_text}>
+                            <Text> Location: Coffee Shop Name</Text>
+                            <Text> Delivery Time: 10 min</Text>
+                            <Rating
+                                type='custom'
+                                ratingImage={COFFEE_CUP_IMAGE}
+                                ratingCount={5}
+                                ratingColor='#3498db'
+                                imageSize={50}
+                                readonly
+                                startingValue={0}
+                            />
+                        </View>
+                    </View>
+                </Card>
+            </TouchableOpacity>
+        )
+    }
+
     render() {
         const { navigate } = this.props.navigation;
         const COFFEE_CUP_IMAGE = require('../images/CoffeeCupTest.png');
