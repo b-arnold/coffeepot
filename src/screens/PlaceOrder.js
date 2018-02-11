@@ -20,6 +20,7 @@ export default class PlaceOrder extends Component {
     }
 
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View>
                 <ScrollView>
@@ -54,6 +55,7 @@ export default class PlaceOrder extends Component {
                             buttonStyle={styles.bttn_style}
                             title='Place Order'
                             rounded
+                            onPress={() => navigate('PaymentScreen')}
                             />
                         </View>
                     </Card>

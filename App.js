@@ -3,13 +3,20 @@ import React from 'react';
 import { StyleSheet, Text, View, Platform, StatusBar, ScrollView, Image } from 'react-native';
 import { Button, Icon, Divider, Avatar } from 'react-native-elements';
 import firebase from 'firebase';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { StackNavigator, TabNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
+import { Provider } from 'react-redux';
+import store from './src/store'
 
 // Navigate is used for screen testing purposes
 import Navigate from './src/screens/Navigate';
 
 //Side Bar Menu Screens
 import Profile from './src/screens/Profile';
+import About from './src/screens/About';
+import Settings from './src/screens/Settings';
+import StandardLegal from './src/screens/StandardLegal';
+import DeliveryLegal from './src/screens/DeliveryLegal';
 
 // GPS Screen
 import GPSMap from './src/screens/GPSMap';
@@ -29,7 +36,8 @@ import InputCoffeeOrderScreen from './src/screens/InputCoffeeOrderScreen';
 
 // Authenticaiton Screens
 import LoginScreen from './src/screens/LoginScreen';
-import CreateAccountScreen from './src/screens/CreateAccountScreen';
+import LogOut from './src/screens/LogOut';
+
 
 // Payment Screens
 import PaymentScreen from './src/screens/PaymentScreen';
@@ -58,19 +66,22 @@ export default class App extends React.Component {
       ExistingOrdersList: { screen: ExistingOrdersList },
       ExistingOrder: { screen: ExistingOrder },
       LoginScreen: { screen: LoginScreen },
-      CreateAccountScreen: { screen: CreateAccountScreen },
       ChooseDelivery: { screen: ChooseDelivery },
       PickLocationList: { screen: PickLocationList },
       PickedLocation: { screen: PickedLocation },
       Profile: { screen: Profile },
       ReceiptSnapshot: { screen: ReceiptSnapshot },
-      PlaceOrder: { screen: PlaceOrder},
+      PlaceOrder: { screen: PlaceOrder },
       PaymentScreen: { screen: PaymentScreen },
       GPSMap: { screen: GPSMap },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
       ReceiptScreen: { screen: ReceiptScreen },
+      About: { screen: About },
+      DeliveryLegal: { screen: DeliveryLegal },
+      Settings: { screen: Settings },
+      StandardLegal: { screen: StandardLegal },
       InputCoffeeOrderScreen: { screen: InputCoffeeOrderScreen },
-    })
+    });
 
     /////////////////////////////////////////////////////////////////////////
     //// This is used for the actual development of the app
@@ -78,18 +89,35 @@ export default class App extends React.Component {
       CoffeePotList: { screen: CoffeePotList },
       CoffeePot: { screen: CoffeePot },
       GPSMap: { screen: GPSMap },
-      Profile: { screen: Profile }
+      PlaceOrder: { screen: PlaceOrder },
+      PaymentScreen: { screen: PaymentScreen },
+      PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
+      ReceiptScreen: { screen: ReceiptScreen },
+      Legal: { screen: StandardLegal},
     });
+
+    /////////////////////////////////////////////////////////////////////////
+    //Side bar menu
+    const ProfileNav = StackNavigator({
+      Profile: { screen: Profile },
+    })
+
+    const SettingNav = StackNavigator({
+      Settings: { screen: Settings }
+    })
+
+    const StandardLegalNav = StackNavigator({
+      StandardLegal: { screen: StandardLegal }
+    })
 
     /////////////////////////////////////////////////////////////////////////
     //// Authentication Screens
     const Auth = StackNavigator({
-      LoginScreen: { screen: LoginScreen },
-      CreateAccount: { screen: CreateAccountScreen }
+      LoginScreen: { screen: LoginScreen }
     });
 
     /////////////////////////////////////////////////////////////////////////
-    //// Authentication Screens
+    //// Delivery Screens
     const Delivery = StackNavigator({
       ChooseDelivery: { screen: ChooseDelivery },
       PickLocationList: { screen: PickLocationList },
@@ -111,9 +139,12 @@ export default class App extends React.Component {
             marginTop: 30
           }}
         >
-          <Image
-            source={require('./src/images/profile_icon.png')}
-            style={{ width: 200, height: 200, borderRadius: 100 }} 
+
+          <Avatar
+            source={require('./src/images/Profile_Pic.jpg')}
+            style={{ width: 200, height: 200, borderRadius: 100 }}
+            rounded
+            xlarge
           />
           <Text style={{ marginBottom: 20, color: 'white', fontSize: 20 }}>
             John TestyMcTestFace
@@ -126,10 +157,14 @@ export default class App extends React.Component {
       </ScrollView>
     );
 
+    // Drawer Navigation
     const Drawer = DrawerNavigator({
+      Delivery: { screen: Delivery },
       Home: { screen: Home },
-      Profile: { screen: Profile },
-      Delivery: { screen: Delivery }
+      Profile: { screen: ProfileNav },
+      Settings: { screen: SettingNav},
+      Legal: { screen: StandardLegalNav},
+      LogOut: { screen: LogOut }
     },{
       contentComponent: customDrawerComponent,
       drawerBackgroundColor: '#607D8B',
@@ -157,13 +192,16 @@ export default class App extends React.Component {
     })
 
     return (
-      <View style={styles.container}>
-        <StatusBar
-          barStyle='light-content'
-        />
-        {/* <MainNav /> */ }
-        <ButtonNav />
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          <StatusBar
+            barStyle='light-content'
+          />
+          {/* <ButtonNav /> */ }
+          <MainNav />
+        </View>
+      </Provider>
+
     );
   }
 }

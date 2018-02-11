@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { Button, Card, Icon } from 'react-native-elements';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { Button, Card, Icon, Avatar, Rating } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
@@ -32,6 +32,7 @@ class CoffeePotList extends Component {
     })
     render() {
         const { navigate } = this.props.navigation;
+        const COFFEE_CUP_IMAGE = require('../images/CoffeeCupTest.png');
         return (
             <View>
                 {/* This file is here for scaffolding, but will be replaced */}
@@ -61,192 +62,244 @@ class CoffeePotList extends Component {
                     </View>
 
                     <TouchableOpacity
-                        onPress={() => navigate('CoffeePot')}
+                         onPress={() => navigate('CoffeePot')}
                     >
-                        <Card style={{ backgroundColor: 'red' }}>
-                            <View style={{ flexDirection: 'row' }}>
-                                <View style={{ marginLeft: 10, marginRight: 20 }}>
-                                    <Image 
+                        <Card>
+                            <View style={styles.view_card}>
+                                <View style={styles.view_avatar}>
+                                    <Avatar
                                         source={require('../images/coffee_pot_symbol.png')}
-                                        style={{ width: 50, height: 50 }}
+                                        large
                                     />
-                                    <Text style={{ fontWeight: 'bold' }}>5 min</Text>
+                                    <Text style={styles.view_time}>5 min</Text>
                                 </View>
-                                <View style={{ margin: 5 }}>
-                                    <View style={{ marginBottom: 5 }}>
-                                        <Text>Location: Coffee Shop Name </Text>
-                                    </View>
-                                    <View style={{ marginBottom: 5 }}>
-                                        <Text>Delivery Time: 10 min</Text>
-                                    </View>
-                                    <View>
-                                        <Text>Cups of Coffee: 3/5</Text>
-                                    </View>
+
+                                <View style={styles.view_text}>
+                                    <Text> Location: Coffee Shop Name</Text>
+                                    <Text> Delivery Time: 10 min</Text>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={COFFEE_CUP_IMAGE}
+                                        ratingCount={5}
+                                        ratingColor='#3498db'
+                                        imageSize={50}
+                                        readonly
+                                        startingValue={0}
+                                    />
                                 </View>
                             </View>
                         </Card>
                     </TouchableOpacity>
 
-                    <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ marginLeft: 10, marginRight: 20 }}>
-                                <Image 
-                                    source={require('../images/coffee_pot_symbol.png')}
-                                    style={{ width: 50, height: 50 }}
-                                />
-                                <Text style={{ fontWeight: 'bold' }}>5 min</Text>
-                            </View>
-                            <View style={{ margin: 5 }}>
-                                <View style={{ marginBottom: 5 }}>
-                                    <Text>Location: Coffee Shop Name </Text>
+                    <TouchableOpacity
+                         onPress={() => navigate('CoffeePot')}
+                    >
+                        <Card>
+                            <View style={styles.view_card}>
+                                <View style={styles.view_avatar}>
+                                    <Avatar
+                                        source={require('../images/coffee_pot_symbol.png')}
+                                        large
+                                    />
+                                    <Text style={styles.view_time}>5 min</Text>
                                 </View>
-                                <View style={{ marginBottom: 5 }}>
-                                    <Text>Delivery Time: 10 min</Text>
-                                </View>
-                                <View>
-                                    <Text>Cups of Coffee: 3/5</Text>
-                                </View>
-                            </View>
-                        </View>
-                    </Card>
 
-                    <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ marginLeft: 10, marginRight: 20 }}>
-                                <Image 
-                                    source={require('../images/coffee_pot_symbol.png')}
-                                    style={{ width: 50, height: 50 }}
-                                />
-                                <Text style={{ fontWeight: 'bold' }}>5 min</Text>
-                            </View>
-                            <View style={{ margin: 5 }}>
-                                <View style={{ marginBottom: 5 }}>
-                                    <Text>Location: Coffee Shop Name </Text>
-                                </View>
-                                <View style={{ marginBottom: 5 }}>
-                                    <Text>Delivery Time: 10 min</Text>
-                                </View>
-                                <View>
-                                    <Text>Cups of Coffee: 3/5</Text>
+                                <View style={styles.view_text}>
+                                    <Text> Location: Coffee Shop Name</Text>
+                                    <Text> Delivery Time: 10 min</Text>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={COFFEE_CUP_IMAGE}
+                                        ratingCount={5}
+                                        ratingColor='#3498db'
+                                        imageSize={50}
+                                        readonly
+                                        startingValue={0}
+                                    />
                                 </View>
                             </View>
-                        </View>
-                    </Card>
+                        </Card>
+                    </TouchableOpacity>
 
-                    <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ marginLeft: 10, marginRight: 20 }}>
-                                <Image 
-                                    source={require('../images/coffee_pot_symbol.png')}
-                                    style={{ width: 50, height: 50 }}
-                                />
-                                <Text style={{ fontWeight: 'bold' }}>5 min</Text>
-                            </View>
-                            <View style={{ margin: 5 }}>
-                                <View style={{ marginBottom: 5 }}>
-                                    <Text>Location: Coffee Shop Name </Text>
+                    <TouchableOpacity
+                         onPress={() => navigate('CoffeePot')}
+                    >
+                        <Card>
+                            <View style={styles.view_card}>
+                                <View style={styles.view_avatar}>
+                                    <Avatar
+                                        source={require('../images/coffee_pot_symbol.png')}
+                                        large
+                                    />
+                                    <Text style={styles.view_time}>5 min</Text>
                                 </View>
-                                <View style={{ marginBottom: 5 }}>
-                                    <Text>Delivery Time: 10 min</Text>
-                                </View>
-                                <View>
-                                    <Text>Cups of Coffee: 3/5</Text>
-                                </View>
-                            </View>
-                        </View>
-                    </Card>
 
-                    <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ marginLeft: 10, marginRight: 20 }}>
-                                <Image 
-                                    source={require('../images/coffee_pot_symbol.png')}
-                                    style={{ width: 50, height: 50 }}
-                                />
-                                <Text style={{ fontWeight: 'bold' }}>5 min</Text>
-                            </View>
-                            <View style={{ margin: 5 }}>
-                                <View style={{ marginBottom: 5 }}>
-                                    <Text>Location: Coffee Shop Name </Text>
-                                </View>
-                                <View style={{ marginBottom: 5 }}>
-                                    <Text>Delivery Time: 10 min</Text>
-                                </View>
-                                <View>
-                                    <Text>Cups of Coffee: 3/5</Text>
+                                <View style={styles.view_text}>
+                                    <Text> Location: Coffee Shop Name</Text>
+                                    <Text> Delivery Time: 10 min</Text>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={COFFEE_CUP_IMAGE}
+                                        ratingCount={5}
+                                        ratingColor='#3498db'
+                                        imageSize={50}
+                                        readonly
+                                        startingValue={0}
+                                    />
                                 </View>
                             </View>
-                        </View>
-                    </Card>
+                        </Card>
+                    </TouchableOpacity>
 
-                    <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ marginLeft: 10, marginRight: 20 }}>
-                                <Image 
-                                    source={require('../images/coffee_pot_symbol.png')}
-                                    style={{ width: 50, height: 50 }}
-                                />
-                                <Text style={{ fontWeight: 'bold' }}>5 min</Text>
-                            </View>
-                            <View style={{ margin: 5 }}>
-                                <View style={{ marginBottom: 5 }}>
-                                    <Text>Location: Coffee Shop Name </Text>
+                    <TouchableOpacity
+                         onPress={() => navigate('CoffeePot')}
+                    >
+                        <Card>
+                            <View style={styles.view_card}>
+                                <View style={styles.view_avatar}>
+                                    <Avatar
+                                        source={require('../images/coffee_pot_symbol.png')}
+                                        large
+                                    />
+                                    <Text style={styles.view_time}>5 min</Text>
                                 </View>
-                                <View style={{ marginBottom: 5 }}>
-                                    <Text>Delivery Time: 10 min</Text>
-                                </View>
-                                <View>
-                                    <Text>Cups of Coffee: 3/5</Text>
-                                </View>
-                            </View>
-                        </View>
-                    </Card>
 
-                    <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ marginLeft: 10, marginRight: 20 }}>
-                                <Image 
-                                    source={require('../images/coffee_pot_symbol.png')}
-                                    style={{ width: 50, height: 50 }}
-                                />
-                                <Text style={{ fontWeight: 'bold' }}>5 min</Text>
-                            </View>
-                            <View style={{ margin: 5 }}>
-                                <View style={{ marginBottom: 5 }}>
-                                    <Text>Location: Coffee Shop Name </Text>
-                                </View>
-                                <View style={{ marginBottom: 5 }}>
-                                    <Text>Delivery Time: 10 min</Text>
-                                </View>
-                                <View>
-                                    <Text>Cups of Coffee: 3/5</Text>
+                                <View style={styles.view_text}>
+                                    <Text> Location: Coffee Shop Name</Text>
+                                    <Text> Delivery Time: 10 min</Text>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={COFFEE_CUP_IMAGE}
+                                        ratingCount={5}
+                                        ratingColor='#3498db'
+                                        imageSize={50}
+                                        readonly
+                                        startingValue={0}
+                                    />
                                 </View>
                             </View>
-                        </View>
-                    </Card>
+                        </Card>
+                    </TouchableOpacity>
 
-                    <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ marginLeft: 10, marginRight: 20 }}>
-                                <Image 
-                                    source={require('../images/coffee_pot_symbol.png')}
-                                    style={{ width: 50, height: 50 }}
-                                />
-                                <Text style={{ fontWeight: 'bold' }}>5 min</Text>
+                    <TouchableOpacity
+                         onPress={() => navigate('CoffeePot')}
+                    >
+                        <Card>
+                            <View style={styles.view_card}>
+                                <View style={styles.view_avatar}>
+                                    <Avatar
+                                        source={require('../images/coffee_pot_symbol.png')}
+                                        large
+                                    />
+                                    <Text style={styles.view_time}>5 min</Text>
+                                </View>
+
+                                <View style={styles.view_text}>
+                                    <Text> Location: Coffee Shop Name</Text>
+                                    <Text> Delivery Time: 10 min</Text>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={COFFEE_CUP_IMAGE}
+                                        ratingCount={5}
+                                        ratingColor='#3498db'
+                                        imageSize={50}
+                                        readonly
+                                        startingValue={0}
+                                    />
+                                </View>
                             </View>
-                            <View style={{ margin: 5 }}>
-                                <View style={{ marginBottom: 5 }}>
-                                    <Text>Location: Coffee Shop Name </Text>
+                        </Card>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                         onPress={() => navigate('CoffeePot')}
+                    >
+                        <Card>
+                            <View style={styles.view_card}>
+                                <View style={styles.view_avatar}>
+                                    <Avatar
+                                        source={require('../images/coffee_pot_symbol.png')}
+                                        large
+                                    />
+                                    <Text style={styles.view_time}>5 min</Text>
                                 </View>
-                                <View style={{ marginBottom: 5 }}>
-                                    <Text>Delivery Time: 10 min</Text>
-                                </View>
-                                <View>
-                                    <Text>Cups of Coffee: 3/5</Text>
+
+                                <View style={styles.view_text}>
+                                    <Text> Location: Coffee Shop Name</Text>
+                                    <Text> Delivery Time: 10 min</Text>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={COFFEE_CUP_IMAGE}
+                                        ratingCount={5}
+                                        ratingColor='#3498db'
+                                        imageSize={50}
+                                        readonly
+                                        startingValue={0}
+                                    />
                                 </View>
                             </View>
-                        </View>
-                    </Card>
+                        </Card>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                         onPress={() => navigate('CoffeePot')}
+                    >
+                        <Card>
+                            <View style={styles.view_card}>
+                                <View style={styles.view_avatar}>
+                                    <Avatar
+                                        source={require('../images/coffee_pot_symbol.png')}
+                                        large
+                                    />
+                                    <Text style={styles.view_time}>5 min</Text>
+                                </View>
+
+                                <View style={styles.view_text}>
+                                    <Text> Location: Coffee Shop Name</Text>
+                                    <Text> Delivery Time: 10 min</Text>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={COFFEE_CUP_IMAGE}
+                                        ratingCount={5}
+                                        ratingColor='#3498db'
+                                        imageSize={50}
+                                        readonly
+                                        startingValue={0}
+                                    />
+                                </View>
+                            </View>
+                        </Card>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                         onPress={() => navigate('CoffeePot')}
+                    >
+                        <Card>
+                            <View style={styles.view_card}>
+                                <View style={styles.view_avatar}>
+                                    <Avatar
+                                        source={require('../images/coffee_pot_symbol.png')}
+                                        large
+                                    />
+                                    <Text style={styles.view_time}>5 min</Text>
+                                </View>
+
+                                <View style={styles.view_text}>
+                                    <Text> Location: Coffee Shop Name</Text>
+                                    <Text> Delivery Time: 10 min</Text>
+                                    <Rating
+                                        type='custom'
+                                        ratingImage={COFFEE_CUP_IMAGE}
+                                        ratingCount={5}
+                                        ratingColor='#3498db'
+                                        imageSize={50}
+                                        readonly
+                                        startingValue={0}
+                                    />
+                                </View>
+                            </View>
+                        </Card>
+                    </TouchableOpacity>
 
                     <Text style={styles.end_text}>
                         No More Coffee Pots
@@ -271,7 +324,12 @@ const styles = {
         flexDirection: 'row'
     },
     view_avatar: {
-        flexDirection: 'row'
+        flexDirection: 'column',
+    },
+    view_time: {
+        fontWeight: 'bold',
+        textAlign: 'center',
+        margin: 5
     },
     view_text: {
         justifyContent: 'space-between'

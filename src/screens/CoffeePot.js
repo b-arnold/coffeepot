@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
-import { Avatar, Button } from 'react-native-elements';
+import { Avatar, Button, Rating } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
@@ -22,6 +22,8 @@ class CoffeePot extends Component {
     }
 
     render() {
+        const { navigate } = this.props.navigation;
+        const COFFEE_CUP_IMAGE = require('../images/CoffeeCupTest.png');
         return (
             <View style={styles.container}>
                 {/* This will display the time left in the coffee pot */}
@@ -41,7 +43,15 @@ class CoffeePot extends Component {
 
                 {/* WIP: Figuring out how to add a row of coffee cups */}
                 <View>
-                    <Text>Row of Coffee Cups</Text>
+                    <Rating
+                        type='custom'
+                        ratingImage={COFFEE_CUP_IMAGE}
+                        ratingCount={5}
+                        ratingColor='#3498db'
+                        ratingBackgroundColor='transparent'
+                        imageSize={70}
+                        readonly
+                    />
                 </View>
 
                 {/* This will display the location of the coffee shop */}
@@ -55,6 +65,7 @@ class CoffeePot extends Component {
                     title='Join Coffee Pot'
                     buttonStyle={styles.button_style}
                     rounded
+                    onPress = {() => navigate('PlaceOrder')}
                 />
             </View>
         );

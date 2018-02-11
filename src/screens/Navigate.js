@@ -171,16 +171,6 @@ class Navigate extends Component {
                   }
                 />
 
-                {/* Create Account Screen */}
-                <Button
-                  buttonStyle={styles.bttn_style}
-                  title='Create Account Screen'
-                  rounded
-                  onPress={() =>
-                    navigate('CreateAccountScreen')
-                  }
-                />
-
                 {/* Payment Confirmation Screen */}
                 <Button
                   buttonStyle={styles.bttn_style}
@@ -218,6 +208,46 @@ class Navigate extends Component {
                     rounded
                     onPress={() =>
                         navigate('PaymentScreen')
+                    }
+                />
+
+                {/* About Screen */}
+                <Button 
+                    buttonStyle={style=styles.bttn_style}
+                    title='About'
+                    rounded
+                    onPress={() => 
+                        navigate('About')
+                    }
+                />
+
+                {/* Delivery Legal Screen */}
+                <Button 
+                    buttonStyle={style=styles.bttn_style}
+                    title='Delivery Legal'
+                    rounded
+                    onPress={() => 
+                        navigate('DeliveryLegal')
+                    }
+                />
+
+                {/* Settings Screen */}
+                <Button 
+                    buttonStyle={style=styles.bttn_style}
+                    title='Settings'
+                    rounded
+                    onPress={() => 
+                        navigate('Settings')
+                    }
+                />
+
+                {/* Payment Screen */}
+                <Button 
+                    buttonStyle={style=styles.bttn_style}
+                    title='Standard Legal'
+                    rounded
+                    onPress={() => 
+                        navigate('Standard Legal')
                     }
                 />
 

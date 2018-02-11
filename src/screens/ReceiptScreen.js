@@ -4,30 +4,41 @@
     Brian Cajulis, Brett Arnold, Daniel Davis
 */
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image } from 'react-native';
-import { Button, Card } from 'react-native-elements';
+import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { NavigationActions } from 'react-navigation';
+import { Button, Card, Icon } from 'react-native-elements';
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 ///////////////////////////////////////////////////////////
 // Receipt Screen
 // Shows Receipt of coffee and allows user to rate transaction
 ///////////////////////////////////////////////////////////
+
+
 class ReceiptScreen extends Component {
-  static navigationOptions = {
-    title: 'Receipt',
+  static navigationOptions = ({navigation}) => ({
+    title: 'Legal',
     headerStyle: {
-      backgroundColor: PRIMARY_COLOR
+        backgroundColor: PRIMARY_COLOR,
+        paddingRight: 10,
+        paddingLeft: 10
     },
     headerTitleStyle: {
-      color: SECONDARY_COLOR
+        color: SECONDARY_COLOR
     },
-    headerTintColor: SECONDARY_COLOR
-  }
+    headerTintColor: SECONDARY_COLOR,
+    headerBackTitle: null,
+    headerLeft: null
+})
 
   /////////////////////////////////////////////////////////
   // Main render method
   /////////////////////////////////////////////////////////
   render() {
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'CoffeePotList' })]
+    })
     return (
       <ScrollView>
         <View>
@@ -66,7 +77,7 @@ class ReceiptScreen extends Component {
 
         <View style={{ marginTop: 30, alignItems: 'center' }}>
           <Button
-            title="Review"
+            title="Give Review"
             buttonStyle={styles.buttonStyle}
             rounded
           />
@@ -79,9 +90,15 @@ class ReceiptScreen extends Component {
             </View>
           </Card>
           <Button
-            title="Leave Comment Here"
+            title="Leave A Comment"
             buttonStyle={styles.buttonStyle}
             rounded
+          />
+          <Button
+            title="Return Home"
+            buttonStyle={styles.buttonStyle}
+            rounded
+            onPress={() => this.props.navigation.dispatch(resetAction)}
           />
         </View>
       </ScrollView>
