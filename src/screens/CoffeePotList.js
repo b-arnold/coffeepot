@@ -79,7 +79,8 @@ class CoffeePotList extends Component {
                         style={{
                             borderWidth: 0
                         }}
-                        flipVertical={true}
+                        flipHorizontal={true}
+                        flipVertical={false}
                         alignHeight={true}
                     >
                         {/* Front side of the card */}
@@ -147,6 +148,7 @@ class CoffeePotList extends Component {
                             borderWidth: 0,
                         }}
                         flipHorizontal={true}
+                        flipVertical={false}
                         alignHeight={true}
                     >
                         {/* Front side of the card */}
@@ -213,6 +215,7 @@ class CoffeePotList extends Component {
                             borderWidth: 0
                         }}
                         flipHorizontal={true}
+                        flipVertical={false}
                         alignHeight={true}
                     >
                         {/* Front side of the card */}
@@ -286,6 +289,7 @@ class CoffeePotList extends Component {
                             borderWidth: 0
                         }}
                         flipHorizontal={true}
+                        flipVertical={false}
                         alignHeight={true}
                     >
                         {/* Front side of the card */}
@@ -353,6 +357,7 @@ class CoffeePotList extends Component {
                             borderWidth: 0,
                         }}
                         flipHorizontal={true}
+                        flipVertical={false}
                         alignHeight={true}
                     >
                         {/* Front side of the card */}
@@ -419,6 +424,7 @@ class CoffeePotList extends Component {
                             borderWidth: 0
                         }}
                         flipHorizontal={true}
+                        flipVertical={false}
                         alignHeight={true}
                     >
                         {/* Front side of the card */}
