@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Button, Card, Icon, Avatar, Rating } from 'react-native-elements';
+
+//NPM Packages
 import FlipCard from 'react-native-flip-card';
+import TimerCountdown from 'react-native-timer-countdown';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
@@ -76,7 +79,7 @@ class CoffeePotList extends Component {
                         style={{
                             borderWidth: 0
                         }}
-                        flipHorizontal={true}
+                        flipVertical={true}
                         alignHeight={true}
                     >
                         {/* Front side of the card */}
@@ -92,7 +95,11 @@ class CoffeePotList extends Component {
                                             source={require('../images/coffee_pot_symbol.png')}
                                             large
                                         />
-                                        <Text style={styles.view_time}>5:34 Left</Text>
+                                        <TimerCountdown
+                                            initialSecondsRemaining={300000}
+                                            allowFontScaling={true}
+                                            style={styles.view_time}
+                                        />
                                         <Button 
                                             title='Join'
                                             buttonStyle={styles.button_style}
@@ -155,7 +162,11 @@ class CoffeePotList extends Component {
                                             source={require('../images/coffee_pot_symbol.png')}
                                             large
                                         />
-                                        <Text style={styles.view_time}>5:34 Left</Text>
+                                        <TimerCountdown
+                                            initialSecondsRemaining={300000}
+                                            allowFontScaling={true}
+                                            style={styles.view_time}
+                                        />
                                         <Button 
                                             title='Join'
                                             buttonStyle={styles.button_style}
@@ -217,7 +228,11 @@ class CoffeePotList extends Component {
                                             source={require('../images/coffee_pot_symbol.png')}
                                             large
                                         />
-                                        <Text style={styles.view_time}>5:34 Left</Text>
+                                        <TimerCountdown
+                                            initialSecondsRemaining={300000}
+                                            allowFontScaling={true}
+                                            style={styles.view_time}
+                                        />
                                         <Button 
                                             title='Join'
                                             buttonStyle={styles.button_style}
@@ -286,7 +301,11 @@ class CoffeePotList extends Component {
                                             source={require('../images/coffee_pot_symbol.png')}
                                             large
                                         />
-                                        <Text style={styles.view_time}>5:34 Left</Text>
+                                        <TimerCountdown
+                                            initialSecondsRemaining={300000}
+                                            allowFontScaling={true}
+                                            style={styles.view_time}
+                                        />
                                         <Button 
                                             title='Join'
                                             buttonStyle={styles.button_style}
@@ -349,7 +368,11 @@ class CoffeePotList extends Component {
                                             source={require('../images/coffee_pot_symbol.png')}
                                             large
                                         />
-                                        <Text style={styles.view_time}>5:34 Left</Text>
+                                        <TimerCountdown
+                                            initialSecondsRemaining={300000}
+                                            allowFontScaling={true}
+                                            style={styles.view_time}
+                                        />
                                         <Button 
                                             title='Join'
                                             buttonStyle={styles.button_style}
@@ -411,7 +434,11 @@ class CoffeePotList extends Component {
                                             source={require('../images/coffee_pot_symbol.png')}
                                             large
                                         />
-                                        <Text style={styles.view_time}>5:34 Left</Text>
+                                        <TimerCountdown
+                                            initialSecondsRemaining={300000}
+                                            allowFontScaling={true}
+                                            style={styles.view_time}
+                                        />
                                         <Button 
                                             title='Join'
                                             buttonStyle={styles.button_style}
