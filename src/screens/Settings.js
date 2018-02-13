@@ -1,19 +1,32 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, TouchableOpacity } from 'react-native';
+import { Button, Icon } from 'react-native-elements';
+
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 export default class Settings extends Component {
-    static navigationOptions = {
+    static navigationOptions = ({navigation}) => ({
         title: 'Settings',
         headerStyle: {
-            backgroundColor: '#16a085'
-            
+            backgroundColor: PRIMARY_COLOR,
+            paddingRight: 10,
+            paddingLeft: 10
         },
         headerTitleStyle: {
-            color: '#ecf0f1'
+            color: SECONDARY_COLOR
         },
-        headerTintColor: 'white'
-    }
+        headerTintColor: SECONDARY_COLOR,
+        headerBackTitle: null,
+        headerLeft: (
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+                <Icon 
+                    type='material-community'
+                    name='menu'
+                    color={ SECONDARY_COLOR }
+                />
+            </TouchableOpacity>
+        )
+    })
 
     render() {
         const { navigate } = this.props.navigation;

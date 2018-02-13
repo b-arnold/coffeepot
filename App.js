@@ -13,14 +13,13 @@ import Navigate from './src/screens/Navigate';
 
 //Side Bar Menu Screens
 import Profile from './src/screens/Profile';
-
-// GPS Screen
-import GPSMap from './src/screens/GPSMap';
 import About from './src/screens/About';
 import Settings from './src/screens/Settings';
 import StandardLegal from './src/screens/StandardLegal';
 import DeliveryLegal from './src/screens/DeliveryLegal';
 
+// GPS Screen
+import GPSMap from './src/screens/GPSMap';
 
 // CoffeePot Screens
 import CoffeePotList from './src/screens/CoffeePotList';
@@ -94,10 +93,21 @@ export default class App extends React.Component {
       PaymentScreen: { screen: PaymentScreen },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
       ReceiptScreen: { screen: ReceiptScreen },
+      Legal: { screen: StandardLegal},
     });
 
+    /////////////////////////////////////////////////////////////////////////
+    //Side bar menu
     const ProfileNav = StackNavigator({
-      Profile: { screen: Profile }
+      Profile: { screen: Profile },
+    })
+
+    const SettingNav = StackNavigator({
+      Settings: { screen: Settings }
+    })
+
+    const StandardLegalNav = StackNavigator({
+      StandardLegal: { screen: StandardLegal }
     })
 
     /////////////////////////////////////////////////////////////////////////
@@ -107,7 +117,7 @@ export default class App extends React.Component {
     });
 
     /////////////////////////////////////////////////////////////////////////
-    //// Authentication Screens
+    //// Delivery Screens
     const Delivery = StackNavigator({
       ChooseDelivery: { screen: ChooseDelivery },
       PickLocationList: { screen: PickLocationList },
@@ -147,10 +157,13 @@ export default class App extends React.Component {
       </ScrollView>
     );
 
+    // Drawer Navigation
     const Drawer = DrawerNavigator({
       Delivery: { screen: Delivery },
       Home: { screen: Home },
       Profile: { screen: ProfileNav },
+      Settings: { screen: SettingNav},
+      Legal: { screen: StandardLegalNav},
       LogOut: { screen: LogOut }
     },{
       contentComponent: customDrawerComponent,
