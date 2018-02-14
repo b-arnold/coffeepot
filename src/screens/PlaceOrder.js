@@ -16,7 +16,8 @@ export default class PlaceOrder extends Component {
         headerTitleStyle: {
             color: '#ecf0f1'
         },
-        headerTintColor: 'white'
+        headerTintColor: 'white',
+        tabBarVisible: false
     }
 
     render() {
