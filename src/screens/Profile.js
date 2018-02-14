@@ -29,7 +29,17 @@ class Profile extends Component {
                     color={ SECONDARY_COLOR }
                 />
             </TouchableOpacity>
-        )
+        ),
+        tabBarIcon: () => {
+            return (
+                <Icon
+                    name="user"
+                    type="font-awesome" 
+                    size={30} 
+                    color="grey"
+                /> 
+            );
+        },
     })
 
     render() {
