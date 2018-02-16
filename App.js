@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Font } from 'expo';
 import { StyleSheet, Text, View, Platform, StatusBar, ScrollView, Image } from 'react-native';
 import { Button, Icon, Divider, Avatar } from 'react-native-elements';
 import firebase from 'firebase';
@@ -25,6 +25,7 @@ import DeliveryLegal from './src/screens/DeliveryLegal';
 // CoffeePot Screens
 import CoffeePotList from './src/screens/CoffeePotList';
 import CoffeePot from './src/screens/CoffeePot';
+import HomeScreen from './src/screens/HomeScreen';
 
 // Delivery Screens
 import ChooseDelivery from './src/screens/ChooseDelivery';
@@ -39,7 +40,6 @@ import InputCoffeeOrderScreen from './src/screens/InputCoffeeOrderScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import LogOut from './src/screens/LogOut';
 
-
 // Payment Screens
 import PaymentScreen from './src/screens/PaymentScreen';
 import ReceiptSnapshot from './src/screens/ReceiptSnapshot';
@@ -51,10 +51,19 @@ import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from './src/constants/st
 import { GOOGLE_FIREBASE_CONFIG } from './src/constants/api_keys';
 
 export default class App extends React.Component {
+
   ////////////////////////////////////////////////////////////////////////
   // Upon loading app, initialize firebase
   componentWillMount() {
     firebase.initializeApp(GOOGLE_FIREBASE_CONFIG);
+  }
+
+  ////////////////////////////////////////////////////////////////////////
+  // Upon loading app, loads Brush Script MT for header
+  async componentDidMount() {
+    Font.loadAsync({
+      'brush-script-mt': require('./assets/fonts/BRUSHSCI.ttf')
+    });
   }
 
   render() {
@@ -94,10 +103,27 @@ export default class App extends React.Component {
       PaymentScreen: { screen: PaymentScreen },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
       ReceiptScreen: { screen: ReceiptScreen },
+<<<<<<< HEAD
+=======
+      Legal: { screen: StandardLegal },
+>>>>>>> b414f75df9e7e991ebdc9c862af9486692b66027
     });
 
     const ProfileNav = StackNavigator({
+<<<<<<< HEAD
       Profile: { screen: Profile }
+=======
+      Profile: { screen: Profile },
+      PlaceOrder: { screen: PlaceOrder }
+    })
+
+    const SettingNav = StackNavigator({
+      Settings: { screen: Settings }
+    })
+
+    const StandardLegalNav = StackNavigator({
+      StandardLegal: { screen: StandardLegal }
+>>>>>>> b414f75df9e7e991ebdc9c862af9486692b66027
     })
 
     /////////////////////////////////////////////////////////////////////////
@@ -115,6 +141,38 @@ export default class App extends React.Component {
       ExistingOrdersList: { screen: ExistingOrdersList },
       ExistingOrder: { screen: ExistingOrder },
       GPSMap: { screen: GPSMap }
+    });
+
+    /////////////////////////////////////////////////////////////////////////
+    //// Home Screens
+
+    const HomeScreenNav = StackNavigator({
+      HomeScreen: { screen: HomeScreen },
+      PlaceOrder: { screen: PlaceOrder }
+    });
+
+    const GPSNav = StackNavigator({
+      GPSMap: { screen: GPSMap },
+      PlaceOrder: { screen: PlaceOrder }
+    });
+
+    const CoffeePotListNav = StackNavigator({
+      CoffeePotList: { screen: CoffeePotList },
+      PlaceOrder: { screen: PlaceOrder }
+    });
+
+    const HomeNav = TabNavigator({
+      HomeScreen: { screen: HomeScreenNav },
+      CoffeePotList: { screen: CoffeePotListNav },
+      GPS: { screen: GPSNav },
+      Profile: { screen: ProfileNav }
+    }, {
+      tabBarOptions: {
+        showLabel: false,
+        style: {
+          backgroundColor: 'black'
+        }
+      }
     });
 
     //////////////////////////////////////////////////////////////////////////////
@@ -150,11 +208,19 @@ export default class App extends React.Component {
     const Drawer = DrawerNavigator(
     {
       Delivery: { screen: Delivery },
-      Home: { screen: Home },
+      Home: { screen: HomeNav },
       Profile: { screen: ProfileNav },
+<<<<<<< HEAD
       LogOut: { screen: LogOut }
     },
     {
+=======
+      Settings: { screen: SettingNav },
+      Legal: { screen: StandardLegalNav },
+      LogOut: { screen: LogOut },
+      //HomeScreen: { screen: HomeNav }
+    },{
+>>>>>>> b414f75df9e7e991ebdc9c862af9486692b66027
       contentComponent: customDrawerComponent,
       drawerBackgroundColor: '#607D8B',
       contentOptions: {

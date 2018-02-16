@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 import MapView from 'react-native-maps';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
@@ -15,7 +15,17 @@ class GPSMap extends Component {
         headerTitleStyle: {
             color: '#ecf0f1'
         },
-        headerTintColor: 'white'
+        headerTintColor: 'white',
+        tabBarIcon: () => {
+            return (
+                <Icon
+                    name="location-on"
+                    type="material" 
+                    size={30} 
+                    color="grey"
+                /> 
+            );
+        },
     }
        
     render() {

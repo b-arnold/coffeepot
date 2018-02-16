@@ -3,18 +3,35 @@
   "private": true,
   "dependencies": {
     "expo": "^24.0.0",
-    "firebase": "^4.9.0",
-    "react": "16.0.0",
+    "firebase": "^4.10.0",
+    "object-assign": "^4.1.1",
+    "react": "^16.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
     "react-native-elements": "^0.19.0",
     "react-native-maps": "^0.19.0",
     "react-native-vector-icons": "^4.5.0",
-    "react-navigation": "^1.0.0-beta.27",
+    "react-navigation": "^1.0.3",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "eslint-config-rallycoding": "^3.2.0"
-  }
+  },
+  "name": "install",
+  "description": "Software engineering project for undergradute Senior Capstone (or course CS480) of 2018 for Azusa Pacific University.",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b-arnold/coffeepot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/b-arnold/coffeepot/issues"
+  },
+  "homepage": "https://github.com/b-arnold/coffeepot#readme"
 }

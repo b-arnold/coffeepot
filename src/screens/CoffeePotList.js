@@ -29,6 +29,16 @@ class CoffeePotList extends Component {
                 />
             </TouchableOpacity>
         ),
+        tabBarIcon: () => {
+            return (
+                <Icon
+                    name="grid"
+                    type="entypo" 
+                    size={30} 
+                    color="grey"
+                /> 
+            );
+        },
     })
     render() {
         const { navigate } = this.props.navigation;
