@@ -103,16 +103,10 @@ export default class App extends React.Component {
       PaymentScreen: { screen: PaymentScreen },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
       ReceiptScreen: { screen: ReceiptScreen },
-<<<<<<< HEAD
-=======
       Legal: { screen: StandardLegal },
->>>>>>> b414f75df9e7e991ebdc9c862af9486692b66027
     });
 
     const ProfileNav = StackNavigator({
-<<<<<<< HEAD
-      Profile: { screen: Profile }
-=======
       Profile: { screen: Profile },
       PlaceOrder: { screen: PlaceOrder }
     })
@@ -123,7 +117,6 @@ export default class App extends React.Component {
 
     const StandardLegalNav = StackNavigator({
       StandardLegal: { screen: StandardLegal }
->>>>>>> b414f75df9e7e991ebdc9c862af9486692b66027
     })
 
     /////////////////////////////////////////////////////////////////////////
@@ -210,17 +203,11 @@ export default class App extends React.Component {
       Delivery: { screen: Delivery },
       Home: { screen: HomeNav },
       Profile: { screen: ProfileNav },
-<<<<<<< HEAD
-      LogOut: { screen: LogOut }
-    },
-    {
-=======
       Settings: { screen: SettingNav },
       Legal: { screen: StandardLegalNav },
       LogOut: { screen: LogOut },
       //HomeScreen: { screen: HomeNav }
     },{
->>>>>>> b414f75df9e7e991ebdc9c862af9486692b66027
       contentComponent: customDrawerComponent,
       drawerBackgroundColor: '#607D8B',
       contentOptions: {
