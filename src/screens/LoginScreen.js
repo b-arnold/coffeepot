@@ -101,8 +101,8 @@ class LoginScreen extends Component {
   ///////////////////////////////////////////////////////////
   // Login user via username/password
   onStandardSignupButtonPress = () => {
-    const { email, password, passwordRetype } = this.props;
-    this.props.signupUser(email, password, passwordRetype);
+    const { email, password, passwordRetype, firstName, lastName } = this.props;
+    this.props.signupUser(email, password, passwordRetype, firstName, lastName);
   };
 
   /////////////////////////////////////////////////////////
@@ -208,7 +208,7 @@ class LoginScreen extends Component {
             inputStyle={{ color: 'black' }}
             containerStyle={{ width: 150 }}
             value={this.props.lastName}
-            onChangeText={this.props.onLastNameChange}
+            onChangeText={this.onLastNameChange}
           />
         </View>
       );
@@ -226,7 +226,7 @@ class LoginScreen extends Component {
             secureTextEntry
             value={this.props.passwordRetype}
             onChangeText={this.onPasswordRetypeChange}
-            style={{ color: 'black' }}
+            inputStyle={{ color: 'black' }}
           />
         </View>
       );
@@ -269,6 +269,7 @@ class LoginScreen extends Component {
           <FormInput
             placeholder="youremail@email.com"
             containerStyle={{ marginTop: 10, marginBottom: 10 }}
+            inputStyle={{ color: 'black' }}
             value={this.props.email}
             onChangeText={this.onEmailChange}
           />
@@ -277,6 +278,7 @@ class LoginScreen extends Component {
             placeholder="password"
             secureTextEntry
             containerStyle={{ marginTop: 10, marginBottom: 10 }}
+            inputStyle={{ color: 'black' }}
             value={this.props.password}
             onChangeText={this.onPasswordChange}
           />

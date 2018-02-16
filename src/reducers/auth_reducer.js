@@ -14,7 +14,8 @@
     RESET_APP_STATE,
     FIRST_NAME_CHANGE,
     LAST_NAME_CHANGE,
-    AUTH_SIGNOUT_USER
+    AUTH_SIGNOUT_USER,
+    ADD_NAME_SUCCESS
   } from '../actions/types';
 
   const INITIAL_STATE = {
@@ -56,6 +57,8 @@
         };
       case AUTH_USER_SUCCESS:
         return { ...state, ...INITIAL_STATE, user: action.payload };
+      case ADD_NAME_SUCCESS:
+        return { ...state, ...INITIAL_STATE };
       case RESET_APP_STATE:
         return INITIAL_STATE;
       default:
