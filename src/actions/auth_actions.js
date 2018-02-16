@@ -15,6 +15,7 @@ import {
   FIRST_NAME_CHANGE,
   LAST_NAME_CHANGE,
   ADD_NAME_SUCCESS
+  LAST_NAME_CHANGE
 } from './types.js';
 
 ////////////////////////////////////////////////////////////////
