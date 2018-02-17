@@ -12,4 +12,4 @@ export const GOOGLE_FIREBASE_CONFIG = {
 };
 
 // Google Maps API
-export const GOOGLE_MAPS_API = 'AIzaSyBfC9otJBQbIRVVTe5rn2m0ZKIvdClUQFE';
+export const GOOGLE_MAPS_API = 'AIzaSyC0DiVi_LUtheBGeLlx66aWHVTbUbVrFlI';
