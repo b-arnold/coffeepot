@@ -1,5 +1,5 @@
 // Google Places API
-export const GOOGLE_PLACES_API_KEY = "AIzaSyDjrbvSjgsP0_hO01OydtlvoQP17_8fd4A";
+export const GOOGLE_PLACES_API_KEY = "AIzaSyBRyAblzBtcpv9kholBOBSDa7d18MOVoUo";
 
 //Firebase Config
 export const GOOGLE_FIREBASE_CONFIG = {
@@ -12,4 +12,4 @@ export const GOOGLE_FIREBASE_CONFIG = {
 };
 
 // Google Maps API
-export const GOOGLE_MAPS_API = 'AIzaSyC0DiVi_LUtheBGeLlx66aWHVTbUbVrFlI';
+export const GOOGLE_MAPS_API = 'AIzaSyBfC9otJBQbIRVVTe5rn2m0ZKIvdClUQFE';

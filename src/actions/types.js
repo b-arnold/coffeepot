@@ -10,3 +10,6 @@ export const FIRST_NAME_CHANGE = 'first_name_change';
 export const LAST_NAME_CHANGE = 'last_name_change';
 export const LOGIN_PASSWORD_RETYPE = 'password_retype_change';
 export const AUTH_SIGNOUT_USER = 'auth_user_signout';
+
+// PLACES TYPES
+export const FETCH_PLACES = "fetch_places";
