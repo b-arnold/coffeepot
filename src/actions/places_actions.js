@@ -12,21 +12,24 @@ export const fetchPlaces = ( location ) => async dispatch => {
 
   try {
     // Get the latitude/longitude from city/address using Google Geocode API Service
-    const geocodeUrl = urlBuilder.buildGeocodeUrl(location);
-    const { data } = await axios.get(geocodeUrl);
-    const latLongCoords = data.results[0].geometry.location;
+    // const geocodeUrl = urlBuilder.buildGeocodeUrl(location);
+    // const { data } = await axios.get(geocodeUrl);
+    // const latLongCoords = data.results[0].geometry.location;
     // console.log(geocodeUrl);
     //console.log(latLongCoords);
 
     // Get the places using Google Places API Service
-    const placesUrl = urlBuilder.buildPlacesUrl(latLongCoords);
+    //console.log(latitude);
+    //console.log(longitude);
+    console.log(location);
+    const placesUrl = urlBuilder.buildPlacesUrl(location);
     const placesResponse = await axios.get(placesUrl);
     const placesData = placesResponse.data;
 
     // Add the geocoded lat/long to the payload (for use with map)
     const searchRegion = {
-      latitude: latLongCoords.lat,
-      longitude: latLongCoords.lng,
+      latitude: location.latitude,
+      longitude: location.longitude,
       longitudeDelta: 0.04, // Zoom level
       latitudeDelta: 0.09 // Zoom level
     };

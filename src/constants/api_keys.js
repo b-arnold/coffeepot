@@ -1,5 +1,5 @@
 // Google Places API
-export const GOOGLE_PLACES_API_KEY = "AIzaSyBRyAblzBtcpv9kholBOBSDa7d18MOVoUo";
+export const GOOGLE_PLACES_API_KEY = "AIzaSyDIyZnKM6IU4jrs0RA2BEYj3chb96ptZe4";
 
 //Firebase Config
 export const GOOGLE_FIREBASE_CONFIG = {
