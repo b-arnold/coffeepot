@@ -4,7 +4,15 @@
     Brian Cajulis, Brett Arnold, Daniel Davis
 */
 import React, { Component } from 'react';
-import { View, Text, Image, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  ImageBackground,
+  TouchableOpacity
+} from 'react-native';
 import {
   Button,
   FormInput,
@@ -26,13 +34,7 @@ class LoginScreen extends Component {
 
   static navigationOptions = {
     title: 'Login',
-    headerStyle: {
-      backgroundColor: PRIMARY_COLOR
-    },
-    headerTitleStyle: {
-      color: SECONDARY_COLOR
-    },
-    headerTintColor: SECONDARY_COLOR
+    header: null
   }
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -132,15 +134,17 @@ class LoginScreen extends Component {
           <Button
             title="Sign Up"
             onPress={this.onStandardSignupButtonPress}
+            rounded
             buttonStyle={styles.loginButtonStyle}
+            buttonStyle={{ backgroundColor: '#E55300', width: 270, borderRadius: 7 }}
           />
           <View style={{ flexDirection: 'column', marginTop: 10 }}>
-            <Text style={{ textAlign: 'center' }}>Already have an account?&nbsp;</Text>
-            <TouchableWithoutFeedback onPress={this.onSignupLoginToggle}>
+            <Text style={{ textAlign: 'center', color: 'white', backgroundColor: 'transparent' }}>Already have an account?&nbsp;</Text>
+            <TouchableOpacity onPress={this.onSignupLoginToggle}>
               <View style={{ marginTop: 10, alignItems: 'center' }}>
-                <Text style={{ color: 'blue', textDecorationLine: 'underline' }}>Log In</Text>
+                <Text style={{ color: 'white', backgroundColor: 'transparent' }}>Log In</Text>
               </View>
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
             </View>
         </View>
       );
@@ -152,13 +156,13 @@ class LoginScreen extends Component {
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: 40
+            marginTop: 25
         }}
         >
           <Button
             title="Log In"
-            rounded
             buttonStyle={styles.loginButtonStyle}
+            buttonStyle={{ backgroundColor: '#E55300', width: 330, borderRadius: 7, height: 47 }}
             onPress={this.onStandardLoginButtonPress}
           />
       </View>
@@ -168,23 +172,21 @@ class LoginScreen extends Component {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          marginTop: 25
+          marginTop: 30
       }}
       >
-        <Button
-          title="Register"
-          fontSize={14}
-          rounded
-          buttonStyle={styles.smallButtonStyle}
-          onPress={this.onSignupLoginToggle}
-        />
+      <TouchableOpacity onPress={this.onSignupLoginToggle}>
+        <Text style={{ backgroundColor: 'transparent', color: 'white', marginRight: 40, fontSize: 18 }}>
+          Sign Up
+        </Text>
+      </TouchableOpacity>
 
-        <Button
-          title="Forgot Password?"
-          fontSize={10.5}
-          rounded
-          buttonStyle={styles.smallButtonStyle}
-        />
+      <TouchableOpacity>
+        <Text style={{ backgroundColor: 'transparent', color: 'white', marginLeft: 30, fontSize: 18 }}>
+          Forgot Password
+        </Text>
+      </TouchableOpacity>
+
       </View>
     </View>
   );
@@ -198,15 +200,15 @@ class LoginScreen extends Component {
         <View style={styles.nameStyle}>
           <FormInput
             placeholder="First Name"
-            inputStyle={{ color: 'black' }}
-            containerStyle={{ width: 150 }}
+            inputStyle={{ color: 'white', left: 10, marginTop: 7 }}
+            containerStyle={{ backgroundColor: 'white', height: 50, borderRadius: 7, width: 150 }}
             value={this.props.firstName}
             onChangeText={this.onFirstNameChange}
           />
           <FormInput
             placeholder="Last Name"
-            inputStyle={{ color: 'black' }}
-            containerStyle={{ width: 150 }}
+            inputStyle={{ color: 'white', left: 10, marginTop: 7 }}
+            containerStyle={{ backgroundColor: 'white', height: 50, borderRadius: 7, width: 150 }}
             value={this.props.lastName}
             onChangeText={this.onLastNameChange}
           />
@@ -222,11 +224,12 @@ class LoginScreen extends Component {
       return (
         <View style={{ marginBottom: 10 }}>
           <FormInput
-            placeholder="retype password"
+            placeholder="Retype Password"
             secureTextEntry
             value={this.props.passwordRetype}
             onChangeText={this.onPasswordRetypeChange}
-            inputStyle={{ color: 'black' }}
+            inputStyle={{ color: 'white', left: 10, marginTop: 7 }}
+            containerStyle={{ backgroundColor: 'white', height: 50, borderRadius: 7 }}
           />
         </View>
       );
@@ -258,7 +261,7 @@ class LoginScreen extends Component {
         <View style={styles.containerStyle}>
           <Image
             style={styles.imageStyle}
-            source={require('../images/LoginLogo.png')}
+            source={require('../images/logo_with_name.png')}
           />
         </View>
 
@@ -267,18 +270,18 @@ class LoginScreen extends Component {
         <View style={{ marginBottom: 10, marginTop: 10 }}>
 
           <FormInput
-            placeholder="youremail@email.com"
-            containerStyle={{ marginTop: 10, marginBottom: 10 }}
-            inputStyle={{ color: 'black' }}
+            placeholder="User Name"
+            containerStyle={{ backgroundColor: 'white', height: 50, borderTopRightRadius: 7, borderTopLeftRadius: 7 }}
+            inputStyle={{ color: 'black', left: 10, marginTop: 7 }}
             value={this.props.email}
             onChangeText={this.onEmailChange}
           />
 
           <FormInput
-            placeholder="password"
+            placeholder="Password"
             secureTextEntry
-            containerStyle={{ marginTop: 10, marginBottom: 10 }}
-            inputStyle={{ color: 'black' }}
+            containerStyle={{ backgroundColor: 'white', height: 50, borderBottomRightRadius: 7, borderBottomLeftRadius: 7 }}
+            inputStyle={{ color: 'black', left: 10, marginTop: 7 }}
             value={this.props.password}
             onChangeText={this.onPasswordChange}
           />
@@ -286,7 +289,7 @@ class LoginScreen extends Component {
 
         {this.renderPasswordRetypeButton()}
 
-        <FormValidationMessage containerStyle={{ marginBottom: 10 }}>
+        <FormValidationMessage containerStyle={{ marginBottom: 10, backgroundColor: 'transparent' }}>
           {this.props.error}
         </FormValidationMessage>
 
@@ -299,8 +302,15 @@ class LoginScreen extends Component {
   // Main render method
   /////////////////////////////////////////////////////////
   render() {
-    return <View style={this.getScreenStyle()}>{this.renderContent()}</View>;
-  }
+    return (
+
+      <ImageBackground
+        source={require('../images/background.jpg')} style={{ width: '100%', height: '100%' }}
+      >
+        <View style={this.getScreenStyle()}>{this.renderContent()}</View>
+      </ImageBackground>
+  );
+}
 }
 
 ///////////////////////////////////////////////////////////
