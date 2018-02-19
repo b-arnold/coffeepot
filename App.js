@@ -241,8 +241,8 @@ export default class App extends React.Component {
           <StatusBar
             barStyle='light-content'
           />
-          {/* <ButtonNav /> */ }
-          <MainNav />
+          <ButtonNav />
+          {/*<MainNav />*/}
         </View>
       </Provider>
     );
