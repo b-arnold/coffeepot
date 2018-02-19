@@ -11,3 +11,6 @@ export const LAST_NAME_CHANGE = 'last_name_change';
 export const LOGIN_PASSWORD_RETYPE = 'password_retype_change';
 export const AUTH_SIGNOUT_USER = 'auth_user_signout';
 export const ADD_NAME_SUCCESS = 'add_name_success';
+
+// PLACES TYPES
+export const FETCH_PLACES = "fetch_places";
