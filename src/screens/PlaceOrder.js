@@ -10,13 +10,13 @@ export default class PlaceOrder extends Component {
     static navigationOptions = {
         title: 'Place Order',
         headerStyle: {
-            backgroundColor: '#16a085'
+            backgroundColor: PRIMARY_COLOR
             
         },
         headerTitleStyle: {
-            color: '#ecf0f1'
+            color: SECONDARY_COLOR
         },
-        headerTintColor: 'white',
+        headerTintColor: SECONDARY_COLOR,
         tabBarVisible: false
     }
 

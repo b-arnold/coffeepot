@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View, TouchableOpacity } from 'react-native';
 import { View, Text, Geolocation, ActivityIndicator } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -13,13 +14,32 @@ class GPSMap extends Component {
     static navigationOptions = {
         title: 'GPS Map',
         headerStyle: {
-            backgroundColor: PRIMARY_COLOR
-            
+            backgroundColor: PRIMARY_COLOR,
+            paddingRight: 10,
+            paddingLeft: 10
         },
         headerTitleStyle: {
             color: SECONDARY_COLOR
         },
         headerTintColor: SECONDARY_COLOR,
+        headerLeft: (
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+                <Icon 
+                    type='material-community'
+                    name='menu'
+                    color='grey'
+                />
+            </TouchableOpacity>
+        ),
+        headerRight: (
+            <TouchableOpacity onPress={() => navigation.navigate('PlaceOrder')}>
+                <Icon 
+                    type='font-awesome'
+                    name='coffee'
+                    color='grey'
+                />
+            </TouchableOpacity>
+        ),
         tabBarIcon: () => {
             return (
                 <Icon

@@ -6,7 +6,9 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Button, Card } from 'react-native-elements';
+import { connect } from 'react-redux';
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+import * as actions from '../actions';
 
 ///////////////////////////////////////////////////////////
 // Payment Confirmation Screen
@@ -21,8 +23,16 @@ class PaymentConfirmationScreen extends Component {
     headerTitleStyle: {
       color: SECONDARY_COLOR
     },
-    headerTintColor: SECONDARY_COLOR
+    headerTintColor: SECONDARY_COLOR,
+    tabBarVisible: false
   }
+
+  onConfirmPress = () => {
+    this.props.startTime(true);
+    console.log('Coffee Pot initialized');
+
+    this.props.navigation.navigate('ReceiptScreen');
+  } 
 
   /////////////////////////////////////////////////////////
   // Main render method
@@ -73,7 +83,7 @@ class PaymentConfirmationScreen extends Component {
             title="Confirm"
             rounded
             buttonStyle={styles.buttonStyle}
-            onPress = {() => navigate('ReceiptScreen')}
+            onPress = {this.onConfirmPress}
           />
         </View>
       </View>
@@ -108,4 +118,10 @@ const styles = {
   }
 };
 
-export default PaymentConfirmationScreen;
+function mapStateToProps({ coffee }) {
+  return {
+      time: coffee.time
+  };
+}
+
+export default connect(mapStateToProps, actions)(PaymentConfirmationScreen);
