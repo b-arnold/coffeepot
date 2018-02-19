@@ -65,7 +65,7 @@ class GPSMap extends Component {
                         }}
                         title={name}
                         description={vicinity}
-                        pinColor={PRIMARY_COLOR}
+                        pinColor='red'
                     />
                 );
         })}
