@@ -104,8 +104,6 @@ export default class App extends React.Component {
     //   Legal: { screen: StandardLegal },
     // });
 
-    /////////////////////////////////////////////////////////////////////////
-    //Side bar menu
     const ProfileNav = StackNavigator({
       Profile: { screen: Profile },
       PlaceOrder: { screen: PlaceOrder }
@@ -126,7 +124,7 @@ export default class App extends React.Component {
     });
 
     /////////////////////////////////////////////////////////////////////////
-    //// Delivery Screens
+    //// Authentication Screens
     const Delivery = StackNavigator({
       ChooseDelivery: { screen: ChooseDelivery },
       PickLocationList: { screen: PickLocationList },
@@ -211,8 +209,8 @@ export default class App extends React.Component {
       </ScrollView>
     );
 
-    // Drawer Navigation
-    const Drawer = DrawerNavigator({
+    const Drawer = DrawerNavigator(
+    {
       Delivery: { screen: Delivery },
       Home: { screen: HomeNav },
       Profile: { screen: ProfileNav },
@@ -232,19 +230,21 @@ export default class App extends React.Component {
         },
 
       }
-    })
+    });
 
-    const MainNav = TabNavigator({
+    const MainNav = TabNavigator(
+    {
       Login: { screen: Auth },
       Main: { screen: Drawer },
-    },{
+    },
+    {
       navigationOptions: {
         tabBarVisible: false
-      },
-      tabBarPosition: "bottom",
+    },
+      tabBarPosition: 'bottom',
       swipeEnabled: false,
       lazy: true, // Each screen will not mount/load until user clicks on them
-    })
+    });
 
     return (
       <Provider store={store}>
@@ -252,11 +252,10 @@ export default class App extends React.Component {
           <StatusBar
             barStyle='light-content'
           />
-          {/* <ButtonNav /> */ }
+          {/* <ButtonNav /> */}
           <MainNav />
         </View>
       </Provider>
-
     );
   }
 }

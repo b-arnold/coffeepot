@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, ScrollView, Text } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 
-import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
 
 export default class Settings extends Component {
-    static navigationOptions = ({navigation}) => ({
+    static navigationOptions = ({ navigation }) => ({
         title: 'Settings',
         headerStyle: {
             backgroundColor: PRIMARY_COLOR,
-            paddingRight: 10,
-            paddingLeft: 10
+            paddingRight: 0,
+            paddingLeft: 0
         },
         headerTitleStyle: {
             color: SECONDARY_COLOR
@@ -22,7 +22,7 @@ export default class Settings extends Component {
                 <Icon 
                     type='material-community'
                     name='menu'
-                    color={ SECONDARY_COLOR }
+                    color={SECONDARY_COLOR}
                 />
             </TouchableOpacity>
         )
@@ -31,79 +31,204 @@ export default class Settings extends Component {
     render() {
         const { navigate } = this.props.navigation;
         return (
-            <View
-                style={{
-                    flex: 1,
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    backgroundColor: '#ecf0f1'
-                }}
-            >
-                {/* Setting 1 */}
-                <Button 
-                    buttonStyle={{
-                        margin: 10,
-                        width: 200,
-                        backgroundColor: '#1abc9c'
+            <ScrollView>
+                <View
+                    style={{
+                        flex: 1,
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        backgroundColor: '#ecf0f2'
                     }}
-                    title='Setting 1'
-                    onPress={() => 
-                        navigate('Settings')
-                    }
-                />
+                >    
+                    <Text style={{fontWeight: 'bold'}}>
+                        Preferences
+                    </Text>
+                    {/* Edit Profile */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 1,
+                            width: 330,
+                            backgroundColor: '#B3B3B3'
+                        }}
+                        title='Edit Profile'
+                        onPress={() => 
+                            navigate('Settings')
+                        }
+                    />
 
-                {/* Setting 2 */}
-                <Button 
-                    buttonStyle={{
-                        margin: 10,
-                        width: 200,
-                        backgroundColor: '#1abc9c'
-                    }}
-                    title='Setting 2'
-                    onPress={() => 
-                        navigate('Settings')
-                    }
-                />
+                    {/* Cards */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 1,
+                            width: 330,
+                            backgroundColor: '#B3B3B3'
+                        }}
+                        title='Cards'
+                        onPress={() => 
+                            navigate('Settings')
+                        }
+                    />
 
-                {/* Setting 3 */}
-                <Button 
-                    buttonStyle={{
-                        margin: 10,
-                        width: 200,
-                        backgroundColor: '#1abc9c'
-                    }}
-                    title='Setting 3'
-                    onPress={() => 
-                        navigate('Settings')
-                    }
-                />
+                    {/* Privacy */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 1,
+                            width: 330,
+                            backgroundColor: '#B3B3B3'
+                        }}
+                        title='Privacy'
+                        onPress={() => 
+                            navigate('Settings')
+                        }
+                    />
 
-                {/* Setting 4 */}
-                <Button 
-                    buttonStyle={{
-                        margin: 10,
-                        width: 200,
-                        backgroundColor: '#1abc9c'
-                    }}
-                    title='Setting 4'
-                    onPress={() => 
-                        navigate('Settings')
-                    }
-                />
+                    {/* Blocke Users */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 1,
+                            width: 330,
+                            backgroundColor: '#B3B3B3'
+                        }}
+                        title='Blocke Users'
+                        onPress={() => 
+                            navigate('Settings')
+                        }
+                    />
 
-                {/* Setting 5 */}
-                <Button 
-                    buttonStyle={{
-                        margin: 10,
-                        width: 200,
-                        backgroundColor: '#1abc9c'
-                    }}
-                    title='Setting 5'
-                    onPress={() => 
-                        navigate('Settings')
-                    }
-                />
-            </View>
+                    {/* Notifications */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 1,
+                            width: 330,
+                            backgroundColor: '#B3B3B3'
+                        }}
+                        title='Notifications'
+                        onPress={() => 
+                            navigate('Settings')
+                        }
+                    />
+
+                    {/* Social Networks */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 1,
+                            width: 330,
+                            backgroundColor: '#B3B3B3'
+                        }}
+                        title='Social Networks'
+                        onPress={() => 
+                            navigate('Settings')
+                        }
+                    />
+
+                    <Text style={{fontWeight: 'bold'}}>
+                        Security
+                    </Text>
+
+                    {/* TouchID & Pin*/}
+                    <Button 
+                        buttonStyle={{
+                            margin: 1,
+                            width: 330,
+                            backgroundColor: '#B3B3B3'
+                        }}
+                        title='TouchID & Pin'
+                        onPress={() => 
+                            navigate('Settings')
+                        }
+                    />
+                    {/* Change Password */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 1,
+                            width: 330,
+                            backgroundColor: '#B3B3B3'
+                        }}
+                        title='Change Password'
+                        onPress={() => 
+                            navigate('Settings')
+                        }
+                    />
+                    {/* Remember Devices */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 1,
+                            width: 330,
+                            backgroundColor: '#B3B3B3'
+                        }}
+                        title='Remember Devices'
+                        onPress={() => 
+                            navigate('Settings')
+                        }
+                    />
+
+                    <Text style={{fontWeight: 'bold'}}>
+                        Information
+                    </Text>
+
+                    {/* Legal */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 1,
+                            width: 330,
+                            backgroundColor: '#B3B3B3'
+                        }}
+                        title='Legal'
+                        onPress={() => 
+                            navigate('Settings')
+                        }
+                    />
+                    {/* Helpful Information */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 1,
+                            width: 330,
+                            backgroundColor: '#B3B3B3'
+                        }}
+                        title='Helpful Information'
+                        onPress={() => 
+                            navigate('Settings')
+                        }
+                    />
+                    {/* Send Feedback */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 1,
+                            width: 330,
+                            backgroundColor: '#B3B3B3'
+                        }}
+                        title='Send Feedback'
+                        onPress={() => 
+                            navigate('Settings')
+                        }
+                    />
+                    {/* Rate CoffeePot */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 1,
+                            width: 330,
+                            backgroundColor: '#B3B3B3'
+                        }}
+                        title='Rate CoffeePot'
+                        onPress={() => 
+                            navigate('Settings')
+                        }
+                    />
+                    {/* Sign Out of CoffeePot */}
+                    <Button 
+                        buttonStyle={{
+                            margin: 1,
+                            width: 330,
+                            backgroundColor: '#B3B3B3'
+                        }}
+                        title='Sign Out of CoffeePot'
+                        onPress={() => 
+                            navigate('Settings')
+                        }
+                    />
+                </View>
+            </ScrollView>
+            
         );
     }
 }

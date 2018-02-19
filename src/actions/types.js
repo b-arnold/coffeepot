@@ -14,3 +14,7 @@ export const AUTH_SIGNOUT_USER = 'auth_user_signout';
 // COFFEE POT TYPES
 export const START_TIME = 'start_time';
 export const ADD_ORDER = 'add_order';
+export const ADD_NAME_SUCCESS = 'add_name_success';
+
+// PLACES TYPES
+export const FETCH_PLACES = "fetch_places";

@@ -61,7 +61,7 @@ export const loginUser = (email, password) => async dispatch => {
     const { user } = await firebase.auth().signInWithEmailAndPassword(email, password);
     authUserSuccess(dispatch, user);
   } catch (err) {
-    loginUserFail(dispatch, 'Authentication Failed');
+    loginUserFail(dispatch, err.code);
   }
 };
 
@@ -72,8 +72,9 @@ const authUserSuccess = (dispatch, user) => {
     type: AUTH_USER_SUCCESS,
     payload: user
   });
+
   //should this be return? possible error
-  return this.props.navigation.navigate('Home');
+  this.props.navigation.navigate('Home');
 };
 
 ////////////////////////////////////////////////////////////////
@@ -92,7 +93,7 @@ export const resetSignupLoginPages = () => ({
 
 ////////////////////////////////////////////////////////////////
 // Call appropriate FireBase method to signup user
-export const signupUser = (email, password, passwordRetype) => async dispatch => {
+export const signupUser = (email, password, passwordRetype, firstName, lastName) => async dispatch => {
   try {
     // Dispatch event to trigger loading spinner
     dispatch({ type: AUTH_USER_ATTEMPT });
@@ -101,10 +102,18 @@ export const signupUser = (email, password, passwordRetype) => async dispatch =>
       return loginUserFail(dispatch, 'Passwords do not match');
     }
 
+    //Need to do a email verifcation function here
+
     // Attempt to signup new user
     const { user } = await firebase.auth().createUserWithEmailAndPassword(email, password);
-    //console.log(user);
-    authUserSuccess(dispatch, user);
+    const { currentUser } = firebase.auth();
+
+    // push firt and lastname to the database during account creation
+    await firebase.database().ref(`/users/${currentUser.uid}/name_field`)
+      .push({ firstName, lastName })
+      .then(() => {
+        authUserSuccess(dispatch, user);
+      });
   } catch (err) {
     switch (err.code) {
       case 'auth/email-already-in-use':
@@ -124,6 +133,7 @@ export const signupUser = (email, password, passwordRetype) => async dispatch =>
         return loginUserFail(dispatch, err.message);
     }
   }
+  // First last name needs to be added to user.
 };
 
 ////////////////////////////////////////////////////////////////
