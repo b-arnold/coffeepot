@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import MapView from 'react-native-maps';
 
@@ -9,13 +9,32 @@ class GPSMap extends Component {
     static navigationOptions = {
         title: 'GPS Map',
         headerStyle: {
-            backgroundColor: '#16a085'
-            
+            backgroundColor: PRIMARY_COLOR,
+            paddingRight: 10,
+            paddingLeft: 10
         },
         headerTitleStyle: {
-            color: '#ecf0f1'
+            color: SECONDARY_COLOR
         },
-        headerTintColor: 'white',
+        headerTintColor: SECONDARY_COLOR,
+        headerLeft: (
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+                <Icon 
+                    type='material-community'
+                    name='menu'
+                    color='grey'
+                />
+            </TouchableOpacity>
+        ),
+        headerRight: (
+            <TouchableOpacity onPress={() => navigation.navigate('PlaceOrder')}>
+                <Icon 
+                    type='font-awesome'
+                    name='coffee'
+                    color='grey'
+                />
+            </TouchableOpacity>
+        ),
         tabBarIcon: () => {
             return (
                 <Icon
@@ -40,19 +59,8 @@ class GPSMap extends Component {
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                     }}
-                >
-                    <Button 
-                        iconRight={{
-                            name: 'plus-circle',
-                            type: 'material-community',
-                            size: 25
-                        }}
-                        title='List View'
-                        buttonStyle={styles.button_style}
-                        rounded
-                        onPress = {() => navigate('CoffeePotList')}
-                    />
-                </MapView>
+                />
+                {/* </MapView> */}
             </View>
         );
     }

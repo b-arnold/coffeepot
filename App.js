@@ -12,19 +12,18 @@ import store from './src/store'
 import Navigate from './src/screens/Navigate';
 
 //Side Bar Menu Screens
-import Profile from './src/screens/Profile';
 import About from './src/screens/About';
 import Settings from './src/screens/Settings';
 import StandardLegal from './src/screens/StandardLegal';
 import DeliveryLegal from './src/screens/DeliveryLegal';
 
-// GPS Screen
-import GPSMap from './src/screens/GPSMap';
-
 // CoffeePot Screens
 import CoffeePotList from './src/screens/CoffeePotList';
 import CoffeePot from './src/screens/CoffeePot';
 import HomeScreen from './src/screens/HomeScreen';
+import Profile from './src/screens/Profile';
+import GPSMap from './src/screens/GPSMap';
+import MessageScreen from './src/screens/MessageScreen';
 
 // Delivery Screens
 import ChooseDelivery from './src/screens/ChooseDelivery';
@@ -68,42 +67,42 @@ export default class App extends React.Component {
   render() {
     /////////////////////////////////////////////////////////////
     //This nav is used for testing purposes only.
-    const ButtonNav = StackNavigator({
-      Navigate: { screen: Navigate },
-      CoffeePotList: { screen: CoffeePotList },
-      CoffeePot: { screen: CoffeePot },
-      ExistingOrdersList: { screen: ExistingOrdersList },
-      ExistingOrder: { screen: ExistingOrder },
-      LoginScreen: { screen: LoginScreen },
-      ChooseDelivery: { screen: ChooseDelivery },
-      PickLocationList: { screen: PickLocationList },
-      PickedLocation: { screen: PickedLocation },
-      Profile: { screen: Profile },
-      ReceiptSnapshot: { screen: ReceiptSnapshot },
-      PlaceOrder: { screen: PlaceOrder },
-      PaymentScreen: { screen: PaymentScreen },
-      GPSMap: { screen: GPSMap },
-      PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
-      ReceiptScreen: { screen: ReceiptScreen },
-      About: { screen: About },
-      DeliveryLegal: { screen: DeliveryLegal },
-      Settings: { screen: Settings },
-      StandardLegal: { screen: StandardLegal },
-      InputCoffeeOrderScreen: { screen: InputCoffeeOrderScreen },
-    });
+    // const ButtonNav = StackNavigator({
+    //   Navigate: { screen: Navigate },
+    //   CoffeePotList: { screen: CoffeePotList },
+    //   CoffeePot: { screen: CoffeePot },
+    //   ExistingOrdersList: { screen: ExistingOrdersList },
+    //   ExistingOrder: { screen: ExistingOrder },
+    //   LoginScreen: { screen: LoginScreen },
+    //   ChooseDelivery: { screen: ChooseDelivery },
+    //   PickLocationList: { screen: PickLocationList },
+    //   PickedLocation: { screen: PickedLocation },
+    //   Profile: { screen: Profile },
+    //   ReceiptSnapshot: { screen: ReceiptSnapshot },
+    //   PlaceOrder: { screen: PlaceOrder },
+    //   PaymentScreen: { screen: PaymentScreen },
+    //   GPSMap: { screen: GPSMap },
+    //   PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
+    //   ReceiptScreen: { screen: ReceiptScreen },
+    //   About: { screen: About },
+    //   DeliveryLegal: { screen: DeliveryLegal },
+    //   Settings: { screen: Settings },
+    //   StandardLegal: { screen: StandardLegal },
+    //   InputCoffeeOrderScreen: { screen: InputCoffeeOrderScreen },
+    // });
 
     /////////////////////////////////////////////////////////////////////////
     //// This is used for the actual development of the app
-    const Home = StackNavigator({
-      CoffeePotList: { screen: CoffeePotList },
-      CoffeePot: { screen: CoffeePot },
-      GPSMap: { screen: GPSMap },
-      PlaceOrder: { screen: PlaceOrder },
-      PaymentScreen: { screen: PaymentScreen },
-      PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
-      ReceiptScreen: { screen: ReceiptScreen },
-      Legal: { screen: StandardLegal },
-    });
+    // const Home = StackNavigator({
+    //   CoffeePotList: { screen: CoffeePotList },
+    //   CoffeePot: { screen: CoffeePot },
+    //   GPSMap: { screen: GPSMap },
+    //   PlaceOrder: { screen: PlaceOrder },
+    //   PaymentScreen: { screen: PaymentScreen },
+    //   PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
+    //   ReceiptScreen: { screen: ReceiptScreen },
+    //   Legal: { screen: StandardLegal },
+    // });
 
     /////////////////////////////////////////////////////////////////////////
     //Side bar menu
@@ -138,21 +137,34 @@ export default class App extends React.Component {
     });
 
     /////////////////////////////////////////////////////////////////////////
-    //// Home Screens
+    //// This is used for the actual development of the app (HOME SCREEN)
 
     const HomeScreenNav = StackNavigator({
       HomeScreen: { screen: HomeScreen },
-      PlaceOrder: { screen: PlaceOrder }
+      MessageScreen: { screen: MessageScreen },
+      PlaceOrder: { screen: PlaceOrder },
+      PaymentScreen: { screen: PaymentScreen },
+      PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
+      ReceiptScreen: { screen: ReceiptScreen },
+      Legal: { screen: StandardLegal },
     });
 
     const GPSNav = StackNavigator({
       GPSMap: { screen: GPSMap },
-      PlaceOrder: { screen: PlaceOrder }
+      PlaceOrder: { screen: PlaceOrder },
+      PaymentScreen: { screen: PaymentScreen },
+      PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
+      ReceiptScreen: { screen: ReceiptScreen },
+      Legal: { screen: StandardLegal },
     });
 
     const CoffeePotListNav = StackNavigator({
       CoffeePotList: { screen: CoffeePotList },
-      PlaceOrder: { screen: PlaceOrder }
+      PlaceOrder: { screen: PlaceOrder },
+      PaymentScreen: { screen: PaymentScreen },
+      PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
+      ReceiptScreen: { screen: ReceiptScreen },
+      Legal: { screen: StandardLegal },
     });
 
     const HomeNav = TabNavigator({

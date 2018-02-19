@@ -8,13 +8,13 @@ class PaymentScreen extends Component {
     static navigationOptions = {
         title: 'Order Payment',
         headerStyle: {
-            backgroundColor: '#16a085'
-            
+            backgroundColor: PRIMARY_COLOR
         },
         headerTitleStyle: {
-            color: '#ecf0f1'
+            color: SECONDARY_COLOR
         },
-        headerTintColor: 'white'
+        headerTintColor: SECONDARY_COLOR,
+        tabBarVisible: false
     }
 
     render() {
