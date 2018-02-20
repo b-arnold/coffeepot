@@ -14,3 +14,4 @@ export const ADD_NAME_SUCCESS = 'add_name_success';
 
 // PLACES TYPES
 export const FETCH_PLACES = "fetch_places";
+export const FETCH_DISTANCE = 'fetch_distance';

@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 class PickedLocation extends Component {
     static navigationOptions = {
         title: 'Location Pick',
         headerStyle: {
-            backgroundColor: '#16a085'
+            backgroundColor: PRIMARY_COLOR
             
         },
         headerTitleStyle: {
-            color: '#ecf0f1'
+            color: SECONDARY_COLOR
         },
-        headerTintColor: 'white'
+        headerTintColor: SECONDARY_COLOR
     }
 
     render() {

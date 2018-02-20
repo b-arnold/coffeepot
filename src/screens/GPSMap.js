@@ -4,7 +4,6 @@ import { Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import MapView, { Marker } from 'react-native-maps';
 
-
 import * as actions from '../actions';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
@@ -33,6 +32,7 @@ class GPSMap extends Component {
     }
 
     //defining state
+    //The 'region' state object will contain latitude and longitude of the user
     state = { region:{} };
     
     componentWillMount() {
@@ -47,18 +47,12 @@ class GPSMap extends Component {
             });
             //console.log(this.state.region.latitude);
             //console.log(this.state.region.longitude);
+            //The action 'fetchPlaces' will search for places with the label 'cafe' with respect to the 'region' state (user's current position)
             this.props.fetchPlaces(this.state.region);
         },
-        (error) => console.log(new Date(), error),
-        {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
-    );
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (this.props !== nextProps) {
-            //console.log('received prop')
-            this.setState({ places: nextProps.places });
-        }
+            (error) => console.log(new Date(), error),
+            {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
+        );
     }
     
     renderMarkers() {
@@ -105,7 +99,7 @@ class GPSMap extends Component {
 
     render() {
         const { navigate } = this.props.navigation
-        console.log(this.state.region.latitude);
+        //console.log(this.state.region.latitude);
         if(this.state.region.latitude !== undefined)
         {
             return (

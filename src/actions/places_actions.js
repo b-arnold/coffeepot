@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import axios from 'axios';
-import { FETCH_PLACES } from './types';
+import { FETCH_PLACES, FETCH_DISTANCE } from './types';
 import * as urlBuilder from '../utility/url_builder';
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@ export const fetchPlaces = ( location ) => async dispatch => {
     // Get the places using Google Places API Service
     //console.log(latitude);
     //console.log(longitude);
-    console.log(location);
+    //console.log(location);
     const placesUrl = urlBuilder.buildPlacesUrl(location);
     const placesResponse = await axios.get(placesUrl);
     const placesData = placesResponse.data;
@@ -39,6 +39,19 @@ export const fetchPlaces = ( location ) => async dispatch => {
 
     dispatch({ type: FETCH_PLACES, payload: placesDataWithSearchRegion });
     // console.log(placesDataWithSearchRegion)
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const fetchDistance = ( origin, destination ) => async dispatch => {
+  try {
+    const directionUrl = urlBuilder.buildDirectionsUrl(origin, destination);
+    const directionResponse = await axios.get(directionUrl);
+    const directionData = directionResponse.data;
+    //console.log(directionData);
+
+    dispatch({ type: FETCH_DISTANCE, payload: directionData })
   } catch (err) {
     console.error(err);
   }
