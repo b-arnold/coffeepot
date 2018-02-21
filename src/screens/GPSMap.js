@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, Geolocation, ActivityIndicator } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { View, Text, Geolocation, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { Button, Icon, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, Callout } from 'react-native-maps';
 
 import * as actions from '../actions';
+import * as urlBuilder from '../utility/url_builder';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
@@ -54,12 +55,41 @@ class GPSMap extends Component {
             {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
         );
     }
+
     
     renderMarkers() {
         //console.log(this.props.places);
+        const { navigate } = this.props.navigation
         if(this.props.places !== null) {
             return this.props.places.map(places => {
                 const { geometry, place_id, name, vicinity, photos } = places;
+                if(photos !== undefined) {
+                    const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference)
+                    return (
+                    <Marker
+                        key={place_id}
+                        coordinate={{
+                            latitude: geometry.location.lat,
+                            longitude: geometry.location.lng
+                        }}
+                        pinColor='red'
+                    >
+                        <Callout>
+                            <TouchableOpacity
+                                key={place_id}
+                                onPress={() => navigate('PickedLocation')}
+                            >
+                                <Card image={{uri: photoUrl}}>
+                                    <View style={styles.description}>
+                                        <Text style={{fontWeight: 'bold'}}>{name}</Text>
+                                        <Text>{vicinity}</Text>
+                                    </View>
+                                </Card>
+                            </TouchableOpacity>
+                        </Callout>
+                    </Marker>
+                );
+                }
                 return (
                     <Marker
                         key={place_id}
@@ -90,6 +120,7 @@ class GPSMap extends Component {
                     showsUserLocation={true}
                     showsPointsOfInterest={false}
                     showsMyLocationButton={true}
+                    rotateEnabled={false}
                 >
                    {this.renderMarkers()} 
                 </MapView>

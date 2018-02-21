@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import axios from 'axios';
-import { FETCH_PLACES, FETCH_DISTANCE } from './types';
+import { FETCH_PLACES, FETCH_DISTANCE, LOAD_PLACE_DETAILS,  } from './types';
 import * as urlBuilder from '../utility/url_builder';
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -44,6 +44,7 @@ export const fetchPlaces = ( location ) => async dispatch => {
   }
 };
 
+// WIP
 export const fetchDistance = ( origin, destination ) => async dispatch => {
   try {
     const directionUrl = urlBuilder.buildDirectionsUrl(origin, destination);
@@ -56,3 +57,20 @@ export const fetchDistance = ( origin, destination ) => async dispatch => {
     console.error(err);
   }
 };
+
+// This will load the details of the place that the user has selected
+export const loadPlaceDetails = (name, location, place_id, photos) => async dispatch => {
+  try {
+    //console.log('////////loadPlaceDetail//////////');
+    // console.log(name);
+    // console.log(location);
+    // console.log(place_id);
+    // console.log(photos);
+    const placeData = {name, location, place_id, photos}
+    //console.log(placeData);
+
+    dispatch({ type: LOAD_PLACE_DETAILS, payload: placeData })
+  } catch (err) {
+    console.error(err);
+  }
+}

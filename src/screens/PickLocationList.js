@@ -68,19 +68,22 @@ class PickLocationList extends Component {
     }
 
     renderCards() {
-        const { navigate } = this.props.navigation;
+        //const { navigate } = this.props.navigation;
 
         if(this.props.places !== null) {
             return this.props.places.map(places => {
                 const { geometry, place_id, name, vicinity, photos } = places;
-                console.log('///////////Pick Location Test///////////')
-                console.log(photos);
+                //console.log('///////////Pick Location Test///////////')
+                //console.log(photos);
                 if(photos !== undefined) {
                     const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference);
                     return (
                         <TouchableOpacity
                             key={place_id}
-                            onPress={() => navigate('PickedLocation')}
+                            onPress={() => {
+                                this.props.loadPlaceDetails(name, vicinity, place_id, photos);
+                                this.props.navigation.navigate('PickedLocation', {headerTitle: name})}
+                            }
                         >
                             <Card image={{uri: photoUrl}}>
                                 <View style={styles.description}>
@@ -94,7 +97,7 @@ class PickLocationList extends Component {
                 return (
                     <TouchableOpacity
                         key={place_id}
-                        onPress={() => navigate('PickedLocation')}
+                        onPress={() => this.props.navigation.navigate('PickedLocation', {headerTitle: name})}
                     >
                         <Card>
                             <View style={styles.description}>

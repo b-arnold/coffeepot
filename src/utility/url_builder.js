@@ -23,7 +23,7 @@ export const buildPlacesUrl = ( location ) => {
   //console.log(longitude);
   const query = qs.stringify({ location: coords, ...PLACE_QUERY_PARAMS });
   //console.log(coords);
-  //console.log(`${GOOGLE_PLACES_ROOT_URL}${query}`)
+  console.log(`${GOOGLE_PLACES_ROOT_URL}${query}`)
   //console.log(query);
   return `${GOOGLE_PLACES_ROOT_URL}${query}`;
 };
@@ -36,7 +36,7 @@ export const buildPlacesPhotoUrl = (photoRef, width = SCREEN_WIDTH) => {
     photoreference: photoRef,
     maxwidth: width
   });
-  console.log(`${GOOGLE_PLACES_PHOTO_ROOT_URL}${query}`);
+  //console.log(`${GOOGLE_PLACES_PHOTO_ROOT_URL}${query}`);
   return `${GOOGLE_PLACES_PHOTO_ROOT_URL}${query}`;
 };
 const PLACE_PHOTO_QUERY_PARAMS = {
