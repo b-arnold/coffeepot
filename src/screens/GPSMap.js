@@ -9,7 +9,7 @@ import * as actions from '../actions';
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 class GPSMap extends Component {
-    static navigationOptions = {
+    static navigationOptions = ({navigation}) => ({
         title: 'GPS Map',
         headerStyle: {
             backgroundColor: PRIMARY_COLOR,
@@ -47,8 +47,8 @@ class GPSMap extends Component {
                     color="grey"
                 /> 
             );
-        },
-    }
+        }
+    })
 
     //defining state
     state = { region:{} };
