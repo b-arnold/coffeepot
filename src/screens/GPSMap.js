@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Geolocation, ActivityIndicator, TouchableOpacity } from 'react-native';
-<<<<<<< HEAD
 import { Button, Icon, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import MapView, { Marker, Callout } from 'react-native-maps';
-=======
-import { Button, Icon } from 'react-native-elements';
-import { connect } from 'react-redux';
-import MapView, { Marker } from 'react-native-maps';
->>>>>>> dev
 
 import * as actions from '../actions';
 import * as urlBuilder from '../utility/url_builder';
@@ -81,9 +75,6 @@ class GPSMap extends Component {
         );
     }
 
-<<<<<<< HEAD
-    
-=======
     componentWillReceiveProps(nextProps) {
         if (this.props !== nextProps) {
             //console.log('received prop')
@@ -91,7 +82,6 @@ class GPSMap extends Component {
         }
     }
 
->>>>>>> dev
     renderMarkers() {
         //console.log(this.props.places);
         const { navigate } = this.props.navigation
