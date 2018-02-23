@@ -31,16 +31,24 @@ class PickedLocation extends Component {
                 const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference)
                 return (
                     <View style={styles.container}>
-                        <View>
-                            <Image
-                                uri={photoUrl}
-                            />
-                        </View>
+                        <Image
+                            source={{uri: photoUrl}}
+                            style = {styles.image_style}
+                        />
+                        <Text style={{fontWeight: 'bold'}} >{name}</Text>
+                        
+                        <Text>{location}</Text>
 
-                        <View>
-                            <Text style={{fontWeight: 'bold'}} >{name}</Text>
-                            <Text>{location}</Text>
-                        </View>
+                        <Button 
+                            iconLeft={{
+                                name: 'plus-circle',
+                                type: 'material-community',
+                                size: 25
+                            }}
+                            title='Confirm Location'
+                            buttonStyle={styles.button_style}
+                        />
+
                     </View>
                 );
             }
@@ -53,7 +61,18 @@ class PickedLocation extends Component {
 
 const styles = {
     container: {
-        justifyContent: 'center'
+        alignItems: 'center',
+        flex: 1,
+        flexDirection: 'column',
+    },
+    button_style: {
+        backgroundColor: BUTTON_COLOR,
+        margin: 10
+    },
+    image_style: {
+        margin: 10, 
+        width: 350, 
+        height: 250
     }
 };
 

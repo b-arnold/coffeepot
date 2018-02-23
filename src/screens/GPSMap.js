@@ -77,7 +77,7 @@ class GPSMap extends Component {
                         <Callout>
                             <TouchableOpacity
                                 key={place_id}
-                                onPress={() => navigate('PickedLocation')}
+                                onPress={() => this.props.navigation.navigate('PickedLocation', {headerTitle: name})}
                             >
                                 <Card image={{uri: photoUrl}}>
                                     <View style={styles.description}>

@@ -11,7 +11,7 @@ import { GOOGLE_PLACES_API_KEY, GOOGLE_MAPS_DIRECTIONS_API } from "../constants/
 const PLACE_QUERY_PARAMS = {
   key: GOOGLE_PLACES_API_KEY,
   types: 'cafe',
-  radius: '1609' // In meters (max 50000)
+  radius: '1000' // In meters (max 50000)
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -36,7 +36,7 @@ export const buildPlacesPhotoUrl = (photoRef, width = SCREEN_WIDTH) => {
     photoreference: photoRef,
     maxwidth: width
   });
-  //console.log(`${GOOGLE_PLACES_PHOTO_ROOT_URL}${query}`);
+  console.log(`${GOOGLE_PLACES_PHOTO_ROOT_URL}${query}`);
   return `${GOOGLE_PLACES_PHOTO_ROOT_URL}${query}`;
 };
 const PLACE_PHOTO_QUERY_PARAMS = {
