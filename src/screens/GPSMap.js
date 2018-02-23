@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-import { View, TouchableOpacity, Text, Geolocation, ActivityIndicator  } from 'react-native';
-=======
 import { View, Text, Geolocation, ActivityIndicator, TouchableOpacity } from 'react-native';
->>>>>>> dev
 import { Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import MapView, { Marker } from 'react-native-maps';
