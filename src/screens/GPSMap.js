@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, Geolocation, ActivityIndicator, TouchableOpacity } from 'react-native';
+<<<<<<< HEAD
 import { Button, Icon, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import MapView, { Marker, Callout } from 'react-native-maps';
+=======
+import { Button, Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
+import MapView, { Marker } from 'react-native-maps';
+>>>>>>> dev
 
 import * as actions from '../actions';
 import * as urlBuilder from '../utility/url_builder';
@@ -10,32 +16,51 @@ import * as urlBuilder from '../utility/url_builder';
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 class GPSMap extends Component {
-    static navigationOptions = {
+    static navigationOptions = ({navigation}) => ({
         title: 'GPS Map',
         headerStyle: {
-            backgroundColor: PRIMARY_COLOR
-            
+            backgroundColor: PRIMARY_COLOR,
+            paddingRight: 10,
+            paddingLeft: 10
         },
         headerTitleStyle: {
             color: SECONDARY_COLOR
         },
         headerTintColor: SECONDARY_COLOR,
+        headerLeft: (
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+                <Icon
+                    type='material-community'
+                    name='menu'
+                    color='grey'
+                />
+            </TouchableOpacity>
+        ),
+        headerRight: (
+            <TouchableOpacity onPress={() => navigation.navigate('PlaceOrder')}>
+                <Icon
+                    type='font-awesome'
+                    name='coffee'
+                    color='grey'
+                />
+            </TouchableOpacity>
+        ),
         tabBarIcon: () => {
             return (
                 <Icon
                     name="location-on"
-                    type="material" 
-                    size={30} 
+                    type="material"
+                    size={30}
                     color="grey"
-                /> 
+                />
             );
-        },
-    }
+        }
+    })
 
     //defining state
     //The 'region' state object will contain latitude and longitude of the user
     state = { region:{} };
-    
+
     componentWillMount() {
         // console.log(this.state.location);
         navigator.geolocation.getCurrentPosition((position) => {
@@ -56,7 +81,17 @@ class GPSMap extends Component {
         );
     }
 
+<<<<<<< HEAD
     
+=======
+    componentWillReceiveProps(nextProps) {
+        if (this.props !== nextProps) {
+            //console.log('received prop')
+            this.setState({ places: nextProps.places });
+        }
+    }
+
+>>>>>>> dev
     renderMarkers() {
         //console.log(this.props.places);
         const { navigate } = this.props.navigation
@@ -122,7 +157,7 @@ class GPSMap extends Component {
                     showsMyLocationButton={true}
                     rotateEnabled={false}
                 >
-                   {this.renderMarkers()} 
+                   {this.renderMarkers()}
                 </MapView>
             </View>
         );
@@ -136,7 +171,7 @@ class GPSMap extends Component {
             return (
                 <View style={styles.container}>{this.renderMap()}</View>
             );
-        } 
+        }
         return(
             <View style = {styles.container}>
                 <ActivityIndicator

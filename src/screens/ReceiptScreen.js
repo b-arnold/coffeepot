@@ -17,7 +17,7 @@ import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style
 
 class ReceiptScreen extends Component {
   static navigationOptions = ({navigation}) => ({
-    title: 'Legal',
+    title: 'Receipt',
     headerStyle: {
         backgroundColor: PRIMARY_COLOR,
         paddingRight: 10,
@@ -28,7 +28,8 @@ class ReceiptScreen extends Component {
     },
     headerTintColor: SECONDARY_COLOR,
     headerBackTitle: null,
-    headerLeft: null
+    headerLeft: null,
+    tabBarVisible: false
 })
 
   /////////////////////////////////////////////////////////
@@ -37,7 +38,7 @@ class ReceiptScreen extends Component {
   render() {
     const resetAction = NavigationActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'CoffeePotList' })]
+      actions: [NavigationActions.navigate({ routeName: 'HomeScreen' })]
     })
     return (
       <ScrollView>

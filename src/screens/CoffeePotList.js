@@ -33,6 +33,15 @@ class CoffeePotList extends Component {
                 />
             </TouchableOpacity>
         ),
+        headerRight: (
+            <TouchableOpacity onPress={() => navigation.navigate('PlaceOrder')}>
+                <Icon 
+                    type='font-awesome'
+                    name='coffee'
+                    color='grey'
+                />
+            </TouchableOpacity>
+        ),
         tabBarIcon: () => {
             return (
                 <Icon
