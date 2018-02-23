@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { View, TouchableOpacity, Text, Geolocation, ActivityIndicator  } from 'react-native';
+=======
+import { View, Text, Geolocation, ActivityIndicator, TouchableOpacity } from 'react-native';
+>>>>>>> dev
 import { Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import MapView, { Marker } from 'react-native-maps';
-
 
 import * as actions from '../actions';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 class GPSMap extends Component {
-    static navigationOptions = {
+    static navigationOptions = ({navigation}) => ({
         title: 'GPS Map',
         headerStyle: {
             backgroundColor: PRIMARY_COLOR,
@@ -23,7 +26,7 @@ class GPSMap extends Component {
         headerTintColor: SECONDARY_COLOR,
         headerLeft: (
             <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
-                <Icon 
+                <Icon
                     type='material-community'
                     name='menu'
                     color='grey'
@@ -32,7 +35,7 @@ class GPSMap extends Component {
         ),
         headerRight: (
             <TouchableOpacity onPress={() => navigation.navigate('PlaceOrder')}>
-                <Icon 
+                <Icon
                     type='font-awesome'
                     name='coffee'
                     color='grey'
@@ -43,17 +46,17 @@ class GPSMap extends Component {
             return (
                 <Icon
                     name="location-on"
-                    type="material" 
-                    size={30} 
+                    type="material"
+                    size={30}
                     color="grey"
-                /> 
+                />
             );
-        },
-    }
+        }
+    })
 
     //defining state
     state = { region:{} };
-    
+
     componentWillMount() {
         // console.log(this.state.location);
         navigator.geolocation.getCurrentPosition((position) => {
@@ -79,7 +82,7 @@ class GPSMap extends Component {
             this.setState({ places: nextProps.places });
         }
     }
-    
+
     renderMarkers() {
         //console.log(this.props.places);
         if(this.props.places !== null) {
@@ -116,7 +119,7 @@ class GPSMap extends Component {
                     showsPointsOfInterest={false}
                     showsMyLocationButton={true}
                 >
-                   {this.renderMarkers()} 
+                   {this.renderMarkers()}
                 </MapView>
             </View>
         );
@@ -130,7 +133,7 @@ class GPSMap extends Component {
             return (
                 <View style={styles.container}>{this.renderMap()}</View>
             );
-        } 
+        }
         return(
             <View style = {styles.container}>
                 <ActivityIndicator
