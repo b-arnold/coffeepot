@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import { View, Text, Geolocation, ActivityIndicator } from 'react-native';
+import { View, TouchableOpacity, Text, Geolocation, ActivityIndicator  } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import MapView, { Marker } from 'react-native-maps';
@@ -174,8 +173,8 @@ function mapStateToProps({ places }) {
           searchRegion: null
         };
     }
-    // console.log('/////////////////////////////////////////////////////////')
-    // console.log(places.placesResponse.results);
+     console.log('/////////////////////////////////////////////////////////')
+     console.log(places.placesResponse.results);
     // console.log('/////////////////////////////////////////////////////////')
     // console.log(places.placesResponse.searchRegion);
 
