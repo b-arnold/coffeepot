@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import TimerCountdown from 'react-native-timer-countdown';
 import { Spinner } from '../components/Spinner';
 import * as actions from '../actions';
+import { CoffeePot } from '../components/CoffeePot';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
@@ -92,22 +93,13 @@ class HomeScreen extends Component {
                 source={require('../images/background.jpg')}
                 >
                     <View>
-                        <View style={styles.background}>
-                            <Image
-                                source={require('../images/CoffeePot-Logo-White-02.png')}
-                                style={{
-                                    width: 250,
-                                    height: 250,
-                                }}
-                            />
-                            <TimerCountdown
-                                initialSecondsRemaining={this.state.time}
-                                //onTick={() => this.setState({ alreadyStarted: true })}
-                                //onTimeElapsed={() => this.setState({ alreadyStarted: false })}
-                                //allowFontScaling='true'
-                                style={{ fontSize: 50, color: 'white' }}
-                            />
-                        </View>
+                        <CoffeePot 
+                            endTime = "600000"
+                            startTime = "0"
+                            coffeeShop = "null"
+                            orderNum = "null"
+                            orders = "null"
+                        />
                         <View>
                             <View style={{ marginTop: 25 }}>
                                 <Button 
