@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Geolocation, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, Geolocation, ActivityIndicator, TouchableOpacity, Animated } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import MapView, { Marker } from 'react-native-maps';
@@ -54,6 +54,8 @@ class GPSMap extends Component {
     state = { region:{} };
 
     componentWillMount() {
+        this.index = 0;                                     // Better marker indexing than random chars
+        this.animation = new Animated.Value(0);
         // console.log(this.state.location);
         navigator.geolocation.getCurrentPosition((position) => {
             //console.log(position);
@@ -78,6 +80,22 @@ class GPSMap extends Component {
             this.setState({ places: nextProps.places });
         }
     }
+////////////////////////////////////HELP -read console after you click on a location
+//////// prints to console but does not update. Can't figure out to update it in mapstatetoprops
+/////without it crashing... 
+/////so write a name, choose a location and press place order...
+
+    onButtonPress(places){
+        var markerID = null;
+        const { navigate } = this.props.navigation;
+        markerID = String(places.place_id);
+        this.props.location = markerID;
+        console.log(places.place_id);
+        console.log(markerID);
+        console.log(places.name);
+        this.props.orderUpdate({prop: 'location', markerID});
+        navigate('PlaceOrder');
+    }
 
     renderMarkers() {
         //console.log(this.props.places);
@@ -85,7 +103,7 @@ class GPSMap extends Component {
             return this.props.places.map(places => {
                 const { geometry, place_id, name, vicinity, photos } = places;
                 return (
-                    <Marker
+                    <MapView.Marker
                         key={place_id}
                         coordinate={{
                             latitude: geometry.location.lat,
@@ -93,9 +111,16 @@ class GPSMap extends Component {
                         }}
                         title={name}
                         description={vicinity}
-                        pinColor='red'
-                    />
+                        onPress={() => this.onButtonPress(places)}
+                    >
+                        <Animated.View >
+                            <Animated.View style={[styles.ring]}/>
+                            <View style={styles.Marker}/>
+                        </Animated.View>
+                    </MapView.Marker>
+
                 );
+                console.log(places.placeid);
         })}
     }
 
@@ -104,7 +129,7 @@ class GPSMap extends Component {
             <View style = {styles.container}>
                 <MapView
                     style={styles.map}
-                    mapType='hybrid'
+                    mapType='standard'
                     initialRegion={{
                         latitude: this.state.region.latitude,
                         longitude: this.state.region.longitude,
@@ -161,6 +186,25 @@ const styles = {
     button_style: {
         width: 130,
         backgroundColor: BUTTON_COLOR
+    },
+    markerWrap: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    marker: {
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        backgroundColor: 'rgba(130,4,150,0.9',
+    },
+    ring: {
+        width: 24,
+        height: 24,
+        borderRadius: 12,
+        backgroundColor: 'rgba(130,4,150,0.3)',
+        position: 'absolute',
+        borderWidth: 1,
+        borderColor: 'rgba(130,4,150,0.5)',
     }
 };
 
@@ -169,13 +213,13 @@ function mapStateToProps({ places }) {
         //console.log(places.placesResponse);
         return {
           places: null,
-          searchRegion: null
+          searchRegion: null,
         };
     }
-     console.log('/////////////////////////////////////////////////////////')
-     console.log(places.placesResponse.results);
-    // console.log('/////////////////////////////////////////////////////////')
-    // console.log(places.placesResponse.searchRegion);
+    //  console.log('/////////////////////////////////////////////////////////')
+    //  console.log(places.placesResponse.results);
+    //  console.log('/////////////////////////////////////////////////////////')
+    //  //console.log(places.placesResponse.searchRegion);
 
     return {
         places: places.placesResponse.results,

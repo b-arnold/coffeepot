@@ -18,3 +18,7 @@ export const ADD_NAME_SUCCESS = 'add_name_success';
 
 // PLACES TYPES
 export const FETCH_PLACES = "fetch_places";
+
+// ORDER TYPES
+export const ORDER_UPDATE = 'order_update';
+export const ORDER_CREATE = 'order_create';

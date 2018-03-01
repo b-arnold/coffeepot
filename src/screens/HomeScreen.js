@@ -92,14 +92,14 @@ class HomeScreen extends Component {
                 source={require('../images/background.jpg')}
                 >
                     <View>
-                        <View style={styles.background}>
-                            <Image
+                        <View style={styles.background}>                     
+                            {/*<Image
                                 source={require('../images/CoffeePot-Logo-White-02.png')}
                                 style={{
                                     width: 250,
                                     height: 250,
                                 }}
-                            />
+                            />*/}
                             <TimerCountdown
                                 initialSecondsRemaining={this.state.time}
                                 //onTick={() => this.setState({ alreadyStarted: true })}

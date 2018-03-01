@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image, Dimensions } from 'react-native';
+import { View, Text, ScrollView, Image, Dimensions, TextInput } from 'react-native';
 import { Button, Card } from 'react-native-elements';
+import {orderUpdate, orderCreate} from '../actions';
+import { connect } from 'react-redux';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
-const window_width =Dimensions.get('window').width;
+const window_width = Dimensions.get('window').width;
 
-export default class PlaceOrder extends Component {
+export class PlaceOrder extends Component {
     static navigationOptions = {
         title: 'Place Order',
         headerStyle: {
@@ -20,6 +22,12 @@ export default class PlaceOrder extends Component {
         tabBarVisible: false
     }
 
+    onButtonPress(){
+        const {name, location, drink} = this.props;
+        this.props.orderCreate({name: name || 'name', location: location || 'Starbucks, Azusa', drink: drink || 'drink'});
+        //navigate('PaymentScreen');
+    }
+
     render() {
         const { navigate } = this.props.navigation;
         return (
@@ -27,12 +35,24 @@ export default class PlaceOrder extends Component {
                 <ScrollView>
                     <Card>
                         <View style={{ flexDirection: 'row' }}>
-                            <Text>FirstName LastName</Text>
+                            <TextInput
+                                style={{flex:1}}
+                                label="Name"
+                                placeholder="John Doe"
+                                value={this.props.name}
+                                onChangeText={value => this.props.orderUpdate({prop: 'name', value})}
+                            />
                         </View>
                     </Card>
                     <Card>
                         <View style={{ flexDirection: 'row' }}>
-                            <Text>Location: Starbucks, Azusa</Text>
+                            <Text
+                                flex={1}
+                                onPress={() => navigate('GPSMap')}
+                            >
+                                Location: 
+                            </Text>
+                            <Text>{this.props.location}</Text>
                         </View>
                     </Card>
                     <Card>
@@ -56,7 +76,7 @@ export default class PlaceOrder extends Component {
                             buttonStyle={styles.bttn_style}
                             title='Place Order'
                             rounded
-                            onPress={() => navigate('PaymentScreen')}
+                            onPress={this.onButtonPress.bind(this)}
                             />
                         </View>
                     </Card>
@@ -91,3 +111,15 @@ const styles = {
         alignItems: 'center'
     }
 }
+
+/////////////////////////////////////////////////////////
+// Map redux reducers to component mapStateToProps
+function mapStateToProps({ order }) {
+    return {
+        name: order.name,
+        location: order.location,
+        drink: order.drink
+    };
+}
+
+export default connect(mapStateToProps, {orderUpdate, orderCreate} )(PlaceOrder);
