@@ -51,7 +51,6 @@ export const fetchPlaces = ( location ) => async dispatch => {
       const result = Object.assign(distanceData[i], placesData.results[i]);
       placeDataAndDistData.results.push(result);
     }
-    console.log(placeDataAndDistData.results);
 
     // Puts the results into one variable
     const placesDataWithSearchRegionAndDistance = { ...placeDataAndDistData, searchRegion };
@@ -71,13 +70,9 @@ async function getDistance (origin, destination) {
   try {
     const begin = `${origin.latitude},${origin.longitude}`;
     const end = `${destination.lat},${destination.lng}`;
-    //console.log(begin);
-    //console.log(end);
     const directionUrl = urlBuilder.buildDirectionsUrl(origin, destination);
     const directionResponse = await axios.get(directionUrl);
     const directionData = directionResponse.data.routes[0].legs[0].distance;
-    // console.log('----------------')
-    // console.log(directionData);
     return directionData;
   } catch (err) {
     console.error(err);

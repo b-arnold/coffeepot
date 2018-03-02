@@ -19,12 +19,7 @@ const PLACE_QUERY_PARAMS = {
 export const buildPlacesUrl = ( location ) => {
   const { latitude, longitude } = location;
   const coords = `${latitude},${longitude}`;
-  //console.log(latitude);
-  //console.log(longitude);
   const query = qs.stringify({ location: coords, ...PLACE_QUERY_PARAMS });
-  //console.log(coords);
-  //console.log(`${GOOGLE_PLACES_ROOT_URL}${query}`)
-  //console.log(query);
   return `${GOOGLE_PLACES_ROOT_URL}${query}`;
 };
 

@@ -7,10 +7,13 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import * as urlBuilder from '../utility/url_builder';
 
+// Constant Style
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 
 class PickLocationList extends Component {
+    ///////////////////////////////////////////////////////////////////////////////
+    // Customizes the stacknavigation header
     static navigationOptions = {
         title: 'Pick Location',
         headerStyle: {
@@ -22,14 +25,17 @@ class PickLocationList extends Component {
         headerTintColor: SECONDARY_COLOR
     }
 
-    //defining state
+    ///////////////////////////////////////////////////////////////////////////////
+    // Defining The State
     //The 'region' state object will contain latitude and longitude of the user
     state = { region:{} };
 
+    ///////////////////////////////////////////////////////////////////////////////
+    // Before anything is loaded, this will set the region to the user's current position
+    // Then it will fetch the places that is nearby the user's location.  (nearby is determined by the radius set in "url_builder.js")
     componentWillMount() {
-        // console.log(this.state.location);
         navigator.geolocation.getCurrentPosition((position) => {
-            //console.log(position);
+            // Changes the state of region to user's current location
             this.setState({
                 region: {
                     latitude: position.coords.latitude,
@@ -38,19 +44,14 @@ class PickLocationList extends Component {
             });
             //The action 'fetchPlaces' will search for places with the label 'cafe' with respect to the 'region' state (user's current position)
             this.props.fetchPlaces(this.state.region);
-
-            if(this.props.places !== null) {
-                this.props.places.map(places => {
-                    const { geometry } = places;
-                    this.props.fetchDistance(this.state.region, geometry.location)
-                })
-            }
         },
             (error) => console.log(new Date(), error),
             {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
         );
     }
 
+    ///////////////////////////////////////////////////////////////////////////////
+    // This method will render the GPS View Button (Probably will be removed soon)
     renderBttn() {
         const { navigate } = this.props.navigation;
         return (
@@ -72,13 +73,13 @@ class PickLocationList extends Component {
         );
     }
 
+    ///////////////////////////////////////////////////////////////////////////////
+    // This method renders cards depending on the information it was able to successfully receive
     renderCards() {
-        //const { navigate } = this.props.navigation;
         if(this.props.places !== null) {
-            console.log(this.props.places);
+            // Maps the array of objects to get the specified fields
             return this.props.places.map(places  => {
                 const { geometry, place_id, name, vicinity, photos, text } = places;
-                // const { text } = places.dist;
                 if(photos !== undefined) {
                     const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference);
                     return (
@@ -91,8 +92,8 @@ class PickLocationList extends Component {
                         >
                             <Card image={{uri: photoUrl}}>
                                 <View style={styles.description}>
-                                    <Text style={{fontWeight: 'bold'}}>{name}</Text>
-                                    <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <Text style={styles.bold}>{name}</Text>
+                                    <View style = {styles.view_text}>
                                         <Text>{vicinity}</Text>
                                         <Text>{text}</Text>
                                     </View>
@@ -101,6 +102,7 @@ class PickLocationList extends Component {
                         </TouchableOpacity>
                     );
                 }
+                // This will return if there is no photo reference given
                 return (
                     <TouchableOpacity
                         key={place_id}
@@ -108,8 +110,8 @@ class PickLocationList extends Component {
                     >
                         <Card>
                             <View style={styles.description}>
-                                <Text style={{fontWeight: 'bold'}}>{name}</Text>
-                                <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                                <Text style={styles.bold}>{name}</Text>
+                                <View style = {styles.view_text}>
                                     <Text>{vicinity}</Text>
                                     <Text>{text}</Text>
                                 </View>
@@ -121,6 +123,8 @@ class PickLocationList extends Component {
         }
     }
 
+    ///////////////////////////////////////////////////////////////////////////////
+    // Main render method
     render() {
         return (
             <ScrollView>
@@ -131,9 +135,19 @@ class PickLocationList extends Component {
     }
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Styles Object
 const styles = {
     description: {
         alignContent: 'center'
+    },
+    view_text: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    bold: {
+        fontWeight: 'bold'
     },
     image_style: {
         width: 50, 
@@ -147,6 +161,9 @@ const styles = {
     }
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// MapStateToProps
+// places the data that we received from our action and reducers into a variable
 function mapStateToProps({ places }) {
     if (places.placesResponse === null ) {
         return {
@@ -155,7 +172,6 @@ function mapStateToProps({ places }) {
         };
     }
     if(places.placesResponse !== null) {
-        console.log(places.placesResponse);
         return {
             places: places.placesResponse.results,
             searchRegion: places.placesResponse.searchRegion,
