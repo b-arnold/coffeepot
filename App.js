@@ -154,6 +154,7 @@ export default class App extends React.Component {
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
       ReceiptScreen: { screen: ReceiptScreen },
       Legal: { screen: StandardLegal },
+      PickedLocation: { screen: PickedLocation }
     });
 
     const CoffeePotListNav = StackNavigator({

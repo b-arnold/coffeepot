@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Image } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions';
@@ -18,7 +18,17 @@ class PickedLocation extends Component {
         headerTitleStyle: {
             color: SECONDARY_COLOR
         },
-        headerTintColor: SECONDARY_COLOR
+        headerTintColor: SECONDARY_COLOR,
+        tabBarIcon: () => {
+            return (
+                <Icon
+                    name="location-on"
+                    type="material"
+                    size={30}
+                    color="grey"
+                />
+            );
+        }
     });
 
     render() {

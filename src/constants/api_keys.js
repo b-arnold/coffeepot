@@ -17,5 +17,5 @@ export const GOOGLE_PLACES_API_KEY = "AIzaSyDIyZnKM6IU4jrs0RA2BEYj3chb96ptZe4";
 // Google Maps Distance Matrix API
 export const GOOGLE_MAPS_DISTANCE_MATRIX_API = "AIzaSyCgWoHINE9EtoWQaiVD9nCbJVvLRAqA-Ig";
 
-// // Google Maps Directions API
-// export const GOOGLE_MAPS_DIRECTIONS_API = 'AIzaSyB2wauhIi6ayPLFK3uQxSiYwFITQZdXCkU';
+// Google Maps Directions API
+export const GOOGLE_MAPS_DIRECTIONS_API = 'AIzaSyB2wauhIi6ayPLFK3uQxSiYwFITQZdXCkU';

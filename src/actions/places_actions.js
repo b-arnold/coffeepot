@@ -33,30 +33,56 @@ export const fetchPlaces = ( location ) => async dispatch => {
       longitudeDelta: 0.04, // Zoom level
       latitudeDelta: 0.09 // Zoom level
     };
-    const placesDataWithSearchRegion = { ...placesData, searchRegion };
 
+    const distanceData = [];
+
+    // console.log(placesData.results);
+    // console.log(placesData.results.length);
+
+    // Finds the distance between the origin and destination and pushes it into an array variable
+    for(const i = 0; i < placesData.results.length; i++) {
+      const result = await getDistance(location, placesData.results[i].geometry.location)
+      distanceData.push(result);
+    }
+
+    // Takes the results from distanceData and puts it into one object (will clarify later)
+    const placeDataAndDistData = {results: [] };
+    for(const i = 0; i < placesData.results.length; i++) {
+      const result = Object.assign(distanceData[i], placesData.results[i]);
+      placeDataAndDistData.results.push(result);
+    }
+    console.log(placeDataAndDistData.results);
+
+    // Puts the results into one variable
+    const placesDataWithSearchRegionAndDistance = { ...placeDataAndDistData, searchRegion };
+
+    
     // Dispatch the action and call the callback function
-
-    dispatch({ type: FETCH_PLACES, payload: placesDataWithSearchRegion });
+    dispatch({ type: FETCH_PLACES, payload: placesDataWithSearchRegionAndDistance });
     // console.log(placesDataWithSearchRegion)
   } catch (err) {
     console.error(err);
   }
 };
 
-// WIP
-export const fetchDistance = ( origin, destination ) => async dispatch => {
+// This will grab the distance of the given origin and destination
+// Is called from fetchPlaces
+async function getDistance (origin, destination) {
   try {
+    const begin = `${origin.latitude},${origin.longitude}`;
+    const end = `${destination.lat},${destination.lng}`;
+    //console.log(begin);
+    //console.log(end);
     const directionUrl = urlBuilder.buildDirectionsUrl(origin, destination);
     const directionResponse = await axios.get(directionUrl);
-    const directionData = directionResponse.data;
-    //console.log(directionData);
-
-    dispatch({ type: FETCH_DISTANCE, payload: directionData })
+    const directionData = directionResponse.data.routes[0].legs[0].distance;
+    // console.log('----------------')
+    // console.log(directionData);
+    return directionData;
   } catch (err) {
     console.error(err);
   }
-};
+}
 
 // This will load the details of the place that the user has selected
 export const loadPlaceDetails = (name, location, place_id, photos) => async dispatch => {

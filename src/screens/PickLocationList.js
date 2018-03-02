@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { Button, Card } from 'react-native-elements';
@@ -35,10 +36,15 @@ class PickLocationList extends Component {
                     longitude: position.coords.longitude,
                 }
             });
-            //console.log(this.state.region.latitude);
-            //console.log(this.state.region.longitude);
             //The action 'fetchPlaces' will search for places with the label 'cafe' with respect to the 'region' state (user's current position)
             this.props.fetchPlaces(this.state.region);
+
+            if(this.props.places !== null) {
+                this.props.places.map(places => {
+                    const { geometry } = places;
+                    this.props.fetchDistance(this.state.region, geometry.location)
+                })
+            }
         },
             (error) => console.log(new Date(), error),
             {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
@@ -47,7 +53,6 @@ class PickLocationList extends Component {
 
     renderBttn() {
         const { navigate } = this.props.navigation;
-
         return (
             <View
                 style={styles.button_style}
@@ -69,12 +74,11 @@ class PickLocationList extends Component {
 
     renderCards() {
         //const { navigate } = this.props.navigation;
-
         if(this.props.places !== null) {
-            return this.props.places.map(places => {
-                const { geometry, place_id, name, vicinity, photos } = places;
-                //console.log('///////////Pick Location Test///////////')
-                //console.log(photos);
+            console.log(this.props.places);
+            return this.props.places.map(places  => {
+                const { geometry, place_id, name, vicinity, photos, text } = places;
+                // const { text } = places.dist;
                 if(photos !== undefined) {
                     const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference);
                     return (
@@ -88,7 +92,10 @@ class PickLocationList extends Component {
                             <Card image={{uri: photoUrl}}>
                                 <View style={styles.description}>
                                     <Text style={{fontWeight: 'bold'}}>{name}</Text>
-                                    <Text>{vicinity}</Text>
+                                    <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                                        <Text>{vicinity}</Text>
+                                        <Text>{text}</Text>
+                                    </View>
                                 </View>
                             </Card>
                         </TouchableOpacity>
@@ -102,7 +109,10 @@ class PickLocationList extends Component {
                         <Card>
                             <View style={styles.description}>
                                 <Text style={{fontWeight: 'bold'}}>{name}</Text>
-                                <Text>{vicinity}</Text>
+                                <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <Text>{vicinity}</Text>
+                                    <Text>{text}</Text>
+                                </View>
                             </View>
                         </Card>
                     </TouchableOpacity>
@@ -139,16 +149,18 @@ const styles = {
 
 function mapStateToProps({ places }) {
     if (places.placesResponse === null ) {
-        console.log(places.placesResponse);
         return {
           places: null,
-          searchRegion: null
+          searchRegion: null,
         };
     }
-    return {
-        places: places.placesResponse.results,
-        searchRegion: places.placesResponse.searchRegion,
-    };
+    if(places.placesResponse !== null) {
+        console.log(places.placesResponse);
+        return {
+            places: places.placesResponse.results,
+            searchRegion: places.placesResponse.searchRegion,
+        };
+    }
 }
 
 export default connect(mapStateToProps, actions)(PickLocationList);

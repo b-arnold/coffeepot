@@ -108,43 +108,45 @@ class HomeScreen extends Component {
                                 style={{ fontSize: 50, color: 'white' }}
                             />
                         </View>
-                        <View>
-                            <View style={{ marginTop: 25 }}>
-                                <Button 
-                                    icon={{
-                                        name: 'ios-navigate',
-                                        type: 'ionicon',
-                                        size: 30
-                                    }}
-                                    title='Track Delivery'
-                                    buttonStyle={styles.button_style}
-                                    onPress={() => navigate('GPS')}
-                                />
-                            </View>
-                            <View style={{ marginTop: 25 }}>
-                                <Button 
-                                    icon={{
-                                        name: 'message',
-                                        type: 'entypo',
-                                        size: 30
-                                    }}
-                                    title='Message Deliverer'
-                                    buttonStyle={styles.button_style}
-                                    onPress={() => navigate('MessageScreen')}
-                                />
-                            </View>
-                            <View style={{ marginTop: 25 }}>
-                                <Button 
-                                    icon={{
-                                        name: 'circle-with-plus',
-                                        type: 'entypo',
-                                        size: 30
-                                    }}
-                                    title='Add Another Drink'
-                                    buttonStyle={styles.button_style}
-                                    onPress={this.onAddOrderPress}
-                                />
-                            </View>
+                        <View style={{
+                            alignItems: 'center',
+                        }}>
+                        
+                            <Button 
+                                style = {{margin: 25}}
+                                icon={{
+                                    name: 'ios-navigate',
+                                    type: 'ionicon',
+                                    size: 30
+                                }}
+                                title='Track Delivery'
+                                buttonStyle={styles.button_style}
+                                onPress={() => navigate('GPS')}
+                            />
+                        
+                            <Button 
+                                style = {{margin: 25}}
+                                icon={{
+                                    name: 'message',
+                                    type: 'entypo',
+                                    size: 30
+                                }}
+                                title='Message Deliverer'
+                                buttonStyle={styles.button_style}
+                                onPress={() => navigate('MessageScreen')}
+                            />
+                        
+                            <Button 
+                                style = {{margin: 25}}
+                                icon={{
+                                    name: 'circle-with-plus',
+                                    type: 'entypo',
+                                    size: 30
+                                }}
+                                title='Add Another Drink'
+                                buttonStyle={styles.button_style}
+                                onPress={this.onAddOrderPress}
+                            />
                         </View>
                     </View>
                 </ImageBackground>

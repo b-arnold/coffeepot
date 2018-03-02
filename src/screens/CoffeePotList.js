@@ -65,30 +65,6 @@ class CoffeePotList extends Component {
         const COFFEE_CUP_IMAGE = require('../images/CoffeeCupTest.png');
         return (
             <ScrollView>
-                <View style={styles.view_bttn}>
-                    <Button 
-                        iconRight={{
-                            name: 'plus-circle',
-                            type: 'material-community',
-                            size: 25
-                        }}
-                        title='Place Order'
-                        buttonStyle={styles.button_style}
-                        rounded
-                    />
-                    <Button 
-                        iconRight={{
-                            name: 'map-marker',
-                            type: 'font-awesome',
-                            size: 25
-                        }}
-                        title='GPS View'
-                        buttonStyle={styles.button_style}
-                        rounded
-                        onPress={() => navigate('GPSMap')}
-                    />
-                </View>
-
                 <View
                     style={{
                         flexDirection: 'row',
@@ -513,12 +489,6 @@ class CoffeePotList extends Component {
 //////////////////////////////////////////////////////////////////////////////
 // Style object
 const styles = {
-    view_bttn: {
-        flex:1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginTop:10
-    },
     view_card: {
         justifyContent: 'center'
     },

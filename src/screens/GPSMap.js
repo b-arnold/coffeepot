@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Geolocation, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, Geolocation, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
 import { Button, Icon, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import MapView, { Marker, Callout } from 'react-native-maps';
@@ -55,6 +55,8 @@ class GPSMap extends Component {
     //The 'region' state object will contain latitude and longitude of the user
     state = { region:{} };
 
+    //////////////////////////////////////////////////////
+    // Component
     componentWillMount() {
         // console.log(this.state.location);
         navigator.geolocation.getCurrentPosition((position) => {
@@ -82,12 +84,15 @@ class GPSMap extends Component {
         }
     }
 
+    
+    //////////////////////////////////////////////////////
+    // Render Components
     renderMarkers() {
         //console.log(this.props.places);
         const { navigate } = this.props.navigation
         if(this.props.places !== null) {
             return this.props.places.map(places => {
-                const { geometry, place_id, name, vicinity, photos } = places;
+                const { geometry, place_id, name, vicinity, photos, text } = places;
                 if(photos !== undefined) {
                     const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference)
                     return (
@@ -101,16 +106,26 @@ class GPSMap extends Component {
                     >
                         <Callout>
                             <TouchableOpacity
-                                key={place_id}
-                                onPress={() => this.props.navigation.navigate('PickedLocation', {headerTitle: name})}
-                            >
-                                <Card image={{uri: photoUrl}}>
-                                    <View style={styles.description}>
+                                    key={place_id}
+                                    
+                                    onPress={() => {
+                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos);
+                                            this.props.navigation.navigate('PickedLocation', {headerTitle: name});
+                                        }
+                                    }
+                                >
+                                <View style={styles.content}>
+                                    <Image
+                                        source={{uri: photoUrl}}
+                                        style = {styles.image_style}
+                                    />
+                                    <View style = {styles.description}>
                                         <Text style={{fontWeight: 'bold'}}>{name}</Text>
                                         <Text>{vicinity}</Text>
+                                        <Text>{text}</Text>
                                     </View>
-                                </Card>
-                            </TouchableOpacity>
+                                </View>
+                            </TouchableOpacity> 
                         </Callout>
                     </Marker>
                 );
@@ -122,10 +137,28 @@ class GPSMap extends Component {
                             latitude: geometry.location.lat,
                             longitude: geometry.location.lng
                         }}
-                        title={name}
-                        description={vicinity}
                         pinColor='red'
-                    />
+                    >
+                        <Callout>
+                            <TouchableOpacity
+                                    key={place_id}
+                                    
+                                    onPress={() => {
+                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos);
+                                            this.props.navigation.navigate('PickedLocation', {headerTitle: name});
+                                        }
+                                    }
+                                >
+                                <View style={styles.content}>
+                                    <View style = {styles.description}>
+                                        <Text style={{fontWeight: 'bold'}}>{name}</Text>
+                                        <Text>{vicinity}</Text>
+                                        <Text>{text}</Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity> 
+                        </Callout>
+                    </Marker>
                 );
         })}
     }
@@ -173,6 +206,8 @@ class GPSMap extends Component {
     }
 }
 
+//////////////////////////////////////////////////////
+//Styles Object
 const styles = {
     container: {
         position: 'absolute',
@@ -193,6 +228,20 @@ const styles = {
     button_style: {
         width: 130,
         backgroundColor: BUTTON_COLOR
+    },
+    content: {
+        flex: 1,
+        flexDirection: 'row'
+    },
+    image_style: {
+        margin: 5, 
+        width: 80, 
+        height: 70
+    },
+    description: {
+        flex: 1,
+        flexDirection: 'column',
+        margin: 10
     }
 };
 
@@ -208,7 +257,7 @@ function mapStateToProps({ places }) {
     // console.log(places.placesResponse.results);
     // console.log('/////////////////////////////////////////////////////////')
     // console.log(places.placesResponse.searchRegion);
-
+    console.log(places.placesResponse);
     return {
         places: places.placesResponse.results,
         searchRegion: places.placesResponse.searchRegion
