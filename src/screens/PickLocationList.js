@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import * as urlBuilder from '../utility/url_builder';
 
-// Constant Style
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 
@@ -86,7 +85,7 @@ class PickLocationList extends Component {
                         <TouchableOpacity
                             key={place_id}
                             onPress={() => {
-                                this.props.loadPlaceDetails(name, vicinity, place_id, photos);
+                                this.props.loadPlaceDetails(name, vicinity, place_id, photos, text);
                                 this.props.navigation.navigate('PickedLocation', {headerTitle: name})}
                             }
                         >

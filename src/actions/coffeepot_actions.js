@@ -16,3 +16,7 @@ export const addOrder = cup => ({
     type: ADD_ORDER,
     payload: cup
 });
+
+export const createCoffeePot = () => ({
+    
+});

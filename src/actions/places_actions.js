@@ -7,21 +7,8 @@ import * as urlBuilder from '../utility/url_builder';
 // Makes multiple calls to Google Maps APIs to obtain places info.
 // Inputs: place (Restaurant Name String), location (Address String)
 export const fetchPlaces = ( location ) => async dispatch => {
-  // We have lat/long value from user's map locatino - indeed
-  // expects city/state or postal code - need to convert
-
   try {
-    // Get the latitude/longitude from city/address using Google Geocode API Service
-    // const geocodeUrl = urlBuilder.buildGeocodeUrl(location);
-    // const { data } = await axios.get(geocodeUrl);
-    // const latLongCoords = data.results[0].geometry.location;
-    // console.log(geocodeUrl);
-    //console.log(latLongCoords);
-
     // Get the places using Google Places API Service
-    //console.log(latitude);
-    //console.log(longitude);
-    //console.log(location);
     const placesUrl = urlBuilder.buildPlacesUrl(location);
     const placesResponse = await axios.get(placesUrl);
     const placesData = placesResponse.data;
@@ -34,10 +21,8 @@ export const fetchPlaces = ( location ) => async dispatch => {
       latitudeDelta: 0.09 // Zoom level
     };
 
+    // This will hold the data for the distance from each place from user's location
     const distanceData = [];
-
-    // console.log(placesData.results);
-    // console.log(placesData.results.length);
 
     // Finds the distance between the origin and destination and pushes it into an array variable
     for(const i = 0; i < placesData.results.length; i++) {
@@ -52,18 +37,25 @@ export const fetchPlaces = ( location ) => async dispatch => {
       placeDataAndDistData.results.push(result);
     }
 
+    const holder = null;
+    for(const i =0; i < placeDataAndDistData.length; i++) {
+      if(holder === null) {
+        placesDataAndDistData
+      }
+    }
+
     // Puts the results into one variable
     const placesDataWithSearchRegionAndDistance = { ...placeDataAndDistData, searchRegion };
 
     
     // Dispatch the action and call the callback function
     dispatch({ type: FETCH_PLACES, payload: placesDataWithSearchRegionAndDistance });
-    // console.log(placesDataWithSearchRegion)
   } catch (err) {
     console.error(err);
   }
 };
 
+///////////////////////////////////////////////////////////////////////////////
 // This will grab the distance of the given origin and destination
 // Is called from fetchPlaces
 async function getDistance (origin, destination) {
@@ -79,16 +71,11 @@ async function getDistance (origin, destination) {
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////
 // This will load the details of the place that the user has selected
-export const loadPlaceDetails = (name, location, place_id, photos) => async dispatch => {
+export const loadPlaceDetails = (name, location, place_id, photos, dist) => async dispatch => {
   try {
-    //console.log('////////loadPlaceDetail//////////');
-    // console.log(name);
-    // console.log(location);
-    // console.log(place_id);
-    // console.log(photos);
-    const placeData = {name, location, place_id, photos}
-    //console.log(placeData);
+    const placeData = {name, location, place_id, photos, dist}
 
     dispatch({ type: LOAD_PLACE_DETAILS, payload: placeData })
   } catch (err) {
