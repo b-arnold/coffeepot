@@ -1,6 +1,7 @@
 import {
     START_TIME,
-    ADD_ORDER
+    ADD_ORDER,
+    UPDATE_COUNT_DOWN
 } from './types.js';
 
 /////////////////////////////////////////////////////////
@@ -15,4 +16,11 @@ export const startTime = time => ({
 export const addOrder = cup => ({
     type: ADD_ORDER,
     payload: cup
+});
+
+/////////////////////////////////////////////////////////
+//// Subtracting time from the count down
+export const updateCountDown = count => ({
+    type: UPDATE_COUNT_DOWN,
+    payload: count
 });
