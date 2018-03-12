@@ -108,9 +108,10 @@ export const signupUser = (email, password, passwordRetype, firstName, lastName)
     const { user } = await firebase.auth().createUserWithEmailAndPassword(email, password);
     const { currentUser } = firebase.auth();
 
-    // push firt and lastname to the database during account creation
-    await firebase.database().ref(`/users/${currentUser.uid}/name_field`)
-      .push({ firstName, lastName })
+    // push first and lastname to the database during account creation
+    await firebase.database().ref(`/users/${currentUser.uid}/name_field/`)
+      // .set allows no uid after /name_field/ easier for grabing data
+      .set({ firstName, lastName })
       .then(() => {
         authUserSuccess(dispatch, user);
       });

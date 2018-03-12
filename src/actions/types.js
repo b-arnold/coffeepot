@@ -17,4 +17,8 @@ export const ADD_ORDER = 'add_order';
 export const ADD_NAME_SUCCESS = 'add_name_success';
 
 // PLACES TYPES
-export const FETCH_PLACES = "fetch_places";
+export const FETCH_PLACES = 'fetch_places';
+
+// PROFILE_ACTIONS
+export const FIRST_NAME_CHANGED = 'first_name_changed';
+export const LAST_NAME_CHANGED = 'last_name_changed';
