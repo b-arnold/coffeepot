@@ -15,6 +15,7 @@ export const AUTH_SIGNOUT_USER = 'auth_user_signout';
 export const START_TIME = 'start_time';
 export const ADD_ORDER = 'add_order';
 export const ADD_NAME_SUCCESS = 'add_name_success';
+export const UPDATE_COUNT_DOWN = 'update_count_down';
 
 // PLACES TYPES
 export const FETCH_PLACES = "fetch_places";

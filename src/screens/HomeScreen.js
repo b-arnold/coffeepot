@@ -6,14 +6,27 @@ import {
     ImageBackground, 
     Image
 } from 'react-native';
+import { AppLoading, Asset } from 'expo';
 import { Button, Card, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
-import TimerCountdown from 'react-native-timer-countdown';
 import { Spinner } from '../components/Spinner';
+import CountDown from '../components/CountDown';
+import HomeCoffeePot from '../components/HomeCoffeePot';
 import * as actions from '../actions';
-import { CoffeePot } from '../components/CoffeePot';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+
+///////////////////////////////////////////////////////////////////
+//  Method taken from Expo documents
+function cacheImages(images) {
+    return images.map(image => {
+      if (typeof image === 'string') {
+        return Image.prefetch(image);
+      } else {
+        return Asset.fromModule(image).downloadAsync();
+      }
+    });
+}
 
 class HomeScreen extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -62,17 +75,25 @@ class HomeScreen extends Component {
     ///////////////////////////////////////////////////////////
     //// State of current CoffeePot
     state = {
-        time: 0,
-        alreadyStarted: false
+        time: null,
+        alreadyStarted: false,
     }
 
     componentWillMount() {
         // Sets state to start Coffee Pot for 10 minutes
-        if (this.state.alreadyStarted === false) {
-            if (this.props.time === true) {
-                this.setState({ time: 600000 });
-            }
+        if (this.props.time === true) {
+            this.setState({ alreadyStarted: true })
         }
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //  Method taken from Expo documents
+    async _loadAssetsAsync() {
+        const imageAssets = cacheImages([
+            require('../images/CoffeePot-Logo-White-02.png')
+        ]);
+
+        await Promise.all([...imageAssets]);
     }
 
     onAddOrderPress = () => {
@@ -81,11 +102,10 @@ class HomeScreen extends Component {
         console.log(this.props.drinks);
     }
 
-    render() {
+    renderCoffeePot = () => {
         const { navigate } = this.props.navigation;
-
         return (
-                <ImageBackground 
+            <ImageBackground 
                     style={{
                     width: '100%',
                     height: '100%',
@@ -93,13 +113,7 @@ class HomeScreen extends Component {
                 source={require('../images/background.jpg')}
                 >
                     <View>
-                        <CoffeePot 
-                            endTime = "600000"
-                            startTime = "0"
-                            coffeeShop = "null"
-                            orderNum = "null"
-                            orders = "null"
-                        />
+                        <HomeCoffeePot />
                         <View>
                             <View style={{ marginTop: 25 }}>
                                 <Button 
@@ -110,7 +124,7 @@ class HomeScreen extends Component {
                                     }}
                                     title='Track Delivery'
                                     buttonStyle={styles.button_style}
-                                    onPress={() => navigate('GPS')}
+                                    onPress={() => navigate('TrackDelivery')}
                                 />
                             </View>
                             <View style={{ marginTop: 25 }}>
@@ -140,8 +154,87 @@ class HomeScreen extends Component {
                         </View>
                     </View>
                 </ImageBackground>
-                
         );
+    }
+
+    renderStartScreen = () => {
+        return (
+            <ImageBackground 
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                        }}
+                        source={require('../images/background.jpg')}
+                        >
+                        <View style={{ alignItems: 'flex-end', backgroundColor: 'transparent', marginRight: 30 }}>
+                            <View style={{ transform: [{ rotate: '-45deg'}] }}>
+                                <Icon 
+                                    type='action'
+                                    name='trending-flat'
+                                    color='red'
+                                    size={100}
+                                />
+                            </View>
+                            <View style={{ marginRight: 30 }}>
+                                <Text style={{ fontSize: 15, color: 'white' }}>
+                                        Place an order
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={styles.background}>
+                            <View style={{ alignItems: 'center', marginTop: 100, marginBottom: 160 }}>
+                                <Text style={{ fontSize: 25, color: 'white' }}>
+                                    Haven't joined a Coffee Pot?
+                                </Text>
+                                <Text style={{ fontSize: 25, color: 'white' }}>
+                                    Let's fix that!
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={{ 
+                                alignItems: 'flex-start', 
+                                backgroundColor: 'transparent',   
+                            }}>
+                            <View style={{ marginLeft: 10 }}>
+                                <Text style={{ fontSize: 15, color: 'white' }}>
+                                        Join a Coffee Pot
+                                </Text>
+                            </View>
+                            <View style={{ transform: [{ rotate: '45deg'}], marginLeft: 45 }}>
+                                <Icon 
+                                    type='action'
+                                    name='trending-flat'
+                                    color='red'
+                                    size={100}
+                                />
+                            </View>
+                        </View>
+                    </ImageBackground>
+        );
+    }
+
+    render() {
+
+        ///////////////////////////////////////////////////////////////////
+        //  Method taken from Expo documents
+        if( !this.state.isReady ) {
+            return (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <AppLoading 
+                        startAsync={this._loadAssetsAsync}
+                        onFinish={() => this.setState({ isReady: true })}
+                        onError={console.warn}
+                    />
+                    <Spinner size="large"/> 
+                </View>
+            );
+        }
+        else {
+            if ( this.state.alreadyStarted == true )
+                return ( this.renderCoffeePot() );
+            else
+                return ( this.renderStartScreen() );
+        }
     }
 }
 
@@ -150,7 +243,7 @@ class HomeScreen extends Component {
 function mapStateToProps({ coffee }) {
     return {
         time: coffee.time,
-        drinks: coffee.drinks
+        drinks: coffee.drinks,
     };
 }
 

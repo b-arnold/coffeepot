@@ -29,6 +29,8 @@ class PaymentConfirmationScreen extends Component {
 
   onConfirmPress = () => {
     this.props.startTime(true);
+    const drinks = this.props.drinks + 1;
+    this.props.addOrder(drinks);
     console.log('Coffee Pot initialized');
 
     this.props.navigation.navigate('ReceiptScreen');
@@ -120,7 +122,8 @@ const styles = {
 
 function mapStateToProps({ coffee }) {
   return {
-      time: coffee.time
+      time: coffee.time,
+      drinks: coffee.drinks
   };
 }
 
