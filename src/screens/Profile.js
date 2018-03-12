@@ -119,7 +119,6 @@ class Profile extends Component {
                         </View>
                     </View>
                 </View>
-                
                 <Card>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ marginLeft: 10, marginRight: 20 }}>
