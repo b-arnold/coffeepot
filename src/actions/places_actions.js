@@ -37,10 +37,16 @@ export const fetchPlaces = ( location ) => async dispatch => {
       placeDataAndDistData.results.push(result);
     }
 
+    // (WIP) This will arrange the data in the array so that it will be from nearest to farthest
+    sortData(placeDataAndDistData);
     const holder = null;
-    for(const i =0; i < placeDataAndDistData.length; i++) {
-      if(holder === null) {
-        placesDataAndDistData
+    for(const i = 0; i <= placeDataAndDistData.length-1; i++) {
+      if(placeDataAndDistData[i+1].text < placeDataAndDistData[i].text) {
+        holder = placeDataAndDistData[i];
+        placeDataAndDistData[i] = placeDataAndDistData[i+1];
+        placeDataAndDistData[i+1] = holder;
+        console.log('----------Sort-----------');
+        console.log(placeDataAndDistData);
       }
     }
 
@@ -69,6 +75,14 @@ async function getDistance (origin, destination) {
   } catch (err) {
     console.error(err);
   }
+}
+
+function sortData(data) {
+  
+  
+
+
+  return data
 }
 
 ///////////////////////////////////////////////////////////////////////////////
