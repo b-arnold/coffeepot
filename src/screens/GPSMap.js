@@ -68,7 +68,7 @@ class GPSMap extends Component {
             this.props.fetchPlaces(this.state.region);
         },
         (error) => console.log(new Date(), error),
-        {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
+        { enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
     );
     }
 
@@ -123,7 +123,7 @@ class GPSMap extends Component {
 
     render() {
         const { navigate } = this.props.navigation
-        console.log(this.state.region.latitude);
+        //console.log(this.state.region.latitude);
         if(this.state.region.latitude !== undefined)
         {
             return (

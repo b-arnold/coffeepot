@@ -21,7 +21,6 @@ export const fetchPlaces = ( location ) => async dispatch => {
     // Get the places using Google Places API Service
     //console.log(latitude);
     //console.log(longitude);
-    console.log(location);
     const placesUrl = urlBuilder.buildPlacesUrl(location);
     const placesResponse = await axios.get(placesUrl);
     const placesData = placesResponse.data;

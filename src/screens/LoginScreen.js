@@ -200,14 +200,14 @@ class LoginScreen extends Component {
         <View style={styles.nameStyle}>
           <FormInput
             placeholder="First Name"
-            inputStyle={{ color: 'white', left: 10, marginTop: 7 }}
+            inputStyle={{ color: 'black', left: 10, marginTop: 7 }}
             containerStyle={{ backgroundColor: 'white', height: 50, borderRadius: 7, width: 150 }}
             value={this.props.firstName}
             onChangeText={this.onFirstNameChange}
           />
           <FormInput
             placeholder="Last Name"
-            inputStyle={{ color: 'white', left: 10, marginTop: 7 }}
+            inputStyle={{ color: 'black', left: 10, marginTop: 7 }}
             containerStyle={{ backgroundColor: 'white', height: 50, borderRadius: 7, width: 150 }}
             value={this.props.lastName}
             onChangeText={this.onLastNameChange}
@@ -228,7 +228,7 @@ class LoginScreen extends Component {
             secureTextEntry
             value={this.props.passwordRetype}
             onChangeText={this.onPasswordRetypeChange}
-            inputStyle={{ color: 'white', left: 10, marginTop: 7 }}
+            inputStyle={{ color: 'black', left: 10, marginTop: 7 }}
             containerStyle={{ backgroundColor: 'white', height: 50, borderRadius: 7 }}
           />
         </View>
