@@ -113,61 +113,44 @@ class HomeScreen extends Component {
                 source={require('../images/background.jpg')}
                 >
                     <View>
-                        <View style={styles.background}>
-                            <Image
-                                source={require('../images/CoffeePot-Logo-White-02.png')}
-                                style={{
-                                    width: 250,
-                                    height: 250,
-                                }}
-                            />
-                            <TimerCountdown
-                                initialSecondsRemaining={this.state.time}
-                                //onTick={() => this.setState({ alreadyStarted: true })}
-                                //onTimeElapsed={() => this.setState({ alreadyStarted: false })}
-                                //allowFontScaling='true'
-                                style={{ fontSize: 50, color: 'white' }}
-                            />
-                        </View>
-                        <View style={{
-                            alignItems: 'center',
-                        }}>
-                        
-                            <Button 
-                                style = {{margin: 25}}
-                                icon={{
-                                    name: 'ios-navigate',
-                                    type: 'ionicon',
-                                    size: 30
-                                }}
-                                title='Track Delivery'
-                                buttonStyle={styles.button_style}
-                                onPress={() => navigate('GPS')}
-                            />
-                        
-                            <Button 
-                                style = {{margin: 25}}
-                                icon={{
-                                    name: 'message',
-                                    type: 'entypo',
-                                    size: 30
-                                }}
-                                title='Message Deliverer'
-                                buttonStyle={styles.button_style}
-                                onPress={() => navigate('MessageScreen')}
-                            />
-                        
-                            <Button 
-                                style = {{margin: 25}}
-                                icon={{
-                                    name: 'circle-with-plus',
-                                    type: 'entypo',
-                                    size: 30
-                                }}
-                                title='Add Another Drink'
-                                buttonStyle={styles.button_style}
-                                onPress={this.onAddOrderPress}
-                            />
+                        <HomeCoffeePot />
+                        <View>
+                            <View style={{ marginTop: 25 }}>
+                                <Button 
+                                    icon={{
+                                        name: 'ios-navigate',
+                                        type: 'ionicon',
+                                        size: 30
+                                    }}
+                                    title='Track Delivery'
+                                    buttonStyle={styles.button_style}
+                                    onPress={() => navigate('TrackDelivery')}
+                                />
+                            </View>
+                            <View style={{ marginTop: 25 }}>
+                                <Button 
+                                    icon={{
+                                        name: 'message',
+                                        type: 'entypo',
+                                        size: 30
+                                    }}
+                                    title='Message Deliverer'
+                                    buttonStyle={styles.button_style}
+                                    onPress={() => navigate('MessageScreen')}
+                                />
+                            </View>
+                            <View style={{ marginTop: 25 }}>
+                                <Button 
+                                    icon={{
+                                        name: 'circle-with-plus',
+                                        type: 'entypo',
+                                        size: 30
+                                    }}
+                                    title='Add Another Drink'
+                                    buttonStyle={styles.button_style}
+                                    onPress={this.onAddOrderPress}
+                                />
+                            </View>
                         </View>
                     </View>
                 </ImageBackground>
