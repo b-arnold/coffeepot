@@ -35,6 +35,7 @@ import ExistingOrder from './src/screens/ExistingOrder';
 import PickLocationList from './src/screens/PickLocationList';
 import PickedLocation from './src/screens/PickedLocation';
 import PlaceOrder from './src/screens/PlaceOrder';
+import OrderGPSMap from './src/screens/OrderGPSMap';
 import InputCoffeeOrderScreen from './src/screens/InputCoffeeOrderScreen';
 
 // Authenticaiton Screens
@@ -152,7 +153,7 @@ export default class App extends React.Component {
     });
 
     const GPSNav = StackNavigator({
-      GPSMap: { screen: GPSMap },
+      OrderGPSMap: { screen: OrderGPSMap },
       PlaceOrder: { screen: PlaceOrder },
       PaymentScreen: { screen: PaymentScreen },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
