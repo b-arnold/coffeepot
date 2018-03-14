@@ -28,6 +28,39 @@ export class PlaceOrder extends Component {
         //navigate('PaymentScreen');
     }
 
+    renderLocation() {
+        const { navigate } = this.props.navigation;
+        if(this.props.places !== null) {
+            console.log('PlaceOrder.js---------');
+            console.log(this.props.places);
+            return (
+                <Card>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text
+                            flex={1}
+                            onPress={() => navigate('OrderGPSMap')}
+                        >
+                            Location: 
+                        </Text>
+                        {/*<Text>{this.props.places.vicinity}</Text>*/}
+                    </View>
+                </Card>
+            );
+        }
+        return (
+            <Card>
+            <View style={{ flexDirection: 'row' }}>
+                <Text
+                    flex={1}
+                    onPress={() => navigate('OrderGPSMap')}
+                >
+                    Tap To Select Location
+                </Text>
+            </View>
+        </Card>
+        );
+    }
+
     render() {
         const { navigate } = this.props.navigation;
         return (
@@ -44,17 +77,7 @@ export class PlaceOrder extends Component {
                             />
                         </View>
                     </Card>
-                    <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text
-                                flex={1}
-                                onPress={() => navigate('GPSMap')}
-                            >
-                                Location: 
-                            </Text>
-                            <Text>{this.props.location}</Text>
-                        </View>
-                    </Card>
+                    {this.renderLocation()}
                     <Card>
                         <View style={{ flexDirection: 'column' }}>
                             <Text style ={styles.title_style}>Order:{"\n"}</Text>
@@ -114,6 +137,12 @@ const styles = {
 
 /////////////////////////////////////////////////////////
 // Map redux reducers to component mapStateToProps
+// function mapStateToProps({ places }) {
+//     return {
+//         places: places.selectedPlace
+//     };
+// }
+
 function mapStateToProps({ order }) {
     return {
         name: order.name,

@@ -6,12 +6,21 @@ import {
     //ORDER_SAVE_SUCCESS
 } from './types';
 
-export const orderUpdate = ({prop, value}) => {
+// export const locationUpdate = ( vicinity, place_id) => {
+//     const placeData = {vicinity, place_id}
+//     console.log(placeData);
+//     return {
+//         type: ORDER_UPDATE,
+//         payload: placeData
+//     };
+// };
+export const orderUpdate = ({ prop, value }) => {
+    console.log(value);
     return {
-        type: ORDER_UPDATE,
-        payload: { prop, value}
+      type: ORDER_UPDATE,
+      payload: { prop, value }
     };
-};
+  };
 
 export const orderCreate = ({name, location, drink}) => {
     const {currentUser} = firebase.auth();

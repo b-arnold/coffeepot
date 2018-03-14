@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, Geolocation, ActivityIndicator, TouchableOpacity, Animated } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { View, Text, Geolocation, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
+import { Button, Icon, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, Callout } from 'react-native-maps';
 
 import * as actions from '../actions';
+import * as urlBuilder from '../utility/url_builder';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 class GPSMap extends Component {
+    ///////////////////////////////////////////////////////////////////////////////
+    // Customizes the stacknavigation header
     static navigationOptions = ({navigation}) => ({
         title: 'GPS Map',
         headerStyle: {
@@ -50,86 +53,117 @@ class GPSMap extends Component {
         }
     })
 
+    ///////////////////////////////////////////////////////////////////////////////
     //defining state
+    //The 'region' state object will contain latitude and longitude of the user
     state = { region:{} };
 
+    ///////////////////////////////////////////////////////////////////////////////
+    // Before anything is loaded, this will set the region to the user's current position
+    // Then it will fetch the places that is nearby the user's location.  (nearby is determined by the radius set in "url_builder.js")
     componentWillMount() {
-        this.index = 0;                                     // Better marker indexing than random chars
-        this.animation = new Animated.Value(0);
-        // console.log(this.state.location);
         navigator.geolocation.getCurrentPosition((position) => {
-            //console.log(position);
+            // Changes the state of region to user's current location
             this.setState({
                 region: {
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude,
                 }
             });
-            //console.log(this.state.region.latitude);
-            //console.log(this.state.region.longitude);
+            //The action 'fetchPlaces' will search for places with the label 'cafe' with respect to the 'region' state (user's current position)
             this.props.fetchPlaces(this.state.region);
         },
-        (error) => console.log(new Date(), error),
-        {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
-    );
+            (error) => console.log(new Date(), error),
+            {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
+        );
     }
-
-    componentWillReceiveProps(nextProps) {
-        if (this.props !== nextProps) {
-            //console.log('received prop')
-            this.setState({ places: nextProps.places });
-        }
-    }
-////////////////////////////////////HELP -read console after you click on a location
-//////// prints to console but does not update. Can't figure out to update it in mapstatetoprops
-/////without it crashing... 
-/////so write a name, choose a location and press place order...
-
-    onButtonPress(places){
-        var markerID = null;
-        const { navigate } = this.props.navigation;
-        markerID = String(places.place_id);
-        this.props.location = markerID;
-        console.log(places.place_id);
-        console.log(markerID);
-        console.log(places.name);
-        this.props.orderUpdate({prop: 'location', markerID});
-        navigate('PlaceOrder');
-    }
-
+    
+    ///////////////////////////////////////////////////////////////////////////////
+    // This render method will place a marker on each location that si received from "fetchPlaces()"
     renderMarkers() {
         //console.log(this.props.places);
+        const { navigate } = this.props.navigation
         if(this.props.places !== null) {
             return this.props.places.map(places => {
-                const { geometry, place_id, name, vicinity, photos } = places;
-                return (
-                    <MapView.Marker
+                const { geometry, place_id, name, vicinity, photos, text } = places;
+                if(photos !== undefined) {
+                    const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference)
+                    return (
+                    <Marker
                         key={place_id}
                         coordinate={{
                             latitude: geometry.location.lat,
                             longitude: geometry.location.lng
                         }}
-                        title={name}
-                        description={vicinity}
-                        onPress={() => this.onButtonPress(places)}
+                        pinColor='red'
                     >
-                        <Animated.View >
-                            <Animated.View style={[styles.ring]}/>
-                            <View style={styles.Marker}/>
-                        </Animated.View>
-                    </MapView.Marker>
-
+                        {/* Callout customizes the information that is shown when a marker is selected */}
+                        <Callout>
+                            <TouchableOpacity
+                                    key={place_id}
+                                    
+                                    onPress={() => {
+                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos);
+                                            this.props.navigation.navigate('PickedLocation', {headerTitle: name});
+                                        }
+                                    }
+                                >
+                                <View style={styles.content}>
+                                    <Image
+                                        source={{uri: photoUrl}}
+                                        style = {styles.image_style}
+                                    />
+                                    <View style = {styles.description}>
+                                        <Text style={styles.bold}>{name}</Text>
+                                        <Text>{vicinity}</Text>
+                                        <Text>{text}</Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity> 
+                        </Callout>
+                    </Marker>
                 );
-                console.log(places.placeid);
+                }
+                // If there is no valid photo reference, it will render a marker with no photo (Weh)
+                return (
+                    <Marker
+                        key={place_id}
+                        coordinate={{
+                            latitude: geometry.location.lat,
+                            longitude: geometry.location.lng
+                        }}
+                        pinColor='red'
+                    >
+                        <Callout>
+                            <TouchableOpacity
+                                    key={place_id}
+                                    onPress={() => {
+                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos);
+                                            this.props.navigation.navigate('PickedLocation', {headerTitle: name});
+                                        }
+                                    }
+                                >
+                                <View style={styles.content}>
+                                    <View style = {styles.description}>
+                                        <Text style={styles.bold}>{name}</Text>
+                                        <Text>{vicinity}</Text>
+                                        <Text>{text}</Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity> 
+                        </Callout>
+                    </Marker>
+                );
         })}
     }
-
+    ///////////////////////////////////////////////////////////////////////////////
+    // Renders the map with specific settings and calls the render marker method
     renderMap() {
         return (
             <View style = {styles.container}>
                 <MapView
                     style={styles.map}
-                    mapType='standard'
+                    mapType='hybrid'
                     initialRegion={{
                         latitude: this.state.region.latitude,
                         longitude: this.state.region.longitude,
@@ -139,6 +173,7 @@ class GPSMap extends Component {
                     showsUserLocation={true}
                     showsPointsOfInterest={false}
                     showsMyLocationButton={true}
+                    rotateEnabled={false}
                 >
                    {this.renderMarkers()}
                 </MapView>
@@ -146,9 +181,11 @@ class GPSMap extends Component {
         );
     }
 
+    ///////////////////////////////////////////////////////////////////////////////
+    // Main Render Method
     render() {
         const { navigate } = this.props.navigation
-        console.log(this.state.region.latitude);
+        //console.log(this.state.region.latitude);
         if(this.state.region.latitude !== undefined)
         {
             return (
@@ -166,6 +203,8 @@ class GPSMap extends Component {
     }
 }
 
+//////////////////////////////////////////////////////
+//Styles Object
 const styles = {
     container: {
         position: 'absolute',
@@ -187,40 +226,32 @@ const styles = {
         width: 130,
         backgroundColor: BUTTON_COLOR
     },
-    markerWrap: {
-        alignItems: 'center',
-        justifyContent: 'center',
+    content: {
+        flex: 1,
+        flexDirection: 'row'
     },
-    marker: {
-        width: 8,
-        height: 8,
-        borderRadius: 4,
-        backgroundColor: 'rgba(130,4,150,0.9',
+    image_style: {
+        margin: 5, 
+        width: 80, 
+        height: 70
     },
-    ring: {
-        width: 24,
-        height: 24,
-        borderRadius: 12,
-        backgroundColor: 'rgba(130,4,150,0.3)',
-        position: 'absolute',
-        borderWidth: 1,
-        borderColor: 'rgba(130,4,150,0.5)',
+    description: {
+        flex: 1,
+        flexDirection: 'column',
+        margin: 10
+    },
+    bold: {
+        fontWeight: 'bold'
     }
 };
 
+///////////////////////////////////////////////////////////////////////////////
+// MapStateToProps
+// places the data that we received from our action and reducers into a variable
 function mapStateToProps({ places }) {
     if (places.placesResponse === null) {
-        //console.log(places.placesResponse);
-        return {
-          places: null,
-          searchRegion: null,
-        };
+        return { places: null, searchRegion: null };
     }
-    //  console.log('/////////////////////////////////////////////////////////')
-    //  console.log(places.placesResponse.results);
-    //  console.log('/////////////////////////////////////////////////////////')
-    //  //console.log(places.placesResponse.searchRegion);
-
     return {
         places: places.placesResponse.results,
         searchRegion: places.placesResponse.searchRegion
