@@ -114,22 +114,6 @@ class HomeScreen extends Component {
                 >
                     <View>
                         <HomeCoffeePot />
-                        <View style={styles.background}>                     
-                            {<Image
-                                source={require('../images/CoffeePot-Logo-White-02.png')}
-                                style={{
-                                    width: 250,
-                                    height: 250,
-                                }}
-                            />}
-                            <TimerCountdown
-                                initialSecondsRemaining={this.state.time}
-                                onTick={() => this.setState({ alreadyStarted: true })}
-                                onTimeElapsed={() => this.setState({ alreadyStarted: false })}
-                                allowFontScaling='true'
-                                style={{ fontSize: 50, color: 'white' }}
-                            />
-                        </View>
                         <View>
                             <View style={{ marginTop: 25 }}>
                                 <Button 
