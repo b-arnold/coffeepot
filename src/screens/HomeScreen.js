@@ -113,12 +113,7 @@ class HomeScreen extends Component {
                 source={require('../images/background.jpg')}
                 >
                     <View>
-<<<<<<< HEAD
                         <HomeCoffeePot />
-=======
-<<<<<<< HEAD
-                        <HomeCoffeePot />
-=======
                         <View style={styles.background}>                     
                             {/*<Image
                                 source={require('../images/CoffeePot-Logo-White-02.png')}
@@ -129,14 +124,12 @@ class HomeScreen extends Component {
                             />*/}
                             <TimerCountdown
                                 initialSecondsRemaining={this.state.time}
-                                //onTick={() => this.setState({ alreadyStarted: true })}
-                                //onTimeElapsed={() => this.setState({ alreadyStarted: false })}
-                                //allowFontScaling='true'
+                                onTick={() => this.setState({ alreadyStarted: true })}
+                                onTimeElapsed={() => this.setState({ alreadyStarted: false })}
+                                allowFontScaling='true'
                                 style={{ fontSize: 50, color: 'white' }}
                             />
                         </View>
->>>>>>> Richard-Temp
->>>>>>> dev
                         <View>
                             <View style={{ marginTop: 25 }}>
                                 <Button 
