@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image, Dimensions, TextInput } from 'react-native';
+import { View, Text, ScrollView, Image, Dimensions, TextInput, Picker } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 import {orderUpdate, orderCreate} from '../actions';
 import { connect } from 'react-redux';
@@ -81,7 +81,19 @@ export class PlaceOrder extends Component {
                     <Card>
                         <View style={{ flexDirection: 'column' }}>
                             <Text style ={styles.title_style}>Order:{"\n"}</Text>
-                            <Text>Grande, Iced, Vanilla {"\n"} Caffe Latte{"\n"}</Text>
+                            <Picker
+                                style={{flex:1}}
+                                selectedValue={this.props.drink}
+                                onValueChange={value => this.props.orderUpdate({ prop: 'drink', value})}
+                            >
+                                <Picker.Item label="Expresso" value="Expresso"/>
+                                <Picker.Item label="Macchiato" value="Machhiato"/>
+                                <Picker.Item label="Americano" value="Americano"/>
+                                <Picker.Item label="Latte" value="Latte"/>
+                                <Picker.Item label="Cappuccino" value="Cappuccino"/>
+                                <Picker.Item label="Mocha" value="Mocha"/>
+                                <Picker.Item label="Other" value="Other"/>
+                            </Picker>
 
                             <View style={styles.button_container}>
                                 <Text style ={{fontWeight: 'bold'}}>Remove from Order{"\n"}{"\n"}{"\n"}</Text>
