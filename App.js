@@ -23,7 +23,10 @@ import CoffeePot from './src/screens/CoffeePot';
 import HomeScreen from './src/screens/HomeScreen';
 import Profile from './src/screens/Profile';
 import GPSMap from './src/screens/GPSMap';
+
+// Extensions from HomeScreen
 import MessageScreen from './src/screens/MessageScreen';
+import TrackDelivery from './src/screens/TrackDelivery';
 
 // Delivery Screens
 import ChooseDelivery from './src/screens/ChooseDelivery';
@@ -140,6 +143,7 @@ export default class App extends React.Component {
 
     const HomeScreenNav = StackNavigator({
       HomeScreen: { screen: HomeScreen },
+      TrackDelivery: { screen: TrackDelivery },
       MessageScreen: { screen: MessageScreen },
       PlaceOrder: { screen: PlaceOrder },
       PaymentScreen: { screen: PaymentScreen },
@@ -155,6 +159,7 @@ export default class App extends React.Component {
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
       ReceiptScreen: { screen: ReceiptScreen },
       Legal: { screen: StandardLegal },
+      PickedLocation: { screen: PickedLocation }
     });
 
     const CoffeePotListNav = StackNavigator({

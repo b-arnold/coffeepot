@@ -65,52 +65,18 @@ class CoffeePotList extends Component {
         const COFFEE_CUP_IMAGE = require('../images/CoffeeCupTest.png');
         return (
             <ScrollView>
-                <View style={styles.view_bttn}>
-                    <Button 
-                        iconRight={{
-                            name: 'plus-circle',
-                            type: 'material-community',
-                            size: 25
-                        }}
-                        title='Place Order'
-                        buttonStyle={styles.button_style}
-                        rounded
-                    />
-                    <Button 
-                        iconRight={{
-                            name: 'map-marker',
-                            type: 'font-awesome',
-                            size: 25
-                        }}
-                        title='GPS View'
-                        buttonStyle={styles.button_style}
-                        rounded
-                        onPress={() => navigate('GPSMap')}
-                    />
-                </View>
-
-                <View
-                    style={{
-                        flexDirection: 'row',
-                    }}
-                >
+                <View>
                     <FlipCard
-                        style={{
-                            borderWidth: 0
-                        }}
+                        style={{borderWidth: 0}}
                         flipHorizontal={true}
                         flipVertical={false}
                         alignHeight={true}
                     >
                         {/* Front side of the card */}
                         <View style={styles.face}>
-                            <Card
-                                containerStyle={{
-                                    width: 180
-                                }}
-                            >
+                            <Card>
                                 <View style={styles.view_card}>
-                                    <View style={styles.view_avatar}>
+                                    <View>
                                         <Avatar
                                             source={require('../images/coffee_pot_symbol.png')}
                                             large
@@ -131,13 +97,9 @@ class CoffeePotList extends Component {
 
                         {/* Back side of the card */}
                         <View style={styles.back}>
-                            <Card
-                                containerStyle={{
-                                    width: 180
-                                }}
-                            >
+                            <Card>
                                 <View style={styles.view_card}>
-                                    <View style={styles.view_avatar}>
+                                    <View>
                                         <Avatar
                                             source={require('../images/coffee_pot_symbol.png')}
                                             large
@@ -163,22 +125,16 @@ class CoffeePotList extends Component {
                     
                     {/* Flip Card will show two different info */}
                     <FlipCard
-                        style={{
-                            borderWidth: 0,
-                        }}
+                        style={{borderWidth: 0}}
                         flipHorizontal={true}
                         flipVertical={false}
                         alignHeight={true}
                     >
                         {/* Front side of the card */}
                         <View style={styles.face}>
-                            <Card
-                                containerStyle={{
-                                    width: 180
-                                }}
-                            >
+                            <Card>
                                 <View style={styles.view_card}>
-                                    <View style={styles.view_avatar}>
+                                    <View>
                                         <Avatar
                                             source={require('../images/coffee_pot_symbol.png')}
                                             large
@@ -199,289 +155,9 @@ class CoffeePotList extends Component {
 
                         {/* Back side of the card */}
                         <View style={styles.back}>
-                            <Card
-                                containerStyle={{
-                                    width: 180
-                                }}
-                            >
+                            <Card>
                                 <View style={styles.view_card}>
-                                    <View style={styles.view_avatar}>
-                                        <Avatar
-                                            source={require('../images/coffee_pot_symbol.png')}
-                                            large
-                                        />
-                                    </View>
-
-                                    <View style={styles.view_text}>
-                                        <Text> Location: Coffee Shop Name</Text>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={COFFEE_CUP_IMAGE}
-                                            ratingCount={5}
-                                            ratingColor='#3498db'
-                                            imageSize={30}
-                                            readonly
-                                            startingValue={0}
-                                        />
-                                    </View>
-                                </View>
-                            </Card>
-                        </View>
-                    </FlipCard>
-
-                    <FlipCard
-                        style={{
-                            borderWidth: 0
-                        }}
-                        flipHorizontal={true}
-                        flipVertical={false}
-                        alignHeight={true}
-                    >
-                        {/* Front side of the card */}
-                        <View style={styles.face}>
-                            <Card
-                                containerStyle={{
-                                    width: 180
-                                }}
-                            >
-                                <View style={styles.view_card}>
-                                    <View style={styles.view_avatar}>
-                                        <Avatar
-                                            source={require('../images/coffee_pot_symbol.png')}
-                                            large
-                                        />
-                                        <TimerCountdown
-                                            initialSecondsRemaining={300000}
-                                            allowFontScaling={true}
-                                            style={styles.view_time}
-                                        />
-                                        <Button 
-                                            title='Join'
-                                            buttonStyle={styles.button_style}
-                                        />
-                                    </View>
-                                </View>
-                            </Card>
-                        </View>
-
-                        {/* Back side of the card */}
-                        <View style={styles.back}>
-                            <Card
-                                containerStyle={{
-                                    width: 180
-                                }}
-                            >
-                                <View style={styles.view_card}>
-                                    <View style={styles.view_avatar}>
-                                        <Avatar
-                                            source={require('../images/coffee_pot_symbol.png')}
-                                            large
-                                        />
-                                    </View>
-
-                                    <View style={styles.view_text}>
-                                        <Text> Location: Coffee Shop Name</Text>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={COFFEE_CUP_IMAGE}
-                                            ratingCount={5}
-                                            ratingColor='#3498db'
-                                            imageSize={30}
-                                            readonly
-                                            startingValue={0}
-                                        />
-                                    </View>
-                                </View>
-                            </Card>
-                        </View>
-                    </FlipCard>
-                </View>
-
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between'
-                    }}
-                >
-                    <FlipCard
-                        style={{
-                            borderWidth: 0
-                        }}
-                        flipHorizontal={true}
-                        flipVertical={false}
-                        alignHeight={true}
-                    >
-                        {/* Front side of the card */}
-                        <View style={styles.face}>
-                            <Card
-                                containerStyle={{
-                                    width: 180
-                                }}
-                            >
-                                <View style={styles.view_card}>
-                                    <View style={styles.view_avatar}>
-                                        <Avatar
-                                            source={require('../images/coffee_pot_symbol.png')}
-                                            large
-                                        />
-                                        <TimerCountdown
-                                            initialSecondsRemaining={300000}
-                                            allowFontScaling={true}
-                                            style={styles.view_time}
-                                        />
-                                        <Button 
-                                            title='Join'
-                                            buttonStyle={styles.button_style}
-                                        />
-                                    </View>
-                                </View>
-                            </Card>
-                        </View>
-
-                        {/* Back side of the card */}
-                        <View style={styles.back}>
-                            <Card
-                                containerStyle={{
-                                    width: 180
-                                }}
-                            >
-                                <View style={styles.view_card}>
-                                    <View style={styles.view_avatar}>
-                                        <Avatar
-                                            source={require('../images/coffee_pot_symbol.png')}
-                                            large
-                                        />
-                                    </View>
-
-                                    <View style={styles.view_text}>
-                                        <Text> Location: Coffee Shop Name</Text>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={COFFEE_CUP_IMAGE}
-                                            ratingCount={5}
-                                            ratingColor='#3498db'
-                                            imageSize={30}
-                                            readonly
-                                            startingValue={0}
-                                        />
-                                    </View>
-                                </View>
-                            </Card>
-                        </View>
-                    </FlipCard>
-                    
-                    {/* Flip Card will show two different info */}
-                    <FlipCard
-                        style={{
-                            borderWidth: 0,
-                        }}
-                        flipHorizontal={true}
-                        flipVertical={false}
-                        alignHeight={true}
-                    >
-                        {/* Front side of the card */}
-                        <View style={styles.face}>
-                            <Card
-                                containerStyle={{
-                                    width: 180
-                                }}
-                            >
-                                <View style={styles.view_card}>
-                                    <View style={styles.view_avatar}>
-                                        <Avatar
-                                            source={require('../images/coffee_pot_symbol.png')}
-                                            large
-                                        />
-                                        <TimerCountdown
-                                            initialSecondsRemaining={300000}
-                                            allowFontScaling={true}
-                                            style={styles.view_time}
-                                        />
-                                        <Button 
-                                            title='Join'
-                                            buttonStyle={styles.button_style}
-                                        />
-                                    </View>
-                                </View>
-                            </Card>
-                        </View>
-
-                        {/* Back side of the card */}
-                        <View style={styles.back}>
-                            <Card
-                                containerStyle={{
-                                    width: 180
-                                }}
-                            >
-                                <View style={styles.view_card}>
-                                    <View style={styles.view_avatar}>
-                                        <Avatar
-                                            source={require('../images/coffee_pot_symbol.png')}
-                                            large
-                                        />
-                                    </View>
-
-                                    <View style={styles.view_text}>
-                                        <Text> Location: Coffee Shop Name</Text>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={COFFEE_CUP_IMAGE}
-                                            ratingCount={5}
-                                            ratingColor='#3498db'
-                                            imageSize={30}
-                                            readonly
-                                            startingValue={0}
-                                        />
-                                    </View>
-                                </View>
-                            </Card>
-                        </View>
-                    </FlipCard>
-
-                    <FlipCard
-                        style={{
-                            borderWidth: 0
-                        }}
-                        flipHorizontal={true}
-                        flipVertical={false}
-                        alignHeight={true}
-                    >
-                        {/* Front side of the card */}
-                        <View style={styles.face}>
-                            <Card
-                                containerStyle={{
-                                    width: 180
-                                }}
-                            >
-                                <View style={styles.view_card}>
-                                    <View style={styles.view_avatar}>
-                                        <Avatar
-                                            source={require('../images/coffee_pot_symbol.png')}
-                                            large
-                                        />
-                                        <TimerCountdown
-                                            initialSecondsRemaining={300000}
-                                            allowFontScaling={true}
-                                            style={styles.view_time}
-                                        />
-                                        <Button 
-                                            title='Join'
-                                            buttonStyle={styles.button_style}
-                                        />
-                                    </View>
-                                </View>
-                            </Card>
-                        </View>
-
-                        {/* Back side of the card */}
-                        <View style={styles.back}>
-                            <Card
-                                containerStyle={{
-                                    width: 180
-                                }}
-                            >
-                                <View style={styles.view_card}>
-                                    <View style={styles.view_avatar}>
+                                    <View>
                                         <Avatar
                                             source={require('../images/coffee_pot_symbol.png')}
                                             large
@@ -513,12 +189,6 @@ class CoffeePotList extends Component {
 //////////////////////////////////////////////////////////////////////////////
 // Style object
 const styles = {
-    view_bttn: {
-        flex:1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginTop:10
-    },
     view_card: {
         justifyContent: 'center'
     },
