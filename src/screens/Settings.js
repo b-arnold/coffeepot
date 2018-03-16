@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, TouchableOpacity, ScrollView, Text } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 
-import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 export default class Settings extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -36,11 +36,12 @@ export default class Settings extends Component {
                     style={{
                         flex: 1,
                         flexDirection: 'column',
-                        alignItems: 'flex-start',
-                        backgroundColor: '#ecf0f2'
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: '#abb8c3'
                     }}
                 >    
-                    <Text style={{fontWeight: 'bold'}}>
+                    <Text style={{fontWeight: 'bold', textAlign: 'center', alignItems: 'center', justifyContent: 'center' }}>
                         Preferences
                     </Text>
                     {/* Edit Profile */}
@@ -48,7 +49,7 @@ export default class Settings extends Component {
                         buttonStyle={{
                             margin: 1,
                             width: 330,
-                            backgroundColor: '#B3B3B3'
+                            backgroundColor: BUTTON_COLOR
                         }}
                         title='Edit Profile'
                         onPress={() => 
@@ -61,7 +62,7 @@ export default class Settings extends Component {
                         buttonStyle={{
                             margin: 1,
                             width: 330,
-                            backgroundColor: '#B3B3B3'
+                            backgroundColor: BUTTON_COLOR
                         }}
                         title='Cards'
                         onPress={() => 
@@ -74,7 +75,7 @@ export default class Settings extends Component {
                         buttonStyle={{
                             margin: 1,
                             width: 330,
-                            backgroundColor: '#B3B3B3'
+                            backgroundColor: BUTTON_COLOR
                         }}
                         title='Privacy'
                         onPress={() => 
@@ -87,7 +88,7 @@ export default class Settings extends Component {
                         buttonStyle={{
                             margin: 1,
                             width: 330,
-                            backgroundColor: '#B3B3B3'
+                            backgroundColor: BUTTON_COLOR
                         }}
                         title='Blocke Users'
                         onPress={() => 
@@ -100,7 +101,7 @@ export default class Settings extends Component {
                         buttonStyle={{
                             margin: 1,
                             width: 330,
-                            backgroundColor: '#B3B3B3'
+                            backgroundColor: BUTTON_COLOR
                         }}
                         title='Notifications'
                         onPress={() => 
@@ -113,7 +114,7 @@ export default class Settings extends Component {
                         buttonStyle={{
                             margin: 1,
                             width: 330,
-                            backgroundColor: '#B3B3B3'
+                            backgroundColor: BUTTON_COLOR
                         }}
                         title='Social Networks'
                         onPress={() => 
@@ -130,7 +131,7 @@ export default class Settings extends Component {
                         buttonStyle={{
                             margin: 1,
                             width: 330,
-                            backgroundColor: '#B3B3B3'
+                            backgroundColor: BUTTON_COLOR
                         }}
                         title='TouchID & Pin'
                         onPress={() => 
@@ -142,7 +143,7 @@ export default class Settings extends Component {
                         buttonStyle={{
                             margin: 1,
                             width: 330,
-                            backgroundColor: '#B3B3B3'
+                            backgroundColor: BUTTON_COLOR
                         }}
                         title='Change Password'
                         onPress={() => 
@@ -154,7 +155,7 @@ export default class Settings extends Component {
                         buttonStyle={{
                             margin: 1,
                             width: 330,
-                            backgroundColor: '#B3B3B3'
+                            backgroundColor: BUTTON_COLOR
                         }}
                         title='Remember Devices'
                         onPress={() => 
@@ -171,7 +172,7 @@ export default class Settings extends Component {
                         buttonStyle={{
                             margin: 1,
                             width: 330,
-                            backgroundColor: '#B3B3B3'
+                            backgroundColor: BUTTON_COLOR
                         }}
                         title='Legal'
                         onPress={() => 
@@ -183,7 +184,7 @@ export default class Settings extends Component {
                         buttonStyle={{
                             margin: 1,
                             width: 330,
-                            backgroundColor: '#B3B3B3'
+                            backgroundColor: BUTTON_COLOR
                         }}
                         title='Helpful Information'
                         onPress={() => 
@@ -195,7 +196,7 @@ export default class Settings extends Component {
                         buttonStyle={{
                             margin: 1,
                             width: 330,
-                            backgroundColor: '#B3B3B3'
+                            backgroundColor: BUTTON_COLOR
                         }}
                         title='Send Feedback'
                         onPress={() => 
@@ -207,7 +208,7 @@ export default class Settings extends Component {
                         buttonStyle={{
                             margin: 1,
                             width: 330,
-                            backgroundColor: '#B3B3B3'
+                            backgroundColor: BUTTON_COLOR
                         }}
                         title='Rate CoffeePot'
                         onPress={() => 
@@ -219,7 +220,7 @@ export default class Settings extends Component {
                         buttonStyle={{
                             margin: 1,
                             width: 330,
-                            backgroundColor: '#B3B3B3'
+                            backgroundColor: BUTTON_COLOR
                         }}
                         title='Sign Out of CoffeePot'
                         onPress={() => 

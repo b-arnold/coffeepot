@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import firebase from 'firebase';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import { Card, Icon, Avatar, Rating } from 'react-native-elements';
+import { connect } from 'react-redux';
 
-import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+import * as actions from '../actions';
+import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
 
 /////////////////////////////////////////////////////////
 ////  The following code is for the Profile Screen   ////
 /////////////////////////////////////////////////////////
 
 class Profile extends Component {
-    static navigationOptions = ({navigation}) => ({
+    static navigationOptions = ({ navigation }) => ({
         title: 'Profile',
         headerStyle: {
             backgroundColor: PRIMARY_COLOR,
@@ -23,16 +31,16 @@ class Profile extends Component {
         headerBackTitle: null,
         headerLeft: (
             <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
-                <Icon 
+                <Icon
                     type='material-community'
                     name='menu'
-                    color={ SECONDARY_COLOR }
+                    color={SECONDARY_COLOR}
                 />
             </TouchableOpacity>
         ),
         headerRight: (
             <TouchableOpacity onPress={() => navigation.navigate('PlaceOrder')}>
-                <Icon 
+                <Icon
                     type='font-awesome'
                     name='coffee'
                     color='grey'
@@ -43,22 +51,40 @@ class Profile extends Component {
             return (
                 <Icon
                     name="user"
-                    type="font-awesome" 
-                    size={30} 
+                    type="font-awesome"
+                    size={30}
                     color="grey"
-                /> 
+                />
             );
         },
     })
 
+    componentWillMount() {
+      const { currentUser } = firebase.auth();
+
+      // Load first name into properties
+      firebase.database().ref(`users/${currentUser.uid}/name_field/firstName`)
+      .on('value', snapshot => {
+        this.props.profileFirstNameChange(snapshot.val());
+      });
+
+      // Load last name into properties
+      firebase.database().ref(`users/${currentUser.uid}/name_field/lastName`)
+      .on('value', snapshot => {
+        this.props.profileLastNameChange(snapshot.val());
+      });
+    }
+
     render() {
         return (
             <ScrollView>
-                <View style={{
+                <View
+                  style={{
                     flex: 1,
                     justifyContent: 'center',
                     alignItems: 'center'
-                }}>
+                  }}
+                >
                     <View style={{ marginTop: 10 }}>
                         <Avatar
                             source={require('../images/Profile_Pic.jpg')}
@@ -67,27 +93,36 @@ class Profile extends Component {
                     </View>
 
                     <View>
-                        <Text style={{ fontSize: 40 }}>First Last</Text>
+                        <Text style={{ fontSize: 40, marginTop: 15 }}>
+                          {this.props.firstName} {this.props.lastName}
+                        </Text>
                     </View>
 
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', margin: 10 }}>
+                    <View
+                      style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        margin: 10
+                      }}
+                    >
                         <View style={styles.container}>
                             <Rating
                                 imageSize={30}
                                 readonly
+                                //starting value will equal all ratings together out of five
                                 startingValue={4.5}
                             />
                         </View>
                         <View style={styles.container}>
-                            <Text style={{ fontSize: 20 }}>Deliveries: ##</Text>
+                            <Text style={{ fontSize: 20 }}>Deliveries: {}</Text>
                         </View>
                     </View>
                 </View>
-                
                 <Card>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ marginLeft: 10, marginRight: 20 }}>
-                            <Avatar 
+                            <Avatar
                                 source={require('../images/Profile_Pic.jpg')}
                                 medium
                             />
@@ -98,139 +133,7 @@ class Profile extends Component {
                                 imageSize={30}
                                 readonly
                                 startingValue={4.5}
-                            />
-                            </View>
-                            <Text>Name: First Last </Text>
-                            <Text>Comments: Blah blah blah blah...</Text>
-                        </View>
-                    </View>
-                </Card>
-
-                <Card>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={{ marginLeft: 10, marginRight: 20 }}>
-                            <Avatar 
-                                source={require('../images/Profile_Pic.jpg')}
-                                medium
-                            />
-                        </View>
-                        <View>
-                            <View style={{ marginBottom: 5 }}>
-                                <Rating
-                                imageSize={30}
-                                readonly
-                                startingValue={4.5}
-                            />
-                            </View>
-                            <Text>Name: First Last </Text>
-                            <Text>Comments: Blah blah blah blah...</Text>
-                        </View>
-                    </View>
-                </Card>
-
-                <Card>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={{ marginLeft: 10, marginRight: 20 }}>
-                            <Avatar 
-                                source={require('../images/Profile_Pic.jpg')}
-                                medium
-                            />
-                        </View>
-                        <View>
-                            <View style={{ marginBottom: 5 }}>
-                                <Rating
-                                imageSize={30}
-                                readonly
-                                startingValue={4.5}
-                            />
-                            </View>
-                            <Text>Name: First Last </Text>
-                            <Text>Comments: Blah blah blah blah...</Text>
-                        </View>
-                    </View>
-                </Card>
-
-                <Card>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={{ marginLeft: 10, marginRight: 20 }}>
-                            <Avatar 
-                                source={require('../images/Profile_Pic.jpg')}
-                                medium
-                            />
-                        </View>
-                        <View>
-                            <View style={{ marginBottom: 5 }}>
-                                <Rating
-                                imageSize={30}
-                                readonly
-                                startingValue={4.5}
-                            />
-                            </View>
-                            <Text>Name: First Last </Text>
-                            <Text>Comments: Blah blah blah blah...</Text>
-                        </View>
-                    </View>
-                </Card>
-
-                <Card>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={{ marginLeft: 10, marginRight: 20 }}>
-                            <Avatar 
-                                source={require('../images/Profile_Pic.jpg')}
-                                medium
-                            />
-                        </View>
-                        <View>
-                            <View style={{ marginBottom: 5 }}>
-                                <Rating
-                                imageSize={30}
-                                readonly
-                                startingValue={4.5}
-                            />
-                            </View>
-                            <Text>Name: First Last </Text>
-                            <Text>Comments: Blah blah blah blah...</Text>
-                        </View>
-                    </View>
-                </Card>
-
-                <Card>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={{ marginLeft: 10, marginRight: 20 }}>
-                            <Avatar 
-                                source={require('../images/Profile_Pic.jpg')}
-                                medium
-                            />
-                        </View>
-                        <View>
-                            <View style={{ marginBottom: 5 }}>
-                                <Rating
-                                imageSize={30}
-                                readonly
-                                startingValue={4.5}
-                            />
-                            </View>
-                            <Text>Name: First Last </Text>
-                            <Text>Comments: Blah blah blah blah...</Text>
-                        </View>
-                    </View>
-                </Card>
-
-                <Card>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={{ marginLeft: 10, marginRight: 20 }}>
-                            <Avatar 
-                                source={require('../images/Profile_Pic.jpg')}
-                                medium
-                            />
-                        </View>
-                        <View>
-                            <View style={{ marginBottom: 5 }}>
-                                <Rating
-                                imageSize={30}
-                                readonly
-                                startingValue={4.5}
-                            />
+                                />
                             </View>
                             <Text>Name: First Last </Text>
                             <Text>Comments: Blah blah blah blah...</Text>
@@ -249,10 +152,19 @@ class Profile extends Component {
     }
 }
 
-export default Profile;
-
 const styles = {
     container: {
         margin: 10
     }
 };
+
+/////////////////////////////////////////////////////////
+// Map redux reducers to component mapStateToProps
+function mapStateToProps({ prof }) {
+  return {
+    firstName: prof.firstName,
+    lastName: prof.lastName
+  };
+}
+
+export default connect(mapStateToProps, actions)(Profile);
