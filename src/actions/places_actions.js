@@ -38,17 +38,8 @@ export const fetchPlaces = ( location ) => async dispatch => {
     }
 
     // (WIP) This will arrange the data in the array so that it will be from nearest to farthest
-    //sortData(placeDataAndDistData);
-    const holder = null;
-    for(const i = 0; i <= placeDataAndDistData.length-1; i++) {
-      if(placeDataAndDistData[i+1].text < placeDataAndDistData[i].text) {
-        holder = placeDataAndDistData[i];
-        placeDataAndDistData[i] = placeDataAndDistData[i+1];
-        placeDataAndDistData[i+1] = holder;
-        console.log('----------Sort-----------');
-        console.log(placeDataAndDistData);
-      }
-    }
+    const sortedData =  null;
+    sortedData = await sortData(placeDataAndDistData);
 
     // Puts the results into one variable
     const placesDataWithSearchRegionAndDistance = { ...placeDataAndDistData, searchRegion };
@@ -77,13 +68,26 @@ async function getDistance (origin, destination) {
   }
 }
 
-// function sortData(data) {
-  
-  
-
-
-//   return data
-// }
+async function sortData (data) {
+  console.log('-----Entered Sort Data-----');
+  const len = data.results.length;
+  console.log('-----Found Length-----');
+  for(const i = len-1; i >= 0; i--) {
+    console.log('-----Entered First Loop-----');
+    for(const j = 1; j <= i; j++) {
+      console.log('-----Entered Second Loop-----');
+      const num1 = Number(data.results[j-1].text.replace(' mi', ''))
+      const num2 = Number(data.results[j].text.replace(' mi', ''))
+      if(num1 > num2) {
+        console.log('sort');
+        const temp = data.results[j-1];
+        data.results[j-1] = data.results[j]
+        data.results[j] = temp;
+      }
+    }
+  }
+  return data;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // This will load the details of the place that the user has selected
