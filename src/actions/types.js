@@ -25,7 +25,6 @@ export const FETCH_DISTANCE = 'fetch_distance';
 export const FIRST_NAME_CHANGED = 'first_name_changed';
 export const LAST_NAME_CHANGED = 'last_name_changed';
 export const LOAD_PLACE_DETAILS = 'load_place_details';
-export const FETCH_PLACES = "fetch_places";
 
 // ORDER TYPES
 export const ORDER_UPDATE = 'order_update';
