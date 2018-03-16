@@ -13,6 +13,7 @@ export const buildPlacesUrl = ( location ) => {
   const { latitude, longitude } = location;
   const coords = `${latitude},${longitude}`;
   const query = qs.stringify({ location: coords, ...PLACE_QUERY_PARAMS });
+  //console.log(`${GOOGLE_PLACES_ROOT_URL}${query}`);
   return `${GOOGLE_PLACES_ROOT_URL}${query}`;
 };
 

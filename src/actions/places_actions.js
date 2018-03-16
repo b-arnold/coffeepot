@@ -38,11 +38,15 @@ export const fetchPlaces = ( location ) => async dispatch => {
     }
 
     // (WIP) This will arrange the data in the array so that it will be from nearest to farthest
-    const sortedData =  null;
-    sortedData = await sortData(placeDataAndDistData);
+    const sortedData =  {results: [] };
+    const sortedResults = await sortData(placeDataAndDistData.results);
+    for(const i = 0; i < sortedResults.length; i++) {
+      sortedData.results.push(sortedResults[i]);
+    }
 
+    console.log(sortedData)
     // Puts the results into one variable
-    const placesDataWithSearchRegionAndDistance = { ...placeDataAndDistData, searchRegion };
+    const placesDataWithSearchRegionAndDistance = { ...sortedData, searchRegion };
 
     
     // Dispatch the action and call the callback function
@@ -61,32 +65,64 @@ async function getDistance (origin, destination) {
     const end = `${destination.lat},${destination.lng}`;
     const directionUrl = urlBuilder.buildDirectionsUrl(origin, destination);
     const directionResponse = await axios.get(directionUrl);
-    const directionData = directionResponse.data.routes[0].legs[0].distance;
+    const directionData = directionResponse.data.routes[0].legs[0];
     return directionData;
   } catch (err) {
     console.error(err);
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// sortData will sort the places from nearest to farthest (Currently using merge sort algorithm)
+// Is called inside fetchPlaces
 async function sortData (data) {
-  console.log('-----Entered Sort Data-----');
-  const len = data.results.length;
-  console.log('-----Found Length-----');
-  for(const i = len-1; i >= 0; i--) {
-    console.log('-----Entered First Loop-----');
-    for(const j = 1; j <= i; j++) {
-      console.log('-----Entered Second Loop-----');
-      const num1 = Number(data.results[j-1].text.replace(' mi', ''))
-      const num2 = Number(data.results[j].text.replace(' mi', ''))
-      if(num1 > num2) {
-        console.log('sort');
-        const temp = data.results[j-1];
-        data.results[j-1] = data.results[j]
-        data.results[j] = temp;
-      }
+  //-----------------Bubble Sort-------------------------
+  // for(const i = len-1; i >= 0; i--) {
+  //   for(const j = 1; j <= i; j++) {
+  //     const num1 = Number(data.results[j-1].text.replace(' mi', ''))
+  //     const num2 = Number(data.results[j].text.replace(' mi', ''))
+  //     if(num1 > num2) {
+  //       const temp = data.results[j-1];
+  //       data.results[j-1] = data.results[j]
+  //       data.results[j] = temp;
+  //     }
+  //   }
+  // }
+  //-----------------------------------------------------
+  if (data.length === 1) {
+    // return once there is only one item in the array
+    return data;
+  }
+
+  // middle tells us the middle item of the array rounded down
+  const middle = Math.floor(data.length / 2);
+  // gets the item on the left side
+  const left = data.slice(0, middle);
+  // gets the item on the right side
+  const right = data.slice(middle);  
+
+  return merge(
+    await sortData(left),
+    await sortData(right)
+  )
+}
+
+async function merge (left, right) {
+  let result = [];
+  let indexLeft = 0;
+  let indexRight = 0;
+
+  while(indexLeft < left.length && indexRight < right.length) {
+    if (Number(left[indexLeft].distance.text.replace(' mi', '')) < Number(right[indexRight].distance.text.replace(' mi', ''))) {
+      result.push(left[indexLeft]);
+      indexLeft++;
+    } else {
+      result.push(right[indexRight]);
+      indexRight++;
     }
   }
-  return data;
+  let final = await result.concat(left.slice(indexLeft)).concat(right.slice(indexRight));
+  return final
 }
 
 ///////////////////////////////////////////////////////////////////////////////
