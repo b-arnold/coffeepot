@@ -23,9 +23,10 @@ export class PlaceOrder extends Component {
     }
 
     onButtonPress(){
+        const { navigate } = this.props.navigation;
         const {name, location, drink} = this.props;
         this.props.orderCreate({name: name || 'name', location: location || 'Starbucks, Azusa', drink: drink || 'drink'});
-        //navigate('PaymentScreen');
+        navigate('PaymentScreen');
     }
 
     renderLocation() {

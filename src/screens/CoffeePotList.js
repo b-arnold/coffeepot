@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { ImageBackground, View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { AppLoading, Asset } from 'expo';
 import { Button, Card, Icon, Avatar, Rating } from 'react-native-elements';
+import { Spinner } from '../components/Spinner';
 
-//NPM Packages
-import FlipCard from 'react-native-flip-card';
-import TimerCountdown from 'react-native-timer-countdown';
+import CoffeePotCard from '../components/CoffeePotCard';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+
+///////////////////////////////////////////////////////////////////
+//  Method taken from Expo documents
+function cacheImages(images) {
+    return images.map(image => {
+      if (typeof image === 'string') {
+        return Image.prefetch(image);
+      } else {
+        return Asset.fromModule(image).downloadAsync();
+      }
+    });
+}
 
 class CoffeePotList extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -54,134 +66,55 @@ class CoffeePotList extends Component {
         },
     })
 
-    // renderCard() {
-    //     return (
-            
-    //     )
-    // }
+    state = {
+        isReady: false
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //  Method taken from Expo documents
+    async _loadAssetsAsync() {
+        const imageAssets = cacheImages([
+            require('../images/CoffeePot-Logo-White-02.png'),
+            require('../images/background.jpg')
+        ]);
+
+        await Promise.all([...imageAssets]);
+    }
 
     render() {
         const { navigate } = this.props.navigation;
-        const COFFEE_CUP_IMAGE = require('../images/CoffeeCupTest.png');
-        return (
-            <ScrollView>
-                <View>
-                    <FlipCard
-                        style={{borderWidth: 0}}
-                        flipHorizontal={true}
-                        flipVertical={false}
-                        alignHeight={true}
-                    >
-                        {/* Front side of the card */}
-                        <View style={styles.face}>
-                            <Card>
-                                <View style={styles.view_card}>
-                                    <View>
-                                        <Avatar
-                                            source={require('../images/coffee_pot_symbol.png')}
-                                            large
-                                        />
-                                        <TimerCountdown
-                                            initialSecondsRemaining={300000}
-                                            allowFontScaling={true}
-                                            style={styles.view_time}
-                                        />
-                                        <Button 
-                                            title='Join'
-                                            buttonStyle={styles.button_style}
-                                        />
-                                    </View>
-                                </View>
-                            </Card>
-                        </View>
-
-                        {/* Back side of the card */}
-                        <View style={styles.back}>
-                            <Card>
-                                <View style={styles.view_card}>
-                                    <View>
-                                        <Avatar
-                                            source={require('../images/coffee_pot_symbol.png')}
-                                            large
-                                        />
-                                    </View>
-
-                                    <View style={styles.view_text}>
-                                        <Text> Location: Coffee Shop Name</Text>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={COFFEE_CUP_IMAGE}
-                                            ratingCount={5}
-                                            ratingColor='#3498db'
-                                            imageSize={30}
-                                            readonly
-                                            startingValue={0}
-                                        />
-                                    </View>
-                                </View>
-                            </Card>
-                        </View>
-                    </FlipCard>
-                    
-                    {/* Flip Card will show two different info */}
-                    <FlipCard
-                        style={{borderWidth: 0}}
-                        flipHorizontal={true}
-                        flipVertical={false}
-                        alignHeight={true}
-                    >
-                        {/* Front side of the card */}
-                        <View style={styles.face}>
-                            <Card>
-                                <View style={styles.view_card}>
-                                    <View>
-                                        <Avatar
-                                            source={require('../images/coffee_pot_symbol.png')}
-                                            large
-                                        />
-                                        <TimerCountdown
-                                            initialSecondsRemaining={300000}
-                                            allowFontScaling={true}
-                                            style={styles.view_time}
-                                        />
-                                        <Button 
-                                            title='Join'
-                                            buttonStyle={styles.button_style}
-                                        />
-                                    </View>
-                                </View>
-                            </Card>
-                        </View>
-
-                        {/* Back side of the card */}
-                        <View style={styles.back}>
-                            <Card>
-                                <View style={styles.view_card}>
-                                    <View>
-                                        <Avatar
-                                            source={require('../images/coffee_pot_symbol.png')}
-                                            large
-                                        />
-                                    </View>
-
-                                    <View style={styles.view_text}>
-                                        <Text> Location: Coffee Shop Name</Text>
-                                        <Rating
-                                            type='custom'
-                                            ratingImage={COFFEE_CUP_IMAGE}
-                                            ratingCount={5}
-                                            ratingColor='#3498db'
-                                            imageSize={30}
-                                            readonly
-                                            startingValue={0}
-                                        />
-                                    </View>
-                                </View>
-                            </Card>
-                        </View>
-                    </FlipCard>
+        ///////////////////////////////////////////////////////////////////
+        //  Method taken from Expo documents
+        if( !this.state.isReady ) {
+            return (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <AppLoading 
+                        startAsync={this._loadAssetsAsync}
+                        onFinish={() => this.setState({ isReady: true })}
+                        onError={console.warn}
+                    />
+                    <Spinner size="large"/> 
                 </View>
-            </ScrollView>
+            );
+        }
+        return (
+            <ImageBackground 
+                    style={{
+                    width: '100%',
+                    height: '100%',
+                }}
+                source={require('../images/background.jpg')}
+                >
+                <ScrollView>
+                    <View>
+                        <CoffeePotCard />
+                        <CoffeePotCard />
+                        <CoffeePotCard />
+                        <CoffeePotCard />
+                        <CoffeePotCard />
+                    </View>
+                </ScrollView>
+            </ImageBackground>
         );
     }
 }
