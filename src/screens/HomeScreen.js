@@ -77,6 +77,7 @@ class HomeScreen extends Component {
     state = {
         time: null,
         alreadyStarted: false,
+        isReady: false
     }
 
     componentWillMount() {
@@ -90,7 +91,8 @@ class HomeScreen extends Component {
     //  Method taken from Expo documents
     async _loadAssetsAsync() {
         const imageAssets = cacheImages([
-            require('../images/CoffeePot-Logo-White-02.png')
+            require('../images/CoffeePot-Logo-White-02.png'),
+            require('../images/background.jpg')
         ]);
 
         await Promise.all([...imageAssets]);

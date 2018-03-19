@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { Icon, Rating } from 'react-native-elements';
+import { AppLoading, Asset } from 'expo';
+import { Spinner } from '../components/Spinner';
 import CountDown from '../components/CountDown';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
@@ -9,13 +11,6 @@ import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style
 
 const cup_image = require('../images/coffee_cup_symbol.png');
 const cups = [{cup_image},{cup_image},{cup_image},{cup_image},{cup_image}]
-
-///////////////////////////////////////////////////////////////////
-// Make Component: CoffeePot has "startTime" & "endTime" properties
-//   to define countdown timer; "orderNum" defines number of drinks in
-//   CoffeePot; "coffeeShop" holds coffee shop for CoffeePot; "order" 
-//   holds information for individual orders
-///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
 //  Method taken from Expo documents
@@ -33,6 +28,7 @@ class HomeCoffeePot extends Component {
     ///////////////////////////////////////////////////////////
     //// State of current CoffeePot
     state = {
+        isReady: false,
         time: null,
         alreadyStarted: false,
         drinks: null,
@@ -46,7 +42,8 @@ class HomeCoffeePot extends Component {
     async _loadAssetsAsync() {
         const imageAssets = cacheImages([
             require('../images/CoffeePot-Logo-White-02.png'),
-            require('../images/CoffeeCupTest.png')
+            require('../images/coffee_cup_symbol.png'),
+            require('../images/store_icon.png')
         ]);
 
         await Promise.all([...imageAssets]);
@@ -137,19 +134,29 @@ class HomeCoffeePot extends Component {
                 <TouchableOpacity onPress={this.onThirdPress}
                     style={{ marginTop: 10}}
                 >
-                    <Image
-                        source={require('../images/store_icon.png')}
-                        style={{
-                            width: 250,
-                            height: 250,
-                        }}
-                    />
-                    <View style={{ marginBottom: 14, alignItems: 'center' }}>
-                        <Text style={{ fontSize: 30, color: 'white' }}>
+                    <View style={{alignItems: 'center'}}>
+                        <Image
+                            source={require('../images/store_icon.png')}
+                            style={{
+                                width: 200,
+                                height: 200,
+                            }}
+                        />
+                    </View>
+                    <View style={{ marginBottom: 10, alignItems: 'center' }}>
+                        <Text style={{ fontSize: 30, color: 'white', fontWeight: 'bold' }}>
                             Drive: 15 minutes
                         </Text>
                     </View>
                 </TouchableOpacity>
+                    <View style={{ marginTop: 5, marginBottom: 9, alignItems: 'center' }}>
+                        <Rating
+                            imageSize={40}
+                            type='star'
+                            //starting value will equal all ratings together out of five
+                            startingValue={3}
+                        />
+                    </View>
             </View>
         );
     }
@@ -179,6 +186,20 @@ class HomeCoffeePot extends Component {
     }
 
     render() {
+        ///////////////////////////////////////////////////////////////////
+        //  Method taken from Expo documents
+        if( !this.state.isReady ) {
+            return (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <AppLoading 
+                        startAsync={this._loadAssetsAsync}
+                        onFinish={() => this.setState({ isReady: true })}
+                        onError={console.warn}
+                    />
+                    <Spinner size="large"/> 
+                </View>
+            );
+        }
         return (
             <View style={styles.container}>
                 {this.renderScreenView()}
