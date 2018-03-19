@@ -92,7 +92,7 @@ class PickedLocation extends Component {
         }
         return(
             <View style={styles.container}>
-                <Text>No Photo Reference</Text>
+                <Text>No Photo For This Location</Text>
                 <Text style={{fontWeight: 'bold'}} >{name}</Text>
                 
                 <Text>{location}</Text>

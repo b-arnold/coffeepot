@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 
@@ -78,14 +78,14 @@ class PickLocationList extends Component {
         if(this.props.places !== null) {
             // Maps the array of objects to get the specified fields
             return this.props.places.map(places  => {
-                const { geometry, place_id, name, vicinity, photos, text } = places;
+                const { geometry, place_id, name, vicinity, photos, distance, duration } = places;
                 if(photos !== undefined) {
                     const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference);
                     return (
                         <TouchableOpacity
                             key={place_id}
                             onPress={() => {
-                                this.props.loadPlaceDetails(name, vicinity, place_id, photos, text);
+                                this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance.text);
                                 this.props.navigation.navigate('PickedLocation', {headerTitle: name})}
                             }
                         >
@@ -94,7 +94,7 @@ class PickLocationList extends Component {
                                     <Text style={styles.bold}>{name}</Text>
                                     <View style = {styles.view_text}>
                                         <Text>{vicinity}</Text>
-                                        <Text>{text}</Text>
+                                        <Text>{distance.text}   {duration.text} Drive</Text>
                                     </View>
                                 </View>
                             </Card>
@@ -105,14 +105,17 @@ class PickLocationList extends Component {
                 return (
                     <TouchableOpacity
                         key={place_id}
-                        onPress={() => this.props.navigation.navigate('PickedLocation', {headerTitle: name})}
+                        onPress={() => {
+                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance.text);
+                            this.props.navigation.navigate('PickedLocation', {headerTitle: name})
+                        }}
                     >
-                        <Card>
+                        <Card title='No Photo For This Location'>
                             <View style={styles.description}>
                                 <Text style={styles.bold}>{name}</Text>
                                 <View style = {styles.view_text}>
                                     <Text>{vicinity}</Text>
-                                    <Text>{text}</Text>
+                                    <Text>{distance.text}   {duration.text} Drive</Text>
                                 </View>
                             </View>
                         </Card>
@@ -125,11 +128,21 @@ class PickLocationList extends Component {
     ///////////////////////////////////////////////////////////////////////////////
     // Main render method
     render() {
-        return (
-            <ScrollView>
-                {this.renderBttn()}
-                {this.renderCards()}
-            </ScrollView>
+        if(this.state.region.latitude !== undefined  && this.props.places !== null) {
+            return (
+                <ScrollView>
+                    {this.renderBttn()}
+                    {this.renderCards()}
+                </ScrollView>
+            );
+        }
+        return(
+            <View style = {styles.loadingStyle}>
+                <ActivityIndicator
+                    size='large'
+                    color={BUTTON_COLOR}
+                />
+            </View>
         );
     }
 }
@@ -142,7 +155,7 @@ const styles = {
     },
     view_text: {
         flex: 1,
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-between'
     },
     bold: {
@@ -157,6 +170,10 @@ const styles = {
         flexDirection: 'row',
         justifyContent: 'center',
         margin: 10
+    },
+    loadingStyle: {
+        flex: 1,
+        justifyContent: 'center'
     }
 }
 
