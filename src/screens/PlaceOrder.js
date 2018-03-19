@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image, Dimensions, TextInput } from 'react-native';
-import { Button, Card } from 'react-native-elements';
-import {orderUpdate, orderCreate} from '../actions';
+import { View, Text, ScrollView, Dimensions, TextInput } from 'react-native';
 import { connect } from 'react-redux';
+import { Button, Card } from 'react-native-elements';
+import { orderUpdate, orderCreate } from '../actions';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
@@ -13,7 +13,7 @@ export class PlaceOrder extends Component {
         title: 'Place Order',
         headerStyle: {
             backgroundColor: PRIMARY_COLOR
-            
+
         },
         headerTitleStyle: {
             color: SECONDARY_COLOR
@@ -22,15 +22,17 @@ export class PlaceOrder extends Component {
         tabBarVisible: false
     }
 
-    onButtonPress(){
-        const {name, location, drink} = this.props;
-        this.props.orderCreate({name: name || 'name', location: location || 'Starbucks, Azusa', drink: drink || 'drink'});
+    onButtonPress() {
+        const { name, location, drink } = this.props;
+        this.props.orderCreate({
+          name: name || 'name', location: location || 'Starbucks, Azusa', drink: drink || 'drink'
+        });
         //navigate('PaymentScreen');
     }
 
     renderLocation() {
         const { navigate } = this.props.navigation;
-        if(this.props.places !== null) {
+        if (this.props.places !== null) {
             console.log('PlaceOrder.js---------');
             console.log(this.props.places);
             return (
@@ -40,7 +42,7 @@ export class PlaceOrder extends Component {
                             flex={1}
                             onPress={() => navigate('OrderGPSMap')}
                         >
-                            Location: 
+                            Location:
                         </Text>
                         {/*<Text>{this.props.places.vicinity}</Text>*/}
                     </View>
@@ -62,7 +64,6 @@ export class PlaceOrder extends Component {
     }
 
     render() {
-        const { navigate } = this.props.navigation;
         return (
             <View>
                 <ScrollView>
@@ -73,19 +74,23 @@ export class PlaceOrder extends Component {
                                 label="Name"
                                 placeholder="John Doe"
                                 value={this.props.name}
-                                onChangeText={value => this.props.orderUpdate({prop: 'name', value})}
+                                onChangeText={
+                                  value => this.props.orderUpdate({ prop: 'name', value })
+                                }
                             />
                         </View>
                     </Card>
                     {this.renderLocation()}
                     <Card>
                         <View style={{ flexDirection: 'column' }}>
-                            <Text style ={styles.title_style}>Order:{"\n"}</Text>
-                            <Text>Grande, Iced, Vanilla {"\n"} Caffe Latte{"\n"}</Text>
+                            <Text style={styles.title_style}>Order:{'\n'}</Text>
+                            <Text>Grande, Iced, Vanilla {'\n'} Caffe Latte{'\n'}</Text>
 
                             <View style={styles.button_container}>
-                                <Text style ={{fontWeight: 'bold'}}>Remove from Order{"\n"}{"\n"}{"\n"}</Text>
-                                <Button 
+                                <Text style={{ fontWeight: 'bold' }}>
+                                  Remove from Order{'\n'}{'\n'}{'\n'}
+                                </Text>
+                                <Button
                                 buttonStyle={styles.AddBttn_style}
                                 title='Add Order +'
                                 rounded
@@ -95,12 +100,12 @@ export class PlaceOrder extends Component {
                     </Card>
                     <Card>
                         <View style={styles.button_container}>
-                        <Button 
+                        <Button
                             buttonStyle={styles.bttn_style}
                             title='Place Order'
                             rounded
                             onPress={this.onButtonPress.bind(this)}
-                            />
+                        />
                         </View>
                     </Card>
                 </ScrollView>
@@ -125,12 +130,12 @@ const styles = {
         backgroundColor: BUTTON_COLOR
     },
     title_style: {
-        fontSize:20,
+        fontSize: 20,
         fontWeight: 'bold'
     },
-    button_container:{
-        flexDirection: 'column', 
-        justifyContent: 'center', 
+    button_container: {
+        flexDirection: 'column',
+        justifyContent: 'center',
         alignItems: 'center'
     }
 }
