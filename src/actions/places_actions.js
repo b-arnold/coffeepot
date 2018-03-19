@@ -37,15 +37,15 @@ export const fetchPlaces = ( location ) => async dispatch => {
       placeDataAndDistData.results.push(result);
     }
 
-    // (WIP) This will arrange the data in the array so that it will be from nearest to farthest
+    // This will arrange the data in the array so that it will be from nearest to farthest by using Merge Sort algorithm
     const sortedData =  {results: [] };
     const sortedResults = await sortData(placeDataAndDistData.results);
     for(const i = 0; i < sortedResults.length; i++) {
       sortedData.results.push(sortedResults[i]);
     }
 
-    console.log(sortedData)
     // Puts the results into one variable
+    // Contains places, directions to places, search region, and sorted data
     const placesDataWithSearchRegionAndDistance = { ...sortedData, searchRegion };
 
     
