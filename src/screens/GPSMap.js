@@ -85,7 +85,7 @@ class GPSMap extends Component {
         const { navigate } = this.props.navigation
         if(this.props.places !== null) {
             return this.props.places.map(places => {
-                const { geometry, place_id, name, vicinity, photos, text } = places;
+                const { geometry, place_id, name, vicinity, photos, distance, duration } = places;
                 if(photos !== undefined) {
                     const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference)
                     return (
@@ -116,7 +116,7 @@ class GPSMap extends Component {
                                     <View style = {styles.description}>
                                         <Text style={styles.bold}>{name}</Text>
                                         <Text>{vicinity}</Text>
-                                        <Text>{text}</Text>
+                                        <Text>{distance.text}   {duration.text} Drive</Text>
                                     </View>
                                 </View>
                             </TouchableOpacity> 
@@ -147,7 +147,7 @@ class GPSMap extends Component {
                                     <View style = {styles.description}>
                                         <Text style={styles.bold}>{name}</Text>
                                         <Text>{vicinity}</Text>
-                                        <Text>{text}</Text>
+                                        <Text>{distance.text}   {duration.text} Drive</Text>
                                     </View>
                                 </View>
                             </TouchableOpacity> 
@@ -186,17 +186,17 @@ class GPSMap extends Component {
     render() {
         const { navigate } = this.props.navigation
         //console.log(this.state.region.latitude);
-        if(this.state.region.latitude !== undefined)
+        if(this.state.region.latitude !== undefined  && this.props.places !== null)
         {
             return (
                 <View style={styles.container}>{this.renderMap()}</View>
             );
         }
         return(
-            <View style = {styles.container}>
+            <View style = {styles.loadingStyle}>
                 <ActivityIndicator
                     size='large'
-                    color={PRIMARY_COLOR}
+                    color={BUTTON_COLOR}
                 />
             </View>
         );
@@ -242,6 +242,10 @@ const styles = {
     },
     bold: {
         fontWeight: 'bold'
+    },
+    loadingStyle: {
+        flex: 1,
+        justifyContent: 'center'
     }
 };
 
