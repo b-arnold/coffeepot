@@ -127,8 +127,6 @@ export default class App extends React.Component {
       LoginScreen: { screen: LoginScreen }
     });
 
-    /////////////////////////////////////////////////////////////////////////
-    //// Authentication Screens
     const Delivery = StackNavigator({
       ChooseDelivery: { screen: ChooseDelivery },
       PickLocationList: { screen: PickLocationList },
@@ -223,7 +221,6 @@ export default class App extends React.Component {
       Settings: { screen: SettingNav },
       Legal: { screen: StandardLegalNav },
       LogOut: { screen: LogOut },
-      //HomeScreen: { screen: HomeNav }
     },{
       contentComponent: customDrawerComponent,
       drawerBackgroundColor: '#607D8B',

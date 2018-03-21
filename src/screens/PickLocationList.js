@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { Button, Card } from 'react-native-elements';
+import { Button, Icon, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions';
@@ -16,12 +16,25 @@ class PickLocationList extends Component {
     static navigationOptions = {
         title: 'Pick Location',
         headerStyle: {
-            backgroundColor: PRIMARY_COLOR
+            backgroundColor: PRIMARY_COLOR,
+            paddingRight: 10,
+            paddingLeft: 10
         },
         headerTitleStyle: {
-            color: SECONDARY_COLOR
+            color: SECONDARY_COLOR,
+            fontFamily: 'brush-script-mt',
+            fontSize: 30
         },
-        headerTintColor: SECONDARY_COLOR
+        headerTintColor: SECONDARY_COLOR,
+        headerRight: (
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('GPSMap')}>
+                <Icon
+                    name="map-marker"
+                    type="font-awesome"
+                    color='grey'
+                />
+            </TouchableOpacity>
+        ),
     }
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -49,28 +62,6 @@ class PickLocationList extends Component {
         );
     }
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // This method will render the GPS View Button (Probably will be removed soon)
-    renderBttn() {
-        const { navigate } = this.props.navigation;
-        return (
-            <View
-                style={styles.button_style}
-            >
-                <Button 
-                    iconRight={{
-                        name: 'map-marker',
-                        type: 'font-awesome',
-                        size: 25
-                    }}
-                    title='GPS View'
-                    buttonStyle={{ backgroundColor: BUTTON_COLOR }}
-                    rounded
-                    onPress={() => navigate('GPSMap')}
-                />
-            </View>  
-        );
-    }
 
     ///////////////////////////////////////////////////////////////////////////////
     // This method renders cards depending on the information it was able to successfully receive
@@ -85,7 +76,7 @@ class PickLocationList extends Component {
                         <TouchableOpacity
                             key={place_id}
                             onPress={() => {
-                                this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance.text);
+                                this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance);
                                 this.props.navigation.navigate('PickedLocation', {headerTitle: name})}
                             }
                         >
@@ -106,7 +97,7 @@ class PickLocationList extends Component {
                     <TouchableOpacity
                         key={place_id}
                         onPress={() => {
-                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance.text);
+                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance);
                             this.props.navigation.navigate('PickedLocation', {headerTitle: name})
                         }}
                     >
@@ -131,7 +122,6 @@ class PickLocationList extends Component {
         if(this.state.region.latitude !== undefined  && this.props.places !== null) {
             return (
                 <ScrollView>
-                    {this.renderBttn()}
                     {this.renderCards()}
                 </ScrollView>
             );
