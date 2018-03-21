@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Slider } from 'react-native';
-import { BUTTON_COLOR } from '../constants/style';
+import { View, Text } from 'react-native';
+
+import Slider from 'react-native-slider';
+
+import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 class TimeSlider extends Component {
     state = {timeSelected: 5}
@@ -24,8 +27,9 @@ class TimeSlider extends Component {
                     minimumValue={5}
                     onValueChange={this.updateTime.bind(this)}
                     value={timeSelected}
-                    trackStyle={styles.sliderTrack}
-                    thunbStyle={styles.sliderThumb}
+                    thumbStyle={styles.thumb}
+                    trackStyle={styles.track}
+                    minimumTrackTintColor={BUTTON_COLOR}
                 />
                 <Text style={styles.selectedText}>Selected Timer: {this.state.timeSelected} Minutes</Text>
             </View>
@@ -37,7 +41,6 @@ const styles = {
     container: {
         flexDirection: 'column',
         justifyContent: 'center',
-        
     },
     text: {
         fontSize: 25,
@@ -49,14 +52,15 @@ const styles = {
         textAlign: 'center',
         fontWeight: 'bold'
     },
-    sliderTrack: {
-        height: 18,
+    track: {
+        height: 25,
         borderRadius: 1,
-        backgroundColor: BUTTON_COLOR
+        backgroundColor: '#d5d8e8'
     },
-    sliderThumb: {
-        width: 0,
+    thumb: {
         height: 30,
+        width: 20,
+        borderRadius: 1,
         borderRadius: 1,
         backgroundColor: 'black'
     }

@@ -103,7 +103,7 @@ class GPSMap extends Component {
                                     key={place_id}
                                     
                                     onPress={() => {
-                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos);
+                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance);
                                             this.props.navigation.navigate('PickedLocation', {headerTitle: name});
                                         }
                                     }
@@ -138,7 +138,7 @@ class GPSMap extends Component {
                             <TouchableOpacity
                                     key={place_id}
                                     onPress={() => {
-                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos);
+                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance);
                                             this.props.navigation.navigate('PickedLocation', {headerTitle: name});
                                         }
                                     }

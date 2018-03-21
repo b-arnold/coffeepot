@@ -13,7 +13,7 @@ import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style
 class PickLocationList extends Component {
     ///////////////////////////////////////////////////////////////////////////////
     // Customizes the stacknavigation header
-    static navigationOptions = {
+    static navigationOptions = ({navigation}) => ({
         title: 'Pick Location',
         headerStyle: {
             backgroundColor: PRIMARY_COLOR,
@@ -27,7 +27,7 @@ class PickLocationList extends Component {
         },
         headerTintColor: SECONDARY_COLOR,
         headerRight: (
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('GPSMap')}>
+            <TouchableOpacity onPress={() => navigation.navigate('GPSMap')}>
                 <Icon
                     name="map-marker"
                     type="font-awesome"
@@ -35,7 +35,7 @@ class PickLocationList extends Component {
                 />
             </TouchableOpacity>
         ),
-    }
+    })
 
     ///////////////////////////////////////////////////////////////////////////////
     // Defining The State
@@ -106,7 +106,8 @@ class PickLocationList extends Component {
                                 <Text style={styles.bold}>{name}</Text>
                                 <View style = {styles.view_text}>
                                     <Text>{vicinity}</Text>
-                                    <Text>{distance.text}   {duration.text} Drive</Text>
+                                    <Text>{distance.text} away</Text>
+                                    <Text>{duration.text} drive</Text>
                                 </View>
                             </View>
                         </Card>

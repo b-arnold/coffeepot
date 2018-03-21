@@ -151,7 +151,7 @@ export default class App extends React.Component {
     });
 
     const GPSNav = StackNavigator({
-      OrderGPSMap: { screen: OrderGPSMap },
+      GPSMap: { screen: GPSMap },
       PlaceOrder: { screen: PlaceOrder },
       PaymentScreen: { screen: PaymentScreen },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },

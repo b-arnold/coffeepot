@@ -18,19 +18,11 @@ class PickedLocation extends Component {
             
         },
         headerTitleStyle: {
-            color: SECONDARY_COLOR
+            color: SECONDARY_COLOR,
+            fontFamily: 'brush-script-mt',
+            fontSize: 30
         },
         headerTintColor: SECONDARY_COLOR,
-        tabBarIcon: () => {
-            return (
-                <Icon
-                    name="location-on"
-                    type="material"
-                    size={30}
-                    color="grey"
-                />
-            );
-        }
     });
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -77,7 +69,7 @@ class PickedLocation extends Component {
                                         <Text style={styles.bold}>{name}</Text>
                                         <View style = {styles.view_text}>
                                             <Text>{location}</Text>
-                                            <Text>{distance.text}</Text>
+                                            <Text>{distance.text} away</Text>
                                         </View>
                                     </View>
                                 </Card>
