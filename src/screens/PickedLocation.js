@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import * as urlBuilder from '../utility/url_builder';
 
+import TimeSlider from '../components/TimeSlider';
+
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 class PickedLocation extends Component {
@@ -66,6 +68,7 @@ class PickedLocation extends Component {
                             }}
                         >
                             <View style={{backgroundColor:'white', padding: 10}}>
+                                <Text style={{fontWeight:'bold', textAlign: 'center', fontSize: 20}}>Create Coffee Pot At This Location?</Text>
                                 <Card
                                     image={{uri: photoUrl}}
                                     containerStyle={{height: 220}}
@@ -78,6 +81,8 @@ class PickedLocation extends Component {
                                         </View>
                                     </View>
                                 </Card>
+
+                                <TimeSlider />
 
                                 <View style={styles.bttn_view_style}>
                                     <Button
@@ -115,6 +120,7 @@ class PickedLocation extends Component {
                         }}
                     >
                         <View style={{backgroundColor:'white', padding: 10}}>
+                            <Text style={{fontWeight:'bold', textAlign: 'center', fontSize: 20}}>Create Coffee Pot At This Location?</Text>
                             <Card
                                 title='No Photo For This Location'
                                 containerStyle={{height: 140}}
