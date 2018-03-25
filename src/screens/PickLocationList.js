@@ -76,7 +76,7 @@ class PickLocationList extends Component {
                         <TouchableOpacity
                             key={place_id}
                             onPress={() => {
-                                this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance);
+                                this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance, geometry);
                                 this.props.navigation.navigate('PickedLocation', {headerTitle: name})}
                             }
                         >
@@ -97,7 +97,7 @@ class PickLocationList extends Component {
                     <TouchableOpacity
                         key={place_id}
                         onPress={() => {
-                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance);
+                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance, geometry);
                             this.props.navigation.navigate('PickedLocation', {headerTitle: name})
                         }}
                     >

@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
 
 import Slider from 'react-native-slider';
 
+import * as actions from '../actions';
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 class TimeSlider extends Component {
     state = {timeSelected: 5}
 
+    componentWillMount() {
+        this.props.setTimer(this.state.timeSelected);
+    }
+
     updateTime(time) {
+        const result = parseFloat(time);
         this.setState(() => {
+            this.props.setTimer(result);
             return {
-                timeSelected: parseFloat(time)
+                timeSelected: result
             };
         });
     }
@@ -66,4 +74,4 @@ const styles = {
     }
 }
 
-export default TimeSlider;
+export default connect(null, actions)(TimeSlider);

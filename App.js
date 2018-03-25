@@ -22,7 +22,10 @@ import CoffeePotList from './src/screens/CoffeePotList';
 import CoffeePot from './src/screens/CoffeePot';
 import HomeScreen from './src/screens/HomeScreen';
 import Profile from './src/screens/Profile';
+
+// GPS Screens
 import GPSMap from './src/screens/GPSMap';
+import CoffeePotGPS from './src/screens/CoffeePotGPS'
 
 // Extensions from HomeScreen
 import MessageScreen from './src/screens/MessageScreen';
@@ -69,45 +72,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    /////////////////////////////////////////////////////////////
-    //This nav is used for testing purposes only.
-    // const ButtonNav = StackNavigator({
-    //   Navigate: { screen: Navigate },
-    //   CoffeePotList: { screen: CoffeePotList },
-    //   CoffeePot: { screen: CoffeePot },
-    //   ExistingOrdersList: { screen: ExistingOrdersList },
-    //   ExistingOrder: { screen: ExistingOrder },
-    //   LoginScreen: { screen: LoginScreen },
-    //   ChooseDelivery: { screen: ChooseDelivery },
-    //   PickLocationList: { screen: PickLocationList },
-    //   PickedLocation: { screen: PickedLocation },
-    //   Profile: { screen: Profile },
-    //   ReceiptSnapshot: { screen: ReceiptSnapshot },
-    //   PlaceOrder: { screen: PlaceOrder },
-    //   PaymentScreen: { screen: PaymentScreen },
-    //   GPSMap: { screen: GPSMap },
-    //   PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
-    //   ReceiptScreen: { screen: ReceiptScreen },
-    //   About: { screen: About },
-    //   DeliveryLegal: { screen: DeliveryLegal },
-    //   Settings: { screen: Settings },
-    //   StandardLegal: { screen: StandardLegal },
-    //   InputCoffeeOrderScreen: { screen: InputCoffeeOrderScreen },
-    // });
-
-    /////////////////////////////////////////////////////////////////////////
-    //// This is used for the actual development of the app
-    // const Home = StackNavigator({
-    //   CoffeePotList: { screen: CoffeePotList },
-    //   CoffeePot: { screen: CoffeePot },
-    //   GPSMap: { screen: GPSMap },
-    //   PlaceOrder: { screen: PlaceOrder },
-    //   PaymentScreen: { screen: PaymentScreen },
-    //   PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
-    //   ReceiptScreen: { screen: ReceiptScreen },
-    //   Legal: { screen: StandardLegal },
-    // });
-
     const ProfileNav = StackNavigator({
       Profile: { screen: Profile },
       PlaceOrder: { screen: PlaceOrder }
@@ -133,7 +97,7 @@ export default class App extends React.Component {
       PickedLocation: { screen: PickedLocation },
       ExistingOrdersList: { screen: ExistingOrdersList },
       ExistingOrder: { screen: ExistingOrder },
-      GPSMap: { screen: GPSMap }
+      GPSMap: { screen: GPSMap },
     });
 
     /////////////////////////////////////////////////////////////////////////
@@ -151,7 +115,7 @@ export default class App extends React.Component {
     });
 
     const GPSNav = StackNavigator({
-      GPSMap: { screen: GPSMap },
+      CoffeePotGPS: { screen: CoffeePotGPS },
       PlaceOrder: { screen: PlaceOrder },
       PaymentScreen: { screen: PaymentScreen },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },

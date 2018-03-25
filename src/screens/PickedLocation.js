@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView, Image, Modal, TouchableWithoutFeedback} from 'react-native';
 import { Button, Icon, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 
 import * as actions from '../actions';
 import * as urlBuilder from '../utility/url_builder';
@@ -38,10 +39,23 @@ class PickedLocation extends Component {
     ///////////////////////////////////////////////////////////////////////////////
     // Called in the mian render method, and will show when the state for modal is 'true'
     renderModal() {
-        const { location, name, photos, place_id, distance } = this.props.places;
+        const { location, name, photos, place_id, distance, geometry } = this.props.places;
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'ChooseDelivery'})]
+        });
         // If there is a photo, render modal with a photo, else don't
         if(photos !== undefined) {
-            const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference)
+            // Gets the url for the photo
+            const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference);
+            // Used to condense the data needed to create a coffee pot
+            const condenseData = {
+                name: name,
+                address: location,
+                place_id: place_id,
+                photoUrl: photoUrl,
+                geometry: geometry
+            }
             return (
                 <Modal
                     visible={this.state.modalVisible}
@@ -80,6 +94,11 @@ class PickedLocation extends Component {
                                     <Button
                                         title='Confirm'
                                         buttonStyle={styles.button_style}
+                                        onPress={() => {
+                                            this.props.createCoffeePot(condenseData, this.props.timer)
+                                            this.props.navigation.dispatch(resetAction);
+                                            this.setModalVisible(false);
+                                        }}
                                     />
                                     <Button
                                         title='Go Back'
@@ -238,11 +257,13 @@ const styles = {
 ///////////////////////////////////////////////////////////////////////////////
 // MapStateToProps
 // places the data that we received from our action and reducers into a variable
-function mapStateToProps({ places }) {
+function mapStateToProps({ places, coffee }) {
     // console.log('//////////places.selectedPlace///////////');
     // console.log(places.selectedPlace);
+    //console.log(coffee.timer)
     return {
-        places: places.selectedPlace
+        places: places.selectedPlace,
+        timer: coffee.timer
     };
 }
 
