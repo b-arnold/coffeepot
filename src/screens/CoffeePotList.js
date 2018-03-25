@@ -80,6 +80,11 @@ class CoffeePotList extends Component {
         await Promise.all([...imageAssets]);
     }
 
+    // google places api to use current location and radius.
+    componentWillMount() {
+
+    }
+
     render() {
         const { navigate } = this.props.navigation;
         ///////////////////////////////////////////////////////////////////
