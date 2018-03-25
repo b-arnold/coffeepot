@@ -13,15 +13,14 @@ import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style
 function cacheImages(images) {
     return images.map(image => {
       if (typeof image === 'string') {
-        return Image.prefetch(image);
-      } else {
-        return Asset.fromModule(image).downloadAsync();
+        return image.prefetch(image);
       }
+        return Asset.fromModule(image).downloadAsync();
     });
 }
 
 class CoffeePotList extends Component {
-    static navigationOptions = ({navigation}) => ({
+    static navigationOptions = ({ navigation }) => ({
         title: 'Coffee Pots',
         //Changes the color of the header
         headerStyle: {
@@ -38,7 +37,7 @@ class CoffeePotList extends Component {
         headerBackTitle: null,
         headerLeft: (
             <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
-                <Icon 
+                <Icon
                     type='material-community'
                     name='menu'
                     color={ SECONDARY_COLOR }
@@ -47,7 +46,7 @@ class CoffeePotList extends Component {
         ),
         headerRight: (
             <TouchableOpacity onPress={() => navigation.navigate('PlaceOrder')}>
-                <Icon 
+                <Icon
                     type='font-awesome'
                     name='coffee'
                     color='grey'
@@ -58,10 +57,10 @@ class CoffeePotList extends Component {
             return (
                 <Icon
                     name="grid"
-                    type="entypo" 
-                    size={30} 
+                    type="entypo"
+                    size={30}
                     color="grey"
-                /> 
+                />
             );
         },
     })
@@ -85,26 +84,26 @@ class CoffeePotList extends Component {
         const { navigate } = this.props.navigation;
         ///////////////////////////////////////////////////////////////////
         //  Method taken from Expo documents
-        if( !this.state.isReady ) {
+        if (!this.state.isReady) {
             return (
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <AppLoading 
+                    <AppLoading
                         startAsync={this._loadAssetsAsync}
                         onFinish={() => this.setState({ isReady: true })}
                         onError={console.warn}
                     />
-                    <Spinner size="large"/> 
+                    <Spinner size="large"/>
                 </View>
             );
         }
         return (
-            <ImageBackground 
+            <ImageBackground
                     style={{
                     width: '100%',
                     height: '100%',
                 }}
                 source={require('../images/background.jpg')}
-                >
+            >
                 <ScrollView>
                     <View>
                         <CoffeePotCard />
@@ -122,27 +121,7 @@ class CoffeePotList extends Component {
 //////////////////////////////////////////////////////////////////////////////
 // Style object
 const styles = {
-    view_card: {
-        justifyContent: 'center'
-    },
-    view_avatar: {
-        justifyContent: 'center'
-    },
-    view_time: {
-        fontWeight: 'bold',
-        textAlign: 'center',
-        margin: 5
-    },
-    view_text: {
-        justifyContent: 'space-between'
-    },
-    end_text: {
-        margin: 10,
-        textAlign: 'center'
-    },
-    button_style: {
-        backgroundColor: BUTTON_COLOR
-    }
-}
+
+};
 
 export default CoffeePotList;

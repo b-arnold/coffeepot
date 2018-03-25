@@ -27,5 +27,5 @@ export const LAST_NAME_CHANGED = 'last_name_changed';
 export const LOAD_PLACE_DETAILS = 'load_place_details';
 
 // ORDER TYPES
-export const ORDER_UPDATE = 'order_update';
+export const ORDER_CHANGE = 'order_change';
 export const ORDER_CREATE = 'order_create';
