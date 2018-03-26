@@ -13,7 +13,20 @@ import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style
 // Receipt Screen
 // Shows Receipt of coffee and allows user to rate transaction
 ///////////////////////////////////////////////////////////
+'use strict';
 
+const functions = require('firebase-functions');
+const nodemailer = require('nodemailer');
+
+const gmailEmail = functions.config().gmail.email;
+const gmailPassword = functions.config().gmail.password;
+const mailTransport = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: gmailEmail,
+    pass: gmailPassword,
+  },
+});
 
 class ReceiptScreen extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -73,6 +86,8 @@ class ReceiptScreen extends Component {
             title="Email Receipt"
             buttonStyle={styles.emailButtonStyle}
             rounded
+            onPress={exports.sendEmailConfirmation = functions.database.ref('/users/{uid}').onWrite((event) => { return null; }
+            )}
           />
         </View>
 
