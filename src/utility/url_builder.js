@@ -21,7 +21,7 @@ export const buildPlacesUrl = ( location ) => {
 const PLACE_QUERY_PARAMS = {
   key: GOOGLE_PLACES_API_KEY,
   types: 'cafe',
-  radius: '2000' // In meters (max 50000)
+  radius: '1700' // In meters (max 50000)
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////

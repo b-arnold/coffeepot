@@ -187,7 +187,7 @@ export default class App extends React.Component {
       LogOut: { screen: LogOut },
     },{
       contentComponent: customDrawerComponent,
-      drawerBackgroundColor: '#607D8B',
+      drawerBackgroundColor: '#1d1d1d',
       contentOptions: {
         inactiveBackgroundColor: BUTTON_COLOR,
         activeBackgroundColor: BUTTON_COLOR,
