@@ -247,8 +247,6 @@ function mapStateToProps({ coffee }) {
     if (coffee.coffeePots === null) {
         return { coffeePots: null };
     }
-    console.log('-----CoffeePotGPS-----');
-    console.log(coffee.coffeePots.results);
     return { coffeePots: coffee.coffeePots.results };
 }
 
