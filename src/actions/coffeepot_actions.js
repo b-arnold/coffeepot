@@ -44,7 +44,6 @@ export const createCoffeePot = (locDetails, timer) => async dispatch => {
             deliverer = snapshot.val();
         })
 
-        console.log(locDetails);
         await firebase.database().ref('/coffeePots/')
             .push({deliverer, locDetails, timer, orders})
         dispatch({type: CREATE_COFFEE_POT_SUCCESS})
