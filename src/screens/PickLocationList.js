@@ -1,14 +1,26 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { AppLoading, Asset } from 'expo';
 
 import * as actions from '../actions';
 import * as urlBuilder from '../utility/url_builder';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
+///////////////////////////////////////////////////////////////////
+//  Method taken from Expo documents
+function cacheImages(images) {
+    return images.map(image => {
+      if (typeof image === 'string') {
+        return Image.prefetch(image);
+      } else {
+        return Asset.fromModule(image).downloadAsync();
+      }
+    });
+}
 
 class PickLocationList extends Component {
     ///////////////////////////////////////////////////////////////////////////////
@@ -22,6 +34,16 @@ class PickLocationList extends Component {
             color: SECONDARY_COLOR
         },
         headerTintColor: SECONDARY_COLOR
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //  Method taken from Expo documents
+    async _loadAssetsAsync() {
+        const imageAssets = cacheImages([
+            require('../images/background.jpg')
+        ]);
+
+        await Promise.all([...imageAssets]);
     }
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -126,10 +148,18 @@ class PickLocationList extends Component {
     // Main render method
     render() {
         return (
-            <ScrollView>
-                {this.renderBttn()}
-                {this.renderCards()}
-            </ScrollView>
+            <ImageBackground 
+                    style={{
+                    width: '100%',
+                    height: '100%',
+                }}
+                source={require('../images/background.jpg')}
+                >
+                <ScrollView>
+                    {this.renderBttn()}
+                    {this.renderCards()}
+                </ScrollView>
+            </ImageBackground>
         );
     }
 }
