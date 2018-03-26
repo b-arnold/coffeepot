@@ -127,12 +127,13 @@ async function merge (left, right) {
 
 ///////////////////////////////////////////////////////////////////////////////
 // This will load the details of the place that the user has selected
-export const loadPlaceDetails = (name, location, place_id, photos, dist) => async dispatch => {
+export const loadPlaceDetails = (name, location, place_id, photos, distance, geometry) => async dispatch => {
   try {
-    const placeData = {name, location, place_id, photos, dist}
+    const placeData = {name, location, place_id, photos, distance, geometry}
 
     dispatch({ type: LOAD_PLACE_DETAILS, payload: placeData })
   } catch (err) {
     console.error(err);
   }
 }
+

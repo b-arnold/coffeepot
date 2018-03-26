@@ -9,7 +9,7 @@ import * as urlBuilder from '../utility/url_builder';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
-class GPSMap extends Component {
+class CoffeePotGPS extends Component {
     ///////////////////////////////////////////////////////////////////////////////
     // Customizes the stacknavigation header
     static navigationOptions = ({navigation}) => ({
@@ -23,6 +23,34 @@ class GPSMap extends Component {
             color: SECONDARY_COLOR
         },
         headerTintColor: SECONDARY_COLOR,
+        headerLeft: (
+            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+                <Icon
+                    type='material-community'
+                    name='menu'
+                    color='grey'
+                />
+            </TouchableOpacity>
+        ),
+        headerRight: (
+            <TouchableOpacity onPress={() => navigation.navigate('PlaceOrder')}>
+                <Icon
+                    type='font-awesome'
+                    name='coffee'
+                    color='grey'
+                />
+            </TouchableOpacity>
+        ),
+        tabBarIcon: () => {
+            return (
+                <Icon
+                    name="location-on"
+                    type="material"
+                    size={30}
+                    color="grey"
+                />
+            );
+        }
     })
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -42,8 +70,8 @@ class GPSMap extends Component {
                     longitude: position.coords.longitude,
                 }
             });
-            //The action 'fetchPlaces' will search for places with the label 'cafe' with respect to the 'region' state (user's current position)
-            this.props.fetchPlaces(this.state.region);
+            //The action 'fetchCoffeePots' will get coffee pots from the database and the distance limit is currently 2 miles
+            this.props.fetchCoffeePots(this.state.region);
         },
             (error) => console.log(new Date(), error),
             {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
@@ -55,74 +83,68 @@ class GPSMap extends Component {
     renderMarkers() {
         //console.log(this.props.places);
         const { navigate } = this.props.navigation
-        if(this.props.places !== null) {
-            return this.props.places.map(places => {
-                const { geometry, place_id, name, vicinity, photos, distance } = places;
-                if(photos !== undefined) {
-                    const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference)
+        console.log('-----RenderMarkers-----');
+        if(this.props.coffeePots !== null) {
+            return this.props.coffeePots.map(coffeePots => {
+                const { deliverer, locDetails, text } = coffeePots;
+                console.log(locDetails.photoUrl);
+                if(locDetails.photoUrl !== undefined) {
                     return (
-                    <Marker
-                        key={place_id}
-                        coordinate={{
-                            latitude: geometry.location.lat,
-                            longitude: geometry.location.lng
-                        }}
-                        pinColor='red'
-                    >
-                        {/* Callout customizes the information that is shown when a marker is selected */}
-                        <Callout>
-                            <TouchableOpacity
-                                    key={place_id}
-                                    
-                                    onPress={() => {
-                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, geometry);
-                                            this.props.navigation.navigate('PickedLocation', {headerTitle: name});
-                                        }
-                                    }
-                                >
+                        <Marker
+                            key={locDetails.place_id}
+                            coordinate={{
+                                latitude: locDetails.geometry.location.lat,
+                                longitude: locDetails.geometry.location.lng
+                            }}
+                            image={require('../images/CoffeePot_MarkerWithCircle_Green.png')}
+                        >
+                            {/* Callout customizes the information that is shown when a marker is selected */}
+                            <Callout>
                                 <View style={styles.content}>
                                     <Image
-                                        source={{uri: photoUrl}}
+                                        source={{uri: locDetails.photoUrl}}
                                         style = {styles.image_style}
                                     />
-                                    <View style = {styles.description}>
-                                        <Text style={styles.bold}>{name}</Text>
-                                        <Text>{vicinity}</Text>
-                                        <Text>{distance.text}   {duration.text} Drive</Text>
+                                    <View style={styles.description}>
+                                        <View style={styles.content}>
+                                            <Text style={styles.bold}>Deliverer: </Text>
+                                            <Text>{deliverer.firstName} {deliverer.lastName}</Text>
+                                        </View>
+                                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                            <Text style={styles.bold}>{locDetails.name}</Text>
+                                            <Text>{text} away</Text>
+                                        </View>
+                                        <Text>{locDetails.address}</Text>
                                     </View>
                                 </View>
-                            </TouchableOpacity> 
-                        </Callout>
-                    </Marker>
-                );
+                            </Callout>
+                        </Marker>
+                    );
                 }
                 // If there is no valid photo reference, it will render a marker with no photo (Weh)
                 return (
                     <Marker
-                        key={place_id}
+                        key={locDetails.place_id}
                         coordinate={{
-                            latitude: geometry.location.lat,
-                            longitude: geometry.location.lng
+                            latitude: locDetails.geometry.location.lat,
+                            longitude: locDetails.geometry.location.lng
                         }}
-                        pinColor='red'
+                        image={require('../images/CoffeePot_MarkerWithCircle_Green.png')}
                     >
                         <Callout>
-                            <TouchableOpacity
-                                    key={place_id}
-                                    onPress={() => {
-                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, geometry);
-                                            this.props.navigation.navigate('PickedLocation', {headerTitle: name});
-                                        }
-                                    }
-                                >
                                 <View style={styles.content}>
-                                    <View style = {styles.description}>
-                                        <Text style={styles.bold}>{name}</Text>
-                                        <Text>{vicinity}</Text>
-                                        <Text>{distance.text}   {duration.text} Drive</Text>
+                                    <View style={styles.description}>
+                                        <View style={styles.content}>
+                                            <Text style={styles.bold}>Deliverer: </Text>
+                                            <Text>{deliverer.firstName} {deliverer.lastName}</Text>
+                                        </View>
+                                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                            <Text style={styles.bold}>{locDetails.name}</Text>
+                                            <Text>{text} away</Text>
+                                        </View>
+                                        <Text>{locDetails.address}</Text>
                                     </View>
                                 </View>
-                            </TouchableOpacity> 
                         </Callout>
                     </Marker>
                 );
@@ -158,7 +180,7 @@ class GPSMap extends Component {
     render() {
         const { navigate } = this.props.navigation
         //console.log(this.state.region.latitude);
-        if(this.state.region.latitude !== undefined  && this.props.places !== null)
+        if(this.state.region.latitude !== undefined  && this.props.coffeePots !== null)
         {
             return (
                 <View style={styles.container}>{this.renderMap()}</View>
@@ -199,16 +221,13 @@ const styles = {
         backgroundColor: BUTTON_COLOR
     },
     content: {
-        flex: 1,
         flexDirection: 'row'
     },
     image_style: {
-        margin: 5, 
-        width: 80, 
-        height: 70
+        width: 85, 
+        height: 80
     },
     description: {
-        flex: 1,
         flexDirection: 'column',
         margin: 10
     },
@@ -224,14 +243,13 @@ const styles = {
 ///////////////////////////////////////////////////////////////////////////////
 // MapStateToProps
 // places the data that we received from our action and reducers into a variable
-function mapStateToProps({ places }) {
-    if (places.placesResponse === null) {
-        return { places: null, searchRegion: null };
+function mapStateToProps({ coffee }) {
+    if (coffee.coffeePots === null) {
+        return { coffeePots: null };
     }
-    return {
-        places: places.placesResponse.results,
-        searchRegion: places.placesResponse.searchRegion
-    };
+    console.log('-----CoffeePotGPS-----');
+    console.log(coffee.coffeePots.results);
+    return { coffeePots: coffee.coffeePots.results };
 }
 
-export default connect(mapStateToProps, actions)(GPSMap);
+export default connect(mapStateToProps, actions)(CoffeePotGPS);
