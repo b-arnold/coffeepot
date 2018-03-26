@@ -29,3 +29,6 @@ export const LOAD_PLACE_DETAILS = 'load_place_details';
 // ORDER TYPES
 export const ORDER_CHANGE = 'order_change';
 export const ORDER_CREATE = 'order_create';
+
+// Coffee Pot List TYPES
+export const FETCH_LAT = 'fetch_lat';

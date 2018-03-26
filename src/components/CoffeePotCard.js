@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Image, View, Text } from 'react-native';
-import { Button, Card, Icon, Avatar, Rating } from 'react-native-elements';
+import { Button, Card, Rating } from 'react-native-elements';
 import { AppLoading, Asset } from 'expo';
-import { Spinner } from '../components/Spinner';
-
+import firebase from 'firebase';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 //NPM Packages
 import FlipCard from 'react-native-flip-card';
 import TimerCountdown from 'react-native-timer-countdown';
 
-import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+import { BUTTON_COLOR } from '../constants/style';
 
 const cup_image = require('../images/coffee_cup_symbol.png');
 const cups = [{cup_image},{cup_image},{cup_image},{cup_image},{cup_image}]
@@ -36,7 +37,10 @@ class CoffeePotCard extends Component {
     }
 
     componentWillMount() {
-        this.setState({ drinks: 3 })
+        this.setState({ drinks: 3 });
+
+        //Load All Coffee Pots
+      //  this.props.coffeePotFetch();
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -51,10 +55,10 @@ class CoffeePotCard extends Component {
         await Promise.all([...imageAssets]);
     }
 
-    renderCard = () => { 
-        
-        var cups = [] 
-        for (var i = 0; i < this.state.drinks; i++ ) 
+    renderCard = () => {
+
+        var cups = []
+        for (var i = 0; i < this.state.drinks; i++ )
         {
             cups.push(<Image key={i} source={require('../images/coffee_cup_symbol.png')}
                 style={{
@@ -64,7 +68,7 @@ class CoffeePotCard extends Component {
                 }}
             />)
         }
-        
+
 
         return (
             <FlipCard
@@ -92,7 +96,7 @@ class CoffeePotCard extends Component {
                                     />
                                 </View>
                             </View>
-                            <Button 
+                            <Button
                                 title='Join'
                                 buttonStyle={styles.button_style}
                             />
@@ -113,12 +117,12 @@ class CoffeePotCard extends Component {
                                 </View>
                                 <View style={{ justifyContent: 'center' }}>
                                     <View style={{ padding: 5 }}>
-                                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}> 
+                                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
                                             Coffee Shop Name
                                         </Text>
                                     </View>
                                     <View style={{ padding: 5 }}>
-                                        <Text style={{ fontSize: 15 }}> 
+                                        <Text style={{ fontSize: 15 }}>
                                             Distance: ...
                                         </Text>
                                     </View>
@@ -136,12 +140,12 @@ class CoffeePotCard extends Component {
 
                             <View style={{ flexDirection: 'row' }}>
                                 <View style={{ marginRight: 5, justifyContent: 'center' }}>
-                                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}> 
+                                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
                                         Cups Joined:
                                     </Text>
                                 </View>
-                                <View style={{ 
-                                    flexDirection:'row', 
+                                <View style={{
+                                    flexDirection:'row',
                                 }}>
                                     {cups.map(function(img,i){
                                     return img;
@@ -149,7 +153,7 @@ class CoffeePotCard extends Component {
                                 </View>
                             </View>
                             <View style={{ marginTop: 5 }}>
-                                <Button 
+                                <Button
                                     title='Join'
                                     buttonStyle={styles.button_style}
                                 />
@@ -167,7 +171,7 @@ class CoffeePotCard extends Component {
         if( !this.state.isReady ) {
             return (
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <AppLoading 
+                    <AppLoading
                         startAsync={this._loadAssetsAsync}
                         onFinish={() => this.setState({ isReady: true })}
                         onError={console.warn}
@@ -180,8 +184,6 @@ class CoffeePotCard extends Component {
         return (this.renderCard());
     }
 }
-
-export default CoffeePotCard;
 
 //////////////////////////////////////////////////////////////////////////////
 // Style object
@@ -204,4 +206,11 @@ const styles = {
         height: 165,
         width: 165
     }
+};
+function mapStateToProps({ list }) {
+  return {
+    coffeePot: list.coffeePot
+  };
 }
+
+export default connect(mapStateToProps, actions)(CoffeePotCard);

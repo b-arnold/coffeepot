@@ -1,10 +1,33 @@
 import firebase from 'firebase';
 
 import {
-    COFFEEPOT_GET_SUCCESS
-} from './types'
+  FETCH_LAT
+} from '../actions/types';
 
-export const getCoffeePot = () => {
-    
+const INITIAL_STATE = {
+  coffePot: {
+    location: {
+      lat: '',
+      lng: ''
+    },
+    name: ''
+  }
 };
 
+export default function (state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case FETCH_LAT:
+      return {
+        ...state,
+        coffeePot: {
+          location: {
+            lat: action.payload,
+            ...state.lng
+          },
+          ...state.name
+        }
+      };
+    default:
+      return state;
+  }
+}

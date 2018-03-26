@@ -97,7 +97,7 @@ class CoffeePotList extends Component {
                         onFinish={() => this.setState({ isReady: true })}
                         onError={console.warn}
                     />
-                    <Spinner size="large"/>
+                    <Spinner size="large" />
                 </View>
             );
         }
@@ -111,10 +111,6 @@ class CoffeePotList extends Component {
             >
                 <ScrollView>
                     <View>
-                        <CoffeePotCard />
-                        <CoffeePotCard />
-                        <CoffeePotCard />
-                        <CoffeePotCard />
                         <CoffeePotCard />
                     </View>
                 </ScrollView>
