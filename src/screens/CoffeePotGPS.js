@@ -77,17 +77,17 @@ class CoffeePotGPS extends Component {
             {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
         );
     }
-    
+
     ///////////////////////////////////////////////////////////////////////////////
     // This render method will place a marker on each location that si received from "fetchPlaces()"
     renderMarkers() {
         //console.log(this.props.places);
         const { navigate } = this.props.navigation
-        console.log('-----RenderMarkers-----');
+        //console.log('-----RenderMarkers-----');
         if(this.props.coffeePots !== null) {
             return this.props.coffeePots.map(coffeePots => {
                 const { deliverer, locDetails, text } = coffeePots;
-                console.log(locDetails.photoUrl);
+                //console.log(locDetails.photoUrl);
                 if(locDetails.photoUrl !== undefined) {
                     return (
                         <Marker
@@ -224,7 +224,7 @@ const styles = {
         flexDirection: 'row'
     },
     image_style: {
-        width: 85, 
+        width: 85,
         height: 80
     },
     description: {

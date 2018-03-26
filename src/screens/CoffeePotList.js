@@ -80,13 +80,7 @@ class CoffeePotList extends Component {
         await Promise.all([...imageAssets]);
     }
 
-    // google places api to use current location and radius.
-    componentWillMount() {
-
-    }
-
     render() {
-        const { navigate } = this.props.navigation;
         ///////////////////////////////////////////////////////////////////
         //  Method taken from Expo documents
         if (!this.state.isReady) {
@@ -110,19 +104,12 @@ class CoffeePotList extends Component {
                 source={require('../images/background.jpg')}
             >
                 <ScrollView>
-                    <View>
-                        <CoffeePotCard />
-                    </View>
+                    <CoffeePotCard />
                 </ScrollView>
             </ImageBackground>
         );
     }
 }
 
-//////////////////////////////////////////////////////////////////////////////
-// Style object
-const styles = {
-
-};
 
 export default CoffeePotList;
