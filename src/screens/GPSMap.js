@@ -57,7 +57,7 @@ class GPSMap extends Component {
         const { navigate } = this.props.navigation
         if(this.props.places !== null) {
             return this.props.places.map(places => {
-                const { geometry, place_id, name, vicinity, photos, distance } = places;
+                const { geometry, place_id, name, vicinity, photos, distance, duration } = places;
                 if(photos !== undefined) {
                     const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference)
                     return (
@@ -73,9 +73,8 @@ class GPSMap extends Component {
                         <Callout>
                             <TouchableOpacity
                                     key={place_id}
-                                    
                                     onPress={() => {
-                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, geometry);
+                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance, geometry);
                                             this.props.navigation.navigate('PickedLocation', {headerTitle: name});
                                         }
                                     }
@@ -110,7 +109,7 @@ class GPSMap extends Component {
                             <TouchableOpacity
                                     key={place_id}
                                     onPress={() => {
-                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, geometry);
+                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance, geometry);
                                             this.props.navigation.navigate('PickedLocation', {headerTitle: name});
                                         }
                                     }

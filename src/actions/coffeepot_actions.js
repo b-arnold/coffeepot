@@ -44,6 +44,7 @@ export const createCoffeePot = (locDetails, timer) => async dispatch => {
             deliverer = snapshot.val();
         })
 
+        console.log(locDetails);
         await firebase.database().ref('/coffeePots/')
             .push({deliverer, locDetails, timer, orders})
         dispatch({type: CREATE_COFFEE_POT_SUCCESS})
@@ -83,6 +84,7 @@ export const fetchCoffeePots = (currLoc) => async dispatch => {
             })
         })
         
+        // Holds the distance results from you to each coffee place
         const distanceData = [];
         // This will remove coffee pots that are more than a mile from your location
         for(const i = 0; i < coffeePots.results.length; i++) {
@@ -94,6 +96,7 @@ export const fetchCoffeePots = (currLoc) => async dispatch => {
         // Takes the results from distanceData and puts it into one object (will clarify later)
         const coffeePotsAndDistData = { results: [] };
         for(const i = 0; i < coffeePots.results.length; i++) {
+            // NOTE: Object.assign(distanceData[i]) , coffeePots.results[i]) does not work. Issue something about enumerable values with coffeePots.results
             const result = Object.assign(distanceData[i], JSON.parse(JSON.stringify(coffeePots.results[i])));
             coffeePotsAndDistData.results.push(result);
         }
@@ -114,7 +117,7 @@ export const fetchCoffeePots = (currLoc) => async dispatch => {
 
 ///////////////////////////////////////////////////////////////////////////////
 // This will grab the distance of the given origin and destination
-// Is called from fetchPlaces
+// Is called from "fetchCoffeePots()"
 async function getDistance (origin, destination) {
     try {
       const begin = `${origin.latitude},${origin.longitude}`;
