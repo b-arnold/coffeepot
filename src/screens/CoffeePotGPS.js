@@ -83,11 +83,9 @@ class CoffeePotGPS extends Component {
     renderMarkers() {
         //console.log(this.props.places);
         const { navigate } = this.props.navigation
-        console.log('-----RenderMarkers-----');
         if(this.props.coffeePots !== null) {
             return this.props.coffeePots.map(coffeePots => {
                 const { deliverer, locDetails, text } = coffeePots;
-                console.log(locDetails.photoUrl);
                 if(locDetails.photoUrl !== undefined) {
                     return (
                         <Marker
