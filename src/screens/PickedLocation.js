@@ -45,7 +45,7 @@ class PickedLocation extends Component {
             actions: [NavigationActions.navigate({ routeName: 'ChooseDelivery'})]
         });
         // If there is a photo, render modal with a photo, else don't
-        if(photos !== undefined) {
+        if(photos !== undefined && photos !== null) {
             // Gets the url for the photo
             const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference);
             // Used to condense the data needed to create a coffee pot
@@ -112,7 +112,15 @@ class PickedLocation extends Component {
                 </Modal>
             );
         }
+        //-------------------------------------------------------------------------
         //--------------------If no photo is available-----------------------------
+        const condenseData = {
+            name: name,
+            address: location,
+            place_id: place_id,
+            photoUrl: null,
+            geometry: geometry
+        }
         return (
             <Modal
                 visible={this.state.modalVisible}
@@ -145,10 +153,17 @@ class PickedLocation extends Component {
                                 </View>
                             </Card>
 
+                            <TimeSlider />
+
                             <View style={styles.bttn_view_style}>
                                 <Button
                                     title='Confirm'
                                     buttonStyle={styles.button_style}
+                                    onPress={() => {
+                                        this.props.createCoffeePot(condenseData, this.props.timer)
+                                        this.props.navigation.dispatch(resetAction);
+                                        this.setModalVisible(false);
+                                    }}
                                 />
                                 <Button
                                     title='Go Back'

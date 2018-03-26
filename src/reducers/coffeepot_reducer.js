@@ -12,7 +12,7 @@ const INITIAL_STATE = {
     hasCoffeePot: false,
     drinks: 0,
     countDown: 60000,
-    coffeePotLocations: null
+    coffeePots: null
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -28,7 +28,7 @@ export default function (state = INITIAL_STATE, action) {
         case SET_TIMER: 
             return { ...state, timer: action.payload};
         case FETCH_COFFEE_POTS:
-            return { ...state, coffeePotLocations: action.payload};
+            return { ...state, coffeePots: action.payload};
         default:
             return state;
     }

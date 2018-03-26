@@ -23,34 +23,6 @@ class GPSMap extends Component {
             color: SECONDARY_COLOR
         },
         headerTintColor: SECONDARY_COLOR,
-        headerLeft: (
-            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
-                <Icon
-                    type='material-community'
-                    name='menu'
-                    color='grey'
-                />
-            </TouchableOpacity>
-        ),
-        headerRight: (
-            <TouchableOpacity onPress={() => navigation.navigate('PlaceOrder')}>
-                <Icon
-                    type='font-awesome'
-                    name='coffee'
-                    color='grey'
-                />
-            </TouchableOpacity>
-        ),
-        tabBarIcon: () => {
-            return (
-                <Icon
-                    name="location-on"
-                    type="material"
-                    size={30}
-                    color="grey"
-                />
-            );
-        }
     })
 
     ///////////////////////////////////////////////////////////////////////////////
