@@ -39,8 +39,24 @@ class PaymentScreen extends Component {
 
                     <Card>
                         <View style={{ flexDirection: 'column' }}>
-                            <Text>Card Number: xxxx-xxxx-xxxx-0000{"\n"}</Text>
-                            <Text>Expiration Date: 01/ 2020{"\n"}</Text>
+                            <Text>Card Number:</Text>
+                            <TextInput
+                                style={{flex:1}}
+                                label="CardNumber"
+                                placeholder="0000-0000-0000-0000"
+                                //value={this.props.card}
+                                //onChangeText={value => this.props.orderUpdate({prop: 'name', value})}
+                            />
+                            <Text>{"\n"}</Text>
+                            <Text>Expiration Date:</Text>
+                            <TextInput
+                                style={{flex:1}}
+                                label="ExpDate"
+                                placeholder="01/20"
+                                //value={this.props.card}
+                                //onChangeText={value => this.props.orderUpdate({prop: 'name', value})}
+                            />
+                            <Text>{"\n"}</Text>
                             <View style={styles.button_container}>
                                 <Button 
                                     buttonStyle={styles.AddBttn_style}

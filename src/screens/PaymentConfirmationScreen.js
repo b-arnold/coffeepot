@@ -26,8 +26,13 @@ class PaymentConfirmationScreen extends Component {
     headerTintColor: SECONDARY_COLOR,
     tabBarVisible: false
   }
+  
 
   onConfirmPress = () => {
+    const timeDate = new Date();
+    time = timeDate.toString();
+    this.props.orderCreate({name: name || 'name', location: location || 'Starbucks, Azusa', 
+    drink: drink || 'drink', time: time || '30180101:010101', cost: '$0.00'});
     this.props.startTime(true);
     const drinks = this.props.drinks + 1;
     this.props.addOrder(drinks);
@@ -47,7 +52,7 @@ class PaymentConfirmationScreen extends Component {
           <Card style={styles.cardStyle}>
             <View style={{ margin: 10 }}>
               <View style={styles.cardTextStyle}>
-                <Text>Order: </Text>
+                <Text>Order: {this.props.drink}</Text>
               </View>
 
               <View style={styles.cardTextStyle}>

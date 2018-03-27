@@ -7,7 +7,9 @@ const INITIAL_STATE = {
     name: '',
     location: '',
     selectedPlace: null,
-    drink: ''
+    drink: '',
+    time: '',
+    cost: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
