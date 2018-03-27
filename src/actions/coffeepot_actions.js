@@ -7,7 +7,8 @@ import {
     CREATE_COFFEE_POT,
     SET_TIMER,
     CREATE_COFFEE_POT_SUCCESS,
-    FETCH_COFFEE_POTS
+    FETCH_COFFEE_POTS,
+    FETCH_MY_COFFEE_POT
 } from './types.js';
 import * as urlBuilder from '../utility/url_builder';
 
@@ -41,7 +42,7 @@ export const createCoffeePot = (locDetails, timer) => async dispatch => {
         const deliverer = null;
         const orders = []
         await firebase.database().ref(`/users/${currentUser.uid}/name_field`).once('value').then(function(snapshot) {
-            deliverer = snapshot.val();
+            deliverer = {name: snapshot.val(), uid: currentUser.uid};
         })
 
         await firebase.database().ref('/coffeePots/')
@@ -68,7 +69,7 @@ export const fetchCoffeePots = (currLoc) => async dispatch => {
     try {
         const coffeePots = { results: [] }
         const ref = firebase.database().ref();
-        const response = null;
+        //const response = { result: [] };
 
         // This will get all the coffee pots from the database (Subject to change)
         await ref.child('coffeePots').once('value', function(snapshot) {
@@ -129,3 +130,27 @@ async function getDistance (origin, destination) {
       console.error(err);
     }
   }
+
+///////////////////////////////////////////////////////////////////////////////
+// This will get the user's coffee pot for the 'HomeScreen.js'
+export const fetchMyCoffeePot = (uid) => async dispatch => {
+    try {
+        const ref = firebase.database().ref();
+        const response = { results: [] };
+        const myCoffeePot = null;
+        await ref.child('coffeePots').once('value', function(snapshot){
+            snapshot.forEach(function(child){
+               response.results.push(child);
+            }) 
+        })
+        for(const i = 0; i < response.results.length; i++) {
+            const coffeePot = JSON.parse(JSON.stringify(response.results[i]));
+            if(coffeePot.deliverer.uid === uid) {
+                myCoffeePot = JSON.parse(JSON.stringify(response.results[i]));
+            }
+        }
+        dispatch({ type: FETCH_MY_COFFEE_POT, payload: myCoffeePot });
+    } catch(err) {
+        console.error(err);
+    }
+}

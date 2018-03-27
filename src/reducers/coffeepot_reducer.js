@@ -5,6 +5,7 @@ import {
     CREATE_COFFEE_POT_SUCCESS,
     SET_TIMER,
     FETCH_COFFEE_POTS,
+    FETCH_MY_COFFEE_POT
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -12,7 +13,8 @@ const INITIAL_STATE = {
     hasCoffeePot: false,
     drinks: 0,
     countDown: 60000,
-    coffeePots: null
+    coffeePots: null,
+    myCoffeePot: null
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -29,6 +31,8 @@ export default function (state = INITIAL_STATE, action) {
             return { ...state, timer: action.payload};
         case FETCH_COFFEE_POTS:
             return { ...state, coffeePots: action.payload};
+        case FETCH_MY_COFFEE_POT:
+            return { ...state, myCoffeePot: action.payload};
         default:
             return state;
     }

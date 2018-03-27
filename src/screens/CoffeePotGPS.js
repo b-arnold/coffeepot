@@ -3,6 +3,7 @@ import { View, Text, Geolocation, ActivityIndicator, TouchableOpacity, Image } f
 import { Button, Icon, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import MapView, { Marker, Callout } from 'react-native-maps';
+import firebase from 'firebase';
 
 import * as actions from '../actions';
 import * as urlBuilder from '../utility/url_builder';
@@ -81,12 +82,47 @@ class CoffeePotGPS extends Component {
     ///////////////////////////////////////////////////////////////////////////////
     // This render method will place a marker on each location that si received from "fetchPlaces()"
     renderMarkers() {
+        const { currentUser } = firebase.auth();
         //console.log(this.props.places);
         const { navigate } = this.props.navigation
         if(this.props.coffeePots !== null) {
             return this.props.coffeePots.map(coffeePots => {
+                // 'text' is the distance that location is from the current user
                 const { deliverer, locDetails, text } = coffeePots;
                 if(locDetails.photoUrl !== undefined) {
+                    if(currentUser.uid === deliverer.uid){
+                        return (
+                            <Marker
+                                key={locDetails.place_id}
+                                coordinate={{
+                                    latitude: locDetails.geometry.location.lat,
+                                    longitude: locDetails.geometry.location.lng
+                                }}
+                                image={require('../images/CoffeePot_MarkerWithCircle_Red.png')}
+                            >
+                                {/* Callout customizes the information that is shown when a marker is selected */}
+                                <Callout>
+                                    <View style={styles.content}>
+                                        <Image
+                                            source={{uri: locDetails.photoUrl}}
+                                            style = {styles.image_style}
+                                        />
+                                        <View style={styles.description}>
+                                            <View style={styles.content}>
+                                                <Text style={styles.bold}>Deliverer: </Text>
+                                                <Text>{deliverer.name.firstName} {deliverer.name.lastName} (You)</Text>
+                                            </View>
+                                            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                                <Text style={styles.bold}>{locDetails.name}</Text>
+                                                <Text>{text} away</Text>
+                                            </View>
+                                            <Text>{locDetails.address}</Text>
+                                        </View>
+                                    </View>
+                                </Callout>
+                            </Marker>
+                        );
+                    }
                     return (
                         <Marker
                             key={locDetails.place_id}
@@ -106,7 +142,7 @@ class CoffeePotGPS extends Component {
                                     <View style={styles.description}>
                                         <View style={styles.content}>
                                             <Text style={styles.bold}>Deliverer: </Text>
-                                            <Text>{deliverer.firstName} {deliverer.lastName}</Text>
+                                            <Text>{deliverer.name.firstName} {deliverer.name.lastName}</Text>
                                         </View>
                                         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                             <Text style={styles.bold}>{locDetails.name}</Text>
@@ -134,7 +170,7 @@ class CoffeePotGPS extends Component {
                                     <View style={styles.description}>
                                         <View style={styles.content}>
                                             <Text style={styles.bold}>Deliverer: </Text>
-                                            <Text>{deliverer.firstName} {deliverer.lastName}</Text>
+                                            <Text>{deliverer.name.firstName} {deliverer.name.lastName}</Text>
                                         </View>
                                         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                             <Text style={styles.bold}>{locDetails.name}</Text>

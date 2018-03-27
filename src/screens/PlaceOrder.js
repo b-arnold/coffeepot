@@ -25,15 +25,13 @@ export class PlaceOrder extends Component {
     onButtonPress(){
         const { navigate } = this.props.navigation;
         const {name, location, drink} = this.props;
-        this.props.orderCreate({name: name || 'name', location: location || 'Starbucks, Azusa', drink: drink || 'drink'});
+        //this.props.orderCreate({name: name || 'name', location: location || 'Starbucks, Azusa', drink: drink || 'drink'});
         navigate('PaymentScreen');
     }
 
     renderLocation() {
         const { navigate } = this.props.navigation;
         if (this.props.places !== null) {
-            console.log('PlaceOrder.js---------');
-            console.log(this.props.places);
             return (
                 <Card>
                     <View style={{ flexDirection: 'row' }}>
