@@ -71,7 +71,6 @@ export const fetchCoffeePots = (currLoc) => async dispatch => {
         const ref = firebase.database().ref();
         const response = null;
 
-        // Need to assign key values
         // This will get all the coffee pots from the database (Subject to change)
         await ref.child('coffeePots').once('value', function(snapshot) {
             snapshot.forEach(function(child) {

@@ -69,6 +69,7 @@ class CoffeePotCard extends Component {
 
     renderCard() {
         const cups = [];
+        console.log(this.props.coffeePots);
         for (var i = 0; i < this.state.drinks; i++) {
             cups.push(<Image key={i} source={require('../images/coffee_cup_symbol.png')}
                 style={{
