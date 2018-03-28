@@ -101,11 +101,9 @@ class CoffeePotCard extends Component {
                     flipHorizontal={true}
                     flipVertical={false}
                     alignHeight={true}
-                    key={coffeePots[this.props.keyProp]}
                 >
                     {/* Front side of the card */}
                     <View style={styles.face}>
-                         <Card>
                          <Card
                             key={coffeePots[locDetails.place_id]}
                          >
