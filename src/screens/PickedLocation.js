@@ -56,8 +56,6 @@ class PickedLocation extends Component {
                 photoUrl: photoUrl,
                 geometry: geometry
             }
-            console.log('-----PickedLocation-----');
-            console.log(condenseData);
             return (
                 <Modal
                     visible={this.state.modalVisible}

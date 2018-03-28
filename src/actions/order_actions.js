@@ -11,11 +11,10 @@ export const orderChange = text => ({
   payload: text
 });
 
-export const orderCreate = ({ name, location, drink }) => {
-    return (dispatch) => {
-          //Something like /coffeepots/name(which will be the orders inside the cofeepots)
-        firebase.database().ref('/coffeePots/')
-        .push({ location, drink })
+
+    return(dispatch) => {
+        firebase.database().ref(`/orders/`)
+        .push({name, location, drink})
         .then(() => {
             dispatch({ type: ORDER_CREATE });
         });

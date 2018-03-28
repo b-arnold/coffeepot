@@ -22,8 +22,9 @@ class CountDown extends Component {
     }
 
     componentWillMount() {
-        if (this.props.time === true) {
-            count = 60000
+        if (this.props.myCoffeePot != null) {
+            const { timer } = this.props.myCoffeePot
+            count = timer * 60000
             this.props.updateCountDown(count)
             console.log(this.props.countDown)
             //this.setState({ time: this.props.countDown });
@@ -58,7 +59,8 @@ class CountDown extends Component {
 function mapStateToProps({ coffee }) {
     return {
         time: coffee.time,
-        countDown: coffee.countDown
+        countDown: coffee.countDown,
+        myCoffeePot: coffee.myCoffeePot
     };
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Icon, Rating } from 'react-native-elements';
 import { AppLoading, Asset } from 'expo';
+import firebase from 'firebase';
 import { Spinner } from '../components/Spinner';
 import CountDown from '../components/CountDown';
 import { connect } from 'react-redux';
@@ -54,15 +55,15 @@ class HomeCoffeePot extends Component {
         if (this.props.time === true) {
             this.setState({ alreadyStarted: true })
         }
-
+        const { currentUser } = firebase.auth();
+        this.props.fetchMyCoffeePot(currentUser.uid);
         this.setState({ drinks: this.props.drinks })
     }
 
-    TimerStatus = () => {
-        if (this.props.time)
-            return (
-                <CountDown />
-            );
+    TimerStatus() {
+        return (
+            <CountDown />
+        );
         
         if (this.state.alreadyStarted)
             return (
@@ -73,8 +74,26 @@ class HomeCoffeePot extends Component {
         
         return (<View />);
     }
+
+    renderNoCoffeePot() {
+        return (
+            <View style={styles.background}>
+                    <View style={{alignItems: 'center' }}>
+                        <Image
+                            source={require('../images/CoffeePot-Logo-White-02.png')}
+                            style={{
+                                width: 250,
+                                height: 250,
+                            }}
+                        />
+                        <Text style={styles.text_style}>No Coffee Pot</Text>
+                    </View>
+            </View>
+        );
+    }
     
-    renderCoffeePotTimer = () => {
+    renderCoffeePotTimer() {
+        const { timer } = this.props.myCoffeePot;
         return (
             <View style={styles.background}>
                 <TouchableOpacity onPress={this.onFirstPress}> 
@@ -93,7 +112,8 @@ class HomeCoffeePot extends Component {
         );
     }
 
-    renderNumberOfDrinks = () => {
+    renderNumberOfDrinks() {
+        const { deliverer } = this.props.myCoffeePot;
         var cups = [] 
         for (var i = 0; i < this.props.drinks; i++ ) {
             cups.push(<Image key={i} source={require('../images/coffee_cup_symbol.png')}
@@ -106,20 +126,24 @@ class HomeCoffeePot extends Component {
         }
 
         return (
-
             <View style={styles.background}>
                 <TouchableOpacity onPress={this.onSecondPress}>
-                    <View style={{ 
-                            flexDirection:'row', 
-                            marginTop: 70, 
-                            marginBottom: 40 
-                        }}>
-                        {cups.map(function(img,i){
-                            return img;
-                        })}
-                    </View>
-                    <View style={{ marginBottom: 54, alignItems: 'center' }}>
-                        <Text style={{ fontSize: 30, color: 'white' }}>
+                    <View style={{alignItems: 'center', marginTop: 20}}>
+                        <View style={{flexDirection: 'row'}}>
+                            <Text style={styles.bold}>Deliverer: </Text>
+                            <Text style={styles.text_style}>{deliverer.name.firstName} {deliverer.name.lastName}</Text>
+                        </View>
+                        <View
+                            style={{ 
+                                flexDirection:'row',
+                                marginTop: 10,
+                                marginBottom: 20
+                            }}>
+                            {cups.map(function(img,i){
+                                return img;
+                            })}
+                        </View>
+                        <Text style={styles.text_style}>
                             Number of Drinks: {this.props.drinks}
                         </Text>
                     </View>
@@ -128,35 +152,21 @@ class HomeCoffeePot extends Component {
         );
     }
 
-    renderShopInformation = () => {
+    // Renders the shop information details
+    renderShopInformation() {
+        const { locDetails } = this.props.myCoffeePot;
         return (
             <View style={styles.background}>
-                <TouchableOpacity onPress={this.onThirdPress}
-                    style={{ marginTop: 10}}
-                >
+                <TouchableOpacity onPress={this.onThirdPress}>
                     <View style={{alignItems: 'center'}}>
                         <Image
-                            source={require('../images/store_icon.png')}
-                            style={{
-                                width: 200,
-                                height: 200,
-                            }}
+                            source={{uri: locDetails.photoUrl}}
+                            style={styles.image_style}
                         />
-                    </View>
-                    <View style={{ marginBottom: 10, alignItems: 'center' }}>
-                        <Text style={{ fontSize: 30, color: 'white', fontWeight: 'bold' }}>
-                            Drive: 15 minutes
-                        </Text>
+                        <Text style={styles.bold}>{locDetails.name}</Text>
+                        <Text style={styles.text_style}>{locDetails.address}</Text>
                     </View>
                 </TouchableOpacity>
-                    <View style={{ marginTop: 5, marginBottom: 9, alignItems: 'center' }}>
-                        <Rating
-                            imageSize={40}
-                            type='star'
-                            //starting value will equal all ratings together out of five
-                            startingValue={3}
-                        />
-                    </View>
             </View>
         );
     }
@@ -188,7 +198,7 @@ class HomeCoffeePot extends Component {
     render() {
         ///////////////////////////////////////////////////////////////////
         //  Method taken from Expo documents
-        if( !this.state.isReady ) {
+        if( this.state.isReady != true) {
             return (
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <AppLoading 
@@ -200,24 +210,20 @@ class HomeCoffeePot extends Component {
                 </View>
             );
         }
+        else if( this.props.myCoffeePot != null ) {
+            return (
+                <View style={styles.container}>
+                    {this.renderScreenView()}
+                </View>
+            );
+        }
         return (
-            <View style={styles.container}>
-                {this.renderScreenView()}
+            <View>
+                {this.renderNoCoffeePot()}
             </View>
         );
     }
 }
-
-/////////////////////////////////////////////////////////
-// Map redux reducers to component mapStateToProps
-function mapStateToProps({ coffee }) {
-    return {
-        time: coffee.time,
-        drinks: coffee.drinks
-    };
-}
-
-export default connect(mapStateToProps, actions)(HomeCoffeePot);
 
 const styles = {
     background: {
@@ -235,5 +241,37 @@ const styles = {
     },
     container: {
         flexDirection: 'row'
+    },
+    text_style: {
+        color: 'white',
+        fontSize: 20
+    },
+    image_style: {
+        width: 400,
+        height: 200,
+        borderWidth: 5,
+        borderColor: 'white',
+        margin: 10
+    },
+    bold: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        color: 'white'
     }
 };
+
+/////////////////////////////////////////////////////////
+// Map redux reducers to component mapStateToProps
+function mapStateToProps({ coffee }) {
+    if(coffee.myCoffeePot === null) {
+        return { myCoffeePot: null}
+    }
+    return {
+        hasCoffeePot: coffee.hasCoffeePot,
+        time: coffee.time,
+        drinks: coffee.drinks,
+        myCoffeePot: coffee.myCoffeePot
+    };
+}
+
+export default connect(mapStateToProps, actions)(HomeCoffeePot);

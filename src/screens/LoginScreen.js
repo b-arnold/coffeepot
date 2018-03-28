@@ -270,7 +270,7 @@ class LoginScreen extends Component {
         <View style={{ marginBottom: 10, marginTop: 10 }}>
 
           <FormInput
-            placeholder="User Name"
+            placeholder="email"
             containerStyle={{ backgroundColor: 'white', height: 50, borderTopRightRadius: 7, borderTopLeftRadius: 7 }}
             inputStyle={{ color: 'black', left: 10, marginTop: 7 }}
             value={this.props.email}
@@ -278,7 +278,7 @@ class LoginScreen extends Component {
           />
 
           <FormInput
-            placeholder="Password"
+            placeholder="password"
             secureTextEntry
             containerStyle={{ backgroundColor: 'white', height: 50, borderBottomRightRadius: 7, borderBottomLeftRadius: 7 }}
             inputStyle={{ color: 'black', left: 10, marginTop: 7 }}

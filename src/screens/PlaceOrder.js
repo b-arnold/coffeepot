@@ -28,6 +28,7 @@ export class PlaceOrder extends Component {
         tabBarVisible: false
     }
 
+
     // Add order render method to display when no order has been added
     renderAddOrder() {
       return (
@@ -75,6 +76,28 @@ export class PlaceOrder extends Component {
                         value={this.props.order}
                         onChangeText={this.props.onOrderChange}
                       />
+
+    onButtonPress(){
+        const { navigate } = this.props.navigation;
+        const {name, location, drink} = this.props;
+        //this.props.orderCreate({name: name || 'name', location: location || 'Starbucks, Azusa', drink: drink || 'drink'});
+        navigate('PaymentScreen');
+    }
+
+    renderLocation() {
+        const { navigate } = this.props.navigation;
+        if (this.props.places !== null) {
+            return (
+                <Card>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text
+                            flex={1}
+                            onPress={() => navigate('OrderGPSMap')}
+                        >
+                            Location:
+                        </Text>
+                        {/*<Text>{this.props.places.vicinity}</Text>*/}
+
                     </View>
               </View>
           </Card>

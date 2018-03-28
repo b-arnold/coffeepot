@@ -30,7 +30,7 @@ class TimeSlider extends Component {
             <View style={styles.container}>
                 <Text style={styles.text}>{String(timeSelected)} Minutes</Text>
                 <Slider
-                    step={5}
+                    step={1}
                     maximumValue={20}
                     minimumValue={5}
                     onValueChange={this.updateTime.bind(this)}
@@ -66,8 +66,8 @@ const styles = {
         backgroundColor: '#d5d8e8'
     },
     thumb: {
-        height: 30,
-        width: 20,
+        height: 45,
+        width: 30,
         borderRadius: 1,
         borderRadius: 1,
         backgroundColor: 'black'

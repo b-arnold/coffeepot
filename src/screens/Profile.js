@@ -99,7 +99,7 @@ class Profile extends Component {
     //  Method taken from Expo documents
     async _loadAssetsAsync() {
         const imageAssets = cacheImages([
-            //require('../images/Profile_Pic.jpg'),
+            // require('../images/Profile_Pic.jpg'),
             require('../images/background.jpg')
         ]);
 
