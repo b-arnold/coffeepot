@@ -106,6 +106,9 @@ class CoffeePotCard extends Component {
                     {/* Front side of the card */}
                     <View style={styles.face}>
                          <Card>
+                         <Card
+                            key={coffeePots[locDetails.place_id]}
+                         >
                             <View style={styles.view_card}>
                                 <View style={{ flexDirection: 'row' }}>
                                     <View style={{ alignItems: 'center' }}>
