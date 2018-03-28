@@ -8,7 +8,8 @@ import {
     SET_TIMER,
     CREATE_COFFEE_POT_SUCCESS,
     FETCH_COFFEE_POTS,
-    FETCH_MY_COFFEE_POT
+    FETCH_MY_COFFEE_POT,
+    REMOVE_MY_COFFEE_POT
 } from './types.js';
 import * as urlBuilder from '../utility/url_builder';
 
@@ -151,6 +152,33 @@ export const fetchMyCoffeePot = (uid) => async dispatch => {
         }
         dispatch({ type: FETCH_MY_COFFEE_POT, payload: myCoffeePot });
     } catch(err) {
+        console.error(err);
+    }
+}
+
+export const removeMyCoffeePot = () => async dispatch => {
+    try {
+        const { currentUser } = firebase.auth();
+        const ref = firebase.database().ref();
+        const response = null;
+        const removed = false;
+        
+        await ref.child('coffeePots').once('value', function(snapshot){
+            snapshot.forEach(function(child){
+                response = JSON.parse(JSON.stringify(child));
+                const uid = response.deliverer.uid;
+                if(currentUser.uid === uid) {
+                    console.log('removed ' + uid);
+                    ref.child(`coffeePots/${child.key}`).remove();
+                    removed = true;
+                }
+            })
+        })
+
+        if(removed === true) {
+            dispatch({ type: REMOVE_MY_COFFEE_POT})
+        }
+    } catch (err) {
         console.error(err);
     }
 }

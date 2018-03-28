@@ -57,7 +57,7 @@ class CoffeePotGPS extends Component {
     ///////////////////////////////////////////////////////////////////////////////
     //defining state
     //The 'region' state object will contain latitude and longitude of the user
-    state = { region:{} };
+    state = { region:{}, hasCoffeePot: false};
 
     ///////////////////////////////////////////////////////////////////////////////
     // Before anything is loaded, this will set the region to the user's current position
@@ -78,6 +78,19 @@ class CoffeePotGPS extends Component {
             {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
         );
     }
+
+    // componentWillUpdate() {
+    //     console.log('-----Props-----');
+    //     console.log(this.props.hasCoffeePot);
+    //     console.log('-----State-----');
+    //     console.log(this.state.hasCoffeePot);
+    //     if(this.state.hasCoffeePot !== this.props.hasCoffeePot) {
+    //         console.log('-----entered-----');
+    //         this.setState({
+    //             hasCoffeePot: this.props.hasCoffeePot
+    //         })
+    //     }
+    // }
     
     ///////////////////////////////////////////////////////////////////////////////
     // This render method will place a marker on each location that si received from "fetchPlaces()"
@@ -279,9 +292,15 @@ const styles = {
 // places the data that we received from our action and reducers into a variable
 function mapStateToProps({ coffee }) {
     if (coffee.coffeePots === null) {
-        return { coffeePots: null };
+        return {
+            coffeePots: null,
+            hasCoffeePot: coffee.hasCoffeePot
+        };
     }
-    return { coffeePots: coffee.coffeePots.results };
+    return { 
+        coffeePots: coffee.coffeePots.results,
+        hasCoffeePot: coffee.hasCoffeePot
+    };
 }
 
 export default connect(mapStateToProps, actions)(CoffeePotGPS);
