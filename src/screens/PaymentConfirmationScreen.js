@@ -9,6 +9,7 @@ import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 import * as actions from '../actions';
+import {orderUpdate, orderCreate} from '../actions';
 
 ///////////////////////////////////////////////////////////
 // Payment Confirmation Screen
@@ -29,10 +30,10 @@ class PaymentConfirmationScreen extends Component {
   
 
   onConfirmPress = () => {
-    const timeDate = new Date();
-    time = timeDate.toString();
-    this.props.orderCreate({name: name || 'name', location: location || 'Starbucks, Azusa', 
-    drink: drink || 'drink', time: time || '30180101:010101', cost: '$0.00'});
+    // const timeDateTemp = new Date();
+    // timeDate = timeDateTemp.toString();
+    // this.props.orderCreate({name: order.name || 'name', location: location || 'Starbucks, Azusa', 
+    // drink: order.drink || 'drink', time: timeDate || '30180101:010101', cost: '$0.00'});
     this.props.startTime(true);
     const drinks = this.props.drinks + 1;
     this.props.addOrder(drinks);
@@ -52,7 +53,7 @@ class PaymentConfirmationScreen extends Component {
           <Card style={styles.cardStyle}>
             <View style={{ margin: 10 }}>
               <View style={styles.cardTextStyle}>
-                <Text>Order: {this.props.drink}</Text>
+                <Text>Order: {this.order.drink}</Text>
               </View>
 
               <View style={styles.cardTextStyle}>

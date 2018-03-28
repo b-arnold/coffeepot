@@ -10,6 +10,7 @@ const INITIAL_STATE = {
     drink: '',
     time: '',
     cost: '',
+    size: '',
 };
 
 export default (state = INITIAL_STATE, action) => {

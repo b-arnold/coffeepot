@@ -22,12 +22,12 @@ export const orderUpdate = ({ prop, value }) => {
     };
   };
 
-export const orderCreate = ({name, location, drink, time, cost}) => {
+export const orderCreate = ({name, location, drink, time, cost, size}) => {
     const {currentUser} = firebase.auth();
 
     return(dispatch) => {
         firebase.database().ref(`/coffeePots/`)
-        .push({name, location, drink, time, cost})
+        .push({name, location, drink, time, cost, size0})
         .then(() => {
             dispatch({ type: ORDER_CREATE});
         });
