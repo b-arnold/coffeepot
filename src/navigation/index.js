@@ -50,8 +50,15 @@ import * as actions from '../actions';
 
 
 class Navigation extends Component {
+    state = {
+        hScreen: false,
+        cpScreen: false,
+        gpsScreen: false,
+        profScreen: false
+    }
+
   componentWillMount() {
-    const { currentUser } = firebase.auth();
+    //const { currentUser } = firebase.auth();
 
     //   // Load first name into properties
     //   firebase.database().ref(`users/${currentUser.uid}/name_field/firstName`)
@@ -77,9 +84,8 @@ class Navigation extends Component {
   render() {
     
     const ProfileNav = StackNavigator({
-      HomeScreen: { screen: Profile },
-      Profile: { screen: Profile },
-      PlaceOrder: { screen: PlaceOrder }
+        Profile: { screen: Profile },
+         PlaceOrder: { screen: PlaceOrder },
     })
 
     const SettingNav = StackNavigator({
@@ -111,18 +117,16 @@ class Navigation extends Component {
     });
 
     const GPSNav = StackNavigator({
-      HomeScreen: { screen: OrderGPSMap },
       OrderGPSMap: { screen: OrderGPSMap },
       PlaceOrder: { screen: PlaceOrder },
       PaymentScreen: { screen: PaymentScreen },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
       ReceiptScreen: { screen: ReceiptScreen },
       Legal: { screen: StandardLegal },
-      PickedLocation: { screen: PickedLocation }
+      PickedLocation: { screen: PickedLocation },
     });
 
     const CoffeePotListNav = StackNavigator({
-      HomeScreen: { screen: CoffeePotList },
       CoffeePotList: { screen: CoffeePotList },
       PlaceOrder: { screen: PlaceOrder },
       PaymentScreen: { screen: PaymentScreen },
@@ -176,7 +180,7 @@ class Navigation extends Component {
             xlarge
           />
           <Text style={{ marginBottom: 20, color: 'white', fontSize: 20 }}>
-            {this.props.firstName} {this.props.lastName}
+            {/* {this.props.firstName} {this.props.lastName} */}
           </Text>
         </View>
 
@@ -188,8 +192,8 @@ class Navigation extends Component {
 
     const Drawer = DrawerNavigator(
     {
-      Delivery: { screen: Delivery },
       Home: { screen: HomeNav },
+      Delivery: { screen: Delivery },
       Settings: { screen: SettingNav },
       Legal: { screen: StandardLegalNav },
       LogOut: { screen: LogOut }
@@ -245,13 +249,13 @@ const styles = StyleSheet.create({
     }
   });
   
-  /////////////////////////////////////////////////////////
-  // Map redux reducers to component mapStateToProps
-  function mapStateToProps({ prof }) {
-    return {
-      firstName: prof.firstName,
-      lastName: prof.lastName
-    };
-  }
+//   /////////////////////////////////////////////////////////
+//   // Map redux reducers to component mapStateToProps
+//   function mapStateToProps({ prof }) {
+//     return {
+//       firstName: prof.firstName,
+//       lastName: prof.lastName
+//     };
+//   }
   
-  export default connect(mapStateToProps, actions)(Navigation);
+  export default Navigation;
