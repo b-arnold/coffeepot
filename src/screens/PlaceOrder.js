@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Dimensions, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  Dimensions,
+  ImageBackground
+} from 'react-native';
 import { connect } from 'react-redux';
-import { Button, Card } from 'react-native-elements';
-import { orderUpdate, orderCreate } from '../actions';
+import { Button, Card, FormInput } from 'react-native-elements';
+import * as actions from '../actions';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
@@ -21,6 +27,55 @@ export class PlaceOrder extends Component {
         headerTintColor: SECONDARY_COLOR,
         tabBarVisible: false
     }
+
+
+    // Add order render method to display when no order has been added
+    renderAddOrder() {
+      return (
+        <View style={styles.button_container}>
+
+
+          <Button
+              buttonStyle={styles.addBttn_style}
+              title='Add Additional Order'
+              rounded
+          />
+        </View>
+      );
+    }
+
+    // Actions to be called place order button is pressed
+    placeOrderPress() {
+      const { navigate } = this.props.navigation;
+
+      navigate('PaymentScreen');
+    }
+
+    // Update Order
+    onOrderChange = text => {
+      this.props.orderChange(text);
+    }
+
+    //Render Order Card
+    renderCard() {
+      return (
+        <View>
+          <Card>
+              <View style={{ flexDirection: 'column' }}>
+                  <Text style={styles.title_style}>Order:</Text>
+                    <View>
+                      <FormInput
+                        placeholder="Drink Name"
+                        inputStyle={{ color: 'black', marginTop: 7 }}
+                        containerStyle={{
+                          backgroundColor: 'white',
+                          height: 50,
+                          borderRadius: 7,
+                          width: 300
+                        }}
+                        value={this.props.order}
+                        onChangeText={this.props.onOrderChange}
+                      />
 
     onButtonPress(){
         const { navigate } = this.props.navigation;
@@ -42,71 +97,38 @@ export class PlaceOrder extends Component {
                             Location:
                         </Text>
                         {/*<Text>{this.props.places.vicinity}</Text>*/}
+
                     </View>
-                </Card>
-            );
-        }
-        return (
-            <Card>
-            <View style={{ flexDirection: 'row' }}>
-                <Text
-                    flex={1}
-                    onPress={() => navigate('OrderGPSMap')}
-                >
-                    Tap To Select Location
-                </Text>
-            </View>
-        </Card>
-        );
+              </View>
+          </Card>
+
+          <View style={styles.button_container}>
+            <Button
+                buttonStyle={styles.bttn_style}
+                title='Place Order'
+                rounded
+                onPress={() => this.placeOrderPress()}
+            />
+          </View>
+        </View>
+      );
     }
 
+    // Render
     render() {
         return (
-            <View>
-                <ScrollView>
-                    <Card>
-                        <View style={{ flexDirection: 'row' }}>
-                            <TextInput
-                                style={{flex:1}}
-                                label="Name"
-                                placeholder="John Doe"
-                                value={this.props.name}
-                                onChangeText={
-                                  value => this.props.orderUpdate({ prop: 'name', value })
-                                }
-                            />
-                        </View>
-                    </Card>
-                    {this.renderLocation()}
-                    <Card>
-                        <View style={{ flexDirection: 'column' }}>
-                            <Text style={styles.title_style}>Order:{'\n'}</Text>
-                            <Text>Grande, Iced, Vanilla {'\n'} Caffe Latte{'\n'}</Text>
-
-                            <View style={styles.button_container}>
-                                <Text style={{ fontWeight: 'bold' }}>
-                                  Remove from Order{'\n'}{'\n'}{'\n'}
-                                </Text>
-                                <Button
-                                buttonStyle={styles.AddBttn_style}
-                                title='Add Order +'
-                                rounded
-                                />
-                            </View>
-                        </View>
-                    </Card>
-                    <Card>
-                        <View style={styles.button_container}>
-                        <Button
-                            buttonStyle={styles.bttn_style}
-                            title='Place Order'
-                            rounded
-                            onPress={this.onButtonPress.bind(this)}
-                        />
-                        </View>
-                    </Card>
-                </ScrollView>
-            </View>
+          <ImageBackground
+                  style={{
+                  width: '100%',
+                  height: '100%',
+              }}
+              source={require('../images/background.jpg')}
+          >
+            <ScrollView>
+                {this.renderCard()}
+                {this.renderAddOrder()}
+            </ScrollView>
+          </ImageBackground>
         );
     }
 }
@@ -118,7 +140,8 @@ const styles = {
     },
     addBttn_style: {
         margin: 0,
-        width: 100,
+        width: 200,
+        height: 40,
         backgroundColor: BUTTON_COLOR
     },
     bttn_style: {
@@ -128,29 +151,25 @@ const styles = {
     },
     title_style: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column'
     },
     button_container: {
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 15
     }
-}
-
-/////////////////////////////////////////////////////////
-// Map redux reducers to component mapStateToProps
-// function mapStateToProps({ places }) {
-//     return {
-//         places: places.selectedPlace
-//     };
-// }
+};
 
 function mapStateToProps({ order }) {
     return {
         name: order.name,
         location: order.location,
-        drink: order.drink
+        order: order.drink
     };
 }
 
-export default connect(mapStateToProps, {orderUpdate, orderCreate} )(PlaceOrder);
+export default connect(mapStateToProps, actions)(PlaceOrder);

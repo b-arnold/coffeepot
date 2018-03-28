@@ -84,7 +84,7 @@ export const fetchCoffeePots = (currLoc) => async dispatch => {
                 coffeePots.results.push(child);
             })
         })
-        
+
         // Holds the distance results from you to each coffee place
         const distanceData = [];
         // This will remove coffee pots that are more than a mile from your location
@@ -101,7 +101,7 @@ export const fetchCoffeePots = (currLoc) => async dispatch => {
             const result = Object.assign(distanceData[i], JSON.parse(JSON.stringify(coffeePots.results[i])));
             coffeePotsAndDistData.results.push(result);
         }
-        
+
         // This will check if the coffee pots are within 1 mile of the current user
         // NOTE: array.splice(index, numToDelete) did not work
         const filteredCoffeePots = { results: [] };
@@ -131,6 +131,7 @@ async function getDistance (origin, destination) {
       console.error(err);
     }
   }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // This will get the user's coffee pot for the 'HomeScreen.js'
@@ -182,3 +183,4 @@ export const removeMyCoffeePot = () => async dispatch => {
         console.error(err);
     }
 }
+

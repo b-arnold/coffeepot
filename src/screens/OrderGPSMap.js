@@ -82,14 +82,14 @@ class OrderGPSMap extends Component {
     }
 ////////////////////////////////////HELP -read console after you click on a location
 //////// prints to console but does not update. Can't figure out to update it in mapstatetoprops
-/////without it crashing... 
+/////without it crashing...
 /////so write a name, choose a location and press place order...
 
     onButtonPress(places){
         const { navigate } = this.props.navigation;
         //this.props.location = markerID;
-        console.log(places.place_id);
-        console.log(places.name);
+        //console.log(places.place_id);
+        //console.log(places.name);
         this.props.orderUpdate(places.vicinity, places.place_id);
         navigate('PlaceOrder');
     }
@@ -117,7 +117,7 @@ class OrderGPSMap extends Component {
                     </MapView.Marker>
 
                 );
-                console.log(places.placeid);
+                //console.log(places.placeid);
         })}
     }
 
@@ -145,7 +145,7 @@ class OrderGPSMap extends Component {
 
     render() {
         const { navigate } = this.props.navigation
-        console.log(this.state.region.latitude);
+        //console.log(this.state.region.latitude);
         if(this.state.region.latitude !== undefined)
         {
             return (

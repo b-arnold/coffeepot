@@ -79,6 +79,7 @@ class CoffeePotGPS extends Component {
         );
     }
 
+
     // componentWillUpdate() {
     //     console.log('-----Props-----');
     //     console.log(this.props.hasCoffeePot);
@@ -98,10 +99,12 @@ class CoffeePotGPS extends Component {
         const { currentUser } = firebase.auth();
         //console.log(this.props.places);
         const { navigate } = this.props.navigation
+
         if(this.props.coffeePots !== null) {
             return this.props.coffeePots.map(coffeePots => {
                 // 'text' is the distance that location is from the current user
                 const { deliverer, locDetails, text } = coffeePots;
+
                 if(locDetails.photoUrl !== undefined) {
                     if(currentUser.uid === deliverer.uid){
                         return (
@@ -271,7 +274,7 @@ const styles = {
         flexDirection: 'row'
     },
     image_style: {
-        width: 85, 
+        width: 85,
         height: 80
     },
     description: {
