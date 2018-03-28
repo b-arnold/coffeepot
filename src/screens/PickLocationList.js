@@ -1,14 +1,26 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, Image, ImageBackground, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Button, Icon, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { AppLoading, Asset } from 'expo';
 
 import * as actions from '../actions';
 import * as urlBuilder from '../utility/url_builder';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
+///////////////////////////////////////////////////////////////////
+//  Method taken from Expo documents
+function cacheImages(images) {
+    return images.map(image => {
+      if (typeof image === 'string') {
+        return Image.prefetch(image);
+      } else {
+        return Asset.fromModule(image).downloadAsync();
+      }
+    });
+}
 
 class PickLocationList extends Component {
     ///////////////////////////////////////////////////////////////////////////////
@@ -36,6 +48,16 @@ class PickLocationList extends Component {
             </TouchableOpacity>
         ),
     })
+
+    ///////////////////////////////////////////////////////////////////
+    //  Method taken from Expo documents
+    async _loadAssetsAsync() {
+        const imageAssets = cacheImages([
+            require('../images/background.jpg')
+        ]);
+
+        await Promise.all([...imageAssets]);
+    }
 
     ///////////////////////////////////////////////////////////////////////////////
     // Defining The State
@@ -122,18 +144,34 @@ class PickLocationList extends Component {
     render() {
         if(this.state.region.latitude !== undefined  && this.props.places !== null) {
             return (
-                <ScrollView>
-                    {this.renderCards()}
-                </ScrollView>
+              <ImageBackground 
+                    style={{
+                    width: '100%',
+                    height: '100%',
+                }}
+                source={require('../images/background.jpg')}
+                >
+                  <ScrollView>
+                      {this.renderCards()}
+                  </ScrollView>
+                </ImageBackground>
             );
         }
         return(
-            <View style = {styles.loadingStyle}>
-                <ActivityIndicator
-                    size='large'
-                    color={BUTTON_COLOR}
-                />
-            </View>
+          <ImageBackground 
+                    style={{
+                    width: '100%',
+                    height: '100%',
+                }}
+                source={require('../images/background.jpg')}
+                >
+                <View style = {styles.loadingStyle}>
+                    <ActivityIndicator
+                        size='large'
+                        color={BUTTON_COLOR}
+                    />
+                </View>
+          </ImageBackground>
         );
     }
 }
