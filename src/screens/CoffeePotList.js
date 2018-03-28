@@ -104,7 +104,11 @@ class CoffeePotList extends Component {
                 source={require('../images/background.jpg')}
             >
                 <ScrollView>
-                    <CoffeePotCard />
+                  <View>
+                    <CoffeePotCard
+                      keyProp='cardKey'
+                    />
+                  </View>
                 </ScrollView>
             </ImageBackground>
         );

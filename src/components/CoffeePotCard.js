@@ -27,13 +27,19 @@ function cacheImages(images) {
 }
 
 class CoffeePotCard extends Component {
+  static defaultProps = {
+    keyProp: 'id'
+  }
+
+
     state = {
         drinks: null,
         isReady: false,
         region: {
           latitude: '',
           longitude: ''
-        }
+        },
+        index: 0
     }
 
     componentWillMount() {
@@ -55,6 +61,12 @@ class CoffeePotCard extends Component {
         );
     }
 
+    ComponentWillReceiveNextProps(nextProps) {
+      if (nextProps !== this.props.data) {
+        this.setSate({ index: 0 });
+      }
+    }
+
     ///////////////////////////////////////////////////////////////////
     //  Method taken from Expo documents
     async _loadAssetsAsync() {
@@ -69,7 +81,7 @@ class CoffeePotCard extends Component {
 
     renderCard() {
         const cups = [];
-        console.log(this.props.coffeePots);
+        //console.log(this.props.coffeePots);
         for (var i = 0; i < this.state.drinks; i++) {
             cups.push(<Image key={i} source={require('../images/coffee_cup_symbol.png')}
                 style={{
@@ -80,9 +92,9 @@ class CoffeePotCard extends Component {
             />)
         }
         if (this.props.coffeePots !== null) {
-          return this.props.coffeePots.map(coffeePots => {
+          return this.props.coffeePots.map((coffeePots) => {
             const { deliverer, locDetails, text } = coffeePots;
-            console.log(deliverer);
+            console.log();
             if (locDetails.photoUrl !== undefined) {
               return (
                 <FlipCard
@@ -90,6 +102,7 @@ class CoffeePotCard extends Component {
                     flipHorizontal={true}
                     flipVertical={false}
                     alignHeight={true}
+                    key={coffeePots[this.props.keyProp]}
                 >
                     {/* Front side of the card */}
                     <View style={styles.face}>
@@ -98,7 +111,7 @@ class CoffeePotCard extends Component {
                                 <View style={{ flexDirection: 'row' }}>
                                     <View style={{ alignItems: 'center' }}>
                                         <Image
-                                            source={require('../images/CoffeePot-Logo-Black-02.png')}
+                                            source={{ url: locDetails.photoUrl }}
                                             style={styles.image_style}
                                         />
                                     </View>
@@ -132,12 +145,12 @@ class CoffeePotCard extends Component {
                                     <View style={{ justifyContent: 'center' }}>
                                         <View style={{ padding: 5 }}>
                                             <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-                                                Coffee Shop Name
+                                                {locDetails.name}
                                             </Text>
                                         </View>
                                         <View style={{ padding: 5 }}>
                                             <Text style={{ fontSize: 15 }}>
-                                                Distance: ...
+                                                Distance: {text}
                                             </Text>
                                         </View>
                                         <View style={{ marginTop: 5, marginLeft: 5 }}>
