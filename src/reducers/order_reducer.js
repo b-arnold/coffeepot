@@ -7,10 +7,10 @@ const INITIAL_STATE = {
     name: '',
     location: '',
     selectedPlace: null,
-    drink: '',
+    drink: 'Expresso',
     time: '',
     cost: '',
-    size: '',
+    size: '8oz',
 };
 
 export default (state = INITIAL_STATE, action) => {

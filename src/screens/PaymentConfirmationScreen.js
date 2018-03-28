@@ -9,7 +9,6 @@ import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 import * as actions from '../actions';
-import {orderUpdate, orderCreate} from '../actions';
 
 ///////////////////////////////////////////////////////////
 // Payment Confirmation Screen
@@ -53,7 +52,7 @@ class PaymentConfirmationScreen extends Component {
           <Card style={styles.cardStyle}>
             <View style={{ margin: 10 }}>
               <View style={styles.cardTextStyle}>
-                <Text>Order: {this.order.drink}</Text>
+                <Text>Order: {this.props.drink}</Text>
               </View>
 
               <View style={styles.cardTextStyle}>
@@ -126,10 +125,14 @@ const styles = {
   }
 };
 
-function mapStateToProps({ coffee }) {
+function mapStateToProps({ coffee, order }) {
   return {
       time: coffee.time,
-      drinks: coffee.drinks
+      drinks: coffee.drinks,
+      name: order.name,
+      location: order.location,
+      drink: order.drink,
+      size: order.size
   };
 }
 

@@ -26,8 +26,8 @@ export const orderCreate = ({name, location, drink, time, cost, size}) => {
     const {currentUser} = firebase.auth();
 
     return(dispatch) => {
-        firebase.database().ref(`/coffeePots/`)
-        .push({name, location, drink, time, cost, size0})
+        firebase.database().ref(`/orders/`)
+        .push({name, location, drink, time, cost, size})
         .then(() => {
             dispatch({ type: ORDER_CREATE});
         });

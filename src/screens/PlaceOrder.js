@@ -89,7 +89,7 @@ export class PlaceOrder extends Component {
                             <Picker
                                 style={{flex:1}}
                                 selectedValue={this.props.drink}
-                                onValueChange={value => this.props.orderUpdate({ prop: 'drink', value})}
+                                onValueChange={value => this.props.orderUpdate({ prop: 'drink', selectedValue})}
                             >
                                 <Picker.Item label="Expresso" value="Expresso"/>
                                 <Picker.Item label="Macchiato" value="Machhiato"/>
@@ -103,7 +103,7 @@ export class PlaceOrder extends Component {
                             <Picker
                                 style={{flex:1}}
                                 selectedValue={this.props.size}
-                                onValueChange={value => this.props.orderUpdate({ prop: 'size', value})}
+                                onValueChange={value => this.props.orderUpdate({ prop: 'size', selectedValue})}
                             >
                                 <Picker.Item label="8oz" value="8oz"/>
                                 <Picker.Item label="12oz" value="12oz"/>
