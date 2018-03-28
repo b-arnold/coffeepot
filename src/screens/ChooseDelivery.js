@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { 
+    Alert,
     View, 
     Text, 
     TouchableOpacity,
@@ -8,6 +9,8 @@ import {
 } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { AppLoading, Asset } from 'expo';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
@@ -95,7 +98,32 @@ class ChooseDelivery extends Component {
                         </Text>
                     </View>
                 </View>
-            </ImageBackground>
+                <View style={{marginBottom: 100}}>
+                    <Text>
+                        Deliver an order that has been submitted!
+                    </Text>
+                </View>
+                <View style={{marginBottom: 10}}>
+                    <Button 
+                        buttonStyle={styles.bttn_style}
+                        title='Pick Location'
+                        rounded
+                        onPress={() => {
+                            if (this.props.myCoffeePot === null) {
+                                navigate('PickLocationList')
+                            } else {
+                                Alert.alert('You Already Have A Coffee Pot!')
+                            }
+                        }}
+                    />
+                </View>
+                <View style={{marginBottom: 30}}>
+                    <Text>
+                        Choose a location to start a CoffeePot!
+                    </Text>
+                </View>
+            </View>
+        </ImageBackground>
         )
     }
 }
@@ -120,4 +148,18 @@ const styles = {
     }
 }
 
-export default ChooseDelivery;
+/////////////////////////////////////////////////////////
+// Map redux reducers to component mapStateToProps
+function mapStateToProps({ coffee }) {
+    if(coffee.myCoffeePot === null) {
+        return { myCoffeePot: null}
+    }
+    return {
+        hasCoffeePot: coffee.hasCoffeePot,
+        time: coffee.time,
+        drinks: coffee.drinks,
+        myCoffeePot: coffee.myCoffeePot
+    };
+}
+
+export default connect(mapStateToProps, actions)(ChooseDelivery);

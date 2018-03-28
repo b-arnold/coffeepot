@@ -23,34 +23,6 @@ class GPSMap extends Component {
             color: SECONDARY_COLOR
         },
         headerTintColor: SECONDARY_COLOR,
-        headerLeft: (
-            <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
-                <Icon
-                    type='material-community'
-                    name='menu'
-                    color='grey'
-                />
-            </TouchableOpacity>
-        ),
-        headerRight: (
-            <TouchableOpacity onPress={() => navigation.navigate('PlaceOrder')}>
-                <Icon
-                    type='font-awesome'
-                    name='coffee'
-                    color='grey'
-                />
-            </TouchableOpacity>
-        ),
-        tabBarIcon: () => {
-            return (
-                <Icon
-                    name="location-on"
-                    type="material"
-                    size={30}
-                    color="grey"
-                />
-            );
-        }
     })
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -85,7 +57,7 @@ class GPSMap extends Component {
         const { navigate } = this.props.navigation
         if(this.props.places !== null) {
             return this.props.places.map(places => {
-                const { geometry, place_id, name, vicinity, photos, text } = places;
+                const { geometry, place_id, name, vicinity, photos, distance, duration } = places;
                 if(photos !== undefined) {
                     const photoUrl = urlBuilder.buildPlacesPhotoUrl(photos[0].photo_reference)
                     return (
@@ -101,9 +73,8 @@ class GPSMap extends Component {
                         <Callout>
                             <TouchableOpacity
                                     key={place_id}
-                                    
                                     onPress={() => {
-                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos);
+                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance, geometry);
                                             this.props.navigation.navigate('PickedLocation', {headerTitle: name});
                                         }
                                     }
@@ -116,7 +87,7 @@ class GPSMap extends Component {
                                     <View style = {styles.description}>
                                         <Text style={styles.bold}>{name}</Text>
                                         <Text>{vicinity}</Text>
-                                        <Text>{text}</Text>
+                                        <Text>{distance.text}   {duration.text} Drive</Text>
                                     </View>
                                 </View>
                             </TouchableOpacity> 
@@ -138,7 +109,7 @@ class GPSMap extends Component {
                             <TouchableOpacity
                                     key={place_id}
                                     onPress={() => {
-                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos);
+                                            this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance, geometry);
                                             this.props.navigation.navigate('PickedLocation', {headerTitle: name});
                                         }
                                     }
@@ -147,7 +118,7 @@ class GPSMap extends Component {
                                     <View style = {styles.description}>
                                         <Text style={styles.bold}>{name}</Text>
                                         <Text>{vicinity}</Text>
-                                        <Text>{text}</Text>
+                                        <Text>{distance.text}   {duration.text} Drive</Text>
                                     </View>
                                 </View>
                             </TouchableOpacity> 
@@ -186,17 +157,17 @@ class GPSMap extends Component {
     render() {
         const { navigate } = this.props.navigation
         //console.log(this.state.region.latitude);
-        if(this.state.region.latitude !== undefined)
+        if(this.state.region.latitude !== undefined  && this.props.places !== null)
         {
             return (
                 <View style={styles.container}>{this.renderMap()}</View>
             );
         }
         return(
-            <View style = {styles.container}>
+            <View style = {styles.loadingStyle}>
                 <ActivityIndicator
                     size='large'
-                    color={PRIMARY_COLOR}
+                    color={BUTTON_COLOR}
                 />
             </View>
         );
@@ -242,6 +213,10 @@ const styles = {
     },
     bold: {
         fontWeight: 'bold'
+    },
+    loadingStyle: {
+        flex: 1,
+        justifyContent: 'center'
     }
 };
 

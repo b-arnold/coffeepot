@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import firebase from 'firebase';
 import store from './src/store'
 import * as actions from './src/actions';
-
 import { GOOGLE_FIREBASE_CONFIG } from './src/constants/api_keys';
 import Navigation from './src/navigation/index';
 
@@ -14,6 +13,7 @@ class App extends Component {
   }
 
   render() {
+
     return (
       <Provider store={store}>
         <Navigation />

@@ -16,6 +16,10 @@ export const START_TIME = 'start_time';
 export const ADD_ORDER = 'add_order';
 export const ADD_NAME_SUCCESS = 'add_name_success';
 export const UPDATE_COUNT_DOWN = 'update_count_down';
+export const CREATE_COFFEE_POT_SUCCESS = 'create_coffee_pot_success';
+export const SET_TIMER = 'set_timer';
+export const FETCH_COFFEE_POTS = 'fetch_coffee_pots';
+export const FETCH_MY_COFFEE_POT = 'fetch_my_coffee_pot';
 
 // PLACES TYPES
 export const FETCH_PLACES = 'fetch_places';
