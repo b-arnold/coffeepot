@@ -94,7 +94,6 @@ class CoffeePotCard extends Component {
         if (this.props.coffeePots !== null) {
           return this.props.coffeePots.map((coffeePots) => {
             const { deliverer, locDetails, text } = coffeePots;
-            console.log();
             if (locDetails.photoUrl !== undefined) {
               return (
                 <FlipCard
@@ -111,7 +110,7 @@ class CoffeePotCard extends Component {
                                 <View style={{ flexDirection: 'row' }}>
                                     <View style={{ alignItems: 'center' }}>
                                         <Image
-                                            source={{ url: locDetails.photoUrl }}
+                                            source={require('../images/CoffeePot-Logo-Black-02.png')}
                                             style={styles.image_style}
                                         />
                                     </View>
@@ -138,7 +137,7 @@ class CoffeePotCard extends Component {
                                 <View style={{ flexDirection: 'row' }}>
                                     <View style={{ alignItems: 'center', marginRight: 5 }}>
                                         <Image
-                                            source={require('../images/store_icon.png')}
+                                            source={{ url: locDetails.photoUrl }}
                                             style={{ width: 100, height: 100 }}
                                         />
                                     </View>
