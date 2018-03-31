@@ -24,11 +24,11 @@ export class PlaceOrder extends Component {
 
     onButtonPress(){
         const { navigate } = this.props.navigation;
-        const {name, location, drink, time, cost, size} = this.props;
-        const timeDateTemp = new Date();
-        timeDate = timeDateTemp.toString();
-        this.props.orderCreate({name: name || 'name', location: location || 'Starbucks, Azusa', 
-        drink: drink || 'drink', time: timeDate || '30180101:010101', cost: '$0.00', size: size || '8oz'});
+        // const {name, location, drink, time, cost, size} = this.props;
+        // const timeDateTemp = new Date();
+        // timeDate = timeDateTemp.toString();
+        // this.props.orderCreate({name: name || 'name', location: location || 'Starbucks, Azusa', 
+        // drink: drink || 'drink', time: timeDate || '30180101:010101', cost: '$0.00', size: size || '8oz'});
         navigate('PaymentScreen');
     }
 
@@ -44,7 +44,7 @@ export class PlaceOrder extends Component {
                             flex={1}
                             onPress={() => navigate('OrderGPSMap')}
                         >
-                            Location: 
+                            Location: {this.props.location}
                         </Text>
                         {/*<Text>{this.props.places.vicinity}</Text>*/}
                     </View>

@@ -51,12 +51,17 @@ class PaymentConfirmationScreen extends Component {
         <View>
           <Card style={styles.cardStyle}>
             <View style={{ margin: 10 }}>
-              <View style={styles.cardTextStyle}>
-                <Text>Order: {this.props.drink}</Text>
+
+            <View style={styles.cardTextStyle}>
+                <Text>Location: {this.props.location}</Text>
               </View>
 
               <View style={styles.cardTextStyle}>
-                <Text>Drink Cost: </Text>
+                <Text>Order: {this.props.drink} {this.props.size}</Text>
+              </View>
+
+              <View style={styles.cardTextStyle}>
+                <Text>Cost: </Text>
               </View>
 
               <View style={styles.cardTextStyle}>
