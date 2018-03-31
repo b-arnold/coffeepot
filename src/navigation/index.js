@@ -192,7 +192,7 @@ class Navigation extends Component {
 
     const Drawer = DrawerNavigator(
     {
-      Home: { screen: HomeNav },
+      Homeapp: { screen: HomeNav },
       Delivery: { screen: Delivery },
       Settings: { screen: SettingNav },
       Legal: { screen: StandardLegalNav },
