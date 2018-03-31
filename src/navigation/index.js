@@ -19,6 +19,7 @@ import CoffeePot from '../screens/CoffeePot';
 import HomeScreen from '../screens/HomeScreen';
 import Profile from '../screens/Profile';
 import GPSMap from '../screens/GPSMap';
+import CoffeePotGPS from '../screens/CoffeePotGPS';
 
 // Extensions from HomeScreen
 import MessageScreen from '../screens/MessageScreen';
@@ -138,7 +139,7 @@ class Navigation extends Component {
     const HomeNav = TabNavigator({
       HomeScreen: { screen: HomeScreenNav },
       CoffeePotList: { screen: CoffeePotListNav },
-      GPS: { screen: GPSNav },
+      GPS: { screen: CoffeePotGPS },
       Profile: { screen: ProfileNav }
     }, {
       tabBarOptions: {

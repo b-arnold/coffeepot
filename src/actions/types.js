@@ -20,6 +20,7 @@ export const CREATE_COFFEE_POT_SUCCESS = 'create_coffee_pot_success';
 export const SET_TIMER = 'set_timer';
 export const FETCH_COFFEE_POTS = 'fetch_coffee_pots';
 export const FETCH_MY_COFFEE_POT = 'fetch_my_coffee_pot';
+export const REMOVE_MY_COFFEE_POT = 'remove_my_coffee_pot';
 
 // PLACES TYPES
 export const FETCH_PLACES = 'fetch_places';
@@ -31,5 +32,5 @@ export const LAST_NAME_CHANGED = 'last_name_changed';
 export const LOAD_PLACE_DETAILS = 'load_place_details';
 
 // ORDER TYPES
-export const ORDER_UPDATE = 'order_update';
+export const ORDER_CHANGE = 'order_change';
 export const ORDER_CREATE = 'order_create';

@@ -102,6 +102,23 @@ class HomeScreen extends Component {
         console.log(this.props.drinks);
     }
 
+    renderRemoveBttn() {
+        if(this.props.myCoffeePot != null) {
+            return (
+                <Button 
+                    icon={{
+                        name: 'cross',
+                        type: 'entypo',
+                        size: 30
+                    }}
+                    title='Cancel Coffee Pot'
+                    buttonStyle={styles.button_style}
+                    onPress={() => this.props.removeMyCoffeePot()}
+                />
+            );
+        }
+    }
+
     renderCoffeePot = () => {
         const { navigate } = this.props.navigation;
         return (
@@ -147,6 +164,7 @@ class HomeScreen extends Component {
                             buttonStyle={styles.button_style}
                             onPress={this.onAddOrderPress}
                         />
+                        {this.renderRemoveBttn()}
                     </View>
                 </View>
             </ImageBackground>
@@ -249,7 +267,7 @@ const styles = {
     button_style: {
         backgroundColor: BUTTON_COLOR,
         borderRadius: 5,
-        margin: 20,
+        margin: 10,
     }
 };
 

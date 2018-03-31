@@ -57,7 +57,7 @@ class CoffeePotGPS extends Component {
     ///////////////////////////////////////////////////////////////////////////////
     //defining state
     //The 'region' state object will contain latitude and longitude of the user
-    state = { region:{} };
+    state = { region:{}, hasCoffeePot: false};
 
     ///////////////////////////////////////////////////////////////////////////////
     // Before anything is loaded, this will set the region to the user's current position
@@ -78,6 +78,20 @@ class CoffeePotGPS extends Component {
             {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
         );
     }
+
+
+    // componentWillUpdate() {
+    //     console.log('-----Props-----');
+    //     console.log(this.props.hasCoffeePot);
+    //     console.log('-----State-----');
+    //     console.log(this.state.hasCoffeePot);
+    //     if(this.state.hasCoffeePot !== this.props.hasCoffeePot) {
+    //         console.log('-----entered-----');
+    //         this.setState({
+    //             hasCoffeePot: this.props.hasCoffeePot
+    //         })
+    //     }
+    // }
     
     ///////////////////////////////////////////////////////////////////////////////
     // This render method will place a marker on each location that si received from "fetchPlaces()"
@@ -85,10 +99,12 @@ class CoffeePotGPS extends Component {
         const { currentUser } = firebase.auth();
         //console.log(this.props.places);
         const { navigate } = this.props.navigation
+
         if(this.props.coffeePots !== null) {
             return this.props.coffeePots.map(coffeePots => {
                 // 'text' is the distance that location is from the current user
                 const { deliverer, locDetails, text } = coffeePots;
+
                 if(locDetails.photoUrl !== undefined) {
                     if(currentUser.uid === deliverer.uid){
                         return (
@@ -258,7 +274,7 @@ const styles = {
         flexDirection: 'row'
     },
     image_style: {
-        width: 85, 
+        width: 85,
         height: 80
     },
     description: {
@@ -279,9 +295,15 @@ const styles = {
 // places the data that we received from our action and reducers into a variable
 function mapStateToProps({ coffee }) {
     if (coffee.coffeePots === null) {
-        return { coffeePots: null };
+        return {
+            coffeePots: null,
+            hasCoffeePot: coffee.hasCoffeePot
+        };
     }
-    return { coffeePots: coffee.coffeePots.results };
+    return { 
+        coffeePots: coffee.coffeePots.results,
+        hasCoffeePot: coffee.hasCoffeePot
+    };
 }
 
 export default connect(mapStateToProps, actions)(CoffeePotGPS);

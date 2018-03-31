@@ -8,7 +8,8 @@ import {
     SET_TIMER,
     CREATE_COFFEE_POT_SUCCESS,
     FETCH_COFFEE_POTS,
-    FETCH_MY_COFFEE_POT
+    FETCH_MY_COFFEE_POT,
+    REMOVE_MY_COFFEE_POT
 } from './types.js';
 import * as urlBuilder from '../utility/url_builder';
 
@@ -83,7 +84,7 @@ export const fetchCoffeePots = (currLoc) => async dispatch => {
                 coffeePots.results.push(child);
             })
         })
-        
+
         // Holds the distance results from you to each coffee place
         const distanceData = [];
         // This will remove coffee pots that are more than a mile from your location
@@ -100,7 +101,7 @@ export const fetchCoffeePots = (currLoc) => async dispatch => {
             const result = Object.assign(distanceData[i], JSON.parse(JSON.stringify(coffeePots.results[i])));
             coffeePotsAndDistData.results.push(result);
         }
-        
+
         // This will check if the coffee pots are within 1 mile of the current user
         // NOTE: array.splice(index, numToDelete) did not work
         const filteredCoffeePots = { results: [] };
@@ -131,6 +132,7 @@ async function getDistance (origin, destination) {
     }
   }
 
+
 ///////////////////////////////////////////////////////////////////////////////
 // This will get the user's coffee pot for the 'HomeScreen.js'
 export const fetchMyCoffeePot = (uid) => async dispatch => {
@@ -154,3 +156,31 @@ export const fetchMyCoffeePot = (uid) => async dispatch => {
         console.error(err);
     }
 }
+
+export const removeMyCoffeePot = () => async dispatch => {
+    try {
+        const { currentUser } = firebase.auth();
+        const ref = firebase.database().ref();
+        const response = null;
+        const removed = false;
+        
+        await ref.child('coffeePots').once('value', function(snapshot){
+            snapshot.forEach(function(child){
+                response = JSON.parse(JSON.stringify(child));
+                const uid = response.deliverer.uid;
+                if(currentUser.uid === uid) {
+                    console.log('removed ' + uid);
+                    ref.child(`coffeePots/${child.key}`).remove();
+                    removed = true;
+                }
+            })
+        })
+
+        if(removed === true) {
+            dispatch({ type: REMOVE_MY_COFFEE_POT})
+        }
+    } catch (err) {
+        console.error(err);
+    }
+}
+

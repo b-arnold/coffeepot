@@ -64,12 +64,12 @@ class ChooseDelivery extends Component {
         const { navigate } = this.props.navigation;
         return (
             <ImageBackground 
-                    style={{
-                    width: '100%',
-                    height: '100%',
-                }}
-                source={require('../images/background.jpg')}
-                >
+                style={{
+                width: '100%',
+                height: '100%',
+            }}
+            source={require('../images/background.jpg')}
+            >
                 <View style={styles.mainContainer}>
                     <View style={{marginBottom: 10}}>
                         <Button 
@@ -89,7 +89,13 @@ class ChooseDelivery extends Component {
                             buttonStyle={styles.bttn_style}
                             title='Pick Location'
                             rounded
-                            onPress={() => navigate('PickLocationList')}
+                            onPress={() => {
+                                if (this.props.myCoffeePot === null) {
+                                    navigate('PickLocationList')
+                                } else {
+                                    Alert.alert('You Already Have A Coffee Pot!')
+                                }
+                            }}
                         />
                     </View>
                     <View style={{marginBottom: 30}}>
@@ -98,31 +104,6 @@ class ChooseDelivery extends Component {
                         </Text>
                     </View>
                 </View>
-                <View style={{marginBottom: 100}}>
-                    <Text>
-                        Deliver an order that has been submitted!
-                    </Text>
-                </View>
-                <View style={{marginBottom: 10}}>
-                    <Button 
-                        buttonStyle={styles.bttn_style}
-                        title='Pick Location'
-                        rounded
-                        onPress={() => {
-                            if (this.props.myCoffeePot === null) {
-                                navigate('PickLocationList')
-                            } else {
-                                Alert.alert('You Already Have A Coffee Pot!')
-                            }
-                        }}
-                    />
-                </View>
-                <View style={{marginBottom: 30}}>
-                    <Text>
-                        Choose a location to start a CoffeePot!
-                    </Text>
-                </View>
-            </View>
         </ImageBackground>
         )
     }
