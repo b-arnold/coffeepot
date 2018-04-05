@@ -6,7 +6,7 @@
 
 import {
   FIRST_NAME_CHANGED,
-  LAST_NAME_CHANGED
+  LAST_NAME_CHANGED,
 } from '../actions/types';
 
 const INITIAL_STATE = {

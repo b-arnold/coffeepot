@@ -22,6 +22,7 @@ import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 import Navigate from './Navigate';
+import { store } from '../store'
 import * as actions from '../actions';
 import { Spinner } from '../components/Spinner';
 
@@ -31,7 +32,6 @@ import { Spinner } from '../components/Spinner';
 // if they do not have an account
 ///////////////////////////////////////////////////////////
 class LoginScreen extends Component {
-
   static navigationOptions = {
     title: 'Login',
     header: null
@@ -44,6 +44,7 @@ class LoginScreen extends Component {
   /////////////////////////////////////////////////////////
   // Register the event which detects a change in state of user
   componentWillMount() {
+    console.log(store.getState());
     if (firebase.auth().currentUser) {
     //  this.props.signoutUser();
       this.props.navigation.navigate('Home');

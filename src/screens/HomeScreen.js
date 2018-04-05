@@ -14,6 +14,7 @@ import firebase from 'firebase';
 import { Spinner } from '../components/Spinner';
 import CountDown from '../components/CountDown';
 import HomeCoffeePot from '../components/HomeCoffeePot';
+import { store } from '../store';
 import * as actions from '../actions';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
@@ -81,6 +82,7 @@ class HomeScreen extends Component {
     }
 
     componentWillMount() {
+        console.log(store.getState());
         const { currentUser } = firebase.auth();
         this.props.fetchMyCoffeePot(currentUser.uid);
     }
@@ -171,84 +173,7 @@ class HomeScreen extends Component {
         );
     }
 
-    // renderStartScreen = () => {
-    //     return (
-    //         <ImageBackground 
-    //                     style={{
-    //                         width: '100%',
-    //                         height: '100%',
-    //                     }}
-    //                     source={require('../images/background.jpg')}
-    //                     >
-    //                     <View style={{ alignItems: 'flex-end', backgroundColor: 'transparent', marginRight: 30 }}>
-    //                         <View style={{ transform: [{ rotate: '-45deg'}] }}>
-    //                             <Icon 
-    //                                 type='action'
-    //                                 name='trending-flat'
-    //                                 color='red'
-    //                                 size={100}
-    //                             />
-    //                         </View>
-    //                         <View style={{ marginRight: 30 }}>
-    //                             <Text style={{ fontSize: 15, color: 'white' }}>
-    //                                     Place an order
-    //                             </Text>
-    //                         </View>
-    //                     </View>
-    //                     <View style={styles.background}>
-    //                         <View style={{ alignItems: 'center', marginTop: 100, marginBottom: 160 }}>
-    //                             <Text style={{ fontSize: 25, color: 'white' }}>
-    //                                 Haven't joined a Coffee Pot?
-    //                             </Text>
-    //                             <Text style={{ fontSize: 25, color: 'white' }}>
-    //                                 Let's fix that!
-    //                             </Text>
-    //                         </View>
-    //                     </View>
-    //                     <View style={{ 
-    //                             alignItems: 'flex-start', 
-    //                             backgroundColor: 'transparent',   
-    //                         }}>
-    //                         <View style={{ marginLeft: 10 }}>
-    //                             <Text style={{ fontSize: 15, color: 'white' }}>
-    //                                     Join a Coffee Pot
-    //                             </Text>
-    //                         </View>
-    //                         <View style={{ transform: [{ rotate: '45deg'}], marginLeft: 45 }}>
-    //                             <Icon 
-    //                                 type='action'
-    //                                 name='trending-flat'
-    //                                 color='red'
-    //                                 size={100}
-    //                             />
-    //                         </View>
-    //                     </View>
-    //                 </ImageBackground>
-    //     );
-    // }
-
     render() {
-        ///////////////////////////////////////////////////////////////////
-        //  Method taken from Expo documents
-        // if( !this.state.isReady || this.props.myCoffeePot === null) {
-        //     return (
-        //         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        //             <AppLoading 
-        //                 startAsync={this._loadAssetsAsync}
-        //                 onFinish={() => this.setState({ isReady: true })}
-        //                 onError={console.warn}
-        //             />
-        //             <Spinner size="large"/> 
-        //         </View>
-        //     );
-        // }
-        // else {
-        //     if ( this.state.alreadyStarted == true )
-        //         return ( this.renderCoffeePot() );
-        //     else
-        //         return ( this.renderStartScreen() );
-        //}
-
         return (
             <View>
                 {this.renderCoffeePot()}

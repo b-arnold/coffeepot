@@ -6,7 +6,8 @@ import {
     SET_TIMER,
     FETCH_COFFEE_POTS,
     FETCH_MY_COFFEE_POT,
-    REMOVE_MY_COFFEE_POT
+    REMOVE_MY_COFFEE_POT,
+    RESET_COFFEE_STATE
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -36,6 +37,8 @@ export default function (state = INITIAL_STATE, action) {
             return { ...state, myCoffeePot: action.payload};
         case REMOVE_MY_COFFEE_POT:
             return { ...state, myCoffeePot: null, hasCoffeePot: false}
+        case RESET_COFFEE_STATE:
+            return INITIAL_STATE;
         default:
             return state;
     }

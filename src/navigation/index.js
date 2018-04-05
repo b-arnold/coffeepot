@@ -57,23 +57,7 @@ class Navigation extends Component {
         gpsScreen: false,
         profScreen: false
     }
-
-  componentWillMount() {
-    //const { currentUser } = firebase.auth();
-
-    //   // Load first name into properties
-    //   firebase.database().ref(`users/${currentUser.uid}/name_field/firstName`)
-    //   .on('value', snapshot => {
-    //     this.props.profileFirstNameChange(snapshot.val());
-    //   });
-
-    //   // Load last name into properties
-    //   firebase.database().ref(`users/${currentUser.uid}/name_field/lastName`)
-    //   .on('value', snapshot => {
-    //     this.props.profileLastNameChange(snapshot.val());
-    //   });
-  }
-
+    
   ////////////////////////////////////////////////////////////////////////
   // Upon loading app, loads Brush Script MT for header
   async componentDidMount() {
@@ -181,7 +165,7 @@ class Navigation extends Component {
             xlarge
           />
           <Text style={{ marginBottom: 20, color: 'white', fontSize: 20 }}>
-            {/* {this.props.firstName} {this.props.lastName} */}
+            {this.props.firstName} {this.props.lastName}
           </Text>
         </View>
 
@@ -242,21 +226,21 @@ class Navigation extends Component {
 //////////////////////////////////////////////////////////////////////////////
 // Style object
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      justifyContent: 'center',
-      marginTop: Platform.OS === 'android' ? 24 : 0
-    }
-  });
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    marginTop: Platform.OS === 'android' ? 24 : 0
+  }
+});
   
-//   /////////////////////////////////////////////////////////
-//   // Map redux reducers to component mapStateToProps
-//   function mapStateToProps({ prof }) {
-//     return {
-//       firstName: prof.firstName,
-//       lastName: prof.lastName
-//     };
-//   }
+/////////////////////////////////////////////////////////
+// Map redux reducers to component mapStateToProps
+function mapStateToProps({ prof }) {
+  return {
+    firstName: prof.firstName,
+    lastName: prof.lastName
+  };
+}
   
-  export default Navigation;
+export default connect(mapStateToProps, actions)(Navigation);
