@@ -1,8 +1,8 @@
 import firebase from 'firebase';
 import {
     ORDER_UPDATE,
-    ORDER_CREATE
-    //ORDER_FETCH_SUCCESS,
+    ORDER_CREATE,
+    NAME_FETCH_SUCCESS
     //ORDER_SAVE_SUCCESS
 } from './types';
 
@@ -33,3 +33,23 @@ export const orderCreate = ({name, location, drink, time, cost, size}) => {
         });
     };
 };
+
+
+////Cannot update name property on order. Only consolelogs name but nothing more.
+export const nameFetch = () => {
+    const { currentUser } = firebase.auth();
+  
+    return (dispatch) => {
+      firebase.database().ref(`/users/${currentUser.uid}/name_field/firstName/`)
+        .on('value', function(snapshot) {
+            var tempName = snapshot.val();
+            value = String(tempName);
+            if (value === undefined) { 
+                console.log('value is undefined'); 
+            } else { 
+                console.log('name function: ' + value);
+                //this.props.orderUpdate({prop: 'name', value}); 
+            }
+        });
+    };
+  };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Image, Dimensions, TextInput, Picker } from 'react-native';
 import { Button, Card } from 'react-native-elements';
-import {orderUpdate, orderCreate} from '../actions';
+import {orderUpdate, orderCreate, nameFetch} from '../actions';
 import { connect } from 'react-redux';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
@@ -89,7 +89,7 @@ export class PlaceOrder extends Component {
                             <Picker
                                 style={{flex:1}}
                                 selectedValue={this.props.drink}
-                                onValueChange={value => this.props.orderUpdate({ prop: 'drink', selectedValue})}
+                                onValueChange={value => this.props.orderUpdate({ prop: 'drink', value})}
                             >
                                 <Picker.Item label="Expresso" value="Expresso"/>
                                 <Picker.Item label="Macchiato" value="Machhiato"/>
@@ -103,7 +103,7 @@ export class PlaceOrder extends Component {
                             <Picker
                                 style={{flex:1}}
                                 selectedValue={this.props.size}
-                                onValueChange={value => this.props.orderUpdate({ prop: 'size', selectedValue})}
+                                onValueChange={value => this.props.orderUpdate({ prop: 'size', value})}
                             >
                                 <Picker.Item label="8oz" value="8oz"/>
                                 <Picker.Item label="12oz" value="12oz"/>
@@ -180,4 +180,4 @@ function mapStateToProps({ order }) {
     };
 }
 
-export default connect(mapStateToProps, {orderUpdate, orderCreate} )(PlaceOrder);
+export default connect(mapStateToProps, {orderUpdate, orderCreate, nameFetch} )(PlaceOrder);

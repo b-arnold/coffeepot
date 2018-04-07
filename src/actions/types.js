@@ -29,3 +29,4 @@ export const LOAD_PLACE_DETAILS = 'load_place_details';
 // ORDER TYPES
 export const ORDER_UPDATE = 'order_update';
 export const ORDER_CREATE = 'order_create';
+export const NAME_FETCH_SUCCESS = 'name_fetch_success';
