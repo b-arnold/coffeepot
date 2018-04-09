@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { 
+    Alert,
     View, 
     Text, 
     TouchableOpacity,
@@ -8,6 +9,8 @@ import {
 } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { AppLoading, Asset } from 'expo';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
@@ -61,12 +64,12 @@ class ChooseDelivery extends Component {
         const { navigate } = this.props.navigation;
         return (
             <ImageBackground 
-                    style={{
-                    width: '100%',
-                    height: '100%',
-                }}
-                source={require('../images/background.jpg')}
-                >
+                style={{
+                width: '100%',
+                height: '100%',
+            }}
+            source={require('../images/background.jpg')}
+            >
                 <View style={styles.mainContainer}>
                     <View style={{marginBottom: 10}}>
                         <Button 
@@ -86,7 +89,13 @@ class ChooseDelivery extends Component {
                             buttonStyle={styles.bttn_style}
                             title='Pick Location'
                             rounded
-                            onPress={() => navigate('PickLocationList')}
+                            onPress={() => {
+                                if (this.props.myCoffeePot === null) {
+                                    navigate('PickLocationList')
+                                } else {
+                                    Alert.alert('You Already Have A Coffee Pot!')
+                                }
+                            }}
                         />
                     </View>
                     <View style={{marginBottom: 30}}>
@@ -95,7 +104,7 @@ class ChooseDelivery extends Component {
                         </Text>
                     </View>
                 </View>
-            </ImageBackground>
+        </ImageBackground>
         )
     }
 }
@@ -120,4 +129,18 @@ const styles = {
     }
 }
 
-export default ChooseDelivery;
+/////////////////////////////////////////////////////////
+// Map redux reducers to component mapStateToProps
+function mapStateToProps({ coffee }) {
+    if(coffee.myCoffeePot === null) {
+        return { myCoffeePot: null}
+    }
+    return {
+        hasCoffeePot: coffee.hasCoffeePot,
+        time: coffee.time,
+        drinks: coffee.drinks,
+        myCoffeePot: coffee.myCoffeePot
+    };
+}
+
+export default connect(mapStateToProps, actions)(ChooseDelivery);

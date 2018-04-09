@@ -13,6 +13,7 @@ export const buildPlacesUrl = ( location ) => {
   const { latitude, longitude } = location;
   const coords = `${latitude},${longitude}`;
   const query = qs.stringify({ location: coords, ...PLACE_QUERY_PARAMS });
+  //console.log(`${GOOGLE_PLACES_ROOT_URL}${query}`);
   return `${GOOGLE_PLACES_ROOT_URL}${query}`;
 };
 
@@ -20,7 +21,7 @@ export const buildPlacesUrl = ( location ) => {
 const PLACE_QUERY_PARAMS = {
   key: GOOGLE_PLACES_API_KEY,
   types: 'cafe',
-  radius: '1000' // In meters (max 50000)
+  radius: '1700' // In meters (max 50000)
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////

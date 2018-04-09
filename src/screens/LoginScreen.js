@@ -3,7 +3,7 @@
   Developers: Brenden Miller, Richard Navarro,
     Brian Cajulis, Brett Arnold, Daniel Davis
 */
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   Text,
@@ -12,18 +12,22 @@ import {
   TouchableWithoutFeedback,
   ImageBackground,
   TouchableOpacity
-} from 'react-native';
+} from "react-native";
 import {
   Button,
   FormInput,
   FormValidationMessage
-} from 'react-native-elements';
-import firebase from 'firebase';
-import { connect } from 'react-redux';
-import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
-import Navigate from './Navigate';
-import * as actions from '../actions';
-import { Spinner } from '../components/Spinner';
+} from "react-native-elements";
+import firebase from "firebase";
+import { connect } from "react-redux";
+import {
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+  BUTTON_COLOR
+} from "../constants/style";
+import Navigate from "./Navigate";
+import * as actions from "../actions";
+import { Spinner } from "../components/Spinner";
 
 ///////////////////////////////////////////////////////////
 // Login Screen
@@ -31,11 +35,10 @@ import { Spinner } from '../components/Spinner';
 // if they do not have an account
 ///////////////////////////////////////////////////////////
 class LoginScreen extends Component {
-
   static navigationOptions = {
-    title: 'Login',
+    title: "Login",
     header: null
-  }
+  };
 
   //////////////////////////////////////////////////////////////////////////////////
   // State definition
@@ -45,8 +48,8 @@ class LoginScreen extends Component {
   // Register the event which detects a change in state of user
   componentWillMount() {
     if (firebase.auth().currentUser) {
-    //  this.props.signoutUser();
-      this.props.navigation.navigate('Home');
+      //  this.props.signoutUser();
+      this.props.navigation.navigate("Homeapp");
       return;
     }
 
@@ -56,10 +59,10 @@ class LoginScreen extends Component {
       this.setState({ showLoading: this.props.loading });
 
       if (user) {
-        this.props.navigation.navigate('Home');
+        this.props.navigation.navigate("Homeapp");
         return;
       }
-      this.props.navigation.navigate('Auth');
+      this.props.navigation.navigate("Auth");
     });
   }
 
@@ -74,13 +77,13 @@ class LoginScreen extends Component {
   // call action when first name is changed
   onFirstNameChange = text => {
     this.props.firstNameChange(text);
-  }
+  };
 
   /////////////////////////////////////////////////////////
   //  call action when last name Changed
   onLastNameChange = text => {
     this.props.lastNameChange(text);
-  }
+  };
 
   /////////////////////////////////////////////////////////
   // update the emailed property when email Changed
@@ -128,7 +131,7 @@ class LoginScreen extends Component {
       return (
         <View
           style={{
-            alignItems: 'center'
+            alignItems: "center"
           }}
         >
           <Button
@@ -136,16 +139,32 @@ class LoginScreen extends Component {
             onPress={this.onStandardSignupButtonPress}
             rounded
             buttonStyle={styles.loginButtonStyle}
-            buttonStyle={{ backgroundColor: '#E55300', width: 270, borderRadius: 7 }}
+            buttonStyle={{
+              backgroundColor: "#E55300",
+              width: 270,
+              borderRadius: 7
+            }}
           />
-          <View style={{ flexDirection: 'column', marginTop: 10 }}>
-            <Text style={{ textAlign: 'center', color: 'white', backgroundColor: 'transparent' }}>Already have an account?&nbsp;</Text>
+          <View style={{ flexDirection: "column", marginTop: 10 }}>
+            <Text
+              style={{
+                textAlign: "center",
+                color: "white",
+                backgroundColor: "transparent"
+              }}
+            >
+              Already have an account?&nbsp;
+            </Text>
             <TouchableOpacity onPress={this.onSignupLoginToggle}>
-              <View style={{ marginTop: 10, alignItems: 'center' }}>
-                <Text style={{ color: 'white', backgroundColor: 'transparent' }}>Log In</Text>
+              <View style={{ marginTop: 10, alignItems: "center" }}>
+                <Text
+                  style={{ color: "white", backgroundColor: "transparent" }}
+                >
+                  Sign In
+                </Text>
               </View>
             </TouchableOpacity>
-            </View>
+          </View>
         </View>
       );
     }
@@ -153,43 +172,87 @@ class LoginScreen extends Component {
       <View>
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 25
-        }}
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
         >
           <Button
-            title="Log In"
+            title="Sign In"
             buttonStyle={styles.loginButtonStyle}
-            buttonStyle={{ backgroundColor: '#E55300', width: 330, borderRadius: 7, height: 47 }}
+            buttonStyle={{
+              backgroundColor: "#E55300",
+              width: 330,
+              borderRadius: 7,
+              height: 47
+            }}
             onPress={this.onStandardLoginButtonPress}
           />
+        </View>
+
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 35
+          }}
+        >
+          <Button
+            title="Sign in with Facebook"
+            buttonStyle={styles.loginButtonStyle}
+            buttonStyle={{
+              backgroundColor: "#3b5998",
+              width: 330,
+              borderRadius: 7,
+              height: 47
+            }}
+            icon={{
+              name: "facebook",
+              type: "entypo",
+              size: 30
+            }}
+            onPress={() => this.props.navigation.navigate("Facebook")}
+          />
+        </View>
+
+        <View
+          style={styles.containerStyle}
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 30
+          }}
+        >
+          <TouchableOpacity onPress={this.onSignupLoginToggle}>
+            <Text
+              style={{
+                backgroundColor: "transparent",
+                color: "white",
+                marginRight: 40,
+                fontSize: 18
+              }}
+            >
+              Sign Up
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Text
+              style={{
+                backgroundColor: "transparent",
+                color: "white",
+                marginLeft: 30,
+                fontSize: 18
+              }}
+            >
+              Forgot Password
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
-
-      <View
-        style={styles.containerStyle}style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: 30
-      }}
-      >
-      <TouchableOpacity onPress={this.onSignupLoginToggle}>
-        <Text style={{ backgroundColor: 'transparent', color: 'white', marginRight: 40, fontSize: 18 }}>
-          Sign Up
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity>
-        <Text style={{ backgroundColor: 'transparent', color: 'white', marginLeft: 30, fontSize: 18 }}>
-          Forgot Password
-        </Text>
-      </TouchableOpacity>
-
-      </View>
-    </View>
-  );
+    );
   }
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -200,15 +263,25 @@ class LoginScreen extends Component {
         <View style={styles.nameStyle}>
           <FormInput
             placeholder="First Name"
-            inputStyle={{ color: 'black', left: 10, marginTop: 7 }}
-            containerStyle={{ backgroundColor: 'white', height: 50, borderRadius: 7, width: 150 }}
+            inputStyle={{ color: "black", left: 10, marginTop: 7 }}
+            containerStyle={{
+              backgroundColor: "white",
+              height: 50,
+              borderRadius: 7,
+              width: 150
+            }}
             value={this.props.firstName}
             onChangeText={this.onFirstNameChange}
           />
           <FormInput
             placeholder="Last Name"
-            inputStyle={{ color: 'black', left: 10, marginTop: 7 }}
-            containerStyle={{ backgroundColor: 'white', height: 50, borderRadius: 7, width: 150 }}
+            inputStyle={{ color: "black", left: 10, marginTop: 7 }}
+            containerStyle={{
+              backgroundColor: "white",
+              height: 50,
+              borderRadius: 7,
+              width: 150
+            }}
             value={this.props.lastName}
             onChangeText={this.onLastNameChange}
           />
@@ -228,8 +301,12 @@ class LoginScreen extends Component {
             secureTextEntry
             value={this.props.passwordRetype}
             onChangeText={this.onPasswordRetypeChange}
-            inputStyle={{ color: 'black', left: 10, marginTop: 7 }}
-            containerStyle={{ backgroundColor: 'white', height: 50, borderRadius: 7 }}
+            inputStyle={{ color: "black", left: 10, marginTop: 7 }}
+            containerStyle={{
+              backgroundColor: "white",
+              height: 50,
+              borderRadius: 7
+            }}
           />
         </View>
       );
@@ -245,7 +322,6 @@ class LoginScreen extends Component {
     return { flex: 1 };
   }
 
-
   /////////////////////////////////////////////////////////
   // Main render method
   /////////////////////////////////////////////////////////
@@ -255,33 +331,42 @@ class LoginScreen extends Component {
     }
     return (
       <KeyboardAvoidingView
-        style={{ flex: 1, justifyContent: 'center' }}
-        behavior='padding'
+        style={{ flex: 1, justifyContent: "center" }}
+        behavior="padding"
       >
         <View style={styles.containerStyle}>
           <Image
             style={styles.imageStyle}
-            source={require('../images/logo_with_name.png')}
+            source={require("../images/logo_with_name.png")}
           />
         </View>
 
-         {this.renderNameField()}
+        {this.renderNameField()}
 
         <View style={{ marginBottom: 10, marginTop: 10 }}>
-
           <FormInput
-            placeholder="User Name"
-            containerStyle={{ backgroundColor: 'white', height: 50, borderTopRightRadius: 7, borderTopLeftRadius: 7 }}
-            inputStyle={{ color: 'black', left: 10, marginTop: 7 }}
+            placeholder="email"
+            containerStyle={{
+              backgroundColor: "white",
+              height: 50,
+              borderTopRightRadius: 7,
+              borderTopLeftRadius: 7
+            }}
+            inputStyle={{ color: "black", left: 10, marginTop: 7 }}
             value={this.props.email}
             onChangeText={this.onEmailChange}
           />
 
           <FormInput
-            placeholder="Password"
+            placeholder="password"
             secureTextEntry
-            containerStyle={{ backgroundColor: 'white', height: 50, borderBottomRightRadius: 7, borderBottomLeftRadius: 7 }}
-            inputStyle={{ color: 'black', left: 10, marginTop: 7 }}
+            containerStyle={{
+              backgroundColor: "white",
+              height: 50,
+              borderBottomRightRadius: 7,
+              borderBottomLeftRadius: 7
+            }}
+            inputStyle={{ color: "black", left: 10, marginTop: 7 }}
             value={this.props.password}
             onChangeText={this.onPasswordChange}
           />
@@ -289,7 +374,9 @@ class LoginScreen extends Component {
 
         {this.renderPasswordRetypeButton()}
 
-        <FormValidationMessage containerStyle={{ marginBottom: 10, backgroundColor: 'transparent' }}>
+        <FormValidationMessage
+          containerStyle={{ marginBottom: 10, backgroundColor: "transparent" }}
+        >
           {this.props.error}
         </FormValidationMessage>
 
@@ -303,14 +390,14 @@ class LoginScreen extends Component {
   /////////////////////////////////////////////////////////
   render() {
     return (
-
       <ImageBackground
-        source={require('../images/background.jpg')} style={{ width: '100%', height: '100%' }}
+        source={require("../images/background.jpg")}
+        style={{ width: "100%", height: "100%" }}
       >
         <View style={this.getScreenStyle()}>{this.renderContent()}</View>
       </ImageBackground>
-  );
-}
+    );
+  }
 }
 
 ///////////////////////////////////////////////////////////
@@ -327,14 +414,14 @@ const styles = {
     backgroundColor: BUTTON_COLOR
   },
   imageStyle: {
-    width: 225,
-    height: 225,
+    width: 250,
+    height: 250,
     borderRadius: 50
   },
   containerStyle: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     margin: 10
   },
   formStyle: {
@@ -342,13 +429,13 @@ const styles = {
     marginBottom: 10
   },
   nameStyle: {
-    flexDirection: 'row',
-    alignItems: 'center'
+    flexDirection: "row",
+    alignItems: "center"
   },
   imageContainerStyle: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     margin: 10
   },
   buttonStyle: {
@@ -357,11 +444,10 @@ const styles = {
   },
   spinnerStyle: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
+    justifyContent: "center",
+    alignItems: "center"
+  }
 };
-
 
 /////////////////////////////////////////////////////////
 // Map redux reducers to component mapStateToProps
