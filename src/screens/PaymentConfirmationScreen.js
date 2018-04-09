@@ -31,8 +31,9 @@ class PaymentConfirmationScreen extends Component {
   onConfirmPress = () => {
     const timeDateTemp = new Date();
     timeDate = timeDateTemp.toString();
-    this.props.orderCreate({name: order.name || 'name', location: location || 'Starbucks, Azusa', 
-    drink: order.drink || 'drink', time: timeDate || '30180101:010101', cost: '$0.00', size: order.size || '8oz'});
+    this.props.orderUpdate({prop: 'time', timeDate});
+    this.props.orderCreate({name: this.props.name || 'name', location: location || 'Starbucks, Azusa', 
+    drink: this.props.drink || 'drink', time: timeDate || 'time', cost: '$0.00', size: this.props.size || '8oz', card: this.props.card || 'xxxx'});
     this.props.startTime(true);
     const drinks = this.props.drinks + 1;
     this.props.addOrder(drinks);
@@ -137,7 +138,9 @@ function mapStateToProps({ coffee, order }) {
       name: order.name,
       location: order.location,
       drink: order.drink,
-      size: order.size
+      size: order.size,
+      card: order.card,
+      cost: order.cost
   };
 }
 
