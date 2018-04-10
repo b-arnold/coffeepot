@@ -7,6 +7,7 @@ import firebase from 'firebase';
 
 import * as actions from '../actions';
 import * as urlBuilder from '../utility/url_builder';
+import CoffeePotModal from '../components/CoffeePotModal';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
@@ -54,10 +55,28 @@ class CoffeePotGPS extends Component {
         }
     })
 
-    ///////////////////////////////////////////////////////////////////////////////
-    //defining state
-    //The 'region' state object will contain latitude and longitude of the user
-    state = { region:{}, hasCoffeePot: false};
+    // This allows child components to use the states and methods from this class
+    constructor(props) {
+        super(props);
+        this.state={
+            region: {},
+            hasCoffeePot: false,
+            modalVisible: false
+        }
+        // Bidning this will allow child components to use the other methods
+        this.setModalVisible = this.setModalVisible.bind(this);
+    }
+
+    // ///////////////////////////////////////////////////////////////////////////////
+    // //defining state
+    // //The 'region' state object will contain latitude and longitude of the user
+    // state = { region:{}, hasCoffeePot: false  };
+
+    setModalVisible(visible) {
+        this.setState({
+            modalVisible: visible
+        })
+    }
 
     ///////////////////////////////////////////////////////////////////////////////
     // Before anything is loaded, this will set the region to the user's current position
@@ -79,31 +98,21 @@ class CoffeePotGPS extends Component {
         );
     }
 
-
-    // componentWillUpdate() {
-    //     console.log('-----Props-----');
-    //     console.log(this.props.hasCoffeePot);
-    //     console.log('-----State-----');
-    //     console.log(this.state.hasCoffeePot);
-    //     if(this.state.hasCoffeePot !== this.props.hasCoffeePot) {
-    //         console.log('-----entered-----');
-    //         this.setState({
-    //             hasCoffeePot: this.props.hasCoffeePot
-    //         })
-    //     }
-    // }
-    
     ///////////////////////////////////////////////////////////////////////////////
     // This render method will place a marker on each location that si received from "fetchPlaces()"
     renderMarkers() {
         const { currentUser } = firebase.auth();
-        //console.log(this.props.places);
         const { navigate } = this.props.navigation
 
         if(this.props.coffeePots !== null) {
             return this.props.coffeePots.map(coffeePots => {
                 // 'text' is the distance that location is from the current user
                 const { deliverer, locDetails, text } = coffeePots;
+                const selected = { 
+                    deliverer: deliverer,
+                    locDetails: locDetails,
+                    distance: text
+                };
 
                 if(locDetails.photoUrl !== undefined) {
                     if(currentUser.uid === deliverer.uid){
@@ -118,23 +127,27 @@ class CoffeePotGPS extends Component {
                             >
                                 {/* Callout customizes the information that is shown when a marker is selected */}
                                 <Callout>
-                                    <View style={styles.content}>
-                                        <Image
-                                            source={{uri: locDetails.photoUrl}}
-                                            style = {styles.image_style}
-                                        />
-                                        <View style={styles.description}>
-                                            <View style={styles.content}>
-                                                <Text style={styles.bold}>Deliverer: </Text>
-                                                <Text>{deliverer.name.firstName} {deliverer.name.lastName} (You)</Text>
+                                    <TouchableOpacity
+                                    
+                                    >
+                                        <View style={styles.content}>
+                                            <Image
+                                                source={{uri: locDetails.photoUrl}}
+                                                style = {styles.image_style}
+                                            />
+                                            <View style={styles.description}>
+                                                <View style={styles.content}>
+                                                    <Text style={styles.bold}>Deliverer: </Text>
+                                                    <Text>{deliverer.name.firstName} {deliverer.name.lastName} (You)</Text>
+                                                </View>
+                                                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                                    <Text style={styles.bold}>{locDetails.name}</Text>
+                                                    <Text>{text} away</Text>
+                                                </View>
+                                                <Text>{locDetails.address}</Text>
                                             </View>
-                                            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                                <Text style={styles.bold}>{locDetails.name}</Text>
-                                                <Text>{text} away</Text>
-                                            </View>
-                                            <Text>{locDetails.address}</Text>
                                         </View>
-                                    </View>
+                                    </TouchableOpacity>
                                 </Callout>
                             </Marker>
                         );
@@ -150,23 +163,28 @@ class CoffeePotGPS extends Component {
                         >
                             {/* Callout customizes the information that is shown when a marker is selected */}
                             <Callout>
-                                <View style={styles.content}>
-                                    <Image
-                                        source={{uri: locDetails.photoUrl}}
-                                        style = {styles.image_style}
-                                    />
-                                    <View style={styles.description}>
-                                        <View style={styles.content}>
-                                            <Text style={styles.bold}>Deliverer: </Text>
-                                            <Text>{deliverer.name.firstName} {deliverer.name.lastName}</Text>
+                                <TouchableOpacity onPress={() => {
+                                    this.props.loadCoffeePotDetails(selected)
+                                    this.setModalVisible(true);
+                                }}>
+                                    <View style={styles.content}>
+                                        <Image
+                                            source={{uri: locDetails.photoUrl}}
+                                            style = {styles.image_style}
+                                        />
+                                        <View style={styles.description}>
+                                            <View style={styles.content}>
+                                                <Text style={styles.bold}>Deliverer: </Text>
+                                                <Text>{deliverer.name.firstName} {deliverer.name.lastName}</Text>
+                                            </View>
+                                            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                                <Text style={styles.bold}>{locDetails.name}</Text>
+                                                <Text>{text} away</Text>
+                                            </View>
+                                            <Text>{locDetails.address}</Text>
                                         </View>
-                                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                            <Text style={styles.bold}>{locDetails.name}</Text>
-                                            <Text>{text} away</Text>
-                                        </View>
-                                        <Text>{locDetails.address}</Text>
                                     </View>
-                                </View>
+                                </TouchableOpacity>
                             </Callout>
                         </Marker>
                     );
@@ -182,6 +200,10 @@ class CoffeePotGPS extends Component {
                         image={require('../images/CoffeePot_MarkerWithCircle_Green.png')}
                     >
                         <Callout>
+                            <TouchableOpacity onPress={() => {
+                                this.props.loadCoffeePotDetails(selected)
+                                this.setModalVisible(true);
+                            }}>
                                 <View style={styles.content}>
                                     <View style={styles.description}>
                                         <View style={styles.content}>
@@ -195,6 +217,7 @@ class CoffeePotGPS extends Component {
                                         <Text>{locDetails.address}</Text>
                                     </View>
                                 </View>
+                            </TouchableOpacity>
                         </Callout>
                     </Marker>
                 );
@@ -207,7 +230,6 @@ class CoffeePotGPS extends Component {
             <View style = {styles.container}>
                 <MapView
                     style={styles.map}
-                    mapType='hybrid'
                     initialRegion={{
                         latitude: this.state.region.latitude,
                         longitude: this.state.region.longitude,
@@ -233,7 +255,14 @@ class CoffeePotGPS extends Component {
         if(this.state.region.latitude !== undefined  && this.props.coffeePots !== null)
         {
             return (
-                <View style={styles.container}>{this.renderMap()}</View>
+                <View style={styles.container}>
+                    {this.renderMap()}
+                    <CoffeePotModal
+                        modalVisible = {this.state.modalVisible}
+                        setModalVisible = {this.setModalVisible} 
+                    />
+                </View>
+
             );
         }
         return(
@@ -287,22 +316,28 @@ const styles = {
     loadingStyle: {
         flex: 1,
         justifyContent: 'center'
-    }
+    },
+    bttn_view_style: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
 };
 
 ///////////////////////////////////////////////////////////////////////////////
 // MapStateToProps
-// places the data that we received from our action and reducers into a variable
+// coffee the data that we received from our action and reducers into a variable
 function mapStateToProps({ coffee }) {
     if (coffee.coffeePots === null) {
         return {
             coffeePots: null,
-            hasCoffeePot: coffee.hasCoffeePot
+            hasCoffeePot: coffee.hasCoffeePot,
+            selectedCoffeePot: null
         };
     }
     return { 
         coffeePots: coffee.coffeePots.results,
-        hasCoffeePot: coffee.hasCoffeePot
+        hasCoffeePot: coffee.hasCoffeePot,
+        selectedCoffeePot: coffee.selectedCoffeePot
     };
 }
 

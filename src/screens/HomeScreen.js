@@ -82,9 +82,16 @@ class HomeScreen extends Component {
     }
 
     componentWillMount() {
-        console.log(store.getState());
         const { currentUser } = firebase.auth();
+
+        // Fetches the coffee pots from current user
         this.props.fetchMyCoffeePot(currentUser.uid);
+
+        // Load first name into properties
+        this.props.profileFirstNameChange();
+
+        // Load last name into properties
+        this.props.profileLastNameChange();
     }
 
     ///////////////////////////////////////////////////////////////////

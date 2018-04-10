@@ -22,6 +22,7 @@ export const FETCH_COFFEE_POTS = 'fetch_coffee_pots';
 export const FETCH_MY_COFFEE_POT = 'fetch_my_coffee_pot';
 export const REMOVE_MY_COFFEE_POT = 'remove_my_coffee_pot';
 export const RESET_COFFEE_STATE = 'reset_coffee_state';
+export const LOAD_COFFEE_POT_DETAILS = 'load_coffee_pot_details';
 
 // PLACES TYPES
 export const FETCH_PLACES = 'fetch_places';

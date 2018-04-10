@@ -44,7 +44,6 @@ class LoginScreen extends Component {
   /////////////////////////////////////////////////////////
   // Register the event which detects a change in state of user
   componentWillMount() {
-    console.log(store.getState());
     if (firebase.auth().currentUser) {
     //  this.props.signoutUser();
       this.props.navigation.navigate('Home');

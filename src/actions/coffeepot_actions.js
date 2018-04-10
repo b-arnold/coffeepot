@@ -9,7 +9,8 @@ import {
     CREATE_COFFEE_POT_SUCCESS,
     FETCH_COFFEE_POTS,
     FETCH_MY_COFFEE_POT,
-    REMOVE_MY_COFFEE_POT
+    REMOVE_MY_COFFEE_POT,
+    LOAD_COFFEE_POT_DETAILS
 } from './types.js';
 import * as urlBuilder from '../utility/url_builder';
 
@@ -184,3 +185,10 @@ export const removeMyCoffeePot = () => async dispatch => {
     }
 }
 
+export const loadCoffeePotDetails = (selectedCoffeePot) => async dispatch => {
+    try {
+        dispatch({ type: LOAD_COFFEE_POT_DETAILS, payload: selectedCoffeePot });
+    } catch (err) {
+        console.err(err);
+    }
+}

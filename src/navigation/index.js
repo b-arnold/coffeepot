@@ -102,7 +102,7 @@ class Navigation extends Component {
     });
 
     const GPSNav = StackNavigator({
-      OrderGPSMap: { screen: OrderGPSMap },
+      CoffeePotGPS: { screen: CoffeePotGPS },
       PlaceOrder: { screen: PlaceOrder },
       PaymentScreen: { screen: PaymentScreen },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
@@ -123,7 +123,7 @@ class Navigation extends Component {
     const HomeNav = TabNavigator({
       HomeScreen: { screen: HomeScreenNav },
       CoffeePotList: { screen: CoffeePotListNav },
-      GPS: { screen: CoffeePotGPS },
+      GPS: { screen: GPSNav },
       Profile: { screen: ProfileNav }
     }, {
       tabBarOptions: {
@@ -157,7 +157,6 @@ class Navigation extends Component {
             marginTop: 30
           }}
         >
-
           <Avatar
             source={require('../images/Profile_Pic.jpg')}
             style={{ width: 200, height: 200, borderRadius: 100 }}
