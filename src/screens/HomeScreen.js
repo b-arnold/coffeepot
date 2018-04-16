@@ -1,3 +1,4 @@
+import { AppLoading, Asset } from 'expo';
 import React, { Component } from 'react';
 import { 
     View, 
@@ -6,9 +7,9 @@ import {
     ImageBackground, 
     Image
 } from 'react-native';
-import { AppLoading, Asset } from 'expo';
 import { Button, Card, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import firebase from 'firebase';
 
 import { Spinner } from '../components/Spinner';
@@ -77,8 +78,12 @@ class HomeScreen extends Component {
 
     ///////////////////////////////////////////////////////////
     //// State of current CoffeePot
-    state = {
-        isReady: false
+    constructor(props) {
+        super(props);
+        this.state={
+            isReady: false,
+            startTimer: false
+        }
     }
 
     componentWillMount() {
@@ -111,6 +116,12 @@ class HomeScreen extends Component {
         console.log(this.props.drinks);
     }
 
+    beginTimer() {
+        this.setState({
+            startTimer: true
+        })
+    }
+
     renderRemoveBttn() {
         if(this.props.myCoffeePot != null) {
             return (
@@ -140,7 +151,9 @@ class HomeScreen extends Component {
             >
                 <View style={{flex: 1}}>
                     <View style={{flex: 2, marginTop: 10}}>
-                        <HomeCoffeePot />
+                        <HomeCoffeePot
+                            startTimer = {this.state.startTimer}
+                        />
                     </View>
                     <View style={{flex: 3, justifyContent: 'center'}}>
                         <Button 
@@ -165,13 +178,13 @@ class HomeScreen extends Component {
                         />
                         <Button 
                             icon={{
-                                name: 'circle-with-plus',
+                                name: 'message',
                                 type: 'entypo',
                                 size: 30
                             }}
-                            title='Add Another Drink'
+                            title='Start Timer'
                             buttonStyle={styles.button_style}
-                            onPress={this.onAddOrderPress}
+                            onPress={() => this.beginTimer()}
                         />
                         {this.renderRemoveBttn()}
                     </View>

@@ -1,8 +1,11 @@
+import { AppLoading, Asset } from 'expo';
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Icon, Rating } from 'react-native-elements';
-import { AppLoading, Asset } from 'expo';
-import firebase from 'firebase';
+import TimerCountdown from 'react-native-timer-countdown';
+import axios from 'axios';
+import * as firebase from 'firebase';
+
 import { Spinner } from '../components/Spinner';
 import CountDown from '../components/CountDown';
 import { connect } from 'react-redux';
@@ -30,12 +33,10 @@ class HomeCoffeePot extends Component {
     //// State of current CoffeePot
     state = {
         isReady: false,
-        time: null,
-        alreadyStarted: false,
         drinks: null,
         firstScreen: true,
         secondScreen: false,
-        thirdScreen: false
+        thirdScreen: false,
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -52,28 +53,25 @@ class HomeCoffeePot extends Component {
 
     componentWillMount() {
         // Sets state to start Coffee Pot for 10 minutes
-        if (this.props.time === true) {
-            this.setState({ alreadyStarted: true })
-        }
         const { currentUser } = firebase.auth();
         this.props.fetchMyCoffeePot(currentUser.uid);
         this.setState({ drinks: this.props.drinks })
     }
 
-    TimerStatus() {
-        return (
-            <CountDown />
-        );
+    async startTimer() {
+        // Test
+        const { timer } = this.props.myCoffeePot;
+        const { currentUser } = firebase.auth();
         
-        if (this.state.alreadyStarted)
-            return (
-                <Text style={{ fontSize: 50, color: 'white' }}>
-                    Finished!
-                </Text>
-            );
-        
-        return (<View />);
+        await axios.post('https://us-central1-coffeepot-e0cb9.cloudfunctions.net/startCloudTimer', {
+            data: {
+                timer: timer,
+             }
+        }).then(function(response) {
+            console.log('timer started')
+        })
     }
+
 
     renderNoCoffeePot() {
         return (
@@ -94,22 +92,46 @@ class HomeCoffeePot extends Component {
     
     renderCoffeePotTimer() {
         const { timer } = this.props.myCoffeePot;
-        return (
-            <View style={styles.background}>
-                <TouchableOpacity onPress={this.onFirstPress}> 
-                    <Image
-                        source={require('../images/CoffeePot-Logo-White-02.png')}
-                        style={{
-                            width: 250,
-                            height: 250,
-                        }}
-                    />
-                    <View style={{ alignItems: 'center' }}>
-                        {this.TimerStatus()}
-                    </View>
-                </TouchableOpacity>
-            </View>
-        );
+        console.log(this.props.startTimer);
+        if(this.props.startTimer === false) {
+            return (
+                <View style={styles.background}>
+                    <TouchableOpacity onPress={this.onFirstPress}> 
+                        <Image
+                            source={require('../images/CoffeePot-Logo-White-02.png')}
+                            style={{
+                                width: 250,
+                                height: 250,
+                            }}
+                        />
+                        <View style={{ alignItems: 'center' }}>
+                            <Text style = {{ color: 'white', fontSize: 20 }}>{timer}:00 (On Hold)</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            );
+        } else {
+            this.startTimer()
+            return (
+                <View style={styles.background}>
+                    <TouchableOpacity onPress={this.onFirstPress}> 
+                        <Image
+                            source={require('../images/CoffeePot-Logo-White-02.png')}
+                            style={{
+                                width: 250,
+                                height: 250,
+                            }}
+                        />
+                        <View style={{ alignItems: 'center'}}>
+                            <TimerCountdown
+                                initialSecondsRemaining={ timer * 60000 }
+                                style={{ fontSize: 20, color: 'white' }}
+                            />
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            );
+        }
     }
 
     renderNumberOfDrinks() {
@@ -268,7 +290,6 @@ function mapStateToProps({ coffee }) {
     }
     return {
         hasCoffeePot: coffee.hasCoffeePot,
-        time: coffee.time,
         drinks: coffee.drinks,
         myCoffeePot: coffee.myCoffeePot
     };

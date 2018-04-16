@@ -127,9 +127,7 @@ class CoffeePotGPS extends Component {
                             >
                                 {/* Callout customizes the information that is shown when a marker is selected */}
                                 <Callout>
-                                    <TouchableOpacity
-                                    
-                                    >
+                                    <TouchableOpacity>
                                         <View style={styles.content}>
                                             <Image
                                                 source={{uri: locDetails.photoUrl}}
