@@ -12,7 +12,7 @@ const INITIAL_STATE = {
     order: '',
     drinkName: '',
     specialInstructions: '',
-    orderID: ''
+    orderID: '',
     drink: 'Expresso',
     time: '',
     cost: '',
