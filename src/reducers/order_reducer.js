@@ -6,7 +6,11 @@ import {
 const INITIAL_STATE = {
     location: '',
     selectedPlace: null,
-    order: ''
+    drink: 'Expresso',
+    time: '',
+    cost: '',
+    size: '8oz',
+    card: ''
 };
 
 export default (state = INITIAL_STATE, action) => {

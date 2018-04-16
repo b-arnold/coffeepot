@@ -87,10 +87,10 @@ class OrderGPSMap extends Component {
 
     onButtonPress(places){
         const { navigate } = this.props.navigation;
-        //this.props.location = markerID;
-        //console.log(places.place_id);
-        //console.log(places.name);
-        this.props.orderUpdate(places.vicinity, places.place_id);
+        
+        console.log(places.place_id);
+        console.log(places.name);
+        this.props.orderUpdate('location', places.place_id);
         navigate('PlaceOrder');
     }
 
@@ -108,6 +108,7 @@ class OrderGPSMap extends Component {
                         }}
                         title={name}
                         description={vicinity}
+                        onSelect={this.props.drink}
                         onPress={() => this.onButtonPress(places)}
                     >
                         <Animated.View >
@@ -205,7 +206,7 @@ const styles = {
     }
 };
 
-function mapStateToProps({ places }) {
+function mapStateToProps({ places, order }) {
     if (places.placesResponse === null) {
         //console.log(places.placesResponse);
         return {
@@ -220,7 +221,8 @@ function mapStateToProps({ places }) {
 
     return {
         places: places.placesResponse.results,
-        searchRegion: places.placesResponse.searchRegion
+        searchRegion: places.placesResponse.searchRegion,
+        location: order.location,
     };
 }
 
