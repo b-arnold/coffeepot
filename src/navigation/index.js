@@ -47,6 +47,9 @@ import PickedLocation from "../screens/PickedLocation";
 import PlaceOrder from "../screens/PlaceOrder";
 import OrderGPSMap from "../screens/OrderGPSMap";
 import InputCoffeeOrderScreen from "../screens/InputCoffeeOrderScreen";
+import DeliverScreen from "../screens/DeliverScreen";
+import CustomerGPS from "../screens/CustomerGPS";
+import CustomerDetails from "../screens/CustomerDetails";
 
 // Authenticaiton Screens
 import LoginScreen from "../screens/LoginScreen";
@@ -142,6 +145,24 @@ class Navigation extends Component {
       Legal: { screen: StandardLegal }
     });
 
+    const Delivery = StackNavigator({
+      DeliverScreen: { screen: DeliverScreen },
+      ChooseDelivery: { screen: ChooseDelivery },
+      PickLocationList: { screen: PickLocationList },
+      PickedLocation: { screen: PickedLocation },
+      ExistingOrdersList: { screen: ExistingOrdersList },
+      ExistingOrder: { screen: ExistingOrder },
+      MessageScreen: { screen: MessageScreen }
+    });
+
+    const CustomerGPSNav = StackNavigator({
+      CustomerGPS: { screen: CustomerGPS }
+    });
+
+    const CustomerDetailsNav = StackNavigator({
+      CustomerDetails: { screen: CustomerDetails }
+    });
+
     const HomeNav = TabNavigator(
       {
         HomeScreen: { screen: HomeScreenNav },
@@ -159,16 +180,21 @@ class Navigation extends Component {
       }
     );
 
-    /////////////////////////////////////////////////////////////////////////
-    //// Authentication Screens
-    const Delivery = StackNavigator({
-      ChooseDelivery: { screen: ChooseDelivery },
-      PickLocationList: { screen: PickLocationList },
-      PickedLocation: { screen: PickedLocation },
-      ExistingOrdersList: { screen: ExistingOrdersList },
-      ExistingOrder: { screen: ExistingOrder },
-      GPSMap: { screen: GPSMap }
-    });
+    const DeliverNav = TabNavigator(
+      {
+        DeliverScreen: { screen: Delivery },
+        CustomerDetails: { screen: CustomerDetailsNav },
+        GPSNav: { screen: CustomerGPSNav }
+      },
+      {
+        tabBarOptions: {
+          showLabel: false,
+          style: {
+            backgroundColor: "black"
+          }
+        }
+      }
+    );
 
     //////////////////////////////////////////////////////////////////////////////
     // This component dictates the configuration of the drawer
@@ -183,7 +209,7 @@ class Navigation extends Component {
           }}
         >
           <Avatar
-            source={require("../images/Profile_Pic.jpg")}
+            source={require("../images/16683918_10103879001921065_4430688832052853506_n.jpg")}
             style={{ width: 200, height: 200, borderRadius: 100 }}
             rounded
             xlarge
@@ -202,7 +228,7 @@ class Navigation extends Component {
     const Drawer = DrawerNavigator(
       {
         Homeapp: { screen: HomeNav },
-        Delivery: { screen: Delivery },
+        Delivery: { screen: DeliverNav },
         Settings: { screen: SettingNav },
         Legal: { screen: StandardLegalNav },
         LogOut: { screen: LogOut }

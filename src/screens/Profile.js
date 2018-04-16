@@ -112,7 +112,10 @@ class Profile extends Component {
             }}
           >
             <View style={{ marginTop: 10 }}>
-              <Avatar source={require("../images/Profile_Pic.jpg")} xlarge />
+              <Avatar
+                source={require("../images/16683918_10103879001921065_4430688832052853506_n.jpg")}
+                xlarge
+              />
             </View>
 
             <View>
@@ -160,7 +163,10 @@ class Profile extends Component {
           <Card>
             <View style={{ flexDirection: "row" }}>
               <View style={{ marginLeft: 10, marginRight: 20 }}>
-                <Avatar source={require("../images/Profile_Pic.jpg")} medium />
+                <Avatar
+                  source={require("../images/bretts_profile_pic.jpg")}
+                  medium
+                />
               </View>
               <View>
                 <View style={{ marginBottom: 5 }}>

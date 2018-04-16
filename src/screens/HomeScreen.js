@@ -101,7 +101,7 @@ class HomeScreen extends Component {
             type: "entypo",
             size: 30
           }}
-          title="Cancel Coffee Pot"
+          title="Leave Coffee Pot"
           buttonStyle={styles.button_style}
           onPress={() => this.props.removeMyCoffeePot()}
         />
