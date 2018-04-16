@@ -26,12 +26,9 @@ function cacheImages(images) {
     });
 }
 
+
+
 class CoffeePotCard extends Component {
-  static defaultProps = {
-    keyProp: 'id'
-  }
-
-
     state = {
         drinks: null,
         isReady: false,
@@ -42,9 +39,9 @@ class CoffeePotCard extends Component {
         index: 0
     }
 
+
     componentWillMount() {
         this.setState({ drinks: 3 });
-
         navigator.geolocation.getCurrentPosition((position) => {
             // Changes the state of region to user's current location
             this.setState({
@@ -79,8 +76,14 @@ class CoffeePotCard extends Component {
         await Promise.all([...imageAssets]);
     }
 
+    standardJoinPress = (deliverer) => {
+      this.props.orderIDChange(deliverer.uid);
+      this.props.navigate('OrderSelectionScreen');
+    }
+
     renderCard() {
         const cups = [];
+          //const { navigate } = this.props.navigation;
         //console.log(this.props.coffeePots);
         for (var i = 0; i < this.state.drinks; i++) {
             cups.push(<Image key={i} source={require('../images/coffee_cup_symbol.png')}
@@ -94,6 +97,7 @@ class CoffeePotCard extends Component {
         if (this.props.coffeePots !== null) {
           return this.props.coffeePots.map((coffeePots) => {
             const { deliverer, locDetails, text } = coffeePots;
+
             if (locDetails.photoUrl !== undefined) {
               return (
                 <FlipCard
@@ -101,12 +105,11 @@ class CoffeePotCard extends Component {
                     flipHorizontal={true}
                     flipVertical={false}
                     alignHeight={true}
+                    key={coffeePots[locDetails.place_id]}
                 >
                     {/* Front side of the card */}
                     <View style={styles.face}>
-                         <Card
-                            key={coffeePots[locDetails.place_id]}
-                         >
+                         <Card>
                             <View style={styles.view_card}>
                                 <View style={{ flexDirection: 'row' }}>
                                     <View style={{ alignItems: 'center' }}>
@@ -126,6 +129,7 @@ class CoffeePotCard extends Component {
                                 <Button
                                     title='Join'
                                     buttonStyle={styles.button_style}
+                                    onPress={() => this.standardJoinPress(deliverer)}
                                 />
                             </View>
                         </Card>
@@ -246,11 +250,14 @@ const styles = {
         width: 165
     }
 };
-function mapStateToProps({ coffee }) {
+function mapStateToProps({ coffee, order }) {
   if (coffee.coffeePots === null) {
-    return { coffeePots: null };
+    return { coffeePots: null, orderID: order.orderID };
   }
-  return { coffeePots: coffee.coffeePots.results };
+  return {
+    coffeePots: coffee.coffeePots.results,
+    orderID: order.orderID
+  };
 }
 
 export default connect(mapStateToProps, actions)(CoffeePotCard);

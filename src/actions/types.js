@@ -34,3 +34,6 @@ export const LOAD_PLACE_DETAILS = 'load_place_details';
 // ORDER TYPES
 export const ORDER_CHANGE = 'order_change';
 export const ORDER_CREATE = 'order_create';
+export const ORDER_NAME_CHANGE = 'order_name_change';
+export const ORDER_INSTRUCTION_CHANGE = 'order_instruction_change';
+export const ORDER_ID_CHANGE = 'order_id_change';

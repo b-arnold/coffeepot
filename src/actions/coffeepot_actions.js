@@ -143,7 +143,7 @@ export const fetchMyCoffeePot = (uid) => async dispatch => {
         await ref.child('coffeePots').once('value', function(snapshot){
             snapshot.forEach(function(child){
                response.results.push(child);
-            }) 
+            })
         })
         for(const i = 0; i < response.results.length; i++) {
             const coffeePot = JSON.parse(JSON.stringify(response.results[i]));
@@ -163,7 +163,7 @@ export const removeMyCoffeePot = () => async dispatch => {
         const ref = firebase.database().ref();
         const response = null;
         const removed = false;
-        
+
         await ref.child('coffeePots').once('value', function(snapshot){
             snapshot.forEach(function(child){
                 response = JSON.parse(JSON.stringify(child));
@@ -183,4 +183,3 @@ export const removeMyCoffeePot = () => async dispatch => {
         console.error(err);
     }
 }
-
