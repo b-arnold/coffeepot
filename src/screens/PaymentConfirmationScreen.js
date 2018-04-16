@@ -26,8 +26,14 @@ class PaymentConfirmationScreen extends Component {
     headerTintColor: SECONDARY_COLOR,
     tabBarVisible: false
   }
+  
 
   onConfirmPress = () => {
+    const timeDateTemp = new Date();
+    timeDate = timeDateTemp.toString();
+    this.props.orderUpdate({prop: 'time', timeDate});
+    this.props.orderCreate({name: this.props.name || 'name', location: location || 'Starbucks, Azusa', 
+    drink: this.props.drink || 'drink', time: timeDate || 'time', cost: '$0.00', size: this.props.size || '8oz', card: this.props.card || 'xxxx'});
     this.props.startTime(true);
     const drinks = this.props.drinks + 1;
     this.props.addOrder(drinks);
@@ -46,12 +52,17 @@ class PaymentConfirmationScreen extends Component {
         <View>
           <Card style={styles.cardStyle}>
             <View style={{ margin: 10 }}>
-              <View style={styles.cardTextStyle}>
-                <Text>Order: </Text>
+
+            <View style={styles.cardTextStyle}>
+                <Text>Location: {this.props.location}</Text>
               </View>
 
               <View style={styles.cardTextStyle}>
-                <Text>Drink Cost: </Text>
+                <Text>Order: {this.props.drink} {this.props.size}</Text>
+              </View>
+
+              <View style={styles.cardTextStyle}>
+                <Text>Cost: </Text>
               </View>
 
               <View style={styles.cardTextStyle}>
@@ -120,10 +131,16 @@ const styles = {
   }
 };
 
-function mapStateToProps({ coffee }) {
+function mapStateToProps({ coffee, order }) {
   return {
       time: coffee.time,
-      drinks: coffee.drinks
+      drinks: coffee.drinks,
+      name: order.name,
+      location: order.location,
+      drink: order.drink,
+      size: order.size,
+      card: order.card,
+      cost: order.cost
   };
 }
 

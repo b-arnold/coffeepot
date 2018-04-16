@@ -37,3 +37,4 @@ export const ORDER_CREATE = 'order_create';
 export const ORDER_NAME_CHANGE = 'order_name_change';
 export const ORDER_INSTRUCTION_CHANGE = 'order_instruction_change';
 export const ORDER_ID_CHANGE = 'order_id_change';
+export const NAME_FETCH_SUCCESS = 'name_fetch_success';
