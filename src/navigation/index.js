@@ -20,6 +20,7 @@ import HomeScreen from '../screens/HomeScreen';
 import Profile from '../screens/Profile';
 import GPSMap from '../screens/GPSMap';
 import CoffeePotGPS from '../screens/CoffeePotGPS';
+import OrderSelectionScreen from '../screens/OrderSelectionScreen';
 
 // Extensions from HomeScreen
 import MessageScreen from '../screens/MessageScreen';
@@ -83,7 +84,7 @@ class Navigation extends Component {
   }
 
   render() {
-    
+
     const ProfileNav = StackNavigator({
         Profile: { screen: Profile },
          PlaceOrder: { screen: PlaceOrder },
@@ -134,6 +135,7 @@ class Navigation extends Component {
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
       ReceiptScreen: { screen: ReceiptScreen },
       Legal: { screen: StandardLegal },
+      OrderSelectionScreen: { screen: OrderSelectionScreen },
     });
 
     const HomeNav = TabNavigator({
@@ -226,7 +228,7 @@ class Navigation extends Component {
       swipeEnabled: false,
       lazy: true, // Each screen will not mount/load until user clicks on them
     });
-    
+
     return (
         <View style={styles.container}>
           <StatusBar
@@ -249,7 +251,7 @@ const styles = StyleSheet.create({
       marginTop: Platform.OS === 'android' ? 24 : 0
     }
   });
-  
+
 //   /////////////////////////////////////////////////////////
 //   // Map redux reducers to component mapStateToProps
 //   function mapStateToProps({ prof }) {
@@ -258,5 +260,5 @@ const styles = StyleSheet.create({
 //       lastName: prof.lastName
 //     };
 //   }
-  
+
   export default Navigation;

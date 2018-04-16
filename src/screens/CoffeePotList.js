@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { ImageBackground, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { AppLoading, Asset } from 'expo';
 import { Button, Card, Icon, Avatar, Rating } from 'react-native-elements';
+import { connect } from 'react-redux';
+
+import * as actions from '../actions';
 import { Spinner } from '../components/Spinner';
 
 import CoffeePotCard from '../components/CoffeePotCard';
@@ -65,8 +68,17 @@ class CoffeePotList extends Component {
         },
     })
 
-    state = {
-        isReady: false
+    constructor(props) {
+      super(props);
+      this.state = {
+        isReady: false,
+        keyId: '',
+        region: {
+          latitude: '',
+          longitude: ''
+        }
+      };
+      this.getPlaceId = this.getPlaceId.bind(this);
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -80,40 +92,73 @@ class CoffeePotList extends Component {
         await Promise.all([...imageAssets]);
     }
 
+    componentWillMount() {
+      navigator.geolocation.getCurrentPosition((position) => {
+          // Changes the state of region to user's current location
+          this.setState({
+              region: {
+                  latitude: position.coords.latitude,
+                  longitude: position.coords.longitude,
+              }
+          });
+          //The action 'fetchPlaces' will search for places with the label 'cafe' with respect to the 'region' state (user's current position)
+          this.props.fetchCoffeePots(this.state.region);
+      },
+          (error) => console.log(new Date(), error),
+          { enableHighAccuracy: false, timeout: 10000, maximumAge: 3000 }
+      );
+    }
+
+    getPlaceId(placeID) {
+      this.setState({
+        keyId: placeID
+      });
+    }
+
     render() {
         ///////////////////////////////////////////////////////////////////
         //  Method taken from Expo documents
-        if (!this.state.isReady) {
-            return (
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <AppLoading
-                        startAsync={this._loadAssetsAsync}
-                        onFinish={() => this.setState({ isReady: true })}
-                        onError={console.warn}
-                    />
-                    <Spinner size="large" />
-                </View>
-            );
+        if (this.props.coffeePots !== null) {
+          const { navigate } = this.props.navigation;
+          return (
+              <ImageBackground
+                      style={{
+                      width: '100%',
+                      height: '100%',
+                  }}
+                  source={require('../images/background.jpg')}
+              >
+                  <ScrollView>
+                    <View>
+                      <CoffeePotCard
+                          key={this.state.keyId}
+                          getPlaceId={this.getPlaceId}
+                          navigate={navigate}
+                      />
+                    </View>
+                  </ScrollView>
+              </ImageBackground>
+          );
         }
         return (
-            <ImageBackground
-                    style={{
-                    width: '100%',
-                    height: '100%',
-                }}
-                source={require('../images/background.jpg')}
-            >
-                <ScrollView>
-                  <View>
-                    <CoffeePotCard
-                      keyProp='cardKey'
-                    />
-                  </View>
-                </ScrollView>
-            </ImageBackground>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <AppLoading
+                    startAsync={this._loadAssetsAsync}
+                    onFinish={() => this.setState({ isReady: true })}
+                    onError={console.warn}
+                />
+                <Spinner size="large" />
+            </View>
         );
     }
 }
 
+function mapStateToProps({ coffee }) {
+  if (coffee.coffeePots === null) {
+    return { coffeePots: null };
+  }
+  return { coffeePots: coffee.coffeePots.results };
+}
 
-export default CoffeePotList;
+
+export default connect(mapStateToProps, actions)(CoffeePotList);
