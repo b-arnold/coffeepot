@@ -7,14 +7,14 @@ import {
   Image
 } from "react-native";
 import { AppLoading, Asset } from "expo";
-import { Button, Card, Icon } from "react-native-elements";
+import { Button, Icon } from "react-native-elements";
 import { connect } from "react-redux";
+import * as actions from "../actions";
 import firebase from "firebase";
 
 import { Spinner } from "../components/Spinner";
 import CountDown from "../components/CountDown";
 import HomeCoffeePot from "../components/HomeCoffeePot";
-import * as actions from "../actions";
 
 import {
   PRIMARY_COLOR,
@@ -34,9 +34,9 @@ function cacheImages(images) {
   });
 }
 
-class HomeScreen extends Component {
+class DeliverScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Coffee Pot",
+    title: "Coffee Pot Delivery",
     headerStyle: {
       backgroundColor: PRIMARY_COLOR,
       paddingRight: 10,
@@ -45,7 +45,7 @@ class HomeScreen extends Component {
     headerTitleStyle: {
       color: SECONDARY_COLOR,
       fontFamily: "brush-script-mt",
-      fontSize: 30
+      fontSize: 25
     },
     headerTintColor: SECONDARY_COLOR,
     headerBackTitle: null,
@@ -54,26 +54,22 @@ class HomeScreen extends Component {
         <Icon type="material-community" name="menu" color="grey" />
       </TouchableOpacity>
     ),
-    headerRight: (
-      <TouchableOpacity onPress={() => navigation.navigate("PlaceOrder")}>
-        <Icon type="font-awesome" name="coffee" color="grey" />
-      </TouchableOpacity>
-    ),
     tabBarIcon: () => {
       return <Icon name="home" size={30} color="grey" />;
     }
   });
 
-  ///////////////////////////////////////////////////////////
-  //// State of current CoffeePot
-  state = {
-    isReady: false
-  };
-
   componentWillMount() {
     const { currentUser } = firebase.auth();
     this.props.fetchMyCoffeePot(currentUser.uid);
   }
+
+  ///////////////////////////////////////////////////////////
+  //// State of current Deliver Screen
+  state = {
+    isReady: false,
+    balance: 0.0
+  };
 
   ///////////////////////////////////////////////////////////////////
   //  Method taken from Expo documents
@@ -86,13 +82,7 @@ class HomeScreen extends Component {
     await Promise.all([...imageAssets]);
   }
 
-  onAddOrderPress = () => {
-    const drinks = this.props.drinks + 1;
-    this.props.addOrder(drinks);
-    console.log(this.props.drinks);
-  };
-
-  renderRemoveBttn() {
+  renderRemoveBttn = () => {
     if (this.props.myCoffeePot != null) {
       return (
         <Button
@@ -101,15 +91,15 @@ class HomeScreen extends Component {
             type: "entypo",
             size: 30
           }}
-          title="Leave Coffee Pot"
+          title="Cancel Coffee Pot"
           buttonStyle={styles.button_style}
           onPress={() => this.props.removeMyCoffeePot()}
         />
       );
     }
-  }
+  };
 
-  renderCoffeePot = () => {
+  renderDeliverScreen = () => {
     const { navigate } = this.props.navigation;
     return (
       <ImageBackground
@@ -125,39 +115,37 @@ class HomeScreen extends Component {
           </View>
           {this.props.myCoffeePot !== null ? (
             <View
-              style={{ flex: 3, justifyContent: "flex-end", paddingBottom: 15 }}
+              style={{
+                flex: 3,
+                justifyContent: "flex-end",
+                paddingBottom: 15,
+                alignItems: "center"
+              }}
             >
-              <Button
-                icon={{
-                  name: "ios-navigate",
-                  type: "ionicon",
-                  size: 30
-                }}
-                title="Track Delivery"
-                buttonStyle={styles.button_style}
-                onPress={() => navigate("TrackDelivery")}
-              />
-              <Button
-                icon={{
-                  name: "message",
-                  type: "entypo",
-                  size: 30
-                }}
-                title="Message Deliverer"
-                buttonStyle={styles.button_style}
-                onPress={() => navigate("MessageScreen")}
-              />
-              {/* <Button 
-                            icon={{
-                                name: 'circle-with-plus',
-                                type: 'entypo',
-                                size: 30
-                            }}
-                            title='Add Another Drink'
-                            buttonStyle={styles.button_style}
-                            onPress={this.onAddOrderPress}
-                        /> */}
-              {this.renderRemoveBttn()}
+              <View style={{ margin: 10 }}>
+                <Text
+                  style={{
+                    fontSize: 40,
+                    color: "white",
+                    backgroundColor: "transparent"
+                  }}
+                >
+                  Balance: ${this.state.balance}
+                </Text>
+              </View>
+              <View style={{ margin: 10 }}>
+                <Button
+                  icon={{
+                    name: "check",
+                    type: "navigation",
+                    size: 30
+                  }}
+                  title="Update Delivery"
+                  buttonStyle={styles.button_style}
+                  onPress={() => navigate("TrackDelivery")}
+                />
+              </View>
+              <View style={{ margin: 10 }}>{this.renderRemoveBttn()}</View>
             </View>
           ) : (
             <View />
@@ -168,6 +156,7 @@ class HomeScreen extends Component {
   };
 
   render() {
+    const { navigate } = this.props.navigation;
     ///////////////////////////////////////////////////////////////////
     //  Method taken from Expo documents
     if (!this.state.isReady) {
@@ -184,9 +173,37 @@ class HomeScreen extends Component {
         </View>
       );
     }
-    return <View>{this.renderCoffeePot()}</View>;
+    if (this.props.myCoffeePot !== null) {
+      return <View>{this.renderDeliverScreen()}</View>;
+    } else {
+      return (
+        <ImageBackground
+          style={{
+            width: "100%",
+            height: "100%"
+          }}
+          source={require("../images/background.jpg")}
+        >
+          <View
+            style={{
+              alignItems: "center",
+              backgroundColor: "transparent",
+              justifyContent: "center",
+              flex: 1
+            }}
+          >
+            <Button
+              title="Start a Coffee Pot"
+              buttonStyle={styles.button_style}
+              onPress={() => navigate("ChooseDelivery")}
+            />
+          </View>
+        </ImageBackground>
+      );
+    }
   }
 }
+
 const styles = {
   background: {
     alignItems: "center",
@@ -195,8 +212,10 @@ const styles = {
   },
   button_style: {
     backgroundColor: BUTTON_COLOR,
-    borderRadius: 5,
-    margin: 10
+    width: 345,
+    height: 60,
+    borderWidth: 0,
+    borderRadius: 5
   }
 };
 
@@ -214,4 +233,4 @@ function mapStateToProps({ coffee }) {
   };
 }
 
-export default connect(mapStateToProps, actions)(HomeScreen);
+export default connect(mapStateToProps, actions)(DeliverScreen);

@@ -3,7 +3,9 @@
   Developers: Brenden Miller, Richard Navarro,
     Brian Cajulis, Brett Arnold, Daniel Davis
 */
-import firebase from 'firebase';
+import firebase from "firebase";
+import { AsyncStorage } from "react-native";
+import { Facebook } from "expo";
 import {
   LOGIN_EMAIL_CHANGE,
   LOGIN_PASSWORD_CHANGE,
@@ -13,8 +15,10 @@ import {
   AUTH_USER_SUCCESS,
   RESET_APP_STATE,
   FIRST_NAME_CHANGE,
-  LAST_NAME_CHANGE
-} from './types.js';
+  LAST_NAME_CHANGE,
+  FACEBOOK_LOGIN_SUCCESS,
+  FACEBOOK_LOGIN_FAIL
+} from "./types.js";
 
 ////////////////////////////////////////////////////////////////
 // Called when email is changed
@@ -58,7 +62,9 @@ export const passwordChange = text => {
 export const loginUser = (email, password) => async dispatch => {
   try {
     dispatch({ type: AUTH_USER_ATTEMPT });
-    const { user } = await firebase.auth().signInWithEmailAndPassword(email, password);
+    const { user } = await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password);
     authUserSuccess(dispatch, user);
   } catch (err) {
     loginUserFail(dispatch, err.code);
@@ -74,12 +80,12 @@ const authUserSuccess = (dispatch, user) => {
   });
 
   //should this be return? possible error
-  this.props.navigation.navigate('Home');
+  this.props.navigation.navigate("Home");
 };
 
 ////////////////////////////////////////////////////////////////
 // on failed login helper METHODS
-const loginUserFail = (dispatch, error = '') => {
+const loginUserFail = (dispatch, error = "") => {
   dispatch({
     type: AUTH_USER_FAIL,
     payload: error
@@ -93,23 +99,33 @@ export const resetSignupLoginPages = () => ({
 
 ////////////////////////////////////////////////////////////////
 // Call appropriate FireBase method to signup user
-export const signupUser = (email, password, passwordRetype, firstName, lastName) => async dispatch => {
+export const signupUser = (
+  email,
+  password,
+  passwordRetype,
+  firstName,
+  lastName
+) => async dispatch => {
   try {
     // Dispatch event to trigger loading spinner
     dispatch({ type: AUTH_USER_ATTEMPT });
 
     if (password !== passwordRetype) {
-      return loginUserFail(dispatch, 'Passwords do not match');
+      return loginUserFail(dispatch, "Passwords do not match");
     }
 
     //Need to do a email verifcation function here
 
     // Attempt to signup new user
-    const { user } = await firebase.auth().createUserWithEmailAndPassword(email, password);
+    const { user } = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password);
     const { currentUser } = firebase.auth();
 
     // push first and lastname to the database during account creation
-    await firebase.database().ref(`/users/${currentUser.uid}/name_field/`)
+    await firebase
+      .database()
+      .ref(`/users/${currentUser.uid}/name_field/`)
       // .set allows no uid after /name_field/ easier for grabing data
       .set({ firstName, lastName })
       .then(() => {
@@ -117,18 +133,21 @@ export const signupUser = (email, password, passwordRetype, firstName, lastName)
       });
   } catch (err) {
     switch (err.code) {
-      case 'auth/email-already-in-use':
+      case "auth/email-already-in-use":
         return loginUserFail(
           dispatch,
           `${email} already in use - Please try anothere-mail address or log in with a social media provider`
         );
-      case 'auth/invalid-email':
+      case "auth/invalid-email":
         return loginUserFail(
           dispatch,
           `${email} is an invalid email address - Please ensure you typed your e-mail correctly`
         );
-      case 'auth/weak-password':
-        return loginUserFail(dispatch, 'Password is too weak - Please try again.');
+      case "auth/weak-password":
+        return loginUserFail(
+          dispatch,
+          "Password is too weak - Please try again."
+        );
       default:
         // console.log(err.message);
         return loginUserFail(dispatch, err.message);
@@ -147,4 +166,34 @@ export const signoutUser = () => async dispatch => {
   } catch (err) {
     console.error(err);
   }
+};
+
+////////////////////////////////////////////////////////////////
+// Called to check if user has Logged in to Facebook before
+export const facebookLogin = () => async dispatch => {
+  let token = await AsyncStorage.getItem("fb_token");
+
+  if (token) {
+    dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+  } else {
+    doFacebookLogin(dispatch);
+  }
+};
+
+////////////////////////////////////////////////////////////////
+// Called to sign user in through Facebook
+const doFacebookLogin = async dispatch => {
+  let { type, token } = await Facebook.logInWithReadPermissionsAsync(
+    "1735277376781841",
+    {
+      permissions: ["public_profile"]
+    }
+  );
+
+  if (type === "cancel") {
+    return dispatch({ type: FACEBOOK_LOGIN_FAIL });
+  }
+
+  await AsyncStorage.setItem("fb_token", token);
+  dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
 };
