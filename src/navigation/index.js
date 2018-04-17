@@ -147,23 +147,6 @@ class Navigation extends Component {
       OrderSelectionScreen: { screen: OrderSelectionScreen }
     });
 
-    const HomeNav = TabNavigator(
-      {
-        HomeScreen: { screen: HomeScreenNav },
-        CoffeePotList: { screen: CoffeePotListNav },
-        GPS: { screen: CoffeePotGPS },
-        Profile: { screen: ProfileNav }
-      },
-      {
-        tabBarOptions: {
-          showLabel: false,
-          style: {
-            backgroundColor: "black"
-          }
-        }
-      }
-    );
-
     const Delivery = StackNavigator({
       DeliverScreen: { screen: DeliverScreen },
       ChooseDelivery: { screen: ChooseDelivery },
