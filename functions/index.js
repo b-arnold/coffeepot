@@ -1,10 +1,25 @@
 const functions = require('firebase-functions');
 
 const admin = require('firebase-admin');
-admin.initializeApp();
+admin.initializeApp(functions.config().firebase);
 
 exports.startCloudTimer = functions.https.onCall((req) => {
-    await firebase.database.ref(`/coffeePots/${req.uid}`);
+    let key = '';
+    const ref = admin.database().ref();
+
+    const temp = new Promise(function() {
+        ref.child('coffeePots').once('value', function(snapshot){
+            snapshot.forEach(function(child){
+                const coffeePot = JSON.parse(JSON.stringify(child));
+                if(coffeePot.deliverer.uid === req.uid) {
+                    key = child.key;
+                    console.log(key);
+                }
+            })
+        })
+    })
+
+    console.log(key);
     const finish = false;
     // Converts minutes to ms
     const convert = req.timer * 60000;
@@ -25,10 +40,12 @@ exports.startCloudTimer = functions.https.onCall((req) => {
         const result = minutes + 'm' + seconds + 's';
         console.log(result);
 
+        ref = admin.database().ref(`coffeePots/${key}`)
+        .update({ currTime: result });
+
         if(minutes <= 0 && seconds <= 0) {
             finish = true;
             clearInterval(x);
         }
     }, 1000);
-    console.log('still running');
 })

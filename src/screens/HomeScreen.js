@@ -110,18 +110,6 @@ class HomeScreen extends Component {
         await Promise.all([...imageAssets]);
     }
 
-    onAddOrderPress = () => {
-        const drinks = this.props.drinks + 1;
-        this.props.addOrder(drinks);
-        console.log(this.props.drinks);
-    }
-
-    beginTimer() {
-        this.setState({
-            startTimer: true
-        })
-    }
-
     renderRemoveBttn() {
         if(this.props.myCoffeePot != null) {
             return (
@@ -138,6 +126,27 @@ class HomeScreen extends Component {
             );
         }
     }
+
+    renderStartTimerBttn() {
+        if(this.props.myCoffeePot != null) {
+            const { timer } = this.props.myCoffeePot;
+            return (
+                <Button 
+                    icon={{
+                        name: 'cross',
+                        type: 'entypo',
+                        size: 30
+                    }}
+                    title='Start Timer(For Testing)'
+                    buttonStyle={styles.button_style}
+                    onPress={() => {
+                        this.props.startTimer(timer.length)
+                    }}
+                />
+            );
+        }
+    }
+
 
     renderCoffeePot = () => {
         const { navigate } = this.props.navigation;
@@ -176,16 +185,7 @@ class HomeScreen extends Component {
                             buttonStyle={styles.button_style}
                             onPress={() => navigate('MessageScreen')}
                         />
-                        <Button 
-                            icon={{
-                                name: 'message',
-                                type: 'entypo',
-                                size: 30
-                            }}
-                            title='Start Timer'
-                            buttonStyle={styles.button_style}
-                            onPress={() => this.beginTimer()}
-                        />
+                        {this.renderStartTimerBttn()}
                         {this.renderRemoveBttn()}
                     </View>
                 </View>

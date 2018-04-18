@@ -12,7 +12,9 @@ export const AUTH_SIGNOUT_USER = 'auth_user_signout';
 export const RESET_AUTH_STATE = 'reset_auth_state';
 
 // COFFEE POT TYPES
-export const START_TIME = 'start_time';
+export const START_TIMER = 'start_timer';
+export const END_TIMER = 'end_timer';
+export const UPDATE_TIME_LEFT = 'update_time_left';
 export const ADD_ORDER = 'add_order';
 export const ADD_NAME_SUCCESS = 'add_name_success';
 export const UPDATE_COUNT_DOWN = 'update_count_down';

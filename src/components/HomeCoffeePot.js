@@ -1,6 +1,6 @@
 import { AppLoading, Asset } from 'expo';
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import { Icon, Rating } from 'react-native-elements';
 import TimerCountdown from 'react-native-timer-countdown';
 import axios from 'axios';
@@ -58,21 +58,10 @@ class HomeCoffeePot extends Component {
         this.setState({ drinks: this.props.drinks })
     }
 
-    async startTimer() {
-        // Test
-        const { timer } = this.props.myCoffeePot;
-        const { currentUser } = firebase.auth();
-        
-        await axios.post('https://us-central1-coffeepot-e0cb9.cloudfunctions.net/startCloudTimer', {
-            data: {
-                timer: timer,
-             }
-        }).then(function(response) {
-            console.log('timer started')
-        })
+    timerFinished() {
+        console.log('time done')
+        Alert.alert('Your Coffee Pot is finished!')
     }
-
-
     renderNoCoffeePot() {
         return (
             <View style={styles.background}>
@@ -92,8 +81,9 @@ class HomeCoffeePot extends Component {
     
     renderCoffeePotTimer() {
         const { timer } = this.props.myCoffeePot;
-        console.log(this.props.startTimer);
-        if(this.props.startTimer === false) {
+        let timeLeft = this.props.endTime - this.props.currTime;
+        const now = new Date().getTime();
+        if(this.props.timerStarted === false) {
             return (
                 <View style={styles.background}>
                     <TouchableOpacity onPress={this.onFirstPress}> 
@@ -105,13 +95,12 @@ class HomeCoffeePot extends Component {
                             }}
                         />
                         <View style={{ alignItems: 'center' }}>
-                            <Text style = {{ color: 'white', fontSize: 20 }}>{timer}:00 (On Hold)</Text>
+                            <Text style = {{ color: 'white', fontSize: 20 }}>{timer.length}:00 (On Hold)</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
             );
         } else {
-            this.startTimer()
             return (
                 <View style={styles.background}>
                     <TouchableOpacity onPress={this.onFirstPress}> 
@@ -124,7 +113,9 @@ class HomeCoffeePot extends Component {
                         />
                         <View style={{ alignItems: 'center'}}>
                             <TimerCountdown
-                                initialSecondsRemaining={ timer * 60000 }
+                                initialSecondsRemaining={timeLeft}
+                                onTick={() => this.props.updateTimeLeft(now)}
+                                onTimeElapsed={() => this.timerFinished()}
                                 style={{ fontSize: 20, color: 'white' }}
                             />
                         </View>
@@ -286,12 +277,16 @@ const styles = {
 // Map redux reducers to component mapStateToProps
 function mapStateToProps({ coffee }) {
     if(coffee.myCoffeePot === null) {
-        return { myCoffeePot: null}
+        return { myCoffeePot: null, timerStarted: coffee.timerStarted}
     }
     return {
         hasCoffeePot: coffee.hasCoffeePot,
         drinks: coffee.drinks,
-        myCoffeePot: coffee.myCoffeePot
+        myCoffeePot: coffee.myCoffeePot,
+        timerStarted: coffee.timerStarted,
+        startTime: coffee.startTime,
+        endTime: coffee.endTime,
+        currTime: coffee.currTime,
     };
 }
 

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Image, ImageBackground, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, Image, ImageBackground, TouchableOpacity, ActivityIndicator, RefreshControl } from 'react-native';
 import { Button, Icon, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { AppLoading, Asset } from 'expo';
@@ -62,7 +62,7 @@ class PickLocationList extends Component {
     ///////////////////////////////////////////////////////////////////////////////
     // Defining The State
     //The 'region' state object will contain latitude and longitude of the user
-    state = { region:{} };
+    state = { region:{}, refreshing: false };
 
     ///////////////////////////////////////////////////////////////////////////////
     // Before anything is loaded, this will set the region to the user's current position
@@ -84,6 +84,25 @@ class PickLocationList extends Component {
         );
     }
 
+    onRefresh() {
+        this.setState({ refreshing: true });
+        navigator.geolocation.getCurrentPosition((position) => {
+            // Changes the state of region to user's current location
+            this.setState({
+                region: {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                }
+            });
+            //The action 'fetchPlaces' will search for places with the label 'cafe' with respect to the 'region' state (user's current position)
+            this.props.fetchPlaces(this.state.region).then(() => {
+                this.setState({ refreshing: false })
+            });
+        },
+            (error) => console.log(new Date(), error),
+            {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
+        );
+    }
 
     ///////////////////////////////////////////////////////////////////////////////
     // This method renders cards depending on the information it was able to successfully receive
@@ -151,7 +170,17 @@ class PickLocationList extends Component {
                 }}
                 source={require('../images/background.jpg')}
                 >
-                  <ScrollView>
+                  <ScrollView
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={this.onRefresh.bind(this)}
+                            title='Refreshing List'
+                            titleColor='white'
+                            tintColor='white'
+                        />
+                    }
+                  >
                       {this.renderCards()}
                   </ScrollView>
                 </ImageBackground>
@@ -168,7 +197,7 @@ class PickLocationList extends Component {
                 <View style = {styles.loadingStyle}>
                     <ActivityIndicator
                         size='large'
-                        color={BUTTON_COLOR}
+                        color='white'
                     />
                 </View>
           </ImageBackground>
