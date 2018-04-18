@@ -87,16 +87,23 @@ class HomeScreen extends Component {
     }
 
     componentWillMount() {
-        const { currentUser } = firebase.auth();
-
-        // Fetches the coffee pots from current user
-        this.props.fetchMyCoffeePot(currentUser.uid);
-
-        // Load first name into properties
-        this.props.profileFirstNameChange();
-
-        // Load last name into properties
-        this.props.profileLastNameChange();
+      const { currentUser } = firebase.auth();
+      this.props.fetchMyCoffeePot(currentUser.uid);
+      // Load first name into properties
+      firebase
+        .database()
+        .ref(`users/${currentUser.uid}/name_field/firstName`)
+        .on("value", snapshot => {
+          this.props.profileFirstNameChange(snapshot.val());
+        });
+  
+      // Load last name into properties
+      firebase
+        .database()
+        .ref(`users/${currentUser.uid}/name_field/lastName`)
+        .on("value", snapshot => {
+          this.props.profileLastNameChange(snapshot.val());
+        });
     }
 
     ///////////////////////////////////////////////////////////////////
