@@ -72,12 +72,13 @@ import {
 import * as actions from "../actions";
 
 class Navigation extends Component {
-  state = {
-    user: null,
-    firstName: "",
-    lastName: ""
-  };
-
+    state = {
+        hScreen: false,
+        cpScreen: false,
+        gpsScreen: false,
+        profScreen: false
+    }
+    
   ////////////////////////////////////////////////////////////////////////
   // Upon loading app, loads Brush Script MT for header
   async componentDidMount() {
@@ -211,7 +212,7 @@ class Navigation extends Component {
             rounded
             xlarge
           />
-          <Text style={{ marginBottom: 20, color: "white", fontSize: 20 }}>
+          <Text style={{ marginBottom: 20, color: 'white', fontSize: 20 }}>
             {this.props.firstName} {this.props.lastName}
           </Text>
         </View>
@@ -275,12 +276,12 @@ class Navigation extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    marginTop: Platform.OS === "android" ? 24 : 0
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    marginTop: Platform.OS === 'android' ? 24 : 0
   }
 });
-
+  
 /////////////////////////////////////////////////////////
 // Map redux reducers to component mapStateToProps
 function mapStateToProps({ prof }) {

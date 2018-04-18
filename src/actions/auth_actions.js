@@ -13,12 +13,29 @@ import {
   AUTH_USER_ATTEMPT,
   AUTH_USER_FAIL,
   AUTH_USER_SUCCESS,
-  RESET_APP_STATE,
+  RESET_AUTH_STATE,
   FIRST_NAME_CHANGE,
   LAST_NAME_CHANGE,
-  FACEBOOK_LOGIN_SUCCESS,
-  FACEBOOK_LOGIN_FAIL
-} from "./types.js";
+  RESET_COFFEE_STATE,
+  RESET_ORDER_STATE,
+  RESET_PLACE_STATE,
+  FIRST_NAME_CHANGED,
+  LAST_NAME_CHANGED
+} from './types.js';
+
+// ////////////////////////////////////////////////////////////////
+// // Called when email is changed
+// export const firstNameChange = (text) => async dispatch => {
+//   dispatch({ type: FIRST_NAME_CHANGE, payload: text });
+//   dispatch({ type: FIRST_NAME_CHANGED, payload: text })
+// }
+
+// ////////////////////////////////////////////////////////////////
+// // Called when email is changed
+// export const lastNameChange = (text) => async dispatch => {
+//   dispatch({ type: LAST_NAME_CHANGE, payload: text });
+//   dispatch({ type: LAST_NAME_CHANGED, payload: text })
+// }
 
 ////////////////////////////////////////////////////////////////
 // Called when email is changed
@@ -94,7 +111,7 @@ const loginUserFail = (dispatch, error = "") => {
 ////////////////////////////////////////////////////////////////
 //
 export const resetSignupLoginPages = () => ({
-  type: RESET_APP_STATE
+  type: RESET_AUTH_STATE
 });
 
 ////////////////////////////////////////////////////////////////
@@ -162,7 +179,10 @@ export const signoutUser = () => async dispatch => {
   try {
     dispatch({ type: AUTH_USER_ATTEMPT });
     await firebase.auth().signOut();
-    dispatch({ type: RESET_APP_STATE });
+    dispatch({ type: RESET_AUTH_STATE });
+    dispatch({ type: RESET_COFFEE_STATE });
+    dispatch({ type: RESET_ORDER_STATE });
+    dispatch({ type: RESET_PLACE_STATE });
   } catch (err) {
     console.error(err);
   }

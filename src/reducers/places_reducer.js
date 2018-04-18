@@ -2,7 +2,7 @@ import {
   FETCH_PLACES,
   FETCH_DISTANCE,
   LOAD_PLACE_DETAILS,
-  RESET_APP_STATE
+  RESET_PLACE_STATE
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -17,7 +17,7 @@ export default function (state = INITIAL_STATE, action) {
     case LOAD_PLACE_DETAILS:
       return {
         ...state, selectedPlace: action.payload }
-    case RESET_APP_STATE:
+    case RESET_PLACE_STATE:
       return INITIAL_STATE;
     default:
       return state;

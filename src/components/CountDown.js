@@ -26,9 +26,9 @@ class CountDown extends Component {
             const { timer } = this.props.myCoffeePot
             count = timer * 60000
             this.props.updateCountDown(count)
-            console.log(this.props.countDown)
+            //console.log(this.props.countDown)
             //this.setState({ time: this.props.countDown });
-            console.log(this.state.time)
+            //console.log(this.state.time)
             this.setState({ start: true });
         }
     }

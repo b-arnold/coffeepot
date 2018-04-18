@@ -1,7 +1,9 @@
 import firebase from 'firebase';
 import axios from 'axios';
 import {
-    START_TIME,
+    START_TIMER,
+    END_TIMER,
+    UPDATE_TIME_LEFT,
     ADD_ORDER,
     UPDATE_COUNT_DOWN,
     CREATE_COFFEE_POT,
@@ -9,16 +11,10 @@ import {
     CREATE_COFFEE_POT_SUCCESS,
     FETCH_COFFEE_POTS,
     FETCH_MY_COFFEE_POT,
-    REMOVE_MY_COFFEE_POT
+    REMOVE_MY_COFFEE_POT,
+    LOAD_COFFEE_POT_DETAILS
 } from './types.js';
 import * as urlBuilder from '../utility/url_builder';
-
-/////////////////////////////////////////////////////////
-////  Boolean to start Coffee Pot Timer
-export const startTime = time => ({
-    type: START_TIME,
-    payload: time
-});
 
 /////////////////////////////////////////////////////////
 //// Adding number of drinks to Coffee Pot
@@ -27,27 +23,25 @@ export const addOrder = cup => ({
     payload: cup
 });
 
-////////////////////////////////////s/////////////////////
-//// Subtracting time from the count down
-export const updateCountDown = count => ({
-    type: UPDATE_COUNT_DOWN,
-    payload: count
-});
-
 ///////////////////////////////////////////////////////////////////////////////
-// (WIP) This will push to the database a coffee pot at a location with a timer
+// This will push to the database a coffee pot at a location with a timer
 // Must make it so that only one user can create one coffee pot
-export const createCoffeePot = (locDetails, timer) => async dispatch => {
+export const createCoffeePot = (locDetails, length) => async dispatch => {
     try {
         const { currentUser } = firebase.auth();
         const deliverer = null;
-        const orders = []
+        const timer = {
+            length: length,
+            endTime: '',
+            startTime: '',
+            currTime: ''
+        }
         await firebase.database().ref(`/users/${currentUser.uid}/name_field`).once('value').then(function(snapshot) {
             deliverer = {name: snapshot.val(), uid: currentUser.uid};
         })
 
         await firebase.database().ref('/coffeePots/')
-            .push({deliverer, locDetails, timer, orders})
+            .push({deliverer, locDetails, timer})
         dispatch({type: CREATE_COFFEE_POT_SUCCESS})
     } catch (err) {
         console.error(err);
@@ -157,6 +151,8 @@ export const fetchMyCoffeePot = (uid) => async dispatch => {
     }
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//
 export const removeMyCoffeePot = () => async dispatch => {
     try {
         const { currentUser } = firebase.auth();
@@ -181,5 +177,101 @@ export const removeMyCoffeePot = () => async dispatch => {
         }
     } catch (err) {
         console.error(err);
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//
+export const loadCoffeePotDetails = (selectedCoffeePot) => async dispatch => {
+    try {
+        dispatch({ type: LOAD_COFFEE_POT_DETAILS, payload: selectedCoffeePot });
+    } catch (err) {
+        console.err(err);
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//
+export const startTimer = (timer) => async dispatch => {
+    try {
+        const ref = firebase.database().ref();
+        const { currentUser } = firebase.auth();
+        let  key = '';
+        const convert = timer * 60000;
+        const startTime = new Date().getTime();
+        const currTime = startTime;
+        const endTime = new Date().getTime() + convert;
+
+        await ref.child('coffeePots').once('value', function(snapshot){
+            snapshot.forEach(function(child){
+                const coffeePot = JSON.parse(JSON.stringify(child));
+                if(coffeePot.deliverer.uid === currentUser.uid) {
+                    key = child.key;
+                    firebase.database().ref(`/coffeePots/${key}/timer`).update({ startTime, endTime, currTime });
+                }
+            })
+        })
+        
+        const time = {
+            currTime: currTime,
+            startTime: startTime,
+            endTime: endTime
+        }
+        dispatch({ type: START_TIMER, payload: time })
+    } catch (err) {
+        console.err(err);
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// (WIP) same as remove at the moment
+export const endTimer = () => async dispatch => {
+    try {
+        const { currentUser } = firebase.auth();
+        const ref = firebase.database().ref();
+        const response = null;
+        console.log('-----endTimer-----')
+        
+        await ref.child('coffeePots').once('value', function(snapshot){
+            snapshot.forEach(function(child){
+                response = JSON.parse(JSON.stringify(child));
+                const uid = response.deliverer.uid;
+                if(currentUser.uid === uid) {
+                    console.log('removed ' + uid);
+                    ref.child(`coffeePots/${child.key}`).remove();
+                }
+            })
+        })
+        
+    } catch (err) {
+        console.err(err);
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//
+export const updateTimeLeft = (timeLeft) => async dispatch => {
+    try {
+        if(timeLeft > 1000) {
+            const { currentUser } = firebase.auth();
+            const ref = firebase.database().ref();
+            let  key = '';
+            await ref.child('coffeePots').once('value', function(snapshot){
+                snapshot.forEach(function(child){
+                    const coffeePot = JSON.parse(JSON.stringify(child));
+                    if(coffeePot.deliverer.uid === currentUser.uid) {
+                        key = child.key
+                        firebase.database().ref(`/coffeePots/${key}/timer`).update({ currTime: timeLeft });
+                    }
+                })
+            })
+
+            dispatch({ type: UPDATE_TIME_LEFT, payload: timeLeft})
+        } else {
+            await endTimer();
+            dispatch({ type: END_TIMER })
+        }
+    } catch (err) {
+        console.log(err);
     }
 }
