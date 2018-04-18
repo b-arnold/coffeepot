@@ -23,6 +23,7 @@ class GPSMap extends Component {
             color: SECONDARY_COLOR
         },
         headerTintColor: SECONDARY_COLOR,
+        tabBarVisible: false
     })
 
     ///////////////////////////////////////////////////////////////////////////////

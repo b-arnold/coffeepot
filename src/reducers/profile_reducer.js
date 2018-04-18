@@ -7,8 +7,7 @@
 import {
   FIRST_NAME_CHANGED,
   LAST_NAME_CHANGED,
-  GET_CURRENT_USER
-} from "../actions/types";
+} from '../actions/types';
 
 const INITIAL_STATE = {
   firstName: "",
@@ -21,8 +20,6 @@ export default function(state = INITIAL_STATE, action) {
       return { ...state, firstName: action.payload };
     case LAST_NAME_CHANGED:
       return { ...state, lastName: action.payload };
-    case GET_CURRENT_USER:
-      return { ...state };
     default:
       return state;
   }

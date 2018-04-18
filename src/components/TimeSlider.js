@@ -32,7 +32,7 @@ class TimeSlider extends Component {
                 <Slider
                     step={1}
                     maximumValue={20}
-                    minimumValue={5}
+                    minimumValue={1}
                     onValueChange={this.updateTime.bind(this)}
                     value={timeSelected}
                     thumbStyle={styles.thumb}

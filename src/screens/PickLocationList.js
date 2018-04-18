@@ -51,7 +51,7 @@ class PickLocationList extends Component {
     },
     headerTintColor: SECONDARY_COLOR,
     headerRight: (
-      <TouchableOpacity onPress={() => navigation.navigate("GPSMap")}>
+      <TouchableOpacity onPress={() => navigation.navigate('GPSMap')}>
         <Icon name="map-marker" type="font-awesome" color="grey" />
       </TouchableOpacity>
     ),

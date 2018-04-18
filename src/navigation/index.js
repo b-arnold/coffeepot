@@ -33,6 +33,7 @@ import HomeScreen from "../screens/HomeScreen";
 import Profile from "../screens/Profile";
 import GPSMap from "../screens/GPSMap";
 import CoffeePotGPS from "../screens/CoffeePotGPS";
+import OrderSelectionScreen from "../screens/OrderSelectionScreen";
 
 // Extensions from HomeScreen
 import MessageScreen from "../screens/MessageScreen";
@@ -71,18 +72,13 @@ import {
 import * as actions from "../actions";
 
 class Navigation extends Component {
-  state = {
-    user: null,
-    firstName: "",
-    lastName: ""
-  };
-
-  componentWillMount() {
-    this.props.getCurrentUser();
-    // this.setState({ user: currentUser });
-    // console.log(this.state.user);
-  }
-
+    state = {
+        hScreen: false,
+        cpScreen: false,
+        gpsScreen: false,
+        profScreen: false
+    }
+    
   ////////////////////////////////////////////////////////////////////////
   // Upon loading app, loads Brush Script MT for header
   async componentDidMount() {
@@ -127,7 +123,7 @@ class Navigation extends Component {
     });
 
     const GPSNav = StackNavigator({
-      OrderGPSMap: { screen: OrderGPSMap },
+      CoffeePotGPS: { screen: CoffeePotGPS },
       PlaceOrder: { screen: PlaceOrder },
       PaymentScreen: { screen: PaymentScreen },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
@@ -142,7 +138,8 @@ class Navigation extends Component {
       PaymentScreen: { screen: PaymentScreen },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
       ReceiptScreen: { screen: ReceiptScreen },
-      Legal: { screen: StandardLegal }
+      Legal: { screen: StandardLegal },
+      OrderSelectionScreen: { screen: OrderSelectionScreen }
     });
 
     const Delivery = StackNavigator({
@@ -152,7 +149,8 @@ class Navigation extends Component {
       PickedLocation: { screen: PickedLocation },
       ExistingOrdersList: { screen: ExistingOrdersList },
       ExistingOrder: { screen: ExistingOrder },
-      MessageScreen: { screen: MessageScreen }
+      MessageScreen: { screen: MessageScreen },
+      GPSMap: { screen: GPSMap }
     });
 
     const CustomerGPSNav = StackNavigator({
@@ -167,7 +165,7 @@ class Navigation extends Component {
       {
         HomeScreen: { screen: HomeScreenNav },
         CoffeePotList: { screen: CoffeePotListNav },
-        GPS: { screen: CoffeePotGPS },
+        GPS: { screen: GPSNav },
         Profile: { screen: ProfileNav }
       },
       {
@@ -214,8 +212,8 @@ class Navigation extends Component {
             rounded
             xlarge
           />
-          <Text style={{ marginBottom: 20, color: "white", fontSize: 20 }}>
-            {this.state.firstName} {this.state.lastName}
+          <Text style={{ marginBottom: 20, color: 'white', fontSize: 20 }}>
+            {this.props.firstName} {this.props.lastName}
           </Text>
         </View>
 
@@ -278,18 +276,19 @@ class Navigation extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    marginTop: Platform.OS === "android" ? 24 : 0
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    marginTop: Platform.OS === 'android' ? 24 : 0
   }
 });
-
+  
 /////////////////////////////////////////////////////////
 // Map redux reducers to component mapStateToProps
 function mapStateToProps({ prof }) {
   return {
-    user: prof.user
+    firstName: prof.firstName,
+    lastName: prof.lastName
   };
 }
-
+  
 export default connect(mapStateToProps, actions)(Navigation);

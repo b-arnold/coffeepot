@@ -1,12 +1,15 @@
-import React, { Component } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
-import { Icon, Rating } from "react-native-elements";
-import { AppLoading, Asset } from "expo";
-import firebase from "firebase";
-import { Spinner } from "../components/Spinner";
-import CountDown from "../components/CountDown";
-import { connect } from "react-redux";
-import * as actions from "../actions";
+import { AppLoading, Asset } from 'expo';
+import React, { Component } from 'react';
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
+import { Icon, Rating } from 'react-native-elements';
+import TimerCountdown from 'react-native-timer-countdown';
+import axios from 'axios';
+import * as firebase from 'firebase';
+
+import { Spinner } from '../components/Spinner';
+import CountDown from '../components/CountDown';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 import {
   PRIMARY_COLOR,
@@ -36,17 +39,15 @@ function cacheImages(images) {
 }
 
 class HomeCoffeePot extends Component {
-  ///////////////////////////////////////////////////////////
-  //// State of current CoffeePot
-  state = {
-    isReady: false,
-    time: null,
-    alreadyStarted: false,
-    drinks: null,
-    firstScreen: true,
-    secondScreen: false,
-    thirdScreen: false
-  };
+    ///////////////////////////////////////////////////////////
+    //// State of current CoffeePot
+    state = {
+        isReady: false,
+        drinks: null,
+        firstScreen: true,
+        secondScreen: false,
+        thirdScreen: false,
+    }
 
   ///////////////////////////////////////////////////////////////////
   //  Method taken from Expo documents
@@ -60,26 +61,80 @@ class HomeCoffeePot extends Component {
     await Promise.all([...imageAssets]);
   }
 
-  componentWillMount() {
-    // Sets state to start Coffee Pot for 10 minutes
-    if (this.props.time === true) {
-      this.setState({ alreadyStarted: true });
+    componentWillMount() {
+        // Sets state to start Coffee Pot for 10 minutes
+        const { currentUser } = firebase.auth();
+        this.props.fetchMyCoffeePot(currentUser.uid);
+        this.setState({ drinks: this.props.drinks })
     }
-    const { currentUser } = firebase.auth();
-    //console.log("-----HomeCoffeePot-----");
-    //console.log(currentUser.uid);
-    this.props.fetchMyCoffeePot(currentUser.uid);
-    this.setState({ drinks: this.props.drinks });
-  }
 
-  TimerStatus() {
-    return <CountDown />;
+    timerFinished() {
+        console.log('time done')
+        Alert.alert('Your Coffee Pot is finished!')
+    }
 
-    if (this.state.alreadyStarted)
-      return <Text style={{ fontSize: 50, color: "white" }}>Finished!</Text>;
-
-    return <View />;
-  }
+    renderNoCoffeePot() {
+        return (
+            <View style={styles.background}>
+                    <View style={{alignItems: 'center' }}>
+                        <Image
+                            source={require('../images/CoffeePot-Logo-White-02.png')}
+                            style={{
+                                width: 250,
+                                height: 250,
+                            }}
+                        />
+                        <Text style={styles.text_style}>No Coffee Pot</Text>
+                    </View>
+            </View>
+        );
+    }
+    
+    renderCoffeePotTimer() {
+        const { timer } = this.props.myCoffeePot;
+        let timeLeft = this.props.endTime - this.props.currTime;
+        const now = new Date().getTime();
+        if(this.props.timerStarted === false) {
+            return (
+                <View style={styles.background}>
+                    <TouchableOpacity onPress={this.onFirstPress}> 
+                        <Image
+                            source={require('../images/CoffeePot-Logo-White-02.png')}
+                            style={{
+                                width: 250,
+                                height: 250,
+                            }}
+                        />
+                        <View style={{ alignItems: 'center' }}>
+                            <Text style = {{ color: 'white', fontSize: 20 }}>{timer.length}:00 (On Hold)</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            );
+        } else {
+            return (
+                <View style={styles.background}>
+                    <TouchableOpacity onPress={this.onFirstPress}> 
+                        <Image
+                            source={require('../images/CoffeePot-Logo-White-02.png')}
+                            style={{
+                                width: 250,
+                                height: 250,
+                            }}
+                        />
+                        <View style={{ alignItems: 'center'}}>
+                            <TimerCountdown
+                                initialSecondsRemaining={timeLeft}
+                                onTick={() => this.props.updateTimeLeft(now)}
+                                onTimeElapsed={() => this.timerFinished()}
+                                style={{ fontSize: 20, color: 'white' }}
+                            />
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            );
+        }
+    }
 
   renderNoCoffeePot() {
     return (
@@ -94,24 +149,6 @@ class HomeCoffeePot extends Component {
           />
           <Text style={styles.text_style}>No Coffee Pot</Text>
         </View>
-      </View>
-    );
-  }
-
-  renderCoffeePotTimer() {
-    const { timer } = this.props.myCoffeePot;
-    return (
-      <View style={styles.background}>
-        <TouchableOpacity onPress={this.onFirstPress}>
-          <Image
-            source={require("../images/CoffeePot-Logo-White-02.png")}
-            style={{
-              width: 250,
-              height: 250
-            }}
-          />
-          <View style={{ alignItems: "center" }}>{this.TimerStatus()}</View>
-        </TouchableOpacity>
       </View>
     );
   }
@@ -265,15 +302,18 @@ const styles = {
 /////////////////////////////////////////////////////////
 // Map redux reducers to component mapStateToProps
 function mapStateToProps({ coffee }) {
-  if (coffee.myCoffeePot === null) {
-    return { myCoffeePot: null };
-  }
-  return {
-    hasCoffeePot: coffee.hasCoffeePot,
-    time: coffee.time,
-    drinks: coffee.drinks,
-    myCoffeePot: coffee.myCoffeePot
-  };
+    if(coffee.myCoffeePot === null) {
+        return { myCoffeePot: null, timerStarted: coffee.timerStarted}
+    }
+    return {
+        hasCoffeePot: coffee.hasCoffeePot,
+        drinks: coffee.drinks,
+        myCoffeePot: coffee.myCoffeePot,
+        timerStarted: coffee.timerStarted,
+        startTime: coffee.startTime,
+        endTime: coffee.endTime,
+        currTime: coffee.currTime,
+    };
 }
 
 export default connect(mapStateToProps, actions)(HomeCoffeePot);

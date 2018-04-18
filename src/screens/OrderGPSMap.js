@@ -71,6 +71,15 @@ class OrderGPSMap extends Component {
     );
   }
 
+  onButtonPress(places) {
+    const { navigate } = this.props.navigation;
+
+    console.log(places.place_id);
+    console.log(places.name);
+    this.props.orderUpdate("location", places.place_id);
+    navigate("PlaceOrder");
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props !== nextProps) {
       //console.log('received prop')
@@ -81,14 +90,32 @@ class OrderGPSMap extends Component {
   //////// prints to console but does not update. Can't figure out to update it in mapstatetoprops
   /////without it crashing...
   /////so write a name, choose a location and press place order...
-
-  onButtonPress(places) {
-    const { navigate } = this.props.navigation;
-    //this.props.location = markerID;
-    //console.log(places.place_id);
-    //console.log(places.name);
-    this.props.orderUpdate(places.vicinity, places.place_id);
-    navigate("PlaceOrder");
+  renderMarkers() {
+    //console.log(this.props.places);
+    if (this.props.places !== null) {
+      return this.props.places.map(places => {
+        const { geometry, place_id, name, vicinity, photos } = places;
+        return (
+          <MapView.Marker
+            key={place_id}
+            coordinate={{
+              latitude: geometry.location.lat,
+              longitude: geometry.location.lng
+            }}
+            title={name}
+            description={vicinity}
+            onSelect={this.props.drink}
+            onPress={() => this.onButtonPress(places)}
+          >
+            <Animated.View>
+              <Animated.View style={[styles.ring]} />
+              <View style={styles.Marker} />
+            </Animated.View>
+          </MapView.Marker>
+        );
+        //console.log(places.placeid);
+      });
+    }
   }
 
   renderMarkers() {
@@ -196,7 +223,7 @@ const styles = {
   }
 };
 
-function mapStateToProps({ places }) {
+function mapStateToProps({ places, order }) {
   if (places.placesResponse === null) {
     //console.log(places.placesResponse);
     return {
@@ -211,7 +238,8 @@ function mapStateToProps({ places }) {
 
   return {
     places: places.placesResponse.results,
-    searchRegion: places.placesResponse.searchRegion
+    searchRegion: places.placesResponse.searchRegion,
+    location: order.location
   };
 }
 

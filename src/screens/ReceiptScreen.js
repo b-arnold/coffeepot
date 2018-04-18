@@ -8,6 +8,8 @@ import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { Button, Card, Icon } from 'react-native-elements';
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 ///////////////////////////////////////////////////////////
 // Receipt Screen
@@ -15,7 +17,7 @@ import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style
 ///////////////////////////////////////////////////////////
 
 
-class ReceiptScreen extends Component {
+export class ReceiptScreen extends Component {
   static navigationOptions = ({navigation}) => ({
     title: 'Receipt',
     headerStyle: {
@@ -38,15 +40,20 @@ class ReceiptScreen extends Component {
   render() {
     const resetAction = NavigationActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'HomeScreen' })]
+      actions: [NavigationActions.navigate({ routeName: 'CoffeePotList' })]
     })
     return (
       <ScrollView>
         <View>
           <Card style={styles.cardStyle}>
             <View style={{ margin: 10 }}>
+
               <View style={styles.cardTextStyle}>
-                <Text>Order: </Text>
+                <Text>Time: {this.props.time} </Text>
+              </View>
+
+              <View style={styles.cardTextStyle}>
+                <Text>Order: {this.props.drink} {this.props.size} </Text>
               </View>
 
               <View style={styles.cardTextStyle}>
@@ -137,4 +144,16 @@ const styles = {
   }
 };
 
-export default ReceiptScreen;
+function mapStateToProps({ order }) {
+  return {
+      time: order.time,
+      name: order.name,
+      location: order.location,
+      drink: order.drink,
+      size: order.size,
+      card: order.card,
+      cost: order.cost
+  };
+}
+
+export default connect(mapStateToProps, actions)(ReceiptScreen);
