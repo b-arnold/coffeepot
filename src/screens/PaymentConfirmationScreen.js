@@ -32,8 +32,8 @@ class PaymentConfirmationScreen extends Component {
     const timeDateTemp = new Date();
     timeDate = timeDateTemp.toString();
     this.props.orderUpdate({prop: 'time', timeDate});
-    this.props.orderCreate({name: this.props.name || 'name', location: location || 'Starbucks, Azusa', 
-    drink: this.props.drink || 'drink', time: timeDate || 'time', cost: '$0.00', size: this.props.size || '8oz', card: this.props.card || 'xxxx'});
+    // this.props.orderCreate({name: this.props.name || 'name', location: location || 'Starbucks, Azusa', 
+    // drink: this.props.drink || 'drink', time: timeDate || 'time', cost: '$0.00', size: this.props.size || '8oz', card: this.props.card || 'xxxx'});
     this.props.startTime(true);
     const drinks = this.props.drinks + 1;
     this.props.addOrder(drinks);

@@ -40,7 +40,7 @@ export class ReceiptScreen extends Component {
   render() {
     const resetAction = NavigationActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'HomeScreen' })]
+      actions: [NavigationActions.navigate({ routeName: 'CoffeePotList' })]
     })
     return (
       <ScrollView>

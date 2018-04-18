@@ -3,7 +3,8 @@ import {
     ORDER_CREATE,
     ORDER_NAME_CHANGE,
     ORDER_INSTRUCTION_CHANGE,
-    ORDER_ID_CHANGE
+    ORDER_ID_CHANGE,
+    ORDER_UPDATE
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -32,6 +33,8 @@ export default (state = INITIAL_STATE, action) => {
             return INITIAL_STATE;
         case ORDER_ID_CHANGE:
             return { ...state, orderID: action.payload };
+        case ORDER_UPDATE:
+            return { ...state }
         default:
             return state;
     }

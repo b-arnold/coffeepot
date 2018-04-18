@@ -78,12 +78,6 @@ class Navigation extends Component {
     lastName: ""
   };
 
-  componentWillMount() {
-    this.props.getCurrentUser();
-    // this.setState({ user: currentUser });
-    // console.log(this.state.user);
-  }
-
   ////////////////////////////////////////////////////////////////////////
   // Upon loading app, loads Brush Script MT for header
   async componentDidMount() {
@@ -128,7 +122,7 @@ class Navigation extends Component {
     });
 
     const GPSNav = StackNavigator({
-      OrderGPSMap: { screen: OrderGPSMap },
+      CoffeePotGPS: { screen: CoffeePotGPS },
       PlaceOrder: { screen: PlaceOrder },
       PaymentScreen: { screen: PaymentScreen },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
@@ -154,7 +148,8 @@ class Navigation extends Component {
       PickedLocation: { screen: PickedLocation },
       ExistingOrdersList: { screen: ExistingOrdersList },
       ExistingOrder: { screen: ExistingOrder },
-      MessageScreen: { screen: MessageScreen }
+      MessageScreen: { screen: MessageScreen },
+      GPSMap: { screen: GPSMap }
     });
 
     const CustomerGPSNav = StackNavigator({
@@ -169,7 +164,7 @@ class Navigation extends Component {
       {
         HomeScreen: { screen: HomeScreenNav },
         CoffeePotList: { screen: CoffeePotListNav },
-        GPS: { screen: CoffeePotGPS },
+        GPS: { screen: GPSNav },
         Profile: { screen: ProfileNav }
       },
       {
@@ -217,7 +212,7 @@ class Navigation extends Component {
             xlarge
           />
           <Text style={{ marginBottom: 20, color: "white", fontSize: 20 }}>
-            {this.state.firstName} {this.state.lastName}
+            {this.props.firstName} {this.props.lastName}
           </Text>
         </View>
 
@@ -286,4 +281,13 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Navigation;
+/////////////////////////////////////////////////////////
+// Map redux reducers to component mapStateToProps
+function mapStateToProps({ prof }) {
+  return {
+    firstName: prof.firstName,
+    lastName: prof.lastName
+  };
+}
+  
+export default connect(mapStateToProps, actions)(Navigation);
