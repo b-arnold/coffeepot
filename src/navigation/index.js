@@ -67,7 +67,6 @@ class Navigation extends Component {
   }
 
   render() {
-    
     const ProfileNav = StackNavigator({
         Profile: { screen: Profile },
          PlaceOrder: { screen: PlaceOrder },

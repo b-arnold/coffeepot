@@ -171,15 +171,15 @@ class PickLocationList extends Component {
                 source={require('../images/background.jpg')}
                 >
                   <ScrollView
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={this.state.refreshing}
-                            onRefresh={this.onRefresh.bind(this)}
-                            title='Refreshing List'
-                            titleColor='white'
-                            tintColor='white'
-                        />
-                    }
+                    // refreshControl={
+                    //     <RefreshControl
+                    //         refreshing={this.state.refreshing}
+                    //         onRefresh={this.onRefresh.bind(this)}
+                    //         title='Refreshing List'
+                    //         titleColor='white'
+                    //         tintColor='white'
+                    //     />
+                    // }
                   >
                       {this.renderCards()}
                   </ScrollView>
