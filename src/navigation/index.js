@@ -26,6 +26,9 @@ import Settings from "../screens/Settings";
 import StandardLegal from "../screens/StandardLegal";
 import DeliveryLegal from "../screens/DeliveryLegal";
 
+// Settings Screens
+import EditProfile from "../screens/EditProfile";
+
 // CoffeePot Screens
 import CoffeePotList from "../screens/CoffeePotList";
 import CoffeePot from "../screens/CoffeePot";
@@ -72,13 +75,13 @@ import {
 import * as actions from "../actions";
 
 class Navigation extends Component {
-    state = {
-        hScreen: false,
-        cpScreen: false,
-        gpsScreen: false,
-        profScreen: false
-    }
-    
+  state = {
+    hScreen: false,
+    cpScreen: false,
+    gpsScreen: false,
+    profScreen: false
+  };
+
   ////////////////////////////////////////////////////////////////////////
   // Upon loading app, loads Brush Script MT for header
   async componentDidMount() {
@@ -94,7 +97,8 @@ class Navigation extends Component {
     });
 
     const SettingNav = StackNavigator({
-      Settings: { screen: Settings }
+      Settings: { screen: Settings },
+      EditProfile: { screen: EditProfile }
     });
 
     const StandardLegalNav = StackNavigator({
@@ -206,13 +210,18 @@ class Navigation extends Component {
             marginTop: 30
           }}
         >
-          <Avatar
-            source={require("../images/16683918_10103879001921065_4430688832052853506_n.jpg")}
-            style={{ width: 200, height: 200, borderRadius: 100 }}
-            rounded
-            xlarge
+          <Image
+            source={{ uri: this.props.profileImage }}
+            style={{ width: 150, height: 150, borderRadius: 75 }}
           />
-          <Text style={{ marginBottom: 20, color: 'white', fontSize: 20 }}>
+          <Text
+            style={{
+              marginTop: 10,
+              marginBottom: 20,
+              color: "white",
+              fontSize: 20
+            }}
+          >
             {this.props.firstName} {this.props.lastName}
           </Text>
         </View>
@@ -236,11 +245,11 @@ class Navigation extends Component {
         drawerBackgroundColor: "#545454",
         contentOptions: {
           inactiveBackgroundColor: "#494949",
-          activeBackgroundColor: "#494949",
-          margin: 20,
+          activeBackgroundColor: "#434343",
           labelStyle: {
             color: SECONDARY_COLOR,
-            alignItems: "center"
+            alignItems: "center",
+            margin: 20
           }
         }
       }
@@ -276,19 +285,20 @@ class Navigation extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    marginTop: Platform.OS === 'android' ? 24 : 0
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    marginTop: Platform.OS === "android" ? 24 : 0
   }
 });
-  
+
 /////////////////////////////////////////////////////////
 // Map redux reducers to component mapStateToProps
 function mapStateToProps({ prof }) {
   return {
     firstName: prof.firstName,
-    lastName: prof.lastName
+    lastName: prof.lastName,
+    profileImage: prof.profileImage
   };
 }
-  
+
 export default connect(mapStateToProps, actions)(Navigation);
