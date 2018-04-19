@@ -120,6 +120,7 @@ class Navigation extends Component {
       TrackDelivery: { screen: TrackDelivery },
       MessageScreen: { screen: MessageScreen },
       PlaceOrder: { screen: PlaceOrder },
+      PickedLocation: { screen: PickedLocation },
       PaymentScreen: { screen: PaymentScreen },
       PaymentConfirmationScreen: { screen: PaymentConfirmationScreen },
       ReceiptScreen: { screen: ReceiptScreen },

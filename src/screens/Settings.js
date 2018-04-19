@@ -60,11 +60,11 @@ class Settings extends Component {
             onPress={() => navigate("Settings")}
           />
 
-          {/* Blocke Users */}
+          {/* Blocked Users */}
           <Button
             buttonStyle={styles.buttonStyles}
             containerViewStyle={{ width: "100%" }}
-            title="Blocke Users"
+            title="Blocked Users"
             onPress={() => navigate("Settings")}
           />
 
