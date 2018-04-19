@@ -3,11 +3,13 @@ import firebase from "firebase";
 import {
   View,
   Text,
+  Button,
   ScrollView,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
+  Image
 } from "react-native";
-import { AppLoading, Asset } from "expo";
+import { AppLoading, Asset, ImagePicker } from "expo";
 import { Card, Icon, Avatar, Rating } from "react-native-elements";
 import { connect } from "react-redux";
 import { Spinner } from "../components/Spinner";
@@ -60,7 +62,8 @@ class Profile extends Component {
   });
 
   state = {
-    isReady: false
+    isReady: false,
+    ifViewing: false
   };
 
   componentWillMount() {
@@ -80,6 +83,14 @@ class Profile extends Component {
       .ref(`users/${currentUser.uid}/name_field/lastName`)
       .on("value", snapshot => {
         this.props.profileLastNameChange(snapshot.val());
+      });
+
+    // Load profile image into properties
+    firebase
+      .database()
+      .ref(`users/${currentUser.uid}/profile_image`)
+      .on("value", snapshot => {
+        this.props.profileImageChanged(snapshot.val());
       });
   }
 
@@ -112,9 +123,9 @@ class Profile extends Component {
             }}
           >
             <View style={{ marginTop: 10 }}>
-              <Avatar
-                source={require("../images/16683918_10103879001921065_4430688832052853506_n.jpg")}
-                xlarge
+              <Image
+                source={{ uri: this.props.profileImage }}
+                style={{ width: 180, height: 180, borderRadius: 90 }}
               />
             </View>
 
@@ -160,7 +171,7 @@ class Profile extends Component {
               </View>
             </View>
           </View>
-          <Card>
+          <Card style={{ card: { backgroundColor: "grey" } }}>
             <View style={{ flexDirection: "row" }}>
               <View style={{ marginLeft: 10, marginRight: 20 }}>
                 <Avatar
@@ -222,7 +233,8 @@ const styles = {
 function mapStateToProps({ prof }) {
   return {
     firstName: prof.firstName,
-    lastName: prof.lastName
+    lastName: prof.lastName,
+    profileImage: prof.profileImage
   };
 }
 

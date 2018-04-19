@@ -7,11 +7,13 @@
 import {
   FIRST_NAME_CHANGED,
   LAST_NAME_CHANGED,
-} from '../actions/types';
+  PROFILE_IMAGE_CHANGED
+} from "../actions/types";
 
 const INITIAL_STATE = {
   firstName: "",
-  lastName: ""
+  lastName: "",
+  profileImage: null
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -20,6 +22,8 @@ export default function(state = INITIAL_STATE, action) {
       return { ...state, firstName: action.payload };
     case LAST_NAME_CHANGED:
       return { ...state, lastName: action.payload };
+    case PROFILE_IMAGE_CHANGED:
+      return { ...state, profileImage: action.payload };
     default:
       return state;
   }
