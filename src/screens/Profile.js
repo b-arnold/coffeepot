@@ -85,13 +85,13 @@ class Profile extends Component {
         this.props.profileLastNameChange(snapshot.val());
       });
 
-    // Load profile image into properties
-    firebase
-      .database()
-      .ref(`users/${currentUser.uid}/profile_image`)
-      .on("value", snapshot => {
-        this.props.profileImageChanged(snapshot.val());
-      });
+    // // Load profile image into properties
+    // firebase
+    //   .database()
+    //   .ref(`users/${currentUser.uid}/profile_image`)
+    //   .on("value", snapshot => {
+    //     this.props.profileImageChanged(snapshot.val());
+    //   });
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -124,7 +124,7 @@ class Profile extends Component {
           >
             <View style={{ marginTop: 10 }}>
               <Image
-                source={{ uri: this.props.profileImage }}
+                // source={{ uri: this.props.profileImage }}
                 style={{ width: 180, height: 180, borderRadius: 90 }}
               />
             </View>

@@ -80,11 +80,11 @@ class CoffeePotCard extends Component {
       this.props.orderIDChange(deliverer.uid);
       this.props.navigate('OrderSelectionScreen');
     }
+    
 
     renderCard() {
         const cups = [];
-          //const { navigate } = this.props.navigation;
-        //console.log(this.props.coffeePots);
+
         for (var i = 0; i < this.state.drinks; i++) {
             cups.push(<Image key={i} source={require('../images/coffee_cup_symbol.png')}
                 style={{
@@ -96,8 +96,7 @@ class CoffeePotCard extends Component {
         }
         if (this.props.coffeePots !== null) {
           return this.props.coffeePots.map((coffeePots) => {
-            const { deliverer, locDetails, text } = coffeePots;
-
+            const { deliverer, locDetails, text, timer, orders } = coffeePots;
             if (locDetails.photoUrl !== undefined) {
               return (
                 <FlipCard
@@ -105,7 +104,7 @@ class CoffeePotCard extends Component {
                     flipHorizontal={true}
                     flipVertical={false}
                     alignHeight={true}
-                    key={coffeePots[locDetails.place_id]}
+                    key={deliverer.uid}
                 >
                     {/* Front side of the card */}
                     <View style={styles.face}>
@@ -194,6 +193,100 @@ class CoffeePotCard extends Component {
                     </View>
                 </FlipCard>
               );
+            } else {
+                return (
+                    <FlipCard
+                        style={{ borderWidth: 0 }}
+                        flipHorizontal={true}
+                        flipVertical={false}
+                        alignHeight={true}
+                        key={deliverer.uid}
+                    >
+                        {/* Front side of the card */}
+                        <View style={styles.face}>
+                             <Card>
+                                <View style={styles.view_card}>
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <View style={{ alignItems: 'center' }}>
+                                            <Image
+                                                source={require('../images/CoffeePot-Logo-Black-02.png')}
+                                                style={styles.image_style}
+                                            />
+                                        </View>
+                                        <View style={{ justifyContent: 'center' }}>
+                                            <TimerCountdown
+                                                initialSecondsRemaining={300000}
+                                                allowFontScaling={true}
+                                                style={styles.view_time}
+                                            />
+                                        </View>
+                                    </View>
+                                    <Button
+                                        title='Join'
+                                        buttonStyle={styles.button_style}
+                                        onPress={() => this.standardJoinPress(deliverer)}
+                                    />
+                                </View>
+                            </Card>
+                        </View>
+    
+                        {/* Back side of the card */}
+                        <View style={styles.back}>
+                            <Card>
+                                <View style={styles.view_card}>
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <View style={{ alignItems: 'center', marginRight: 5 }}>
+                                            <Text> No Image :(</Text>
+                                        </View>
+                                        <View style={{ justifyContent: 'center' }}>
+                                            <View style={{ padding: 5 }}>
+                                                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                                                    {locDetails.name}
+                                                </Text>
+                                            </View>
+                                            <View style={{ padding: 5 }}>
+                                                <Text style={{ fontSize: 15 }}>
+                                                    Distance: {text}
+                                                </Text>
+                                            </View>
+                                            <View style={{ marginTop: 5, marginLeft: 5 }}>
+                                                <Rating
+                                                    imageSize={15}
+                                                    readonly
+                                                    //starting value will equal all ratings together out of five
+                                                    startingValue={3}
+                                                    ratingBackgroundColor='transparent'
+                                                />
+                                            </View>
+                                        </View>
+                                    </View>
+    
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <View style={{ marginRight: 5, justifyContent: 'center' }}>
+                                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                                                Cups Joined:
+                                            </Text>
+                                        </View>
+                                        <View style={{
+                                            flexDirection:'row',
+                                        }}>
+                                            {cups.map(function(img,i){
+                                            return img;
+                                            })}
+                                        </View>
+                                    </View>
+                                    <View style={{ marginTop: 5 }}>
+                                        <Button
+                                            title='Join'
+                                            buttonStyle={styles.button_style}
+                                            onPress={() => this.standardJoinPress(deliverer)}
+                                        />
+                                    </View>
+                                </View>
+                            </Card>
+                        </View>
+                    </FlipCard>
+                  );
             }
           });
         }

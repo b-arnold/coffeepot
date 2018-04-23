@@ -11,6 +11,7 @@ import {
     REMOVE_MY_COFFEE_POT,
     RESET_COFFEE_STATE,
     LOAD_COFFEE_POT_DETAILS,
+    ORDER_ADDED
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -19,6 +20,7 @@ const INITIAL_STATE = {
     endTime: null,
     timerStarted: false,
     hasCoffeePot: false,
+    hasOrders: false,
     drinks: 0,
     countDown: 60000,
     coffeePots: null,
@@ -37,7 +39,7 @@ export default function (state = INITIAL_STATE, action) {
                 endTime: action.payload.endTime
             };
         case END_TIMER:
-            return { ...state, hasCoffeePot: false, timerStarted: false };
+            return { ...state, myCoffeePot: null, hasCoffeePot: false, timerStarted: false, hasOrders: false, drinks: 0 };
         case ADD_ORDER:
             return { ...state, drinks: action.payload };
         case UPDATE_COUNT_DOWN:
@@ -51,11 +53,13 @@ export default function (state = INITIAL_STATE, action) {
         case FETCH_MY_COFFEE_POT:
             return { ...state, myCoffeePot: action.payload};
         case REMOVE_MY_COFFEE_POT:
-            return { ...state, myCoffeePot: null, hasCoffeePot: false, timerStarted: false};
+            return { ...state, myCoffeePot: null, hasCoffeePot: false, timerStarted: false, hasOrders: false, drinks: 0};
         case LOAD_COFFEE_POT_DETAILS:
             return { ...state, selectedCoffeePot: action.payload };
         case UPDATE_TIME_LEFT:
             return { ...state, currTime: action.payload};
+        case ORDER_ADDED:
+            return { ...state, hasOrders: true }
         case RESET_COFFEE_STATE:
             return INITIAL_STATE;
         default:

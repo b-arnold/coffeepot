@@ -223,36 +223,12 @@ export const startTimer = (timer) => async dispatch => {
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// (WIP) same as remove at the moment
-export const endTimer = () => async dispatch => {
-    try {
-        const { currentUser } = firebase.auth();
-        const ref = firebase.database().ref();
-        const response = null;
-        console.log('-----endTimer-----')
-        
-        await ref.child('coffeePots').once('value', function(snapshot){
-            snapshot.forEach(function(child){
-                response = JSON.parse(JSON.stringify(child));
-                const uid = response.deliverer.uid;
-                if(currentUser.uid === uid) {
-                    console.log('removed ' + uid);
-                    ref.child(`coffeePots/${child.key}`).remove();
-                }
-            })
-        })
-        
-    } catch (err) {
-        console.err(err);
-    }
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-export const updateTimeLeft = (timeLeft) => async dispatch => {
+export const updateTimeLeft = (now, endTime) => async dispatch => {
     try {
-        if(timeLeft > 1000) {
+        if(now <= endTime) {
             const { currentUser } = firebase.auth();
             const ref = firebase.database().ref();
             let  key = '';
@@ -261,17 +237,32 @@ export const updateTimeLeft = (timeLeft) => async dispatch => {
                     const coffeePot = JSON.parse(JSON.stringify(child));
                     if(coffeePot.deliverer.uid === currentUser.uid) {
                         key = child.key
-                        firebase.database().ref(`/coffeePots/${key}/timer`).update({ currTime: timeLeft });
+                        firebase.database().ref(`/coffeePots/${key}/timer`).update({ currTime: now });
                     }
                 })
             })
 
-            dispatch({ type: UPDATE_TIME_LEFT, payload: timeLeft})
+            dispatch({ type: UPDATE_TIME_LEFT, payload: now})
         } else {
-            await endTimer();
+            const { currentUser } = firebase.auth();
+            const ref = firebase.database().ref();
+            const response = null;
+            console.log('-----endTimer-----')
+            
+            await ref.child('coffeePots').once('value', function(snapshot){
+                snapshot.forEach(function(child){
+                    response = JSON.parse(JSON.stringify(child));
+                    const uid = response.deliverer.uid;
+                    if(currentUser.uid === uid) {
+                        console.log('removed ' + uid);
+                        ref.child(`coffeePots/${child.key}`).remove();
+                    }
+                })
+            })
             dispatch({ type: END_TIMER })
         }
     } catch (err) {
         console.log(err);
     }
 }
+

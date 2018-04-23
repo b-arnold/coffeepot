@@ -1,6 +1,6 @@
 import { AppLoading, Asset } from 'expo';
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import { Icon, Rating } from 'react-native-elements';
 import TimerCountdown from 'react-native-timer-countdown';
 import axios from 'axios';
@@ -47,6 +47,7 @@ class HomeCoffeePot extends Component {
         firstScreen: true,
         secondScreen: false,
         thirdScreen: false,
+        startTimer: false
     }
 
   ///////////////////////////////////////////////////////////////////
@@ -68,9 +69,25 @@ class HomeCoffeePot extends Component {
         this.setState({ drinks: this.props.drinks })
     }
 
-    timerFinished() {
-        console.log('time done')
-        Alert.alert('Your Coffee Pot is finished!')
+    componentWillReceiveProps() {
+      const { timer, orders } = this.props.myCoffeePot;
+      console.log('-----componenetWillReceiveProps-----')
+      console.log(this.props.timerStarted)
+      console.log(orders);
+      
+      // if(this.props.timerStarted === false && this.props.hasOrders != false) {
+      //   this.props.startTimer(timer.length);
+      //   this.setState({
+      //     startTimer: true
+      //   })
+      // } else if (this.state.startTimer === true && this.props.timerStarted === false) {
+      //   this.setState({
+      //     startTimer: false
+      //   })
+      // }
+      if(orders != undefined && this.props.timerStarted != true) {
+        this.props.startTimer(timer.length)
+      }
     }
 
     renderNoCoffeePot() {
@@ -91,27 +108,28 @@ class HomeCoffeePot extends Component {
     }
     
     renderCoffeePotTimer() {
-        const { timer } = this.props.myCoffeePot;
+        const { timer, orders } = this.props.myCoffeePot;
         let timeLeft = this.props.endTime - this.props.currTime;
         const now = new Date().getTime();
+
         if(this.props.timerStarted === false) {
-            return (
-                <View style={styles.background}>
-                    <TouchableOpacity onPress={this.onFirstPress}> 
-                        <Image
-                            source={require('../images/CoffeePot-Logo-White-02.png')}
-                            style={{
-                                width: 250,
-                                height: 250,
-                            }}
-                        />
-                        <View style={{ alignItems: 'center' }}>
-                            <Text style = {{ color: 'white', fontSize: 20 }}>{timer.length}:00 (On Hold)</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            );
-        } else {
+          return (
+            <View style={styles.background}>
+                <TouchableOpacity onPress={this.onFirstPress}> 
+                    <Image
+                        source={require('../images/CoffeePot-Logo-White-02.png')}
+                        style={{
+                            width: 250,
+                            height: 250,
+                        }}
+                    />
+                    <View style={{ alignItems: 'center' }}>
+                        <Text style = {{ color: 'white', fontSize: 20 }}>{timer.length}:00 (On Hold)</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+          );
+        } else if(this.props.timerStarted === true && orders != undefined){
             return (
                 <View style={styles.background}>
                     <TouchableOpacity onPress={this.onFirstPress}> 
@@ -125,8 +143,7 @@ class HomeCoffeePot extends Component {
                         <View style={{ alignItems: 'center'}}>
                             <TimerCountdown
                                 initialSecondsRemaining={timeLeft}
-                                onTick={() => this.props.updateTimeLeft(now)}
-                                onTimeElapsed={() => this.timerFinished()}
+                                onTick={() => this.props.updateTimeLeft(now, this.props.endTime)}
                                 style={{ fontSize: 20, color: 'white' }}
                             />
                         </View>
@@ -307,6 +324,7 @@ function mapStateToProps({ coffee }) {
     }
     return {
         hasCoffeePot: coffee.hasCoffeePot,
+        hasOrders: coffee.hasOrders,
         drinks: coffee.drinks,
         myCoffeePot: coffee.myCoffeePot,
         timerStarted: coffee.timerStarted,

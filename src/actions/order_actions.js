@@ -5,7 +5,9 @@ import {
   ORDER_NAME_CHANGE,
   ORDER_INSTRUCTION_CHANGE,
   ORDER_ID_CHANGE,
-  NAME_FETCH_SUCCESS
+  NAME_FETCH_SUCCESS,
+  ORDER_ADDED,
+  FETCH_MY_COFFEE_POT
 } from "./types";
 
 export const orderIDChange = text => ({
@@ -23,11 +25,7 @@ export const drinkNameChange = text => ({
   payload: text
 });
 
-export const createOrder = (
-  drinkName,
-  specialInstructions,
-  orderID
-) => async dispatch => {
+export const createOrder = (drinkName, specialInstructions, orderID) => async dispatch => {
   try {
     const { currentUser } = firebase.auth();
     const ref = firebase.database().ref();
@@ -44,6 +42,27 @@ export const createOrder = (
         }
       });
     });
+    
+    dispatch({ type: ORDER_ADDED })
+
+    const response = { results: [] };
+    const myCoffeePot = null;
+    await ref.child('coffeePots').once('value', function(snapshot){
+        snapshot.forEach(function(child){
+           response.results.push(child);
+        })
+    })
+    for(const i = 0; i < response.results.length; i++) {
+        const coffeePot = JSON.parse(JSON.stringify(response.results[i]));
+        if(coffeePot.orders != undefined) {
+          console.log(coffeePot.orders.hasOwnProperty(currentUser.uid));
+          if(coffeePot.orders.hasOwnProperty(currentUser.uid)) {
+            myCoffeePot = JSON.parse(JSON.stringify(response.results[i]));
+          }
+        }
+    }
+    console.log(myCoffeePot);
+    dispatch({ type: FETCH_MY_COFFEE_POT, payload: myCoffeePot });
   } catch (err) {
     console.log(err);
   }

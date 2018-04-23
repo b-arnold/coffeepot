@@ -95,13 +95,13 @@ class HomeScreen extends Component {
         this.props.profileLastNameChange(snapshot.val());
       });
 
-    // Load profile image into properties
-    firebase
-      .database()
-      .ref(`users/${currentUser.uid}/profile_image`)
-      .on("value", snapshot => {
-        this.props.profileImageChanged(snapshot.val());
-      });
+    // // Load profile image into properties
+    // firebase
+    //   .database()
+    //   .ref(`users/${currentUser.uid}/profile_image`)
+    //   .on("value", snapshot => {
+    //     this.props.profileImageChanged(snapshot.val());
+    //   });
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -132,25 +132,25 @@ class HomeScreen extends Component {
     }
   }
 
-  renderStartTimerBttn() {
-    if (this.props.myCoffeePot != null) {
-      const { timer } = this.props.myCoffeePot;
-      return (
-        <Button
-          icon={{
-            name: "cross",
-            type: "entypo",
-            size: 30
-          }}
-          title="Start Timer(For Testing)"
-          buttonStyle={styles.button_style}
-          onPress={() => {
-            this.props.startTimer(timer.length);
-          }}
-        />
-      );
-    }
-  }
+  // renderStartTimerBttn() {
+  //   if (this.props.myCoffeePot != null) {
+  //     const { timer } = this.props.myCoffeePot;
+  //     return (
+  //       <Button
+  //         icon={{
+  //           name: "cross",
+  //           type: "entypo",
+  //           size: 30
+  //         }}
+  //         title="Start Timer(For Testing)"
+  //         buttonStyle={styles.button_style}
+  //         onPress={() => {
+  //           this.props.startTimer(timer.length);
+  //         }}
+  //       />
+  //     );
+  //   }
+  // }
 
   renderCoffeePot = () => {
     const { navigate } = this.props.navigation;
@@ -187,7 +187,7 @@ class HomeScreen extends Component {
               buttonStyle={styles.button_style}
               onPress={() => navigate("MessageScreen")}
             />
-            {this.renderStartTimerBttn()}
+            {/* {this.renderStartTimerBttn()} */}
             {this.renderRemoveBttn()}
           </View>
         </View>
