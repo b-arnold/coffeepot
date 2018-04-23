@@ -1,18 +1,11 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  Dimensions,
-  TextInput,
-  Picker,
-  ImageBackground,
-  TouchableOpacity
-} from "react-native";
-import { Button, Card } from "react-native-elements";
-import { orderUpdate, orderCreate, nameFetch } from "../actions";
+import { ImageBackground, View, KeyboardAvoidingView } from "react-native";
+import { Asset } from "expo";
+import { Icon, Button, FormInput } from "react-native-elements";
+
 import { connect } from "react-redux";
+
+import * as actions from "../actions";
 
 import {
   PRIMARY_COLOR,
@@ -20,87 +13,81 @@ import {
   BUTTON_COLOR
 } from "../constants/style";
 
-const window_width = Dimensions.get("window").width;
-
 ///////////////////////////////////////////////////////////////////
 //  Method taken from Expo documents
 function cacheImages(images) {
   return images.map(image => {
     if (typeof image === "string") {
-      return Image.prefetch(image);
-    } else {
-      return Asset.fromModule(image).downloadAsync();
+      return image.prefetch(image);
     }
+    return Asset.fromModule(image).downloadAsync();
   });
 }
 
-class PlaceOrder extends Component {
-  static navigationOptions = {
+class OrderSelectionScreen extends Component {
+  static navigationOptions = ({ navigation }) => ({
     title: "Place Order",
+    //Changes the color of the header
     headerStyle: {
-      backgroundColor: PRIMARY_COLOR
+      backgroundColor: PRIMARY_COLOR,
+      paddingRight: 10,
+      paddingLeft: 10
     },
+    //Changes the color of the Header Title
     headerTitleStyle: {
       color: SECONDARY_COLOR
     },
+    //Changes the color of the back button
     headerTintColor: SECONDARY_COLOR,
-    tabBarVisible: false
-  };
+    tabBarIcon: () => {
+      return <Icon name="grid" type="entypo" size={30} color="grey" />;
+    }
+  });
 
   state = {
-    name: `${this.props.firstName} ${this.props.lastName}`
-  };
+    region: {
+      latitude: '',
+      longitude: ''
+    },
+    index: 0
+  }
+
+
+  componentWillMount() {
+      this.setState({ drinks: 3 });
+      navigator.geolocation.getCurrentPosition((position) => {
+          // Changes the state of region to user's current location
+          this.setState({
+              region: {
+                  latitude: position.coords.latitude,
+                  longitude: position.coords.longitude,
+              }
+          });
+          //The action 'fetchPlaces' will search for places with the label 'cafe' with respect to the 'region' state (user's current position)
+          this.props.fetchCoffeePots(this.state.region);
+      },
+          (error) => console.log(new Date(), error),
+          { enableHighAccuracy: false, timeout: 10000, maximumAge: 3000 }
+      );
+  }
+
 
   ///////////////////////////////////////////////////////////////////
   //  Method taken from Expo documents
   async _loadAssetsAsync() {
     const imageAssets = cacheImages([
-      // require('../images/Profile_Pic.jpg'),
+      require("../images/CoffeePot-Logo-White-02.png"),
       require("../images/background.jpg")
     ]);
 
     await Promise.all([...imageAssets]);
   }
 
-  onButtonPress() {
-    const { navigate } = this.props.navigation;
-    // const {name, location, drink, time, cost, size} = this.props;
-    // const timeDateTemp = new Date();
-    // timeDate = timeDateTemp.toString();
-    // this.props.orderCreate({name: name || 'name', location: location || 'Starbucks, Azusa',
-    // drink: drink || 'drink', time: timeDate || '30180101:010101', cost: '$0.00', size: size || '8oz'});
-    navigate("PaymentScreen");
-  }
-
-  renderLocation() {
-    const { navigate } = this.props.navigation;
-    if (this.props.places !== null) {
-      console.log("PlaceOrder.js---------");
-      console.log(this.props.places);
-      return (
-        <TouchableOpacity
-          onPress={() => navigation.navigate("PickLocationList")}
-        >
-          <Card>
-            <View style={{ flexDirection: "row" }}>
-              <Text flex={1} onPress={() => navigate("OrderGPSMap")}>
-                Location: {this.props.location}
-              </Text>
-            </View>
-          </Card>
-        </TouchableOpacity>
-      );
-    }
-    return (
-      <Card>
-        <View style={{ flexDirection: "row" }}>
-          <Text flex={1} onPress={() => navigate("OrderGPSMap")}>
-            Tap To Select Location
-          </Text>
-        </View>
-      </Card>
-    );
-  }
+  standardPaymentPress = () => {
+    const { drinkName, specialInstructions } = this.props;
+    this.props.createStandAloneOrder(drinkName, specialInstructions, this.state.region);
+    this.props.navigation.navigate("PaymentScreen");
+  };
 
   render() {
     const { navigate } = this.props.navigation;
@@ -112,130 +99,59 @@ class PlaceOrder extends Component {
         }}
         source={require("../images/background.jpg")}
       >
-        <View>
-          <ScrollView>
-            <Card>
-              <View style={{ flexDirection: "row" }}>
-                <Text>Name: </Text>
-                <TextInput
-                  style={{ flex: 1 }}
-                  placeholder={this.state.name}
-                  value={this.state.name}
-                  onChangeText={name => this.setState({ name })}
-                />
-              </View>
-            </Card>
-            {this.renderLocation()}
-            <Card>
-              <View style={{ flexDirection: "column" }}>
-                <Text style={styles.title_style}>Order:{"\n"}</Text>
-                <Picker
-                  style={{ flex: 1 }}
-                  selectedValue={this.props.drink}
-                  onValueChange={value =>
-                    this.props.orderUpdate({ prop: "drink", value })
-                  }
-                >
-                  <Picker.Item label="Expresso" value="Expresso" />
-                  <Picker.Item label="Macchiato" value="Machhiato" />
-                  <Picker.Item label="Americano" value="Americano" />
-                  <Picker.Item label="Latte" value="Latte" />
-                  <Picker.Item label="Cappuccino" value="Cappuccino" />
-                  <Picker.Item label="Mocha" value="Mocha" />
-                  <Picker.Item label="Other" value="Other" />
-                </Picker>
+        <KeyboardAvoidingView>
+          <View style={{ marginBottom: 10, marginTop: 30 }}>
+            <FormInput
+              placeholder="Drink Name"
+              value={this.props.drinkName}
+              inputStyle={{ color: "black", left: 10, marginTop: 7 }}
+              onChangeText={text => this.props.drinkNameChange(text)}
+              containerStyle={{
+                backgroundColor: "white",
+                height: 50,
+                borderRadius: 7
+              }}
+            />
+            <View style={{ marginTop: 20 }}>
+              <FormInput
+                placeholder="Special Instructions"
+                value={this.props.specialInstructions}
+                inputStyle={{ color: "black", left: 10, marginTop: 7 }}
+                onChangeText={text =>
+                  this.props.specialInstructionsChange(text)
+                }
+                containerStyle={{
+                  backgroundColor: "white",
+                  height: 100,
+                  borderRadius: 7
+                }}
+              />
+            </View>
 
-                <Picker
-                  style={{ flex: 1 }}
-                  selectedValue={this.props.size}
-                  onValueChange={value =>
-                    this.props.orderUpdate({ prop: "size", value })
-                  }
-                >
-                  <Picker.Item label="8oz" value="8oz" />
-                  <Picker.Item label="12oz" value="12oz" />
-                  <Picker.Item label="20oz" value="20oz" />
-                  <Picker.Item label="24oz" value="24oz" />
-                  <Picker.Item label="31oz" value="31oz" />
-                </Picker>
-
-                <View style={styles.button_container}>
-                  <Text style={{ fontWeight: "bold" }}>
-                    Remove from Order{"\n"}
-                    {"\n"}
-                    {"\n"}
-                  </Text>
-                  <Button
-                    buttonStyle={styles.AddBttn_style}
-                    title="Add Order +"
-                    rounded
-                  />
-                </View>
-              </View>
-            </Card>
-            <Card>
-              <View style={styles.button_container}>
-                <Button
-                  buttonStyle={styles.bttn_style}
-                  title="Place Order"
-                  rounded
-                  onPress={this.onButtonPress.bind(this)}
-                />
-              </View>
-            </Card>
-          </ScrollView>
-        </View>
+            <View style={{ alignItems: "center", marginTop: 20 }}>
+              <Button
+                title="Payment Options"
+                onPress={this.standardPaymentPress}
+                rounded
+                buttonStyle={{
+                  backgroundColor: "#E55300",
+                  width: 270,
+                  borderRadius: 7
+                }}
+              />
+            </View>
+          </View>
+        </KeyboardAvoidingView>
       </ImageBackground>
     );
   }
 }
-const styles = {
-  mainContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1
-  },
-  addBttn_style: {
-    margin: 0,
-    width: 100,
-    backgroundColor: BUTTON_COLOR
-  },
-  bttn_style: {
-    margin: 0,
-    width: window_width - 75,
-    backgroundColor: BUTTON_COLOR
-  },
-  title_style: {
-    fontSize: 20,
-    fontWeight: "bold"
-  },
-  button_container: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center"
-  }
-};
 
-/////////////////////////////////////////////////////////
-// Map redux reducers to component mapStateToProps
-// function mapStateToProps({ places }) {
-//     return {
-//         places: places.selectedPlace
-//     };
-// }
-
-function mapStateToProps({ order, prof }) {
+function mapStateToProps({ order }) {
   return {
-    name: order.name,
-    location: order.location,
-    drink: order.drink,
-    firstName: prof.firstName,
-    lastName: prof.lastName
+    drinkName: order.drinkName,
+    specialInstructions: order.specialInstructions
   };
 }
 
-export default connect(mapStateToProps, {
-  orderUpdate,
-  orderCreate,
-  nameFetch
-})(PlaceOrder);
+export default connect(mapStateToProps, actions)(OrderSelectionScreen);

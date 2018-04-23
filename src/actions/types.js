@@ -22,6 +22,8 @@ export const ORDER_ID_CHANGE = "order_id_change";
 export const NAME_FETCH_SUCCESS = "name_fetch_success";
 export const ORDER_UPDATE = "order_update";
 export const RESET_ORDER_STATE = "reset_order_state";
+export const ORDER_RESET_FORUM = "order_reset_forum";
+
 
 // COFFEE POT TYPES
 export const START_TIMER = "start_timer";
