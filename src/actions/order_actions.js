@@ -5,7 +5,7 @@ import {
   ORDER_NAME_CHANGE,
   ORDER_INSTRUCTION_CHANGE,
   ORDER_ID_CHANGE,
-  NAME_FETCH_SUCCESS
+  ORDER_RESET_FORUM
 } from "./types";
 
 export const orderIDChange = text => ({
@@ -22,6 +22,20 @@ export const drinkNameChange = text => ({
   type: ORDER_NAME_CHANGE,
   payload: text
 });
+
+export const createStandAloneOrder = (drinkName, specialInstructions, region) => async dispatch => {
+  const time = Date.now();
+  try {
+    const { currentUser } = firebase.auth();
+    await firebase.database().ref(`/orders/${currentUser.uid}/`)
+      .set({ drinkName, specialInstructions, time, region })
+      .then(
+        dispatch({ type: ORDER_RESET_FORUM })
+      );
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const createOrder = (
   drinkName,
