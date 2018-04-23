@@ -52,6 +52,7 @@ export const createOrder = (drinkName, specialInstructions, orderID) => async di
            response.results.push(child);
         })
     })
+
     for(const i = 0; i < response.results.length; i++) {
         const coffeePot = JSON.parse(JSON.stringify(response.results[i]));
         if(coffeePot.orders != undefined) {
@@ -61,7 +62,7 @@ export const createOrder = (drinkName, specialInstructions, orderID) => async di
           }
         }
     }
-    console.log(myCoffeePot);
+    
     dispatch({ type: FETCH_MY_COFFEE_POT, payload: myCoffeePot });
   } catch (err) {
     console.log(err);

@@ -18,7 +18,9 @@ const INITIAL_STATE = {
     time: '',
     cost: '',
     size: '8oz',
-    card: ''
+    card: '',
+    existingOrders: null,
+    selectedOrder: null
 };
 
 export default (state = INITIAL_STATE, action) => {

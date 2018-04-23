@@ -34,7 +34,8 @@ export const createCoffeePot = (locDetails, length) => async dispatch => {
             length: length,
             endTime: '',
             startTime: '',
-            currTime: ''
+            currTime: '',
+            started: false
         }
         await firebase.database().ref(`/users/${currentUser.uid}/name_field`).once('value').then(function(snapshot) {
             deliverer = {name: snapshot.val(), uid: currentUser.uid};
@@ -207,7 +208,12 @@ export const startTimer = (timer) => async dispatch => {
                 const coffeePot = JSON.parse(JSON.stringify(child));
                 if(coffeePot.deliverer.uid === currentUser.uid) {
                     key = child.key;
-                    firebase.database().ref(`/coffeePots/${key}/timer`).update({ startTime, endTime, currTime });
+                    firebase.database().ref(`/coffeePots/${key}/timer`).update({
+                        startTime,
+                        endTime,
+                        currTime,
+                        started: true
+                    });
                 }
             })
         })
@@ -218,6 +224,26 @@ export const startTimer = (timer) => async dispatch => {
             endTime: endTime
         }
         dispatch({ type: START_TIMER, payload: time })
+
+        const response = { results: [] };
+        const myCoffeePot = null;
+        await ref.child('coffeePots').once('value', function(snapshot){
+            snapshot.forEach(function(child){
+            response.results.push(child);
+            })
+        })
+
+        for(const i = 0; i < response.results.length; i++) {
+            const coffeePot = JSON.parse(JSON.stringify(response.results[i]));
+            if(coffeePot.orders != undefined) {
+            console.log(coffeePot.orders.hasOwnProperty(currentUser.uid));
+            if(coffeePot.orders.hasOwnProperty(currentUser.uid)) {
+                myCoffeePot = JSON.parse(JSON.stringify(response.results[i]));
+            }
+            }
+        }
+        
+        dispatch({ type: FETCH_MY_COFFEE_POT, payload: myCoffeePot });
     } catch (err) {
         console.err(err);
     }

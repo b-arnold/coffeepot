@@ -62,33 +62,23 @@ class HomeCoffeePot extends Component {
     await Promise.all([...imageAssets]);
   }
 
-    componentWillMount() {
-        // Sets state to start Coffee Pot for 10 minutes
-        const { currentUser } = firebase.auth();
-        this.props.fetchMyCoffeePot(currentUser.uid);
-        this.setState({ drinks: this.props.drinks })
-    }
+  ///////////////////////////////////////////////////////////////////
+  // Will fetch the coffee pot that the current user is part of 
+  componentWillMount() {
+      // Sets state to start Coffee Pot for 10 minutes
+      const { currentUser } = firebase.auth();
+      this.props.fetchMyCoffeePot(currentUser.uid);
+      this.setState({ drinks: this.props.drinks })
+  }
 
-    componentWillReceiveProps() {
-      const { timer, orders } = this.props.myCoffeePot;
-      console.log('-----componenetWillReceiveProps-----')
-      console.log(this.props.timerStarted)
-      console.log(orders);
-      
-      // if(this.props.timerStarted === false && this.props.hasOrders != false) {
-      //   this.props.startTimer(timer.length);
-      //   this.setState({
-      //     startTimer: true
-      //   })
-      // } else if (this.state.startTimer === true && this.props.timerStarted === false) {
-      //   this.setState({
-      //     startTimer: false
-      //   })
-      // }
-      if(orders != undefined && this.props.timerStarted != true) {
-        this.props.startTimer(timer.length)
-      }
+  ///////////////////////////////////////////////////////////////////
+  // Will start the timer when an order has been added
+  componentWillReceiveProps() {
+    const { timer, orders } = this.props.myCoffeePot;
+    if(orders != undefined && timer.started != true) {
+      this.props.startTimer(timer.length)
     }
+  }
 
     renderNoCoffeePot() {
         return (
@@ -112,7 +102,7 @@ class HomeCoffeePot extends Component {
         let timeLeft = this.props.endTime - this.props.currTime;
         const now = new Date().getTime();
 
-        if(this.props.timerStarted === false) {
+        if(timer.started === false) {
           return (
             <View style={styles.background}>
                 <TouchableOpacity onPress={this.onFirstPress}> 
@@ -129,7 +119,7 @@ class HomeCoffeePot extends Component {
                 </TouchableOpacity>
             </View>
           );
-        } else if(this.props.timerStarted === true && orders != undefined){
+        } else if(timer.started === true && orders != undefined){
             return (
                 <View style={styles.background}>
                     <TouchableOpacity onPress={this.onFirstPress}> 
@@ -322,6 +312,7 @@ function mapStateToProps({ coffee }) {
     if(coffee.myCoffeePot === null) {
         return { myCoffeePot: null, timerStarted: coffee.timerStarted}
     }
+
     return {
         hasCoffeePot: coffee.hasCoffeePot,
         hasOrders: coffee.hasOrders,

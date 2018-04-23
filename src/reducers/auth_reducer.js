@@ -11,7 +11,7 @@ import {
   AUTH_USER_ATTEMPT,
   AUTH_USER_FAIL,
   AUTH_USER_SUCCESS,
-  RESET_APP_STATE,
+  RESET_AUTH_STATE,
   FIRST_NAME_CHANGE,
   LAST_NAME_CHANGE,
   AUTH_SIGNOUT_USER,
@@ -61,7 +61,7 @@ export default function(state = INITIAL_STATE, action) {
       return { ...state, ...INITIAL_STATE, user: action.payload };
     case ADD_NAME_SUCCESS:
       return { ...state, ...INITIAL_STATE };
-    case RESET_APP_STATE:
+    case RESET_AUTH_STATE:
       return INITIAL_STATE;
     case FACEBOOK_LOGIN_SUCCESS:
       return { token: action.payload };
