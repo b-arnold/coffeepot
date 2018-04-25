@@ -5,13 +5,7 @@ import {
   ORDER_NAME_CHANGE,
   ORDER_INSTRUCTION_CHANGE,
   ORDER_ID_CHANGE,
-<<<<<<< HEAD
-  NAME_FETCH_SUCCESS,
-  ORDER_ADDED,
-  FETCH_MY_COFFEE_POT
-=======
   ORDER_RESET_FORUM
->>>>>>> dev
 } from "./types";
 
 export const orderIDChange = text => ({
@@ -29,9 +23,6 @@ export const drinkNameChange = text => ({
   payload: text
 });
 
-<<<<<<< HEAD
-export const createOrder = (drinkName, specialInstructions, orderID) => async dispatch => {
-=======
 export const createStandAloneOrder = (drinkName, specialInstructions, region) => async dispatch => {
   const time = Date.now();
   try {
@@ -46,12 +37,7 @@ export const createStandAloneOrder = (drinkName, specialInstructions, region) =>
   }
 };
 
-export const createOrder = (
-  drinkName,
-  specialInstructions,
-  orderID
-) => async dispatch => {
->>>>>>> dev
+export const createOrder = (drinkName, specialInstructions, orderID) => async dispatch => {
   try {
     const { currentUser } = firebase.auth();
     const ref = firebase.database().ref();
