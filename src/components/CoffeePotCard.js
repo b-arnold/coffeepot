@@ -190,6 +190,7 @@ class CoffeePotCard extends Component {
                                     <Button
                                         title='Join'
                                         buttonStyle={styles.button_style}
+                                        onPress={() => this.standardJoinPress(deliverer)}
                                     />
                                 </View>
                             </View>
