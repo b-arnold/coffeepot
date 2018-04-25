@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
   Image
 } from "react-native";
-import { AppLoading, Asset, ImagePicker } from "expo";
+import { AppLoading, Asset, Constants, ImagePicker } from "expo";
 import {
   Card,
   Icon,
@@ -19,6 +19,7 @@ import {
   Button
 } from "react-native-elements";
 import { connect } from "react-redux";
+import uuid from "uuid";
 import { Spinner } from "../components/Spinner";
 
 import * as actions from "../actions";
@@ -45,7 +46,8 @@ class EditProfile extends Component {
   state = {
     isReady: false,
     firstName: "",
-    lastName: ""
+    lastName: "",
+    image: null
   };
 
   componentWillMount() {
@@ -78,8 +80,8 @@ class EditProfile extends Component {
 
   /////////////////////////////////////////////////////////
   // call action when first name is changed
-  onImageChange = uri => {
-    this.props.setProfileImage(uri);
+  onImageChange = url => {
+    this.props.setProfileImage(url);
   };
 
   _pickImage = async () => {
@@ -91,8 +93,10 @@ class EditProfile extends Component {
     console.log(result);
 
     if (!result.cancelled) {
-      //this.setState({ image: result.uri });
-      this.onImageChange(result.uri);
+      uploadURL = await uploadImageAsync(result.uri);
+
+      this.setState({ image: uploadURL });
+      this.onImageChange(this.state.image);
     }
   };
 
@@ -193,6 +197,20 @@ const styles = {
     borderRadius: 5,
     margin: 10
   }
+};
+
+uploadImageAsync = async uri => {
+  const { currentUser } = firebase.auth();
+
+  const response = await fetch(uri);
+  const blob = await response.blob();
+  const ref = firebase
+    .storage()
+    .ref(`users/${currentUser.uid}/profile_image`)
+    .child(uuid.v4());
+
+  const snapshot = await ref.put(blob);
+  return snapshot.downloadURL;
 };
 
 /////////////////////////////////////////////////////////

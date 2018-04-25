@@ -4,7 +4,8 @@ import {
     ORDER_NAME_CHANGE,
     ORDER_INSTRUCTION_CHANGE,
     ORDER_ID_CHANGE,
-    ORDER_UPDATE
+    ORDER_UPDATE,
+    ORDER_RESET_FORUM
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -14,7 +15,7 @@ const INITIAL_STATE = {
     drinkName: '',
     specialInstructions: '',
     orderID: '',
-    drink: 'Expresso',
+    drink: '',
     time: '',
     cost: '',
     size: '8oz',
@@ -36,7 +37,9 @@ export default (state = INITIAL_STATE, action) => {
         case ORDER_ID_CHANGE:
             return { ...state, orderID: action.payload };
         case ORDER_UPDATE:
-            return { ...state }
+            return { ...state };
+        case ORDER_RESET_FORUM:
+            return { ...state, drinkName: '', specialInstructions: '' };
         default:
             return state;
     }
