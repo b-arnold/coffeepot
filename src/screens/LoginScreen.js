@@ -56,7 +56,7 @@ class LoginScreen extends Component {
     // Listen for authentication state to change
     firebase.auth().onAuthStateChanged(user => {
       this.props.loading = false;
-      this.setState({ showLoading: this.props.loading });
+      this.setState({ showLoading: !this.props.loading });
 
       if (user) {
         this.props.navigation.navigate("Homeapp");

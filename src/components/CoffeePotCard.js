@@ -105,7 +105,7 @@ class CoffeePotCard extends Component {
                     flipHorizontal={true}
                     flipVertical={false}
                     alignHeight={true}
-                    key={coffeePots[locDetails.place_id]}
+                    key={deliverer.uid}
                 >
                     {/* Front side of the card */}
                     <View style={styles.face}>
@@ -187,6 +187,7 @@ class CoffeePotCard extends Component {
                                     <Button
                                         title='Join'
                                         buttonStyle={styles.button_style}
+                                        onPress={() => this.standardJoinPress(deliverer)}
                                     />
                                 </View>
                             </View>
