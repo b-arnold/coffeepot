@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  Modal,
-  TouchableWithoutFeedback
+  View, Text, ScrollView, Image, Modal,
+  TouchableWithoutFeedback, ImageBackground
 } from "react-native";
 import { Button, Icon, Card } from "react-native-elements";
 import { connect } from "react-redux";
@@ -50,14 +46,7 @@ class PickedLocation extends Component {
   ///////////////////////////////////////////////////////////////////////////////
   // Called in the mian render method, and will show when the state for modal is 'true'
   renderModal() {
-    const {
-      location,
-      name,
-      photos,
-      place_id,
-      distance,
-      geometry
-    } = this.props.places;
+    const { location, name, photos, place_id, distance, geometry} = this.props.places;
     const resetAction = NavigationActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName: "DeliverScreen" })]
@@ -76,6 +65,7 @@ class PickedLocation extends Component {
         photoUrl: photoUrl,
         geometry: geometry
       };
+
       return (
         <Modal
           visible={this.state.modalVisible}
@@ -107,7 +97,7 @@ class PickedLocation extends Component {
                   containerStyle={{ height: 220 }}
                 >
                   <View style={styles.description}>
-                    <Text style={styles.bold}>{name}</Text>
+                    <Text style={{ fontWeight: 'bold' }}>{name}</Text>
                     <View style={styles.view_text}>
                       <Text>{location}</Text>
                       <Text>{distance.text} away</Text>
@@ -229,51 +219,67 @@ class PickedLocation extends Component {
           photos[0].photo_reference
         );
         return (
-          <View style={styles.container}>
-            <Image source={{ uri: photoUrl }} style={styles.image_style} />
-            <Text style={{ fontWeight: "bold" }}>{name}</Text>
+          <ImageBackground
+            style={{
+              width: "100%",
+              height: "100%"
+            }}
+            source={require("../images/background.jpg")}
+          >
+            <View style={styles.container}>
+              <Image source={{ uri: photoUrl }} style={styles.image_style} />
+              <Text style={styles.bold}>{name}</Text>
 
-            <Text>{location}</Text>
-            <Text>{distance.text}</Text>
-            <Button
-              iconLeft={{
-                name: "plus-circle",
-                type: "material-community",
-                size: 25
-              }}
-              title="Create Coffee Pot"
-              buttonStyle={{ backgroundColor: BUTTON_COLOR, width: 200 }}
-              onPress={() => {
-                this.setModalVisible(true);
-              }}
-            />
-            {this.renderModal()}
-          </View>
+              <Text style={styles.text_style}>{location}</Text>
+              <Text style={styles.text_style}>{distance.text}</Text>
+              <Button
+                iconLeft={{
+                  name: "plus-circle",
+                  type: "material-community",
+                  size: 25
+                }}
+                title="Create Coffee Pot"
+                buttonStyle={{ backgroundColor: BUTTON_COLOR, width: 200 }}
+                onPress={() => {
+                  this.setModalVisible(true);
+                }}
+              />
+              {this.renderModal()}
+            </View>
+          </ImageBackground>
         );
       }
     }
     //--------------------If no photo is available-----------------------------
     return (
-      <View style={styles.container}>
-        <Text>No Photo For This Location</Text>
-        <Text style={{ fontWeight: "bold" }}>{name}</Text>
+      <ImageBackground
+        style={{
+          width: "100%",
+          height: "100%"
+        }}
+        source={require("../images/background.jpg")}
+      >
+        <View style={styles.container}>
+          <Text>No Photo For This Location</Text>
+          <Text style={{ fontWeight: "bold" }}>{name}</Text>
 
-        <Text>{location}</Text>
+          <Text style={styles.text_style}>{location}</Text>
 
-        <Button
-          iconLeft={{
-            name: "plus-circle",
-            type: "material-community",
-            size: 25
-          }}
-          title="Create Coffee Pot"
-          buttonStyle={{ backgroundColor: BUTTON_COLOR, width: 200 }}
-          onPress={() => {
-            this.setModalVisible(true);
-          }}
-        />
-        {this.renderModal()}
-      </View>
+          <Button
+            iconLeft={{
+              name: "plus-circle",
+              type: "material-community",
+              size: 25
+            }}
+            title="Create Coffee Pot"
+            buttonStyle={{ backgroundColor: BUTTON_COLOR, width: 200 }}
+            onPress={() => {
+              this.setModalVisible(true);
+            }}
+          />
+          {this.renderModal()}
+        </View>
+      </ImageBackground>
     );
   }
 }
@@ -294,6 +300,11 @@ const styles = {
     flexDirection: "column",
     justifyContent: "space-between"
   },
+  text_style: {
+    color: "white",
+    fontSize: 20,
+    backgroundColor: 'rgba(0,0,0,0)'
+  },
   button_style: {
     backgroundColor: BUTTON_COLOR,
     marginTop: 10,
@@ -306,10 +317,16 @@ const styles = {
   image_style: {
     margin: 10,
     width: 350,
-    height: 250
+    height: 250,
+    borderWidth: 5,
+    borderColor: 'white',
+    margin: 10
   },
   bold: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontSize: 20,
+    color: "white",
+    backgroundColor: 'rgba(0,0,0,0)'
   }
 };
 

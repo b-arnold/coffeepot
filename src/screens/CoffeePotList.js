@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ImageBackground, View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { ImageBackground, View, Text, ScrollView, TouchableOpacity, RefreshControl } from 'react-native';
 import { AppLoading, Asset } from 'expo';
 import { Button, Card, Icon, Avatar, Rating } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -76,7 +76,8 @@ class CoffeePotList extends Component {
         region: {
           latitude: '',
           longitude: ''
-        }
+        },
+        refreshing: false
       };
       this.getPlaceId = this.getPlaceId.bind(this);
     }
@@ -109,6 +110,14 @@ class CoffeePotList extends Component {
       );
     }
 
+    onRefresh() {
+        this.setState({ refreshing: true });
+        this.props.fetchCoffeePots(this.state.region).then(() => {
+            this.setState({refreshing: false});
+        })
+
+    }
+
     getPlaceId(placeID) {
       this.setState({
         keyId: placeID
@@ -128,14 +137,22 @@ class CoffeePotList extends Component {
                   }}
                   source={require('../images/background.jpg')}
               >
-                  <ScrollView>
-                    <View>
-                      <CoffeePotCard
-                          key={this.state.keyId}
-                          getPlaceId={this.getPlaceId}
-                          navigate={navigate}
-                      />
-                    </View>
+                  <ScrollView
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={this.onRefresh.bind(this)}
+                            title='Refresh List'
+                            titleColor='white'
+                            tintColor='white'
+                        />
+                    }
+                  >
+                    <CoffeePotCard
+                        key={this.state.keyId}
+                        getPlaceId={this.getPlaceId}
+                        navigate={navigate}
+                    />
                   </ScrollView>
               </ImageBackground>
           );

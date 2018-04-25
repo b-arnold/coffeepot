@@ -135,7 +135,6 @@ class GPSMap extends Component {
             <View style = {styles.container}>
                 <MapView
                     style={styles.map}
-                    mapType='hybrid'
                     initialRegion={{
                         latitude: this.state.region.latitude,
                         longitude: this.state.region.longitude,

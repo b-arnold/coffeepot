@@ -1,13 +1,10 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  ActivityIndicator
+  View, Text, ScrollView,
+  Image, ImageBackground,
+  TouchableOpacity, ActivityIndicator,
+  RefreshControl
 } from "react-native";
 import { Button, Icon, Card } from "react-native-elements";
 import { connect } from "react-redux";
@@ -69,7 +66,7 @@ class PickLocationList extends Component {
   ///////////////////////////////////////////////////////////////////////////////
   // Defining The State
   //The 'region' state object will contain latitude and longitude of the user
-  state = { region: {} };
+  state = { region: {}, refreshing: false };
 
   ///////////////////////////////////////////////////////////////////////////////
   // Before anything is loaded, this will set the region to the user's current position
@@ -92,21 +89,21 @@ class PickLocationList extends Component {
     );
   }
 
+  onRefresh() {
+    this.setState({ refreshing: true });
+    this.props.fetchPlaces(this.state.region).then(() => {
+        this.setState({refreshing: false});
+    })
+
+}
+
   ///////////////////////////////////////////////////////////////////////////////
   // This method renders cards depending on the information it was able to successfully receive
   renderCards() {
     if (this.props.places !== null) {
       // Maps the array of objects to get the specified fields
       return this.props.places.map(places => {
-        const {
-          geometry,
-          place_id,
-          name,
-          vicinity,
-          photos,
-          distance,
-          duration
-        } = places;
+        const { geometry, place_id, name, vicinity, photos, distance, duration } = places;
         if (photos !== undefined) {
           const photoUrl = urlBuilder.buildPlacesPhotoUrl(
             photos[0].photo_reference
@@ -115,14 +112,7 @@ class PickLocationList extends Component {
             <TouchableOpacity
               key={place_id}
               onPress={() => {
-                this.props.loadPlaceDetails(
-                  name,
-                  vicinity,
-                  place_id,
-                  photos,
-                  distance,
-                  geometry
-                );
+                this.props.loadPlaceDetails(name, vicinity, place_id, photos, distance, geometry);
                 this.props.navigation.navigate("PickedLocation", {
                   headerTitle: name
                 });
@@ -147,14 +137,7 @@ class PickLocationList extends Component {
           <TouchableOpacity
             key={place_id}
             onPress={() => {
-              this.props.loadPlaceDetails(
-                name,
-                vicinity,
-                place_id,
-                photos,
-                distance,
-                geometry
-              );
+              this.props.loadPlaceDetails(name, vicinity,  place_id, photos, distance, geometry);
               this.props.navigation.navigate("PickedLocation", {
                 headerTitle: name
               });
@@ -191,7 +174,17 @@ class PickLocationList extends Component {
           }}
           source={require("../images/background.jpg")}
         >
-          <ScrollView>{this.renderCards()}</ScrollView>
+          <ScrollView
+            refreshControl={
+              <RefreshControl
+                  refreshing={this.state.refreshing}
+                  onRefresh={this.onRefresh.bind(this)}
+                  title='Refresh List'
+                  titleColor='white'
+                  tintColor='white'
+              />
+            }
+          >{this.renderCards()}</ScrollView>
         </ImageBackground>
       );
     }

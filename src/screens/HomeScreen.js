@@ -115,42 +115,45 @@ class HomeScreen extends Component {
     await Promise.all([...imageAssets]);
   }
 
-  renderRemoveBttn() {
+  renderBttns() {
+    const { navigate } = this.props.navigation;
     if (this.props.myCoffeePot != null) {
       return (
-        <Button
-          icon={{
-            name: "cross",
-            type: "entypo",
-            size: 30
-          }}
-          title="Cancel Coffee Pot"
-          buttonStyle={styles.button_style}
-          onPress={() => this.props.removeMyCoffeePot()}
-        />
+        <View>
+          <Button
+            icon={{
+              name: "ios-navigate",
+              type: "ionicon",
+              size: 30
+            }}
+            title="Track Delivery"
+            buttonStyle={styles.button_style}
+            onPress={() => navigate("TrackDelivery")}
+          />
+          <Button
+            icon={{
+              name: "message",
+              type: "entypo",
+              size: 30
+            }}
+            title="Message Deliverer"
+            buttonStyle={styles.button_style}
+            onPress={() => navigate("MessageScreen")}
+          />
+          <Button
+            icon={{
+              name: "cross",
+              type: "entypo",
+              size: 30
+            }}
+            title="Cancel Coffee Pot"
+            buttonStyle={styles.button_style}
+            onPress={() => this.props.removeMyCoffeePot()}
+          />
+        </View>
       );
     }
   }
-
-  // renderStartTimerBttn() {
-  //   if (this.props.myCoffeePot != null) {
-  //     const { timer } = this.props.myCoffeePot;
-  //     return (
-  //       <Button
-  //         icon={{
-  //           name: "cross",
-  //           type: "entypo",
-  //           size: 30
-  //         }}
-  //         title="Start Timer(For Testing)"
-  //         buttonStyle={styles.button_style}
-  //         onPress={() => {
-  //           this.props.startTimer(timer.length);
-  //         }}
-  //       />
-  //     );
-  //   }
-  // }
 
   renderCoffeePot = () => {
     const { navigate } = this.props.navigation;
@@ -167,28 +170,7 @@ class HomeScreen extends Component {
             <HomeCoffeePot startTimer={this.state.startTimer} />
           </View>
           <View style={{ flex: 3, justifyContent: "center" }}>
-            <Button
-              icon={{
-                name: "ios-navigate",
-                type: "ionicon",
-                size: 30
-              }}
-              title="Track Delivery"
-              buttonStyle={styles.button_style}
-              onPress={() => navigate("TrackDelivery")}
-            />
-            <Button
-              icon={{
-                name: "message",
-                type: "entypo",
-                size: 30
-              }}
-              title="Message Deliverer"
-              buttonStyle={styles.button_style}
-              onPress={() => navigate("MessageScreen")}
-            />
-            {/* {this.renderStartTimerBttn()} */}
-            {this.renderRemoveBttn()}
+            {this.renderBttns()}
           </View>
         </View>
       </ImageBackground>

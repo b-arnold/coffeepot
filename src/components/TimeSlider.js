@@ -28,7 +28,7 @@ class TimeSlider extends Component {
         const { timeSelected } = this.state;
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>{String(timeSelected)} Minutes</Text>
+                <Text style={styles.selectedText}>Selected Timer: {this.state.timeSelected} Minutes</Text>
                 <Slider
                     step={1}
                     maximumValue={20}
@@ -39,7 +39,6 @@ class TimeSlider extends Component {
                     trackStyle={styles.track}
                     minimumTrackTintColor={BUTTON_COLOR}
                 />
-                <Text style={styles.selectedText}>Selected Timer: {this.state.timeSelected} Minutes</Text>
             </View>
         )
     }

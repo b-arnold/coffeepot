@@ -9,6 +9,10 @@ import * as actions from '../actions';
 import { PRIMARY_COLOR, SECONDARY_COLOR, BUTTON_COLOR } from '../constants/style';
 
 class CoffeePotModal extends Component {
+    standardJoinPress = (deliverer) => {
+        this.props.orderIDChange(deliverer.uid);
+        this.props.navigate('OrderSelectionScreen');
+      }
     renderCard() {
         const { deliverer, locDetails, distance } = this.props.selectedCoffeePot;
         if(locDetails.photoUrl !== undefined && locDetails.photoUrl !== null) {
@@ -56,6 +60,7 @@ class CoffeePotModal extends Component {
     }
 
     renderBttn() {
+        const { deliverer } = this.props.selectedCoffeePot;
         return(
             <View style={styles.bttn_view_style}>
                 <Button
@@ -63,6 +68,7 @@ class CoffeePotModal extends Component {
                     buttonStyle={styles.button_style}
                     raised
                     onPress={() => {
+                        this.standardJoinPress(deliverer)
                         this.props.setModalVisible(false);
                     }}
                 />

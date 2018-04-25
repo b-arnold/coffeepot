@@ -26,8 +26,6 @@ function cacheImages(images) {
     });
 }
 
-
-
 class CoffeePotCard extends Component {
     state = {
         drinks: null,
@@ -38,7 +36,6 @@ class CoffeePotCard extends Component {
         },
         index: 0
     }
-
 
     componentWillMount() {
         this.setState({ drinks: 3 });
@@ -104,6 +101,8 @@ class CoffeePotCard extends Component {
                     flipHorizontal={true}
                     flipVertical={false}
                     alignHeight={true}
+                    alignWidth={true}
+                    perspective={1000}
                     key={deliverer.uid}
                 >
                     {/* Front side of the card */}
@@ -113,16 +112,21 @@ class CoffeePotCard extends Component {
                                 <View style={{ flexDirection: 'row' }}>
                                     <View style={{ alignItems: 'center' }}>
                                         <Image
-                                            source={require('../images/CoffeePot-Logo-Black-02.png')}
+                                            source={{ url: locDetails.photoUrl }}
                                             style={styles.image_style}
                                         />
                                     </View>
                                     <View style={{ justifyContent: 'center' }}>
+                                        <View style={styles.content}>
+                                            <Text style={styles.bold}>Deliverer: </Text>
+                                            <Text>{deliverer.name.firstName} {deliverer.name.lastName}</Text>
+                                        </View>
                                         <TimerCountdown
                                             initialSecondsRemaining={300000}
                                             allowFontScaling={true}
                                             style={styles.view_time}
                                         />
+                                        <Text>Tap Card To View More</Text>
                                     </View>
                                 </View>
                                 <Button
@@ -200,6 +204,8 @@ class CoffeePotCard extends Component {
                         flipHorizontal={true}
                         flipVertical={false}
                         alignHeight={true}
+                        alignWidth={true}
+                        perspective={1000}
                         key={deliverer.uid}
                     >
                         {/* Front side of the card */}
@@ -214,11 +220,16 @@ class CoffeePotCard extends Component {
                                             />
                                         </View>
                                         <View style={{ justifyContent: 'center' }}>
+                                            <View style={styles.content}>
+                                                <Text style={styles.bold}>Deliverer: </Text>
+                                                <Text>{deliverer.name.firstName} {deliverer.name.lastName}</Text>
+                                            </View>
                                             <TimerCountdown
                                                 initialSecondsRemaining={300000}
                                                 allowFontScaling={true}
                                                 style={styles.view_time}
                                             />
+                                            <Text>Tap Card To View More</Text>
                                         </View>
                                     </View>
                                     <Button
@@ -236,7 +247,7 @@ class CoffeePotCard extends Component {
                                 <View style={styles.view_card}>
                                     <View style={{ flexDirection: 'row' }}>
                                         <View style={{ alignItems: 'center', marginRight: 5 }}>
-                                            <Text> No Image :(</Text>
+                                            <Text> No Image Available</Text>
                                         </View>
                                         <View style={{ justifyContent: 'center' }}>
                                             <View style={{ padding: 5 }}>
@@ -339,9 +350,16 @@ const styles = {
         borderRadius: 5
     },
     image_style: {
-        height: 165,
-        width: 165
-    }
+        height: 150,
+        width: 150,
+        margin: 10
+    },
+    bold: {
+        fontWeight: 'bold'
+    },
+    content: {
+        flexDirection: 'row'
+    },
 };
 function mapStateToProps({ coffee, order }) {
   if (coffee.coffeePots === null) {

@@ -258,6 +258,7 @@ class CoffeePotGPS extends Component {
                     <CoffeePotModal
                         modalVisible = {this.state.modalVisible}
                         setModalVisible = {this.setModalVisible} 
+                        navigate={navigate}
                     />
                 </View>
 
