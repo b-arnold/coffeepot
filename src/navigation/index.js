@@ -211,10 +211,10 @@ class Navigation extends Component {
             marginTop: 30
           }}
         >
-          {/* <Image
+          <Image
             source={{ uri: this.props.profileImage }}
             style={{ width: 150, height: 150, borderRadius: 75 }}
-          /> */}
+          />
           <Text
             style={{
               marginTop: 10,
