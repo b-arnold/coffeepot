@@ -55,11 +55,25 @@ class CoffeePotCard extends Component {
         );
     }
 
-    ComponentWillReceiveNextProps(nextProps) {
-      if (nextProps !== this.props.data) {
-        this.setSate({ index: 0 });
-      }
-    }
+    // containsOrders(coffeePots) {
+    //     for(const i = 0; i < coffeePots.length; i++) {
+    //         if(coffeePots[i].orders != undefined) {
+    //             this.props.startTimer(timer.length)
+    //         }
+    //     }
+    // }
+
+    // componentWillReceiveProps(nextProps) {
+    //     // console.log('-----this.props.coffeePots-----')
+    //     // console.log(this.props.coffeePots);
+    //     // console.log('-----nextProps.coffeePots-----')
+    //     // console.log(nextProps.coffeePots);
+    //     if(JSON.stringify(this.props.coffeePots) === JSON.stringify(nextProps.coffeePots)) {
+    //         console.log(true);
+    //     } else {
+    //         console.log(false)
+    //     }
+    // }
 
     ///////////////////////////////////////////////////////////////////
     //  Method taken from Expo documents
@@ -121,11 +135,7 @@ class CoffeePotCard extends Component {
                                             <Text style={styles.bold}>Deliverer: </Text>
                                             <Text>{deliverer.name.firstName} {deliverer.name.lastName}</Text>
                                         </View>
-                                        <TimerCountdown
-                                            initialSecondsRemaining={300000}
-                                            allowFontScaling={true}
-                                            style={styles.view_time}
-                                        />
+                                        <Text style={styles.view_time}>{timer.length}:00 (On Hold)</Text>
                                         <Text>Tap Card To View More</Text>
                                     </View>
                                 </View>
@@ -343,7 +353,7 @@ const styles = {
         fontWeight: 'bold',
         textAlign: 'center',
         margin: 5,
-        fontSize: 40
+        fontSize: 23
     },
     button_style: {
         backgroundColor: BUTTON_COLOR,

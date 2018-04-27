@@ -79,23 +79,6 @@ class HomeCoffeePot extends Component {
       this.props.startTimer(timer.length)
     }
   }
-
-    renderNoCoffeePot() {
-        return (
-            <View style={styles.background}>
-                    <View style={{alignItems: 'center' }}>
-                        <Image
-                            source={require('../images/CoffeePot-Logo-White-02.png')}
-                            style={{
-                                width: 250,
-                                height: 250,
-                            }}
-                        />
-                        <Text style={styles.text_style}>No Coffee Pot</Text>
-                    </View>
-            </View>
-        );
-    }
     
     renderCoffeePotTimer() {
         const { timer, orders } = this.props.myCoffeePot;
