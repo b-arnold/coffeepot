@@ -155,7 +155,7 @@ class EditProfile extends Component {
             </View>
             <View>
               <View style={{ margin: 5, alignItems: "center" }}>
-                <Text style={{ fontSize: 15, color: "white" }}>First Name</Text>
+                <Text style={{ fontSize: 15, color: "white" }}>Last Name</Text>
               </View>
               <FormInput
                 placeholder={this.props.lastName}
