@@ -11,6 +11,15 @@ import Navigation from './src/navigation/index';
 import { BUTTON_COLOR } from './src/constants/style';
 
 class App extends Component {
+
+  //////////////////////////////////////////////////////////////////////////////
+  // Setup some warnings to ignore
+  // https://github.com/firebase/firebase-js-sdk/issues/97
+  constructor() {
+    super();
+    console.disableYellowBox = true;
+  }
+
   componentWillMount() {
     firebase.initializeApp(GOOGLE_FIREBASE_CONFIG);
   }
