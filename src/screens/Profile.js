@@ -124,7 +124,7 @@ class Profile extends Component {
           >
             <View style={{ marginTop: 10 }}>
               <Image
-                // source={{ uri: this.props.profileImage }}
+                source={{ uri: this.props.profileImage }}
                 style={{ width: 180, height: 180, borderRadius: 90 }}
               />
             </View>

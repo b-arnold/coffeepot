@@ -23,20 +23,6 @@ import {
   LAST_NAME_CHANGED
 } from './types.js';
 
-// ////////////////////////////////////////////////////////////////
-// // Called when email is changed
-// export const firstNameChange = (text) => async dispatch => {
-//   dispatch({ type: FIRST_NAME_CHANGE, payload: text });
-//   dispatch({ type: FIRST_NAME_CHANGED, payload: text })
-// }
-
-// ////////////////////////////////////////////////////////////////
-// // Called when email is changed
-// export const lastNameChange = (text) => async dispatch => {
-//   dispatch({ type: LAST_NAME_CHANGE, payload: text });
-//   dispatch({ type: LAST_NAME_CHANGED, payload: text })
-// }
-
 ////////////////////////////////////////////////////////////////
 // Called when email is changed
 export const firstNameChange = text => ({

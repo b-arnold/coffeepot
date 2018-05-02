@@ -118,7 +118,7 @@ class CoffeePotGPS extends Component {
                     if(currentUser.uid === deliverer.uid){
                         return (
                             <Marker
-                                key={locDetails.place_id}
+                                key={deliverer.uid}
                                 coordinate={{
                                     latitude: locDetails.geometry.location.lat,
                                     longitude: locDetails.geometry.location.lng
@@ -152,7 +152,7 @@ class CoffeePotGPS extends Component {
                     }
                     return (
                         <Marker
-                            key={locDetails.place_id}
+                            key={deliverer.uid}
                             coordinate={{
                                 latitude: locDetails.geometry.location.lat,
                                 longitude: locDetails.geometry.location.lng
@@ -190,7 +190,7 @@ class CoffeePotGPS extends Component {
                 // If there is no valid photo reference, it will render a marker with no photo (Weh)
                 return (
                     <Marker
-                        key={locDetails.place_id}
+                        key={deliverer.uid}
                         coordinate={{
                             latitude: locDetails.geometry.location.lat,
                             longitude: locDetails.geometry.location.lng

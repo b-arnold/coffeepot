@@ -75,56 +75,60 @@ class HomeCoffeePot extends Component {
   // Will start the timer when an order has been added
   componentWillReceiveProps() {
     const { timer, orders } = this.props.myCoffeePot;
-    if(orders != undefined && timer.started != true) {
+    console.log('-----componentWillReceiveProps-----')
+    console.log(orders);
+    console.log(this.props.timerStarted);
+    
+    if(orders != undefined && this.props.timerStarted != true) {
       this.props.startTimer(timer.length)
     }
   }
     
-    renderCoffeePotTimer() {
-        const { timer, orders } = this.props.myCoffeePot;
-        let timeLeft = this.props.endTime - this.props.currTime;
-        const now = new Date().getTime();
+  renderCoffeePotTimer() {
+      const { timer, orders } = this.props.myCoffeePot;
+      let timeLeft = this.props.endTime - this.props.currTime;
+      const now = new Date().getTime();
 
-        if(timer.started === false) {
+      if(this.props.timerStarted === false) {
+        return (
+          <View style={styles.background}>
+              <TouchableOpacity onPress={this.onFirstPress}> 
+                  <Image
+                      source={require('../images/CoffeePot-Logo-White-02.png')}
+                      style={{
+                          width: 250,
+                          height: 250,
+                      }}
+                  />
+                  <View style={{ alignItems: 'center' }}>
+                      <Text style = {{ color: 'white', fontSize: 20 }}>{timer.length}:00 (On Hold)</Text>
+                  </View>
+              </TouchableOpacity>
+          </View>
+        );
+      } else if(this.props.timerStarted === true && orders != undefined){
           return (
-            <View style={styles.background}>
-                <TouchableOpacity onPress={this.onFirstPress}> 
-                    <Image
-                        source={require('../images/CoffeePot-Logo-White-02.png')}
-                        style={{
-                            width: 250,
-                            height: 250,
-                        }}
-                    />
-                    <View style={{ alignItems: 'center' }}>
-                        <Text style = {{ color: 'white', fontSize: 20 }}>{timer.length}:00 (On Hold)</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
+              <View style={styles.background}>
+                  <TouchableOpacity onPress={this.onFirstPress}> 
+                      <Image
+                          source={require('../images/CoffeePot-Logo-White-02.png')}
+                          style={{
+                              width: 250,
+                              height: 250,
+                          }}
+                      />
+                      <View style={{ alignItems: 'center'}}>
+                          <TimerCountdown
+                              initialSecondsRemaining={timeLeft}
+                              onTick={() => this.props.updateTimeLeft(now, this.props.endTime)}
+                              style={{ fontSize: 20, color: 'white' }}
+                          />
+                      </View>
+                  </TouchableOpacity>
+              </View>
           );
-        } else if(timer.started === true && orders != undefined){
-            return (
-                <View style={styles.background}>
-                    <TouchableOpacity onPress={this.onFirstPress}> 
-                        <Image
-                            source={require('../images/CoffeePot-Logo-White-02.png')}
-                            style={{
-                                width: 250,
-                                height: 250,
-                            }}
-                        />
-                        <View style={{ alignItems: 'center'}}>
-                            <TimerCountdown
-                                initialSecondsRemaining={timeLeft}
-                                onTick={() => this.props.updateTimeLeft(now, this.props.endTime)}
-                                style={{ fontSize: 20, color: 'white' }}
-                            />
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            );
-        }
-    }
+      }
+  }
 
   renderNoCoffeePot() {
     return (
@@ -137,7 +141,9 @@ class HomeCoffeePot extends Component {
               height: 250
             }}
           />
-          <Text style={styles.text_style}>No Coffee Pot</Text>
+          <View>
+            <Text style={{ color: 'white', fontSize: 20 }}>No Coffee Pot</Text>
+          </View>
         </View>
       </View>
     );
@@ -250,7 +256,7 @@ class HomeCoffeePot extends Component {
     } else if (this.props.myCoffeePot != null) {
       return <View style={styles.container}>{this.renderScreenView()}</View>;
     }
-    return <View>{this.renderNoCoffeePot()}</View>;
+    return this.renderNoCoffeePot();
   }
 }
 
